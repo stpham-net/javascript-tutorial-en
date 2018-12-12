@@ -12,15 +12,19 @@ Các kịch bản được cung cấp và thực hiện dưới dạng văn bả
 
 Ở khía cạnh này, JavaScript rất khác với một ngôn ngữ khác gọi là [Java](https://en.wikipedia.org/wiki/Java_(programming_language)).
 
+<br/>
+
 > ---
 
-🎐 Tại sao lại là "Java" Script?
+**🎐 Tại sao lại là "Java" Script?**
 
 Khi JavaScript được tạo, ban đầu nó có một tên khác: "LiveScript". Nhưng Java rất phổ biến vào thời điểm đó, vì vậy người ta đã quyết định rằng việc định vị một ngôn ngữ mới là "em trai" của Java sẽ giúp ích.
 
 Nhưng khi phát triển, JavaScript đã trở thành một ngôn ngữ hoàn toàn độc lập với đặc tả riêng có tên là [ECMAScript] (http://en.wikipedia.org/wiki/ECMAScript) và bây giờ nó không liên quan gì đến Java.
 
 > ---
+
+<br/>
 
 Ngày nay, JavaScript có thể thực thi không chỉ trên trình duyệt mà còn trên máy chủ hoặc trên bất kỳ thiết bị nào có chương trình đặc biệt gọi là [JavaScript engine] (https://en.wikipedia.org/wiki/JavaScript_engine).
 
@@ -34,9 +38,11 @@ Các động cơ khác nhau có "codenames" khác nhau. Ví dụ:
 
 Các thuật ngữ trên rất tốt để nhớ vì chúng được sử dụng trong các bài viết dành cho nhà phát triển trên internet. Chúng tôi cũng sẽ sử dụng chúng. Chẳng hạn, nếu "một tính năng X được hỗ trợ bởi V8", thì nó có thể hoạt động trong Chrome và Opera.
 
+<br/>
+
 > ---
 
-🎐 Engine hoạt động như thế nào?
+**🎐 Engine hoạt động như thế nào?**
 
 Engine rất phức tạp. Nhưng những điều cơ bản là dễ hiểu.
 
@@ -47,6 +53,8 @@ Engine rất phức tạp. Nhưng những điều cơ bản là dễ hiểu.
 Engine áp dụng tối ưu hóa ở mỗi bước của quy trình (process). Nó thậm chí còn xem (watches) tập lệnh được biên dịch (compiled script) khi nó chạy, phân tích dữ liệu chảy qua nó và áp dụng tối ưu hóa cho machine code dựa trên kiến thức đó. Khi xong, các script chạy khá nhanh.
 
 > ---
+
+<br/>
 
 ## JavaScript trong trình duyệt có thể làm gì?
 
