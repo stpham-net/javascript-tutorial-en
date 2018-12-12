@@ -69,7 +69,7 @@ Kịch bản sẽ không bao giờ dừng lại với một lỗi nghiêm trọn
 
 Các giá trị số đặc biệt đều thuộc về kiểu "number". Tất nhiên chúng không phải là số theo nghĩa thông thường của từ này.
 
-Chúng ta sẽ thấy nhiều hơn về làm việc với các số trong chương `number`.
+Chúng ta sẽ thấy nhiều hơn khi làm việc với các số trong chương `number`.
 
 ## Một chuỗi
 
