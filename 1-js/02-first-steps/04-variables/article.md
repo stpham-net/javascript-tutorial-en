@@ -349,7 +349,7 @@ Nghe có vẻ đơn giản? Thật vậy, nhưng tạo ra những cái tên mô 
 
 > ---
 
-** Tái sử dụng hay tạo?**
+**📌 Tái sử dụng hay tạo?**
 
 Và lưu ý cuối cùng. Có một số lập trình viên lười biếng, thay vì khai báo một biến mới, có xu hướng sử dụng lại các biến hiện có.
 
