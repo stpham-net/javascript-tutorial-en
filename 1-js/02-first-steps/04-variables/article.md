@@ -224,7 +224,7 @@ Về mặt kỹ thuật, không có lỗi ở đây, những tên như vậy đ�
 
 **📌 Tên dành riêng**
 
-Có [danh sách các từ dành riêng](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords), không thể được sử dụng làm tên biến, vì chúng được sử dụng bởi ngôn ngữ
+Có [danh sách các từ dành riêng](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords), không thể được sử dụng làm tên biến, vì chúng được sử dụng bởi bản thân của ngôn ngữ lập trình đang viết. 
 
 Ví dụ: các từ `let`, `class`, `return`, `function` được bảo lưu.
 
