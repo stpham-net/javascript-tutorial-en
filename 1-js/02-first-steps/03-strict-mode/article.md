@@ -73,4 +73,3 @@ Tại thời điểm này, đủ để biết về nó nói chung là:
 2. Chế độ nghiêm ngặt (strict mode) được kích hoạt bởi `"use strict"` ở trên cùng. Ngoài ra, có một số tính năng ngôn ngữ như "lớp" và "mô-đun" cho phép chế độ nghiêm ngặt tự động.
 3. Chế độ nghiêm ngặt được hỗ trợ bởi tất cả các trình duyệt hiện đại.
 4. Chúng ta luôn khuyến nghị bắt đầu các tập lệnh với `"use strict"`. Tất cả các ví dụ trong hướng dẫn này đều cho là như vậy, trừ khi (rất hiếm khi) được chỉ định khác.
-No search results.
