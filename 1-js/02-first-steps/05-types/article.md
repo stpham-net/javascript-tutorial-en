@@ -23,7 +23,7 @@ Kiểu *number* phục vụ cả cho số nguyên và số thập phân.
 
 Có nhiều phép toán cho các số, ví dụ như phép nhân `*`, phép chia `/`, phép cộng `+`, phép trừ `-`, v.v.
 
-Bên cạnh các số thông thường, còn có cái gọi là "giá trị số đặc biệt" cũng thuộc loại đó: `Infinity`,` -Infinity` và` NaN`.
+Bên cạnh các số thông thường, còn có cái gọi là "giá trị số đặc biệt" cũng thuộc loại đó: `Infinity`,` -Infinity` và `NaN`.
 
 - `Infinity` đại diện cho toán học [Vô cực](https://en.wikipedia.org/wiki/Infinity). Đó là một giá trị đặc biệt lớn hơn bất kỳ số nào.
 
