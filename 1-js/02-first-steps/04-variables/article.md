@@ -1,24 +1,24 @@
-# Variables
+# Biến
 
-Most of the time, a JavaScript application needs to work with information. Here are 2 examples:
-1. An online-shop -- the information might include goods being sold and a shopping cart.
-2. A chat application -- the information might include users, messages, and much more.
+Hầu hết thời gian, một ứng dụng JavaScript cần phải làm việc với thông tin. Dưới đây là 2 ví dụ:
+1. Cửa hàng trực tuyến - thông tin có thể bao gồm hàng hóa được bán và giỏ hàng.
+2. Một ứng dụng trò chuyện - thông tin có thể bao gồm người dùng, tin nhắn và nhiều hơn nữa.
 
-Variables are used to store this information.
+Các biến được sử dụng để lưu trữ thông tin này.
 
-## A variable
+## Một biến
 
-A [variable](https://en.wikipedia.org/wiki/Variable_(computer_science)) is a "named storage" for data. We can use variables to store goodies, visitors and other data.
+Một [biến](https://en.wikipedia.org/wiki/Variable_(computer_science)) là "lưu trữ có tên (named storage)" cho dữ liệu. Chúng tôi có thể sử dụng các biến để lưu trữ goodies, khách truy cập và dữ liệu khác.
 
-To create a variable in JavaScript, we need to use the `let` keyword.
+Để tạo một biến trong JavaScript, chúng ta cần sử dụng từ khóa `let`.
 
-The statement below creates (in other words: *declares* or *defines*) a variable with the name "message":
+Câu lệnh dưới đây tạo ra (nói cách khác: *khai báo (declares)* hoặc *định nghĩa (defines)*) một biến có tên "message":
 
 ```js
       let message;
 ```
 
-Now we can put some data into it by using the assignment operator `=`:
+Bây giờ chúng ta có thể đặt một số dữ liệu vào nó bằng cách sử dụng toán tử gán `=`:
 
 ```js
       let message;
@@ -26,7 +26,7 @@ Now we can put some data into it by using the assignment operator `=`:
       message = 'Hello'; // store the string
 ```
 
-The string is now saved into the memory area associated with the variable. We can access it using the variable name:
+Chuỗi bây giờ được lưu vào vùng nhớ được liên kết với biến. Chúng ta có thể truy cập nó bằng tên biến:
 
 ```js
       let message;
@@ -35,7 +35,7 @@ The string is now saved into the memory area associated with the variable. We ca
       alert(message); // shows the variable content
 ```
 
-To be concise we can merge the variable declaration and assignment into a single line:
+Để ngắn gọn, chúng ta có thể hợp nhất khai báo biến và gán thành một dòng duy nhất:
 
 ```js
       let message = 'Hello!'; // define the variable and assign the value
@@ -43,15 +43,15 @@ To be concise we can merge the variable declaration and assignment into a single
       alert(message); // Hello!
 ```
 
-We can also declare multiple variables in one line:
+Chúng ta cũng có thể khai báo nhiều biến trong một dòng:
 
 ```js
       let user = 'John', age = 25, message = 'Hello';
 ```
 
-That might seem shorter, but it's not recommended. For the sake of better readability, please use a single line per variable.
+Điều đó có vẻ ngắn hơn, nhưng nó không được khuyến khích. Để dễ đọc hơn, vui lòng sử dụng một dòng cho mỗi biến.
 
-The multiline variant is a bit longer, but easier to read:
+Biến thể multiline dài hơn một chút, nhưng dễ đọc hơn:
 
 ```js
       let user = 'John';
@@ -59,7 +59,7 @@ The multiline variant is a bit longer, but easier to read:
       let message = 'Hello';
 ```
 
-Some people also write many variables like that:
+Một số người cũng viết nhiều biến như thế này:
 
 ```js
       let user = 'John',
@@ -67,7 +67,7 @@ Some people also write many variables like that:
         message = 'Hello';
 ```
 
-...Or even in the "comma-first" style:
+...Hoặc thậm chí theo kiểu "dấu phẩy đầu tiên":
 
 ```js
       let user = 'John'
@@ -75,57 +75,57 @@ Some people also write many variables like that:
         , message = 'Hello';
 ```
 
-Technically, all these variants do the same. So, it's a matter of personal taste and aesthetics.
+Về mặt kỹ thuật, tất cả các biến thể này đều làm giống nhau. Vì vậy, đó là vấn đề sở thích cá nhân và thẩm mỹ.
 
 <br>
 
 > ---
 
-**📌 `var` instead of `let`**
+**📌 `var` thay vì `let`**
 
-In older scripts you may also find another keyword: `var` instead of `let`:
+Trong các tập lệnh cũ hơn, bạn cũng có thể tìm thấy một từ khóa khác: `var` thay vì `let`:
 
 ```js
       var message = 'Hello';
 ```
 
-The `var` keyword is *almost* the same as `let`. It also declares a variable, but in a slightly different, "old-school" fashion.
+Từ khóa `var` là *gần như* giống như `let`. Nó cũng tuyên bố một biến, nhưng theo một cách hơi khác, "old-school" fashion.
 
-There are subtle differences between `let` and `var`, but they do not matter for us yet. We'll cover them in detail later, in the chapter `var`.
+Có sự khác biệt tinh tế giữa `let` và `var`, nhưng chúng chưa quan trọng đối với chúng ta. Chúng ta sẽ đề cập chi tiết về chúng sau, trong chương `var`.
 
 > ---
 
 <br>
 
-## A real-life analogy
+## Một sự tương tự ngoài đời thực
 
-We can easily grasp the concept of a "variable" if we imagine it as a "box" for data, with a uniquely-named sticker on it.
+Chúng ta có thể dễ dàng nắm bắt khái niệm "biến" nếu chúng ta tưởng tượng nó như một "hộp" cho dữ liệu, với nhãn dán có tên duy nhất trên đó.
 
-For instance, the variable `message` can be imagined as a box labeled `"message"` with the value `"Hello!"` in it:
+Chẳng hạn, biến `message` có thể được tưởng tượng như một hộp có nhãn `"message"` với giá trị `"Xin chào!"` trong đó:
 
-![](variable.png)
+![](biến.png)
 
-We can put any value into the box.
+Chúng tôi có thể đặt bất kỳ giá trị vào hộp.
 
-Also we can change it. The value can be changed as many times as needed:
+Ngoài ra chúng ta có thể thay đổi nó. Giá trị có thể được thay đổi nhiều lần nếu cần:
 
 ```js
       let message;
 
-      message = 'Hello!';
+      message = 'Hello!');
 
       message = 'World!'; // value changed
 
       alert(message);
 ```
 
-When the value is changed, the old data is removed from the variable:
+Khi giá trị được thay đổi, dữ liệu cũ sẽ bị xóa khỏi biến:
 
-![](variable-change.png)
+![](biến-thay đổi.png)
 
-We can also declare two variables and copy data from one into the other.
+Chúng ta cũng có thể khai báo hai biến và sao chép dữ liệu từ cái này sang cái kia.
 
-```js run
+```js
       let hello = 'Hello world!';
 
       let message;
@@ -144,35 +144,35 @@ We can also declare two variables and copy data from one into the other.
 
 **📌 Functional languages**
 
-It may be interesting to know that there also exist [functional](https://en.wikipedia.org/wiki/Functional_programming) programming languages that forbid changing a variable value. For example, [Scala](http://www.scala-lang.org/) or [Erlang](http://www.erlang.org/).
+Thật thú vị khi biết rằng cũng tồn tại các ngôn ngữ lập trình [functional](https://en.wikipedia.org/wiki/Feftal_programming) cấm thay đổi giá trị biến. Ví dụ: [Scala](http://www.scala-lang.org/) hoặc [Erlang](http://www.erlang.org/).
 
-In such languages, once the value is stored "in the box", it's there forever. If we need to store something else, the language forces us to create a new box (declare a new variable). We can't reuse the old one.
+Trong các ngôn ngữ như vậy, một khi giá trị được lưu trữ "trong hộp", nó sẽ tồn tại mãi mãi. Nếu chúng ta cần lưu trữ một cái gì đó khác, ngôn ngữ buộc chúng ta phải tạo một hộp mới (khai báo một biến mới). Chúng ta không thể tái sử dụng cái cũ.
 
-Though it may seem a little bit odd at first sight, these languages are quite capable of serious development. More than that, there are areas like parallel computations where this limitation confers certain benefits. Studying such a language (even if not planning to use it soon) is recommended to broaden the mind.
+Mặc dù có vẻ hơi kỳ lạ ngay từ cái nhìn đầu tiên, những ngôn ngữ này hoàn toàn có khả năng phát triển nghiêm túc. Hơn thế nữa, có những lĩnh vực như tính toán song song trong đó giới hạn này mang lại lợi ích nhất định. Nghiên cứu một ngôn ngữ như vậy (ngay cả khi không có kế hoạch sử dụng nó sớm) được khuyến khích để mở rộng tâm trí.
 
 > ---
 
 <br>
 
-## Variable naming
+## Đặt tên biến
 
-There are two limitations for a variable name in JavaScript:
+Có hai giới hạn cho một tên biến trong JavaScript:
 
-1. The name must contain only letters, digits, symbols `$` and `_`.
-2. The first character must not be a digit.
+1. Tên chỉ được chứa các chữ cái, chữ số, ký hiệu `$` và `_`.
+2. Ký tự đầu tiên không được là chữ số.
 
-Valid names, for instance:
+Tên hợp lệ, ví dụ:
 
 ```js
       let userName;
       let test123;
 ```
 
-When the name contains multiple words, [camelCase](https://en.wikipedia.org/wiki/CamelCase) is commonly used. That is: words go one after another, each word starts with a capital letter: `myVeryLongName`.
+Khi tên chứa nhiều từ, [camelCase](https://en.wikipedia.org/wiki/CamelCase) thường được sử dụng. Đó là: các từ đi nối tiếp nhau, mỗi từ bắt đầu bằng chữ in hoa: `myVeryLongName`.
 
-What's interesting -- the dollar sign `'$'` and the underscore `'_'` can also be used in names. They are regular symbols, just like letters, without any special meaning.
+Điều thú vị - ký hiệu đô la `'$'` và dấu gạch dưới `'_'` cũng có thể được sử dụng trong tên. Chúng là những biểu tượng thông thường, giống như chữ cái, không có bất kỳ ý nghĩa đặc biệt nào.
 
-These names are valid:
+Những tên này là hợp lệ:
 
 ```js
       let $ = 1; // declared a variable with the name "$"
@@ -181,7 +181,7 @@ These names are valid:
       alert($ + _); // 3
 ```
 
-Examples of incorrect variable names:
+Ví dụ về tên biến không chính xác:
 
 ```js
       let 1a; // cannot start with a digit
@@ -193,9 +193,9 @@ Examples of incorrect variable names:
 
 > ---
 
-**📌 Case matters**
+**📌 Trường hợp quan trọng**
 
-Variables named `apple` and `AppLE` -- are two different variables.
+Các biến có tên `apple` và `AppLE` - là hai biến khác nhau.
 
 > ---
 
@@ -204,16 +204,16 @@ Variables named `apple` and `AppLE` -- are two different variables.
 
 > ---
 
-**📌 Non-English letters are allowed, but not recommended**
+**📌 Các chữ cái không phải tiếng Anh được cho phép, nhưng không được đề xuất**
 
-It is possible to use any language, including cyrillic letters or even hieroglyphs, like this:
+Có thể sử dụng bất kỳ ngôn ngữ nào, bao gồm cả chữ cái cyrillic hoặc thậm chí chữ tượng hình, như thế này:
 
 ```js
       let имя = '...';
       let 我 = '...';
 ```
 
-Technically, there is no error here, such names are allowed, but there is an international tradition to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it some time.
+Về mặt kỹ thuật, không có lỗi ở đây, những tên như vậy được cho phép, nhưng có một truyền thống quốc tế để sử dụng tiếng Anh trong tên biến. Ngay cả khi chúng tôi đang viết một kịch bản nhỏ, nó có thể có một cuộc sống lâu dài phía trước. Mọi người từ các quốc gia khác có thể cần phải đọc nó một thời gian.
 
 > ---
 
@@ -222,13 +222,13 @@ Technically, there is no error here, such names are allowed, but there is an int
 
 > ---
 
-**📌 Reserved names**
+**📌 Tên dành riêng**
 
-There is a [list of reserved words](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords), which cannot be used as variable names, because they are used by the language itself.
+Có [danh sách các từ dành riêng](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords), không thể được sử dụng làm tên biến, vì chúng được sử dụng bởi ngôn ngữ
 
-For example, words `let`, `class`, `return`, `function` are reserved.
+Ví dụ: các từ `let`, `class`, `return`, `function` được bảo lưu.
 
-The code below gives a syntax error:
+Mã dưới đây đưa ra một lỗi cú pháp:
 
 ```js
       let let = 5; // can't name a variable "let", error!
@@ -242,9 +242,9 @@ The code below gives a syntax error:
 
 > ---
 
-**📌 An assignment without `use strict`**
+**📌 Một bài tập không có `sử dụng nghiêm ngặt`**
 
-Normally, we need to define a variable before using it. But in the old times, it was technically possible to create a variable by a mere assignment of the value, without `let`. This still works now if we don't put `use strict`. The behavior is kept for compatibility with old scripts.
+Thông thường, chúng ta cần xác định một biến trước khi sử dụng nó. Nhưng trong thời đại cũ, về mặt kỹ thuật có thể tạo ra một biến bằng cách gán giá trị đơn thuần, không có `let`. Điều này vẫn hoạt động ngay bây giờ nếu chúng ta không đặt 'sử dụng nghiêm ngặt'. Các hành vi được giữ cho tương thích với các kịch bản cũ.
 
 ```js
       // note: no "use strict" in this example
@@ -254,7 +254,7 @@ Normally, we need to define a variable before using it. But in the old times, it
       alert(num); // 5
 ```
 
-That's a bad practice, it would give an error in the strict mode:
+Đó là một thực tiễn xấu, nó sẽ báo lỗi ở chế độ nghiêm ngặt:
 
 ```js
       "use strict";
@@ -266,15 +266,15 @@ That's a bad practice, it would give an error in the strict mode:
 
 <br>
 
-## Constants
+## Hằng
 
-To declare a constant (unchanging) variable, one can use `const` instead of `let`:
+Để khai báo một biến không thay đổi, người ta có thể sử dụng `const` thay vì` let`:
 
 ```js
       const myBirthday = '18.04.1982';
 ```
 
-Variables declared using `const` are called "constants". They cannot be changed. An attempt to do it would cause an error:
+Các biến được khai báo sử dụng `const` được gọi là "hằng (constants)". Họ không thể thay đổi. Một nỗ lực để làm điều đó sẽ gây ra lỗi:
 
 ```js
       const myBirthday = '18.04.1982';
@@ -282,16 +282,16 @@ Variables declared using `const` are called "constants". They cannot be changed.
       myBirthday = '01.01.2001'; // error, can't reassign the constant!
 ```
 
-When a programmer is sure that the variable should never change, they can use `const` to guarantee it, and also to clearly show that fact to everyone.
+Khi một lập trình viên chắc chắn rằng biến không bao giờ thay đổi, họ có thể sử dụng `const` để đảm bảo nó và cũng để hiển thị rõ ràng thực tế đó cho mọi người.
 
 
-### Uppercase constants
+### Hằng số in hoa
 
-There is a widespread practice to use constants as aliases for difficult-to-remember values that are known prior to execution.
+Có một thực tiễn phổ biến để sử dụng các hằng số làm bí danh cho các giá trị khó nhớ được biết trước khi thực hiện.
 
-Such constants are named using capital letters and underscores.
+Các hằng số như vậy được đặt tên bằng chữ in hoa và dấu gạch dưới.
 
-Like this:
+Như thế này:
 
 ```js
       const COLOR_RED = "#F00";
@@ -304,74 +304,75 @@ Like this:
       alert(color); // #FF7F00
 ```
 
-Benefits:
+Lợi ích:
 
-- `COLOR_ORANGE` is much easier to remember than `"#FF7F00"`.
-- It is much easier to mistype in `"#FF7F00"` than in `COLOR_ORANGE`.
-- When reading the code, `COLOR_ORANGE` is much more meaningful than `#FF7F00`.
+- `COLOR_ORANGE` dễ nhớ hơn nhiều so với `"#FF7F00"`.
+- Việc nhập nhầm vào `"#FF7F00"` dễ dàng hơn nhiều so với trong`COLOR_ORANGE`.
+- Khi đọc mã, `COLOR_ORANGE` có ý nghĩa hơn nhiều so với `#FF7F00`.
 
-When should we use capitals for a constant, and when should we name them normally? Let's make that clear.
+Khi nào chúng ta nên sử dụng chữ viết hoa cho một hằng số, và khi nào chúng ta nên đặt tên chúng bình thường? Hãy làm rõ điều đó.
 
-Being a "constant" just means that the value never changes. But there are constants that are known prior to execution (like a hexadecimal value for red), and there are those that are *calculated* in run-time, during the execution, but do not change after the assignment.
+Trở thành "hằng số" chỉ có nghĩa là giá trị không bao giờ thay đổi. Nhưng có những hằng số được biết trước khi thực thi (execution) (như giá trị thập lục phân (hexadecimal value) cho màu đỏ) và có những hằng số *được tính (calculated)* trong thời gian chạy, trong khi thực thi (execution), nhưng không thay đổi sau khi gán.
 
-For instance:
+Ví dụ:
 
 ```js
       const pageLoadTime = /* time taken by a webpage to load */;
 ```
 
-The value of `pageLoadTime` is not known prior to the page load, so it's named normally. But it's still a constant, because it doesn't change after assignment.
+Giá trị của `pageLoadTime` không được biết trước khi tải trang, vì vậy nó được đặt tên bình thường. Nhưng nó vẫn là một hằng số, bởi vì nó không thay đổi sau khi gán.
 
-In other words, capital-named constants are only used as aliases for "hard-coded" values.  
+Nói cách khác, hằng số viết hoa (capital-named) chỉ được sử dụng làm bí danh cho các giá trị "mã hóa cứng (hard-coded)".  
 
-## Name things right
+## Đặt tên đúng
 
-Talking about variables, there's one more extremely important thing.
+Nói về các biến, có một điều cực kỳ quan trọng.
 
-Please name the variables sensibly. Take time to think if needed.
+Hãy đặt tên cho các biến hợp lý. Hãy dành thời gian để suy nghĩ nếu cần.
 
-Variable naming is one of the most important and complex skills in programming. A quick glance at variable names can reveal which code is written by a beginner and which by an experienced developer.
+Đặt tên biến là một trong những kỹ năng quan trọng và phức tạp nhất trong lập trình. Nhìn lướt qua tên biến có thể tiết lộ mã nào được viết bởi người mới bắt đầu và mã nào được phát triển bởi nhà phát triển có kinh nghiệm.
 
-In a real project, most of the time is spent on modifying and extending the existing code base, rather than writing something completely separate from scratch. And when we return to the code after some time of doing something else, it's much easier to find information that is well-labeled. Or, in other words, when the variables have good names.
+Trong một dự án thực tế, phần lớn thời gian được dành cho việc sửa đổi và mở rộng cơ sở mã hiện có, thay vì viết một cái gì đó hoàn toàn tách biệt khỏi đầu. Và khi chúng tôi trở lại mã sau một thời gian làm việc khác, việc tìm kiếm thông tin được dán nhãn tốt sẽ dễ dàng hơn nhiều. Hay nói cách khác, khi các biến có tên tốt.
 
-Please spend some time thinking about the right name for a variable before declaring it. This will repay you a lot.
+Hãy dành một chút thời gian suy nghĩ về tên đúng cho một biến trước khi khai báo nó. Điều này sẽ trả ơn bạn rất nhiều.
 
-Some good-to-follow rules are:
+Một số quy tắc tốt để tuân theo là:
 
-- Use human-readable names like `userName` or `shoppingCart`.
-- Stay away from abbreviations or short names like `a`, `b`, `c`, unless you really know what you're doing.
-- Make the name maximally descriptive and concise. Examples of bad names are `data` and `value`. Such a name says nothing. It is only ok to use them if it's exceptionally obvious from the context which data or value is meant.
-- Agree on terms within your team and in your own mind. If a site visitor is called a "user" then we should name related variables like `currentUser` or `newUser`, but not `currentVisitor` or a `newManInTown`.
+- Sử dụng tên người có thể đọc được như `userName` hoặc `shoppingCart`.
+- Tránh xa các chữ viết tắt hoặc tên ngắn như `a`,` b`, `c`, trừ khi bạn thực sự biết bạn đang làm gì.
+- Làm cho tên mô tả tối đa và súc tích. Ví dụ về tên xấu là `data` và `value`. Một cái tên như vậy không nói gì. Chỉ có thể sử dụng chúng nếu nó đặc biệt rõ ràng trong bối cảnh dữ liệu hoặc giá trị có nghĩa là gì.
+- Đồng ý với các điều khoản trong nhóm của bạn và trong tâm trí của riêng bạn. Nếu khách truy cập trang web được gọi là "user" thì chúng ta nên đặt tên cho các biến liên quan như `currentUser` hoặc `newUser`, nhưng không phải `currentVisitor` hoặc `newManInTown`.
 
-Sounds simple? Indeed it is, but creating good descriptive-and-concise names in practice is not. Go for it.
+Nghe có vẻ đơn giản? Thật vậy, nhưng tạo ra những cái tên mô tả và súc tích tốt trong thực tế thì không. Go for it.
 
 <br>
 
 > ---
 
-**📌 Reuse or create?**
+** Tái sử dụng hay tạo?**
 
-And the last note. There are some lazy programmers who, instead of declaring a new variable, tend to reuse the existing ones.
+Và lưu ý cuối cùng. Có một số lập trình viên lười biếng, thay vì khai báo một biến mới, có xu hướng sử dụng lại các biến hiện có.
 
-As a result, the variable is like a box where people throw different things without changing the sticker. What is inside it now? Who knows... We need to come closer and check.
+Kết quả là, biến giống như một hộp nơi mọi người ném những thứ khác nhau mà không thay đổi nhãn dán. Những gì bên trong nó bây giờ? Ai biết... Chúng ta cần đến gần hơn và kiểm tra.
 
-Such a programmer saves a little bit on variable declaration, but loses ten times more on debugging the code.
+Một lập trình viên như vậy tiết kiệm một chút khi khai báo biến, nhưng mất nhiều hơn mười lần khi gỡ lỗi mã.
 
-An extra variable is good, not evil.
+Một biến phụ là tốt, không xấu.
 
-Modern JavaScript minifiers and browsers optimize code well enough, so it won't create performance issues. Using different variables for different values can even help the engine to optimize.
+Các JavaScript minifiers và trình duyệt hiện đại tối ưu hóa mã đủ tốt, do đó nó sẽ không tạo ra các vấn đề về hiệu suất. Sử dụng các biến khác nhau cho các giá trị khác nhau thậm chí có thể giúp động cơ (engine) tối ưu hóa.
 
 > ---
 
 <br>
 
-## Summary
+## Tóm lược
 
-We can declare variables to store data. That can be done using `var` or `let` or `const`.
+Chúng ta có thể khai báo các biến để lưu trữ dữ liệu. Điều đó có thể được thực hiện bằng cách sử dụng `var` hoặc `let` hoặc `const`.
 
-- `let` -- is a modern variable declaration. The code must be in strict mode to use `let` in Chrome (V8).
-- `var` -- is an old-school variable declaration. Normally we don't use it at all, but we'll cover subtle differences from `let` in the chapter <info:var>, just in case you need them.
-- `const` -- is like `let`, but the value of the variable can't be changed.
+- `let` - là một khai báo biến hiện đại. Mã phải ở chế độ nghiêm ngặt để sử dụng `let` trong Chrome (V8).
+- `var` - là một khai báo biến old-school. Thông thường chúng ta hoàn toàn không sử dụng nó, nhưng chúng ta sẽ đề cập đến những khác biệt tinh tế từ `let` trong chương `var`, chỉ trong trường hợp bạn cần chúng.
+- `const` - giống như `let`, nhưng giá trị của biến không thể thay đổi.
 
-Variables should be named in a way that allows us to easily understand what's inside.
+Các biến nên được đặt tên theo cách cho phép chúng ta dễ dàng hiểu những gì bên trong.
 
+1 result is available, use up and down arrow keys to navigate.
