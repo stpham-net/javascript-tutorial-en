@@ -153,7 +153,7 @@ Though it may seem a little bit odd at first sight, these languages are quite ca
 
 <br>
 
-## Variable naming [#variable-naming]
+## Variable naming
 
 There are two limitations for a variable name in JavaScript:
 
