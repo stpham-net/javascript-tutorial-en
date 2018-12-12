@@ -242,9 +242,9 @@ Mã dưới đây đưa ra một lỗi cú pháp:
 
 > ---
 
-**📌 Một bài tập không có `sử dụng nghiêm ngặt`**
+**📌 Một bài tập không có `use strict`**
 
-Thông thường, chúng ta cần xác định một biến trước khi sử dụng nó. Nhưng trong thời đại cũ, về mặt kỹ thuật có thể tạo ra một biến bằng cách gán giá trị đơn thuần, không có `let`. Điều này vẫn hoạt động ngay bây giờ nếu chúng ta không đặt 'sử dụng nghiêm ngặt'. Các hành vi được giữ cho tương thích với các kịch bản cũ.
+Thông thường, chúng ta cần xác định một biến trước khi sử dụng nó. Nhưng trong thời đại cũ, về mặt kỹ thuật có thể tạo ra một biến bằng cách gán giá trị đơn thuần, không có `let`. Điều này vẫn hoạt động ngay bây giờ nếu chúng ta không đặt 'use strict'. Các hành vi được giữ cho tương thích với các kịch bản cũ.
 
 ```js
       // note: no "use strict" in this example
