@@ -12,12 +12,15 @@ Các kịch bản được cung cấp và thực hiện dưới dạng văn bả
 
 Ở khía cạnh này, JavaScript rất khác với một ngôn ngữ khác gọi là [Java](https://en.wikipedia.org/wiki/Java_(programming_language)).
 
+> ---
 
-> Tại sao "Java" Script?
-> Khi JavaScript được tạo, ban đầu nó có một tên khác: "LiveScript". Nhưng Java rất phổ biến vào thời điểm đó, vì vậy người ta đã quyết định rằng việc định vị một ngôn ngữ mới là "em trai" của Java sẽ giúp ích.
-> 
-> Nhưng khi phát triển, JavaScript đã trở thành một ngôn ngữ hoàn toàn độc lập với đặc tả riêng có tên là [ECMAScript] (http://en.wikipedia.org/wiki/ECMAScript) và bây giờ nó không liên quan gì đến Java.
+🎐 Tại sao lại là "Java" Script?
 
+Khi JavaScript được tạo, ban đầu nó có một tên khác: "LiveScript". Nhưng Java rất phổ biến vào thời điểm đó, vì vậy người ta đã quyết định rằng việc định vị một ngôn ngữ mới là "em trai" của Java sẽ giúp ích.
+
+Nhưng khi phát triển, JavaScript đã trở thành một ngôn ngữ hoàn toàn độc lập với đặc tả riêng có tên là [ECMAScript] (http://en.wikipedia.org/wiki/ECMAScript) và bây giờ nó không liên quan gì đến Java.
+
+> ---
 
 Ngày nay, JavaScript có thể thực thi không chỉ trên trình duyệt mà còn trên máy chủ hoặc trên bất kỳ thiết bị nào có chương trình đặc biệt gọi là [JavaScript engine] (https://en.wikipedia.org/wiki/JavaScript_engine).
 
@@ -31,17 +34,19 @@ Các động cơ khác nhau có "codenames" khác nhau. Ví dụ:
 
 Các thuật ngữ trên rất tốt để nhớ vì chúng được sử dụng trong các bài viết dành cho nhà phát triển trên internet. Chúng tôi cũng sẽ sử dụng chúng. Chẳng hạn, nếu "một tính năng X được hỗ trợ bởi V8", thì nó có thể hoạt động trong Chrome và Opera.
 
+> ---
 
-> Engine hoạt động như thế nào?
-> 
-> Engine rất phức tạp. Nhưng những điều cơ bản là dễ hiểu.
-> 
-> 1. Engine (embedded nếu đó là trình duyệt) đọc ("phân tích cú pháp (parses)") tập lệnh.
-> 2. Sau đó, nó chuyển đổi ("biên dịch (compiles)") tập lệnh sang ngôn ngữ máy (machine language).
-> 3. Và sau đó mã máy (machine code) chạy, khá nhanh.
-> 
-> Engine áp dụng tối ưu hóa ở mỗi bước của quy trình (process). Nó thậm chí còn xem (watches) tập lệnh được biên dịch (compiled script) khi nó chạy, phân tích dữ liệu chảy qua nó và áp dụng tối ưu hóa cho machine code dựa trên kiến thức đó. Khi xong, các script chạy khá nhanh.
+🎐 Engine hoạt động như thế nào?
 
+Engine rất phức tạp. Nhưng những điều cơ bản là dễ hiểu.
+
+1. Engine (embedded nếu đó là trình duyệt) đọc ("phân tích cú pháp (parses)") tập lệnh.
+2. Sau đó, nó chuyển đổi ("biên dịch (compiles)") tập lệnh sang ngôn ngữ máy (machine language).
+3. Và sau đó mã máy (machine code) chạy, khá nhanh.
+
+Engine áp dụng tối ưu hóa ở mỗi bước của quy trình (process). Nó thậm chí còn xem (watches) tập lệnh được biên dịch (compiled script) khi nó chạy, phân tích dữ liệu chảy qua nó và áp dụng tối ưu hóa cho machine code dựa trên kiến thức đó. Khi xong, các script chạy khá nhanh.
+
+> ---
 
 ## JavaScript trong trình duyệt có thể làm gì?
 
@@ -85,12 +90,13 @@ Các giới hạn như vậy không tồn tại nếu JavaScript được sử d
 
 Có ít nhất *ba* điều tuyệt vời về JavaScript:
 
+> --- 
 
-> so sánh
-> + Tích hợp đầy đủ với HTML/CSS.
-> + Những điều đơn giản được thực hiện đơn giản.
-> + Hỗ trợ bởi tất cả các trình duyệt chính và được bật theo mặc định.
++ Tích hợp đầy đủ với HTML/CSS.
++ Những điều đơn giản được thực hiện đơn giản.
++ Hỗ trợ bởi tất cả các trình duyệt chính và được bật theo mặc định.
 
+> --- 
 
 Javascript là công nghệ trình duyệt duy nhất kết hợp ba thứ này.
 
