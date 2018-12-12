@@ -6,7 +6,7 @@ Kho lưu trữ này lưu trữ nội dung của Hướng dẫn JavaScript hiện
 
 Mỗi chương, bài viết hoặc một nhiệm vụ (task) có thư mục của nó.
 
-Thư mục được đặt tên như `N-url`, trong đó` N` là một số cho mục đích sắp xếp và `url` là phần URL có tiêu đề của tài liệu.
+Thư mục được đặt tên như `N-url`, trong đó `N` là một số cho mục đích sắp xếp và `url` là phần URL có tiêu đề của tài liệu.
 
 Các dạng được xác định bởi tệp bên trong thư mục:
 
