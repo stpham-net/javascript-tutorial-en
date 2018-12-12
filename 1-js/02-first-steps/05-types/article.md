@@ -85,7 +85,7 @@ Trong JavaScript, có 3 kiểu trích dẫn (quotes).
 
 1. Dấu ngoặc kép: `"Hello"`.
 2. Dấu ngoặc đơn: `'Hello'`.
-3. Backticks: <code>`Hello`</code>.
+3. Backticks: <code>&#96;Hello&#96;</code>.
 
 Dấu ngoặc đôi và đơn là dấu ngoặc "đơn giản". Không có sự khác biệt giữa chúng trong JavaScript.
 
@@ -95,10 +95,10 @@ Backticks là trích dẫn "chức năng mở rộng (extended functionality)". 
       let name = "John";
 
       // embed a variable
-      alert( `Hello, *!*${name}*/!*!` ); // Hello, John!
+      alert( `Hello, ${name}` ); // Hello, John!
 
       // embed an expression
-      alert( `the result is *!*${1 + 2}*/!*` ); // the result is 3
+      alert( `the result is ${1 + 2}` ); // the result is 3
 ```
 
 Biểu thức bên trong `${…}` được đánh giá (evaluated) và kết quả trở thành một phần của chuỗi. Chúng ta có thể đặt bất cứ thứ gì ở đó: một biến như `name` hoặc một biểu thức số học như `1 + 2` hoặc một cái gì đó phức tạp hơn.
