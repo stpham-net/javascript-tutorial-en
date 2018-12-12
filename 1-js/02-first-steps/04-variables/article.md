@@ -112,7 +112,7 @@ Ngoài ra chúng ta có thể thay đổi nó. Giá trị có thể được tha
 ```js
       let message;
 
-      message = 'Hello!');
+      message = 'Hello!';
 
       message = 'World!'; // value changed
 
