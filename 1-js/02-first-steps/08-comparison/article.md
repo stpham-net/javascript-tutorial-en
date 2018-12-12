@@ -16,17 +16,17 @@ Just as all other operators, a comparison returns a value. The value is of the b
 
 For example:
 
-```js run
-alert( 2 > 1 );  // true (correct)
-alert( 2 == 1 ); // false (wrong)
-alert( 2 != 1 ); // true (correct)
+```js
+      alert( 2 > 1 );  // true (correct)
+      alert( 2 == 1 ); // false (wrong)
+      alert( 2 != 1 ); // true (correct)
 ```
 
 A comparison result can be assigned to a variable, just like any value:
 
-```js run
-let result = 5 > 4; // assign the result of the comparison
-alert( result ); // true
+```js
+      let result = 5 > 4; // assign the result of the comparison
+      alert( result ); // true
 ```
 
 ## String comparison
@@ -37,10 +37,10 @@ In other words, strings are compared letter-by-letter.
 
 For example:
 
-```js run
-alert( 'Z' > 'A' ); // true
-alert( 'Glow' > 'Glee' ); // true
-alert( 'Bee' > 'Be' ); // true
+```js
+      alert( 'Z' > 'A' ); // true
+      alert( 'Glow' > 'Glee' ); // true
+      alert( 'Bee' > 'Be' ); // true
 ```
 
 The algorithm to compare two strings is simple:
@@ -59,11 +59,19 @@ Strings `"Glow"` and `"Glee"` are compared character-by-character:
 2. `l` is the same as `l`.
 3. `o` is greater than `e`. Stop here. The first string is greater.
 
-```smart header="Not a real dictionary, but Unicode order"
+<br>
+
+> ---
+
+**📌 Not a real dictionary, but Unicode order**
+
 The comparison algorithm given above is roughly equivalent to the one used in book dictionaries or phone books. But it's not exactly the same.
 
-For instance, case matters. A capital letter `"A"` is not equal to the lowercase `"a"`. Which one is greater? Actually, the lowercase `"a"` is. Why? Because the lowercase character has a greater index in the internal encoding table (Unicode). We'll get back to specific details and consequences in the chapter <info:string>.
-```
+For instance, case matters. A capital letter `"A"` is not equal to the lowercase `"a"`. Which one is greater? Actually, the lowercase `"a"` is. Why? Because the lowercase character has a greater index in the internal encoding table (Unicode). We'll get back to specific details and consequences in the chapter **string**.
+
+> ---
+
+<br>
 
 ## Comparison of different types
 
@@ -71,19 +79,24 @@ When compared values belong to different types, they are converted to numbers.
 
 For example:
 
-```js run
-alert( '2' > 1 ); // true, string '2' becomes a number 2
-alert( '01' == 1 ); // true, string '01' becomes a number 1
+```js
+      alert( '2' > 1 ); // true, string '2' becomes a number 2
+      alert( '01' == 1 ); // true, string '01' becomes a number 1
 ```
 
 For boolean values, `true` becomes `1` and `false` becomes `0`, that's why:
 
-```js run
-alert( true == 1 ); // true
-alert( false == 0 ); // true
+```js
+      alert( true == 1 ); // true
+      alert( false == 0 ); // true
 ```
 
-````smart header="A funny consequence"
+<br>
+
+> ---
+
+**📌 A funny consequence**
+
 It is possible that at the same time:
 
 - Two values are equal.
@@ -91,31 +104,34 @@ It is possible that at the same time:
 
 For example:
 
-```js run
-let a = 0;
-alert( Boolean(a) ); // false
+```js
+      let a = 0;
+      alert( Boolean(a) ); // false
 
-let b = "0";
-alert( Boolean(b) ); // true
+      let b = "0";
+      alert( Boolean(b) ); // true
 
-alert(a == b); // true!
+      alert(a == b); // true!
 ```
 
 From JavaScript's standpoint that's quite normal. An equality check converts using the numeric conversion (hence `"0"` becomes `0`), while `Boolean` conversion uses another set of rules.
-````
+
+> ---
+
+<br>
 
 ## Strict equality
 
 A regular equality check `==` has a problem. It cannot differ `0` from `false`:
 
-```js run
-alert( 0 == false ); // true
+```js
+      alert( 0 == false ); // true
 ```
 
 The same thing with an empty string:
 
-```js run
-alert( '' == false ); // true
+```js
+      alert( '' == false ); // true
 ```
 
 That's because operands of different types are converted to a number by the equality operator `==`. An empty string, just like `false`, becomes a zero.
@@ -128,8 +144,8 @@ In other words, if `a` and `b` are of different types, then `a === b` immediatel
 
 Let's try it:
 
-```js run
-alert( 0 === false ); // false, because the types are different
+```js
+      alert( 0 === false ); // false, because the types are different
 ```
 
 There also exists a "strict non-equality" operator `!==`, as an analogy for `!=`.
@@ -144,21 +160,24 @@ There's a non-intuitive behavior when `null` or `undefined` are compared with ot
 
 
 For a strict equality check `===`
-: These values are different, because each of them belongs to a separate type of its own.
 
-    ```js run
-    alert( null === undefined ); // false
-    ```
+These values are different, because each of them belongs to a separate type of its own.
+
+```js
+      alert( null === undefined ); // false
+```
 
 For a non-strict check `==`
-: There's a special rule. These two are a "sweet couple": they equal each other (in the sense of `==`), but not any other value.
 
-    ```js run
-    alert( null == undefined ); // true
-    ```
+There's a special rule. These two are a "sweet couple": they equal each other (in the sense of `==`), but not any other value.
+
+```js
+      alert( null == undefined ); // true
+```
 
 For maths and other comparisons `< > <= >=`
-: Values `null/undefined` are converted to a number: `null` becomes `0`, while `undefined` becomes `NaN`.
+
+Values `null/undefined` are converted to a number: `null` becomes `0`, while `undefined` becomes `NaN`.
 
 Now let's see funny things that happen when we apply those rules. And, what's more important, how to not fall into a trap with these features.
 
@@ -166,10 +185,10 @@ Now let's see funny things that happen when we apply those rules. And, what's mo
 
 Let's compare `null` with a zero:
 
-```js run
-alert( null > 0 );  // (1) false
-alert( null == 0 ); // (2) false
-alert( null >= 0 ); // (3) *!*true*/!*
+```js
+      alert( null > 0 );  // (1) false
+      alert( null == 0 ); // (2) false
+      alert( null >= 0 ); // (3) *!*true*/!*
 ```
 
 Yeah, mathematically that's strange. The last result states that "`null` is greater than or equal to zero". Then one of the comparisons above must be correct, but they are both false.
@@ -182,10 +201,10 @@ On the other hand, the equality check `==` for `undefined` and `null` is defined
 
 The value `undefined` shouldn't participate in comparisons at all:
 
-```js run
-alert( undefined > 0 ); // false (1)
-alert( undefined < 0 ); // false (2)
-alert( undefined == 0 ); // false (3)
+```js
+      alert( undefined > 0 ); // false (1)
+      alert( undefined < 0 ); // false (2)
+      alert( undefined == 0 ); // false (3)
 ```
 
 Why does it dislike a zero so much? Always false!
