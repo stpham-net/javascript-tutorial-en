@@ -1,6 +1,5 @@
-# The JavaScript language
+# Ngôn ngữ JavaScript
 
-Here we learn JavaScript, starting from scratch and go on to advanced concepts like OOP.
+Ở đây chúng ta tìm hiểu JavaScript, bắt đầu từ đầu và đi đến các khái niệm nâng cao như OOP.
 
-We concentrate on the language itself here, with the minimum of environment-specific notes.
-
+Chúng ta tập trung vào ngôn ngữ ở đây, với tối thiểu các ghi chú của environment-specific.
