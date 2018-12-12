@@ -253,5 +253,4 @@ Toán tử `typeof` cho phép chúng ta xem loại nào được lưu trữ tron
 - Trả về một chuỗi có tên của kiểu, như `"string"`.
 - Với `null` trả về `"object"` - đó là một lỗi trong ngôn ngữ JS, thực tế nó không phải là một đối tượng.
 
-Trong các chương tiếp theo, chúng ta sẽ tập trung vào các giá trị nguyên thủy và một khi chúng ta đã quen thuộc với chúng, thì chúng ta sẽ chuyển sang các đối tượng.
-No search results.
+Trong các chương tiếp theo, chúng ta sẽ tập trung vào các giá trị nguyên thủy và một khi chúng ta đã quen thuộc với chúng, thì chúng ta sẽ chuyển sang các object.
