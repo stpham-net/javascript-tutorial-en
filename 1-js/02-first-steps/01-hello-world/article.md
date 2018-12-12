@@ -106,7 +106,7 @@ Một thẻ `<script>` duy nhất không thể có cả thuộc tính `src` và 
 Điều này sẽ không hoạt động:
 
 ```html
-      <script *!*src*/!*="file.js">
+      <script src="file.js">
         alert(1); // the content is ignored, because src is set
       </script>
 ```
