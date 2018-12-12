@@ -19,7 +19,7 @@ Ví dụ:
       ...
 ```
 
-Chúng tôi sẽ tìm hiểu các chức năng (một cách để nhóm các lệnh) sớm.
+Chúng ta sẽ tìm hiểu các chức năng (một cách để nhóm các lệnh) sớm.
 
 Nhìn tiếp và hãy lưu ý rằng `"use strict"` có thể được đặt ở đầu một hàm (hầu hết các loại hàm) thay vì toàn bộ tập lệnh. Sau đó, chế độ nghiêm ngặt chỉ được kích hoạt trong chức năng đó. Nhưng thông thường mọi người sử dụng nó cho toàn bộ kịch bản.
 
@@ -65,12 +65,12 @@ Khi chúng ta vào chế độ nghiêm ngặt (strict mode), sẽ không có s�
 
 Sự khác biệt của `"use strict"` so với chế độ "default" vẫn còn được đề cập.
 
-Trong các chương tiếp theo, khi chúng tôi tìm hiểu các tính năng ngôn ngữ, chúng tôi sẽ ghi chú về sự khác biệt của chế độ nghiêm ngặt và mặc định. May mắn thay, không có quá nhiều. Và họ thực sự làm cho cuộc sống của chúng ta tốt hơn.
+Trong các chương tiếp theo, khi chúng ta tìm hiểu các tính năng ngôn ngữ, chúng ta sẽ ghi chú về sự khác biệt của chế độ nghiêm ngặt và mặc định. May mắn thay, không có quá nhiều. Và họ thực sự làm cho cuộc sống của chúng ta tốt hơn.
 
 Tại thời điểm này, đủ để biết về nó nói chung là:
 
 1. Lệnh `"use strict"` chuyển động cơ (engine) sang chế độ "hiện đại (modern)", thay đổi hành vi của một số tính năng tích hợp (built-in features). Chúng ta sẽ thấy chi tiết khi chúng ta nghiên cứu.
 2. Chế độ nghiêm ngặt (strict mode) được kích hoạt bởi `"use strict"` ở trên cùng. Ngoài ra, có một số tính năng ngôn ngữ như "lớp" và "mô-đun" cho phép chế độ nghiêm ngặt tự động.
 3. Chế độ nghiêm ngặt được hỗ trợ bởi tất cả các trình duyệt hiện đại.
-4. Chúng tôi luôn khuyến nghị bắt đầu các tập lệnh với `"use strict"`. Tất cả các ví dụ trong hướng dẫn này đều cho là như vậy, trừ khi (rất hiếm khi) được chỉ định khác.
+4. Chúng ta luôn khuyến nghị bắt đầu các tập lệnh với `"use strict"`. Tất cả các ví dụ trong hướng dẫn này đều cho là như vậy, trừ khi (rất hiếm khi) được chỉ định khác.
 No search results.
