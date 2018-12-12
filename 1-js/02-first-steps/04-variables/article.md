@@ -374,5 +374,3 @@ Chúng ta có thể khai báo các biến để lưu trữ dữ liệu. Điều 
 - `const` - giống như `let`, nhưng giá trị của biến không thể thay đổi.
 
 Các biến nên được đặt tên theo cách cho phép chúng ta dễ dàng hiểu những gì bên trong.
-
-1 result is available, use up and down arrow keys to navigate.
