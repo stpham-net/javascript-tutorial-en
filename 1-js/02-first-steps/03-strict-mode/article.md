@@ -65,7 +65,7 @@ Khi chúng ta vào chế độ nghiêm ngặt (strict mode), sẽ không có s�
 
 Sự khác biệt của `"use strict"` so với chế độ "default" vẫn còn được đề cập.
 
-Trong các chương tiếp theo, khi chúng ta tìm hiểu các tính năng ngôn ngữ, chúng ta sẽ ghi chú về sự khác biệt của chế độ nghiêm ngặt và mặc định. May mắn thay, không có quá nhiều. Và họ thực sự làm cho cuộc sống của chúng ta tốt hơn.
+Trong các chương tiếp theo, khi chúng ta tìm hiểu các tính năng ngôn ngữ, chúng ta sẽ ghi chú về sự khác biệt của chế độ nghiêm ngặt và mặc định. May mắn thay, không có quá nhiều. Và chúng thực sự làm cho cuộc sống của chúng ta tốt hơn.
 
 Tại thời điểm này, đủ để biết về nó nói chung là:
 
