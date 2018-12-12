@@ -151,7 +151,7 @@ Như chúng ta có thể thấy, "unary plus" có mức độ ưu tiên là `16`
 
 Chúng ta hãy lưu ý rằng một phép gán `=` cũng là một toán tử. Nó được liệt kê trong bảng ưu tiên với mức độ ưu tiên rất thấp là `3`.
 
-Đó là lý do tại sao khi chúng ta gán một biến, như `x = 2 * 2 + 1`, thì các phép tính được thực hiện trước và sau đó `=` được ước tính, lưu trữ kết quả trong` x`.
+Đó là lý do tại sao khi chúng ta gán một biến, như `x = 2 * 2 + 1`, thì các phép tính được thực hiện trước và sau đó `=` được ước tính, lưu trữ kết quả trong `x`.
 
 ```js
       let x = 2 * 2 + 1;
