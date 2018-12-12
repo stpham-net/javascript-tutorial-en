@@ -52,9 +52,11 @@ The code outputs `6` because JavaScript does not insert semicolons here. It is i
 
 Errors which occur in such cases are quite hard to find and fix.
 
----
+<br/>
 
-**An example of an error**
+> ---
+
+**🎐 An example of an error**
 
 If you're curious to see a concrete example of such an error, check this code out:
 
@@ -94,7 +96,9 @@ So, because the semicolon is not auto-inserted, the code in the first example is
 
 But it should be two separate statements, not a single one. Such a merging in this case is just wrong, hence the error. There are other situations when such a thing happens.
 
----
+> ---
+
+<br/>
 
 It's recommended to put semicolons between statements even if they are separated by newlines. This rule is widely adopted by the community. Let's note once again -- *it is possible* to leave out semicolons most of the time. But it's safer -- especially for a beginner -- to use them.
 
@@ -140,11 +144,22 @@ Sometimes it comes in handy to temporarily disable a part of code:
       alert('World');
 ```
 
-***Use hotkeys!***
+<br/>
+
+> ---
+
+🎐 **Use hotkeys!**
 
 In most editors a line of code can be commented out by `Ctrl+/` hotkey for a single-line comment and something like `Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac try `Cmd` instead of `Ctrl`.
 
-***Nested comments are not supported!***
+> ---
+
+<br>
+<br>
+
+> ---
+
+⚠️ **Nested comments are not supported!**
 
 There may not be `/*...*/` inside another `/*...*/`.
 
@@ -156,6 +171,10 @@ Such code will die with an error:
       */
       alert( 'World' );
 ```
+
+> ---
+
+<br>
 
 Please, don't hesitate to comment your code.
 
