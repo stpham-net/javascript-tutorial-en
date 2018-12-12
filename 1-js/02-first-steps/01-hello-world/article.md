@@ -89,6 +89,9 @@ Chúng ta cũng có thể cung cấp một URL đầy đủ. Ví dụ:
       …
 ```
 
+<br/>
+
+> ---
 
 🎐 **Xin lưu ý:**
 
@@ -100,6 +103,13 @@ Sau này, các trang khác muốn có cùng một tập lệnh sẽ lấy nó t�
 
 Điều đó giúp tiết kiệm lưu lượng và làm cho các trang nhanh hơn.
 
+> ---
+
+<br/>
+
+<br/>
+
+> ---
 
 ⚠️ **Nếu `src` được đặt, nội dung tập lệnh sẽ bị bỏ qua.**
 
@@ -125,6 +135,9 @@ Ví dụ trên có thể được chia thành hai tập lệnh để làm việc
       </script>
 ```
 
+> ---
+
+<br/>
 
 ## Tóm lược
 
