@@ -1,44 +1,44 @@
-# Code structure
+# Cấu trúc mã
 
-The first thing to study is the building blocks of the code.
+Điều đầu tiên để nghiên cứu là các khối xây dựng của mã.
 
-## Statements
+## Các câu lệnh
 
-Statements are syntax constructs and commands that perform actions.
+Các câu lệnh là các cấu trúc cú pháp và các lệnh thực hiện các hành động.
 
-We've already seen a statement `alert('Hello, world!')`, which shows the message "Hello world!".
+Chúng ta đã thấy một câu lệnh `alert('Hello, world!')`, để hiển thị thông báo "Hello world!".
 
-We can have as many statements in the code as we want. Another statement can be separated with a semicolon.
+Chúng ta có thể có nhiều câu lệnh trong mã như chúng ta muốn. Một câu lệnh khác có thể được phân tách bằng dấu chấm phẩy.
 
-For example, here we split the message into two:
+Ví dụ: ở đây chúng ta chia tin nhắn thành hai:
 
 ```js
       alert('Hello'); alert('World');
 ```
 
-Usually each statement is written on a separate line -- thus the code becomes more readable:
+Thông thường mỗi câu lệnh được viết trên một dòng riêng biệt - do đó mã trở nên dễ đọc hơn:
 
 ```js
       alert('Hello');
       alert('World');
 ```
 
-## Semicolons
+## Dấu chấm phẩy
 
-A semicolon may be omitted in most cases when a line break exists.
+Dấu chấm phẩy có thể được bỏ qua trong hầu hết các trường hợp khi có ngắt dòng.
 
-This would also work:
+Điều này cũng sẽ làm việc:
 
 ```js
       alert('Hello')
       alert('World')
 ```
 
-Here JavaScript interprets the line break as an "implicit" semicolon. That's also called an [automatic semicolon insertion](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion).
+Ở đây, JavaScript diễn giải ngắt dòng là một dấu chấm phẩy "ngầm". Điều đó cũng được gọi là [chèn dấu chấm phẩy tự động](https://tc39.github.io/ecma262/#sec-automatic-semiaolon-inserts).
 
-**In most cases a newline implies a semicolon. But "in most cases" does not mean "always"!**
+**Trong hầu hết các trường hợp, một dòng mới ngụ ý một dấu chấm phẩy. Nhưng "trong hầu hết các trường hợp" không có nghĩa là "luôn luôn"!**
 
-There are cases when a newline does not mean a semicolon, for example:
+Có những trường hợp khi một dòng mới không có nghĩa là dấu chấm phẩy, ví dụ:
 
 ```js
       alert(3 +
@@ -46,27 +46,27 @@ There are cases when a newline does not mean a semicolon, for example:
       + 2);
 ```
 
-The code outputs `6` because JavaScript does not insert semicolons here. It is intuitively obvious that if the line ends with a plus `"+"`, then it is an "incomplete expression", so the semicolon is not required. And in this case that works as intended.
+Mã đầu ra sẽ là `6` vì JavaScript không chèn dấu chấm phẩy ở đây. Một cách trực quan rõ ràng là nếu dòng kết thúc bằng dấu cộng `"+"`, thì đó là một "biểu thức không đầy đủ", do đó không cần phải có dấu chấm phẩy. Và trong trường hợp này hoạt động như dự định.
 
-**But there are situations where JavaScript "fails" to assume a semicolon where it is really needed.**
+**Nhưng có những tình huống JavaScript "thất bại" khi giả sử cần một dấu chấm phẩy ở nơi thực sự cần thiết.**
 
-Errors which occur in such cases are quite hard to find and fix.
+Lỗi xảy ra trong những trường hợp như vậy là khá khó để tìm và sửa.
 
 <br/>
 
 > ---
 
-**📌 An example of an error**
+**📌  Một ví dụ về lỗi**
 
-If you're curious to see a concrete example of such an error, check this code out:
+Nếu bạn tò mò muốn xem một ví dụ cụ thể về lỗi như vậy, hãy kiểm tra mã này:
 
 ```js
       [1, 2].forEach(alert)
 ```
 
-No need to think about the meaning of the brackets `[]` and `forEach` yet. We'll study them later, for now it does not matter. Let's just remember the result: it shows `1`, then `2`.
+Không cần phải suy nghĩ về ý nghĩa của dấu ngoặc `[]` và` forEach`. Chúng ta sẽ nghiên cứu chúng sau, bây giờ nó không thành vấn đề. Chúng ta hãy nhớ kết quả: nó hiển thị `1`, rồi `2`.
 
-Now let's add an `alert` before the code and *not* finish it with a semicolon:
+Bây giờ, hãy thêm một `alert` trước mã và *không* kết thúc nó bằng dấu chấm phẩy:
 
 ```js
       alert("There will be an error")
@@ -74,9 +74,9 @@ Now let's add an `alert` before the code and *not* finish it with a semicolon:
       [1, 2].forEach(alert)
 ```
 
-Now if we run it, only the first `alert` is shown, and then we have an error!
+Bây giờ nếu chúng ta chạy nó, chỉ có `alert` đầu tiên được hiển thị, và sau đó chúng ta gặp lỗi!
 
-But everything is fine again if we add a semicolon after `alert`:
+Nhưng mọi thứ sẽ ổn trở lại nếu chúng ta thêm dấu chấm phẩy sau `alert`:
 
 ```js
       alert("All fine now");
@@ -84,35 +84,35 @@ But everything is fine again if we add a semicolon after `alert`:
       [1, 2].forEach(alert)  
 ```
 
-Now we have the "All fine now" message and then `1` and `2`.
+Bây giờ chúng ta có thông báo "All fine now" và sau đó là `1` và `2`.
 
-The error in the no-semicolon variant occurs because JavaScript does not imply a semicolon before square brackets `[...]`.
+Lỗi trong biến thể không có dấu chấm phẩy xảy ra do JavaScript không bao hàm dấu chấm phẩy trước dấu ngoặc vuông `[...]`.
 
-So, because the semicolon is not auto-inserted, the code in the first example is treated as a single statement. That's how the engine sees it:
+Vậy, vì dấu chấm phẩy không được chèn tự động, mã trong ví dụ đầu tiên được coi là một câu lệnh. Đây là cách động cơ (engine) nhìn thấy nó:
 
 ```js
       alert("There will be an error")[1, 2].forEach(alert)
 ```
 
-But it should be two separate statements, not a single one. Such a merging in this case is just wrong, hence the error. There are other situations when such a thing happens.
+Nhưng nó phải là hai câu lệnh riêng biệt, không phải là một câu lệnh duy nhất. Việc hợp nhất như vậy trong trường hợp này là sai, do đó có lỗi. Có những tình huống tương tự khi điều như vậy xảy ra.
 
 > ---
 
 <br/>
 
-It's recommended to put semicolons between statements even if they are separated by newlines. This rule is widely adopted by the community. Let's note once again -- *it is possible* to leave out semicolons most of the time. But it's safer -- especially for a beginner -- to use them.
+Bạn nên đặt dấu chấm phẩy giữa các câu ngay cả khi chúng được phân tách bằng dòng mới. Quy tắc này được cộng đồng áp dụng rộng rãi. Chúng ta hãy lưu ý một lần nữa -- *có thể* bỏ qua dấu chấm phẩy hầu hết thời gian. Nhưng nó an toàn hơn - đặc biệt đối với người mới bắt đầu - sử dụng chúng.
 
 ## Comments
 
-As time goes on, the program becomes more and more complex. It becomes necessary to add *comments* which describe what happens and why.
+Thời gian trôi qua, chương trình ngày càng phức tạp hơn. Nó trở nên cần thiết để thêm *comments* mô tả những gì xảy ra và tại sao.
 
-Comments can be put into any place of the script. They don't affect the execution because the engine simply ignores them.
+Comments có thể được đưa vào bất kỳ nơi nào của kịch bản. Chúng không ảnh hưởng đến việc thực thi vì động cơ (engine) đơn giản bỏ qua chúng.
 
-**One-line comments start with two forward slash characters `//`.**
+**One-line comments bắt đầu bằng hai ký tự gạch chéo về phía trước `//`.**
 
-The rest of the line is a comment. It may occupy a full line of its own or follow a statement.
+Phần còn lại của dòng là một comment. Nó có thể chiếm một dòng đầy đủ của riêng mình hoặc theo sau một câu lệnh.
 
-Like here:
+Giống như ở đây:
 
 ```js
       // This comment occupies a line of its own
@@ -121,9 +121,9 @@ Like here:
       alert('World'); // This comment follows the statement
 ```
 
-**Multiline comments start with a forward slash and an asterisk `/*` and end with an asterisk and a forward slash `*/`.**
+** Nhận xét nhiều dòng bắt đầu bằng dấu gạch chéo và dấu hoa thị `/*` và kết thúc bằng dấu hoa thị và dấu gạch chéo `*/`.**
 
-Like this:
+Như thế này:
 
 ```js
       /* An example with two messages.
@@ -133,9 +133,9 @@ Like this:
       alert('World');
 ```
 
-The content of comments is ignored, so if we put code inside `/* ... */` it won't execute.
+Nội dung của các comment bị bỏ qua, vì vậy nếu chúng ta đặt mã bên trong `/* ... */` thì nó sẽ không được thực thi.
 
-Sometimes it comes in handy to temporarily disable a part of code:
+Đôi khi nó có ích để tạm thời vô hiệu hóa một phần mã:
 
 ```js
       /* Commenting out the code
@@ -148,9 +148,9 @@ Sometimes it comes in handy to temporarily disable a part of code:
 
 > ---
 
-📌 **Use hotkeys!**
+**📌 Sử dụng phím nóng!**
 
-In most editors a line of code can be commented out by `Ctrl+/` hotkey for a single-line comment and something like `Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac try `Cmd` instead of `Ctrl`.
+Trong hầu hết các trình soạn thảo, một dòng mã có thể được nhận xét bằng `Ctrl+/`  cho một nhận xét một dòng và đại loại như `Ctrl+Shift+/` -- cho các nhận xét đa dòng (chọn một đoạn mã và nhấn phím nóng). Đối với Mac, hãy thử `Cmd` thay vì` Ctrl`.
 
 > ---
 
@@ -159,11 +159,11 @@ In most editors a line of code can be commented out by `Ctrl+/` hotkey for a sin
 
 > ---
 
-📌 **Nested comments are not supported!**
+**📌 Nhận xét lồng nhau không được hỗ trợ!**
 
-There may not be `/*...*/` inside another `/*...*/`.
+Không thể có `/*...*/` bên trong một `/*...*/`.
 
-Such code will die with an error:
+Mã như vậy sẽ chết với một lỗi:
 
 ```js
       /*
@@ -176,8 +176,8 @@ Such code will die with an error:
 
 <br>
 
-Please, don't hesitate to comment your code.
+Please, đừng ngần ngại comment code của bạn.
 
-Comments increase the overall code footprint, but that's not a problem at all. There are many tools which minify the code before publishing to the production server. They remove comments, so they don't appear in the working scripts. Therefore comments do not have any negative effects on production at all.
+Nhận xét tăng dấu chân (footprint) mã tổng thể, nhưng đó không phải là một vấn đề. Có nhiều công cụ thu nhỏ (minify) mã trước khi xuất bản lên máy chủ sản xuất (production server). Công cụ sẽ xóa comments, vì vậy chúng không xuất hiện trong các kịch bản làm việc. Do đó, comments không có bất kỳ tác động tiêu cực nào đến sản xuất (production).
 
-Further in the tutorial there will be a chapter **Coding Style** that also explains how to write better comments.
+Hơn nữa trong hướng dẫn sẽ có một chương **Coding Style** cũng giải thích cách viết comments tốt hơn.
