@@ -1,3 +1,4 @@
-# Objects, classes, inheritance
+# Đối tượng, lớp, kế thừa
 
-In this section we return to objects and learn them even more in-depth.
+Trong phần này, chúng ta trở lại các đối tượng và tìm hiểu chúng sâu hơn nữa.
+No search results.
