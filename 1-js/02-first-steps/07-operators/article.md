@@ -159,7 +159,7 @@ Chúng ta hãy lưu ý rằng một phép gán `=` cũng là một toán tử. N
       alert( x ); // 5
 ```
 
-Có thể xâu chuỗi các bài tập:
+Có thể xâu chuỗi các phép gán:
 
 ```js
       let a, b, c;
@@ -171,7 +171,7 @@ Có thể xâu chuỗi các bài tập:
       alert( c ); // 4
 ```
 
-Xâu chuỗi được đánh giá từ phải sang trái. Đầu tiên biểu thức ngoài cùng bên phải `2 + 2` được ước tính sau đó được gán cho các biến ở bên trái: `c`, `b` và `a`. Cuối cùng, tất cả các biến chia sẻ một giá trị duy nhất.
+Xâu chuỗi phép gán được đánh giá từ phải sang trái. Đầu tiên biểu thức ngoài cùng bên phải `2 + 2` được ước tính sau đó được gán cho các biến ở bên trái: `c`, `b` và `a`. Cuối cùng, tất cả các biến chia sẻ một giá trị duy nhất.
 
 <br>
 
