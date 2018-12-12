@@ -16,7 +16,7 @@ Các kịch bản được cung cấp và thực hiện dưới dạng văn bả
 
 > ---
 
-**🎐 Tại sao lại là "Java" Script?**
+**📌 Tại sao lại là "Java" Script?**
 
 Khi JavaScript được tạo, ban đầu nó có một tên khác: "LiveScript". Nhưng Java rất phổ biến vào thời điểm đó, vì vậy người ta đã quyết định rằng việc định vị một ngôn ngữ mới là "em trai" của Java sẽ giúp ích.
 
