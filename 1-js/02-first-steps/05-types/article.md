@@ -233,7 +233,7 @@ Ba dòng cuối có thể cần giải thích thêm:
 
 1. `Math` là một đối tượng tích hợp cung cấp các phép toán. Chúng ta sẽ học nó trong chương `number`. Ở đây nó phục vụ như là một ví dụ về một đối tượng.
 2. Kết quả của `typeof null` là `"object"`. Sai rồi. Đó là một lỗi được công nhận chính thức trong `typeof`, được giữ cho tương thích. Tất nhiên, `null` không phải là một đối tượng. Đó là một giá trị đặc biệt với một loại riêng của nó. Vì vậy, một lần nữa, đó là một lỗi trong ngôn ngữ JavaScript.
-3. Kết quả của `typeof alert` là `"function"`, bởi vì `alert` là một function của ngôn ngữ JS. Chúng ta sẽ nghiên cứu các functions trong các chương tiếp theo và chúng ta sẽ thấy rằng không có loại "function" đặc biệt nào trong ngôn ngữ. Các function thuộc về kiểu object. Nhưng `typeof` đối xử với chúng khác nhau. Chính thức, nó không chính xác, nhưng rất thuận tiện trong thực tế.
+3. Kết quả của `typeof alert` là `"function"`, bởi vì `alert` là một function của ngôn ngữ JS. Chúng ta sẽ nghiên cứu các functions trong các chương tiếp theo và chúng ta sẽ thấy rằng không có loại "function" đặc biệt nào trong ngôn ngữ. Các function thuộc về kiểu object. Nhưng `typeof` phân biệt chúng khác nhau. Chính thức, nó không chính xác, nhưng rất thuận tiện trong thực tế.
 
 ## Tóm lược
 
