@@ -1,3 +1,3 @@
-# An introduction
+# Một lời giới thiệu
 
-About the JavaScript language and the environment to develop with it.
+Về ngôn ngữ JavaScript và môi trường để phát triển cùng với nó.
