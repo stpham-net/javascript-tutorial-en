@@ -1,16 +1,16 @@
-# The modern mode, "use strict"
+# Chế độ hiện đại, "use strict"
 
-For a long time JavaScript was evolving without compatibility issues. New features were added to the language, but the old functionality did not change.
+Trong một thời gian dài JavaScript đã phát triển mà không có vấn đề về tương thích. Các tính năng mới đã được thêm vào ngôn ngữ, nhưng chức năng cũ không thay đổi.
 
-That had the benefit of never breaking existing code. But the downside was that any mistake or an imperfect decision made by JavaScript creators got stuck in the language forever.
+Điều đó có lợi ích của việc không bao giờ phá vỡ mã hiện có. Nhưng nhược điểm là bất kỳ sai lầm hoặc quyết định không hoàn hảo nào được tạo bởi các nhà sáng tạo JavaScript đã bị mắc kẹt trong ngôn ngữ mãi mãi.
 
-It had been so until 2009 when ECMAScript 5 (ES5) appeared. It added new features to the language and modified some of the existing ones. To keep the old code working, most modifications are off by default. One needs to enable them explicitly with a special directive `"use strict"`.
+Cho đến năm 2009, ECMAScript 5 (ES5) đã xuất hiện. Nó đã thêm các tính năng mới cho ngôn ngữ và sửa đổi một số tính năng hiện có. Để giữ cho mã cũ hoạt động, hầu hết các sửa đổi được tắt theo mặc định. Người ta cần kích hoạt chúng một cách rõ ràng bằng một lệnh đặc biệt `"use strict"`.
 
 ## "use strict"
 
-The directive looks like a string: `"use strict"` or `'use strict'`. When it is located on the top of the script, then the whole script works the "modern" way.
+Lệnh này trông giống như một chuỗi: `"use strict"` hoặc `'use strict'`. Khi nó nằm ở trên cùng của tập lệnh, thì toàn bộ tập lệnh hoạt động theo cách "hiện đại" ("modern" way).
 
-For example
+Ví dụ:
 
 ```js
       "use strict";
@@ -19,19 +19,19 @@ For example
       ...
 ```
 
-We will learn functions (a way to group commands) soon.
+Chúng tôi sẽ tìm hiểu các chức năng (một cách để nhóm các lệnh) sớm.
 
-Looking ahead let's just note that `"use strict"` can be put at the start of a function (most kinds of functions) instead of the whole script. Then strict mode is enabled in that function only. But usually people use it for the whole script.
+Nhìn tiếp và hãy lưu ý rằng `"use strict"` có thể được đặt ở đầu một hàm (hầu hết các loại hàm) thay vì toàn bộ tập lệnh. Sau đó, chế độ nghiêm ngặt chỉ được kích hoạt trong chức năng đó. Nhưng thông thường mọi người sử dụng nó cho toàn bộ kịch bản.
 
 <br>
 
 > ---
 
-**📌 Ensure that "use strict" is at the top**
+**📌  Đảm bảo rằng "use strict" là ở trên đầu**
 
-Please make sure that `"use strict"` is on the top of the script, otherwise the strict mode may not be enabled.
+Vui lòng đảm bảo rằng `"use strict"` ở trên cùng của tập lệnh, nếu không chế độ nghiêm ngặt có thể không được bật.
 
-There is no strict mode here:
+Không có chế độ nghiêm ngặt (strict mode) ở đây:
 
 ```js
       alert("some code");
@@ -42,7 +42,7 @@ There is no strict mode here:
       // strict mode is not activated
 ```
 
-Only comments may appear above `"use strict"`.
+Chỉ các comment có thể xuất hiện ở trên `"use strict"`.
 
 > ---
 
@@ -51,11 +51,11 @@ Only comments may appear above `"use strict"`.
 
 > ---
 
-**📌 There's no way to cancel `use strict`**
+**📌 Không có cách nào để hủy bỏ `use strict`**
 
-There is no directive `"no use strict"` or alike, that would return the old behavior.
+Không có chỉ thị `"no use strict"` hoặc tương tự, sẽ trả lại hành vi cũ.
 
-Once we enter the strict mode, there's no return.
+Khi chúng ta vào chế độ nghiêm ngặt (strict mode), sẽ không có sự trở lại.
 
 > ---
 
@@ -63,13 +63,14 @@ Once we enter the strict mode, there's no return.
 
 ## Always "use strict"
 
-The differences of `"use strict"` versus the "default" mode are still to be covered.
+Sự khác biệt của `"use strict"` so với chế độ "default" vẫn còn được đề cập.
 
-In the next chapters, as we learn language features, we'll make notes about the differences of the strict and default mode. Luckily, there are not so many. And they actually make our life better.
+Trong các chương tiếp theo, khi chúng tôi tìm hiểu các tính năng ngôn ngữ, chúng tôi sẽ ghi chú về sự khác biệt của chế độ nghiêm ngặt và mặc định. May mắn thay, không có quá nhiều. Và họ thực sự làm cho cuộc sống của chúng ta tốt hơn.
 
-At this point in time it's enough to know about it in general:
+Tại thời điểm này, đủ để biết về nó nói chung là:
 
-1. The `"use strict"` directive switches the engine to the "modern" mode, changing the behavior of some built-in features. We'll see the details as we study.
-2. The strict mode is enabled by `"use strict"` at the top. Also there are several language features like "classes" and "modules" that enable strict mode automatically.
-3. The strict mode is supported by all modern browsers.
-4. It's always recommended to start scripts with `"use strict"`. All examples in this tutorial assume so, unless (very rarely) specified otherwise.
+1. Lệnh `"use strict"` chuyển động cơ (engine) sang chế độ "hiện đại (modern)", thay đổi hành vi của một số tính năng tích hợp (built-in features). Chúng ta sẽ thấy chi tiết khi chúng ta nghiên cứu.
+2. Chế độ nghiêm ngặt (strict mode) được kích hoạt bởi `"use strict"` ở trên cùng. Ngoài ra, có một số tính năng ngôn ngữ như "lớp" và "mô-đun" cho phép chế độ nghiêm ngặt tự động.
+3. Chế độ nghiêm ngặt được hỗ trợ bởi tất cả các trình duyệt hiện đại.
+4. Chúng tôi luôn khuyến nghị bắt đầu các tập lệnh với `"use strict"`. Tất cả các ví dụ trong hướng dẫn này đều cho là như vậy, trừ khi (rất hiếm khi) được chỉ định khác.
+No search results.
