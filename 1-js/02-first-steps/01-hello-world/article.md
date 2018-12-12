@@ -107,8 +107,6 @@ Sau này, các trang khác muốn có cùng một tập lệnh sẽ lấy nó t�
 
 <br/>
 
-<br/>
-
 > ---
 
 ⚠️ **Nếu `src` được đặt, nội dung tập lệnh sẽ bị bỏ qua.**
