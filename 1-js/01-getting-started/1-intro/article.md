@@ -42,7 +42,7 @@ Các thuật ngữ trên rất tốt để nhớ vì chúng được sử dụng
 
 > ---
 
-**🎐 Engine hoạt động như thế nào?**
+**📌 Engine hoạt động như thế nào?**
 
 Engine rất phức tạp. Nhưng những điều cơ bản là dễ hiểu.
 
