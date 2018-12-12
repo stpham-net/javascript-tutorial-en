@@ -133,7 +133,7 @@ For instance:
 
 > ---
 
-**Please note: the string with zero `\"0\"` is `true`**
+**📌 Please note: the string with zero `\"0\"` is `true`**
 
 Some languages (namely PHP) treat `"0"` as `false`. But in JavaScript a non-empty string is always `true`.
 
