@@ -85,10 +85,10 @@ To attach several scripts, use multiple tags:
 ```html
       <script src="/js/script1.js"></script>
       <script src="/js/script2.js"></script>
-…
+      …
 ```
 
-### Please note:
+**Please note:**
 
 As a rule, only the simplest scripts are put into HTML. More complex ones reside in separate files.
 
@@ -99,7 +99,7 @@ After this, other pages that want the same script will take it from the cache in
 That saves traffic and makes pages faster.
 
 
-### If `src` is set, the script content is ignored.
+**If `src` is set, the script content is ignored.**
 
 A single `<script>` tag can't have both the `src` attribute and the code inside.
 
