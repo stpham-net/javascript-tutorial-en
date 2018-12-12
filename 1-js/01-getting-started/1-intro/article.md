@@ -77,7 +77,7 @@ Ví dụ về các hạn chế đó bao gồm:
     Hạn chế này, một lần nữa, là vì sự an toàn của người dùng. Một trang từ `http://anysite.com` mà người dùng đã mở không được truy cập vào tab trình duyệt khác có URL`http://gmail.com` và đánh cắp thông tin từ đó.
 - JavaScript có thể dễ dàng giao tiếp qua mạng đến máy chủ nơi trang hiện tại (current page) đến. Nhưng khả năng nhận dữ liệu từ các web/tên miền khác bị tê liệt. Mặc dù có thể, nó yêu cầu thỏa thuận rõ ràng (được thể hiện bằng các HTTP headers) từ phía remote. Một lần nữa, đó là một giới hạn an toàn.
 
-![](limitations.png)
+![](limitations@2x.png)
 
 Các giới hạn như vậy không tồn tại nếu JavaScript được sử dụng bên ngoài trình duyệt, ví dụ như trên máy chủ. Các trình duyệt hiện đại cũng cho phép plugin/extensions mở rộng có thể yêu cầu quyền mở rộng (extended permissions).
 
