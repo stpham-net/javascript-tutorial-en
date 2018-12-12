@@ -115,7 +115,7 @@ Like here:
       alert('World'); // This comment follows the statement
 ```
 
-**Multiline comments start with a forward slash and an asterisk <code>/&#42;</code> and end with an asterisk and a forward slash `&#42;/`.**
+**Multiline comments start with a forward slash and an asterisk `/*` and end with an asterisk and a forward slash `*/`.**
 
 Like this:
 
@@ -127,7 +127,7 @@ Like this:
       alert('World');
 ```
 
-The content of comments is ignored, so if we put code inside `/&#42; ... &#42;/` it won't execute.
+The content of comments is ignored, so if we put code inside `/* ... */` it won't execute.
 
 Sometimes it comes in handy to temporarily disable a part of code:
 
@@ -140,7 +140,7 @@ Sometimes it comes in handy to temporarily disable a part of code:
 
 **Use hotkeys!**
 
-In most editors a line of code can be commented out by `key:Ctrl+/` hotkey for a single-line comment and something like `Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac try `Cmd` instead of `Ctrl`.
+In most editors a line of code can be commented out by `Ctrl+/` hotkey for a single-line comment and something like `Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac try `Cmd` instead of `Ctrl`.
 
 ***Nested comments are not supported!***
 
