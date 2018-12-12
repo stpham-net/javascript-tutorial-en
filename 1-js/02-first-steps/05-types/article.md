@@ -168,7 +168,7 @@ Nó chỉ là một giá trị đặc biệt có ý nghĩa "không có gì", "tr
 
 Giá trị đặc biệt `undefined` đứng ngoài. Nó tạo ra một kiểu của riêng nó, giống như `null`.
 
-Ý nghĩa của 'undefined` là "giá trị không được gán (assigned)".
+Ý nghĩa của `undefined` là "giá trị không được gán (assigned)".
 
 Nếu một biến được khai báo, nhưng không được gán, thì giá trị của nó chính xác là `undefined`:
 
