@@ -13,39 +13,52 @@ The directive looks like a string: `"use strict"` or `'use strict'`. When it is 
 For example
 
 ```js
-"use strict";
+      "use strict";
 
-// this code works the modern way
-...
+      // this code works the modern way
+      ...
 ```
 
 We will learn functions (a way to group commands) soon.
 
 Looking ahead let's just note that `"use strict"` can be put at the start of a function (most kinds of functions) instead of the whole script. Then strict mode is enabled in that function only. But usually people use it for the whole script.
 
+<br>
 
-````warn header="Ensure that \"use strict\" is at the top"
+> ---
+
+**📌 Ensure that "use strict" is at the top**
+
 Please make sure that `"use strict"` is on the top of the script, otherwise the strict mode may not be enabled.
 
 There is no strict mode here:
 
-```js no-strict
-alert("some code");
-// "use strict" below is ignored, must be on the top
+```js
+      alert("some code");
+      // "use strict" below is ignored, must be on the top
 
-"use strict";
+      "use strict";
 
-// strict mode is not activated
+      // strict mode is not activated
 ```
 
 Only comments may appear above `"use strict"`.
-````
 
-```warn header="There's no way to cancel `use strict`"
+> ---
+
+<br>
+
+> ---
+
+**📌 There's no way to cancel `use strict`**
+
 There is no directive `"no use strict"` or alike, that would return the old behavior.
 
 Once we enter the strict mode, there's no return.
-```
+
+> ---
+
+<br>
 
 ## Always "use strict"
 
