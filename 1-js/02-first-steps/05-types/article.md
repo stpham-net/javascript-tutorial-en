@@ -188,7 +188,7 @@ Về mặt kỹ thuật, có thể gán `undefined` cho bất kỳ biến nào:
       alert(x); // "undefined"
 ```
 
-...Nhưng nó không được khuyến khích để làm điều đó. Thông thường, chúng tôi sử dụng `null` để viết giá trị "empty" hoặc "unknown" vào biến và `undefined` chỉ được sử dụng để kiểm tra, để xem biến đó được gán hay tương tự.
+...Nhưng nó không được khuyến khích để làm điều đó. Thông thường, chúng tôi sử dụng `null` để viết giá trị "empty" hoặc "unknown" vào biến và `undefined` chỉ được sử dụng để kiểm tra, để xem biến đó được gán hay chưa?
 
 ## Objects và Symbols
 
