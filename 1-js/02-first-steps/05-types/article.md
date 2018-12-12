@@ -67,7 +67,7 @@ Kịch bản sẽ không bao giờ dừng lại với một lỗi nghiêm trọn
 
 <br>
 
-Các giá trị số đặc biệt chính thức thuộc về loại "số". Tất nhiên chúng không phải là số theo nghĩa thông thường của từ này.
+Các giá trị số đặc biệt đều thuộc về kiểu "number". Tất nhiên chúng không phải là số theo nghĩa thông thường của từ này.
 
 Chúng ta sẽ thấy nhiều hơn về làm việc với các số trong chương `number`.
 
