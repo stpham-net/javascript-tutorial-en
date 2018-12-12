@@ -67,7 +67,7 @@ Các chuỗi `"Glow"` và `"Glee"` được so sánh theo từng ký tự:
 
 Thuật toán so sánh được đưa ra ở trên gần tương đương với thuật toán được sử dụng trong từ điển sách hoặc danh bạ điện thoại. Nhưng nó không hoàn toàn giống nhau.
 
-Ví dụ, trường hợp quan trọng. Một chữ cái viết hoa `"A"` không bằng chữ thường `"a"`. Cái nào lớn hơn? Thật ra, chữ thường `"a"` là lớn hơn. Tại sao? Bởi vì ký tự chữ thường có chỉ mục lớn hơn trong bảng mã hóa nội bộ (Unicode). Chúng tôi sẽ quay lại chi tiết cụ thể và hậu quả trong chương **string**.
+Ví dụ, trường hợp quan trọng. Một chữ cái viết hoa `"A"` không bằng chữ thường `"a"`. Cái nào lớn hơn? Thật ra, chữ thường `"a"` là lớn hơn. Tại sao? Bởi vì ký tự chữ thường có chỉ mục lớn hơn trong bảng mã hóa nội bộ (Unicode). Chúng ta sẽ quay lại chi tiết cụ thể và hậu quả trong chương **string**.
 
 > ---
 
@@ -209,7 +209,7 @@ Giá trị 'undefined` không nên tham gia so sánh ở tất cả:
 
 Tại sao nó không thích số 0 nhiều như vậy? Luôn luôn sai!
 
-Chúng tôi đã có những kết quả này bởi vì:
+Chúng ta đã có những kết quả này bởi vì:
 
 - So sánh `(1)` và `(2)` trả về `false` vì `undefined` được chuyển đổi thành `NaN`. Và `NaN` là một giá trị số đặc biệt trả về `false` cho tất cả các phép so sánh.
 - Kiểm tra đẳng thức `(3)` trả về `false`, bởi vì `undefined` chỉ bằng `null` và không có giá trị nào khác.
