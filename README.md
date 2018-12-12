@@ -1,39 +1,17 @@
-# The JavaScript Tutorial
+# Hướng dẫn JavaScript
 
-This repository hosts the content of the Modern JavaScript Tutorial, published at [https://javascript.info](https://javascript.info).
+Kho lưu trữ này lưu trữ nội dung của Hướng dẫn JavaScript hiện đại, được xuất bản tại [https://javascript.info](https://javascript.info).
 
-## Translations
+## Kết cấu
 
-(In alphabetical order):
+Mỗi chương, bài viết hoặc một nhiệm vụ (task) có thư mục của nó.
 
-| Language | Github | Translation leads | Translated (%) | Published |
-|----------|--------|-------------------|-----------------|-----------|
-| Chinese | https://github.com/xitu/javascript-tutorial-zh | @leviding | ![](http://translate-hook.javascript.info/stats/zh.svg?1) | https://zh.javascript.info |
-| Japanese | https://github.com/KenjiI/javascript-tutorial-ja | @KenjiI | ![](http://translate-hook.javascript.info/stats/ja.svg?1) | https://ja.javascript.info |
-| Romanian | https://github.com/lighthousand/javascript-tutorial-ro | @lighthousand | started | - |
-| Russian | https://github.com/iliakan/javascript-tutorial-ru | @iliakan | * | https://learn.javascript.ru |
-| Turkish | https://github.com/sahinyanlik/javascript-tutorial-tr | @sahinyanlik | ![](http://translate-hook.javascript.info/stats/tr.svg?1) | - |
+Thư mục được đặt tên như `N-url`, trong đó` N` là một số cho mục đích sắp xếp và `url` là phần URL có tiêu đề của tài liệu.
 
+Các dạng được xác định bởi tệp bên trong thư mục:
 
+  - `index.md` là viết tắt của một chương
+  - `article.md` là viết tắt của một bài viết
+  - `task.md` là viết tắt của một tác vụ (giải pháp phải được cung cấp trong tệp `Solution.md`)
 
-`*` – the previous version is published in Russian, need to backport/translate the new one from English.
-
-If you'd like to translate it into your language, please clone the repository, change its name to `javascript-tutorial-...` (by the language) and [create an issue](https://github.com/iliakan/javascript-tutoria-en/issues/new) for me to add you to the list.
-
-You can edit the text in any editor (markdown-like syntax). The server to run the tutorial locally and see how it looks is at <https://github.com/iliakan/javascript-tutorial-server>.  
-
-
-
-## Structure
-
-Every chapter, article or a task has its folder.
-
-The folder is named like `N-url`, where `N` is a number for the sorting purposes and `url` is the URL part with title of the material.
-
-The type of the material is defined by the file inside the folder:
-
-  - `index.md` stands for a chapter
-  - `article.md` stands for an article
-  - `task.md` stands for a task (solution must be provided in `solution.md` file aswell)
-
-Each of these files starts from the `# Main header`.
+Mỗi tệp này bắt đầu từ `# Tiêu đề chính`.
