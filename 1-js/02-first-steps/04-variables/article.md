@@ -268,7 +268,7 @@ Thông thường, chúng ta cần xác định một biến trước khi sử d�
 
 ## Hằng
 
-Để khai báo một biến không thay đổi, người ta có thể sử dụng `const` thay vì` let`:
+Để khai báo một biến không thay đổi, người ta có thể sử dụng `const` thay vì `let`:
 
 ```js
       const myBirthday = '18.04.1982';
