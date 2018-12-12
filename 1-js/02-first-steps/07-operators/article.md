@@ -441,7 +441,7 @@ Ví dụ:
 
 Xin lưu ý rằng toán tử dấu phẩy có độ ưu tiên rất thấp, thấp hơn `=`, vì vậy dấu ngoặc đơn rất quan trọng trong ví dụ trên.
 
-Nếu không có chúng: `a = 1 + 2, 3 + 4` sẽ đánh giá `+` trước tiên, tính tổng các số thành `a = 3, 7`, sau đó toán tử gán `=` gán `a = 3`, rồi số sau khi dấu phẩy `7` không được xử lý, vì vậy nó bị bỏ qua.
+Nếu không có chúng: `a = 1 + 2, 3 + 4` sẽ đánh giá `+` trước tiên, tính tổng các số thành `a = 3, 7`, sau đó toán tử gán `=` gán `a = 3`, rồi số sau dấu phẩy `7` không được xử lý, vì vậy nó bị bỏ qua.
 
 > ---
 
