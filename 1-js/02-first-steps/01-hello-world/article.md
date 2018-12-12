@@ -82,13 +82,13 @@ Chúng ta cũng có thể cung cấp một URL đầy đủ. Ví dụ:
 
 Để đính kèm một số tập lệnh, sử dụng nhiều thẻ:
 
+
 ```html
       <script src="/js/script1.js"></script>
       <script src="/js/script2.js"></script>
       …
 ```
 
-〰️〰️〰️
 
 🎐 **Xin lưu ý:**
 
@@ -100,16 +100,13 @@ Sau này, các trang khác muốn có cùng một tập lệnh sẽ lấy nó t�
 
 Điều đó giúp tiết kiệm lưu lượng và làm cho các trang nhanh hơn.
 
-〰️〰️〰️
-
-
-〰️〰️〰️ 
 
 ⚠️ **Nếu `src` được đặt, nội dung tập lệnh sẽ bị bỏ qua.**
 
 Một thẻ `<script>` duy nhất không thể có cả thuộc tính `src` và mã bên trong.
 
 Điều này sẽ không hoạt động:
+
 
 ```html
       <script src="file.js">
@@ -128,7 +125,6 @@ Ví dụ trên có thể được chia thành hai tập lệnh để làm việc
       </script>
 ```
 
-〰️〰️〰️ 
 
 ## Tóm lược
 
