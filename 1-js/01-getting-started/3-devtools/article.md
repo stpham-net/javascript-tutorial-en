@@ -22,7 +22,7 @@ Các developer tool sẽ mở trên tab Console theo mặc định.
 
 Nó trông giống như thế này:
 
-![chrome](chrome@2x.png)
+![chrome](chrome.png)
 
 Giao diện chính xác của các công cụ dành cho nhà phát triển tùy thuộc vào phiên bản Chrome của bạn. Nó thay đổi theo thời gian nhưng nên tương tự.
 
@@ -46,7 +46,7 @@ Safari (trình duyệt của Mac, không được Windows/Linux hỗ trợ) có 
 
 Mở Preferences và đi đến khung "Advanced". Có một hộp kiểm ở phía dưới:
 
-![safari](safari@2x.png)
+![safari](safari.png)
 
 Bây giờ `Cmd+Opt+C` có thể chuyển đổi sang console. Ngoài ra, lưu ý rằng mục menu mới trên cùng có tên "Develop" đã xuất hiện. Nó có nhiều lệnh và tùy chọn.
 
