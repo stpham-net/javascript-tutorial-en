@@ -103,7 +103,7 @@ Chúng ta có thể dễ dàng nắm bắt khái niệm "biến" nếu chúng ta
 
 Chẳng hạn, biến `message` có thể được tưởng tượng như một hộp có nhãn `"message"` với giá trị `"Xin chào!"` trong đó:
 
-![](biến.png)
+![](variable.png)
 
 Chúng tôi có thể đặt bất kỳ giá trị vào hộp.
 
@@ -121,7 +121,7 @@ Ngoài ra chúng ta có thể thay đổi nó. Giá trị có thể được tha
 
 Khi giá trị được thay đổi, dữ liệu cũ sẽ bị xóa khỏi biến:
 
-![](biến-thay đổi.png)
+![](variable-change.png)
 
 Chúng ta cũng có thể khai báo hai biến và sao chép dữ liệu từ cái này sang cái kia.
 
