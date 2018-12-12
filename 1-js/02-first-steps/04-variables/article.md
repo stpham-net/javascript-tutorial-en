@@ -339,7 +339,7 @@ Hãy dành một chút thời gian suy nghĩ về tên đúng cho một biến t
 Một số quy tắc tốt để tuân theo là:
 
 - Sử dụng tên người có thể đọc được như `userName` hoặc `shoppingCart`.
-- Tránh xa các chữ viết tắt hoặc tên ngắn như `a`,` b`, `c`, trừ khi bạn thực sự biết bạn đang làm gì.
+- Tránh xa các chữ viết tắt hoặc tên ngắn như `a`, `b`, `c`, trừ khi bạn thực sự biết bạn đang làm gì.
 - Làm cho tên mô tả tối đa và súc tích. Ví dụ về tên xấu là `data` và `value`. Một cái tên như vậy không nói gì. Chỉ có thể sử dụng chúng nếu nó đặc biệt rõ ràng trong bối cảnh dữ liệu hoặc giá trị có nghĩa là gì.
 - Đồng ý với các điều khoản trong nhóm của bạn và trong tâm trí của riêng bạn. Nếu khách truy cập trang web được gọi là "user" thì chúng ta nên đặt tên cho các biến liên quan như `currentUser` hoặc `newUser`, nhưng không phải `currentVisitor` hoặc `newManInTown`.
 
