@@ -129,7 +129,7 @@ Trong JavaScript, không có loại đó. Chỉ có một loại: `string`. Mộ
 
 Kiểu boolean chỉ có hai giá trị: `true` và `false`.
 
-Loại này thường được sử dụng để lưu trữ các giá trị yes/no: `true` có nghĩa là" có, đúng" và `false` có nghĩa là "không, không chính xác".
+Loại này thường được sử dụng để lưu trữ các giá trị yes/no: `true` có nghĩa là "có, đúng" và `false` có nghĩa là "không, không chính xác".
 
 Ví dụ:
 
