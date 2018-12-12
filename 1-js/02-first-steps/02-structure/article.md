@@ -56,7 +56,7 @@ Errors which occur in such cases are quite hard to find and fix.
 
 > ---
 
-**🎐 An example of an error**
+**💡 An example of an error**
 
 If you're curious to see a concrete example of such an error, check this code out:
 
@@ -148,7 +148,7 @@ Sometimes it comes in handy to temporarily disable a part of code:
 
 > ---
 
-🎐 **Use hotkeys!**
+💡 **Use hotkeys!**
 
 In most editors a line of code can be commented out by `Ctrl+/` hotkey for a single-line comment and something like `Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac try `Cmd` instead of `Ctrl`.
 
