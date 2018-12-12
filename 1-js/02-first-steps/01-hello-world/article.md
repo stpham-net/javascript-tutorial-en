@@ -13,30 +13,25 @@ JavaScript programs can be inserted in any part of an HTML document with the hel
 
 For instance:
 
-```html run height=100
-<!DOCTYPE HTML>
-<html>
+```html
+      <!DOCTYPE HTML>
+      <html>
 
-<body>
+      <body>
 
-  <p>Before the script...</p>
+        <p>Before the script...</p>
 
-*!*
-  <script>
-    alert( 'Hello, world!' );
-  </script>
-*/!*
+        <script>
+          alert( 'Hello, world!' );
+        </script>
 
-  <p>...After the script.</p>
+        <p>...After the script.</p>
 
-</body>
+      </body>
 
-</html>
+      </html>
 ```
 
-```online
-You can run the example by clicking on the "Play" button in its right-top corner.
-```
 
 The `<script>` tag contains JavaScript code which is automatically executed when the browser meets the tag.
 
@@ -45,24 +40,25 @@ The `<script>` tag contains JavaScript code which is automatically executed when
 
 The `<script>` tag has a few attributes that are rarely used nowadays, but we can find them in old code:
 
- The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>
+**The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>**
 
- : The old standard HTML4 required a script to have a type. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern standard totally changed the meaning of this attribute. Now it can be used for Javascript modules. But that's an advanced topic; we'll talk about modules later in another part of the tutorial. 
+The old standard HTML4 required a script to have a type. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern standard totally changed the meaning of this attribute. Now it can be used for Javascript modules. But that's an advanced topic; we'll talk about modules later in another part of the tutorial. 
 
- The `language` attribute: <code>&lt;script <u>language</u>=...&gt;</code>
-  : This attribute was meant to show the language of the script. This attribute no longer makes sense, because JavaScript is the default language. No need to use it.
+**The `language` attribute: <code>&lt;script <u>language</u>=...&gt;</code>**
 
-Comments before and after scripts.
-: In really ancient books and guides, one may find comments inside `<script>`, like this:
+This attribute was meant to show the language of the script. This attribute no longer makes sense, because JavaScript is the default language. No need to use it.
 
-    ```html no-beautify
-    <script type="text/javascript"><!--
-        ...
-    //--></script>
-    ```
+**Comments before and after scripts.**
 
-    This trick isn't used in modern JavaScript. These comments were used to hide the JavaScript code from old browsers that didn't know about a `<script>` tag. Since browsers released in the last 15 years don't have this issue, this kind of comment can help you identify really old code.
+In really ancient books and guides, one may find comments inside `<script>`, like this:
 
+```
+      <script type="text/javascript"><!--
+          ...
+      //--></script>
+```
+
+This trick isn't used in modern JavaScript. These comments were used to hide the JavaScript code from old browsers that didn't know about a `<script>` tag. Since browsers released in the last 15 years don't have this issue, this kind of comment can help you identify really old code.
 
 ## External scripts
 
@@ -71,7 +67,7 @@ If we have a lot of JavaScript code, we can put it into a separate file.
 The script file is attached to HTML with the `src` attribute:
 
 ```html
-<script src="/path/to/script.js"></script>
+      <script src="/path/to/script.js"></script>
 ```
 
 Here `/path/to/script.js` is an absolute path to the file with the script (from the site root).
@@ -81,18 +77,19 @@ It is also possible to provide a path relative to the current page. For instance
 We can give a full URL as well. For instance:
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js"></script>
 ```
 
 To attach several scripts, use multiple tags:
 
 ```html
-<script src="/js/script1.js"></script>
-<script src="/js/script2.js"></script>
+      <script src="/js/script1.js"></script>
+      <script src="/js/script2.js"></script>
 …
 ```
 
-```smart
+### Please note:
+
 As a rule, only the simplest scripts are put into HTML. More complex ones reside in separate files.
 
 The benefit of a separate file is that the browser will download it and then store it in its [cache](https://en.wikipedia.org/wiki/Web_cache).
@@ -100,17 +97,18 @@ The benefit of a separate file is that the browser will download it and then sto
 After this, other pages that want the same script will take it from the cache instead of downloading it. So the file is actually downloaded only once.
 
 That saves traffic and makes pages faster.
-```
 
-````warn header="If `src` is set, the script content is ignored."
+
+### If `src` is set, the script content is ignored.
+
 A single `<script>` tag can't have both the `src` attribute and the code inside.
 
 This won't work:
 
 ```html
-<script *!*src*/!*="file.js">
-  alert(1); // the content is ignored, because src is set
-</script>
+      <script *!*src*/!*="file.js">
+        alert(1); // the content is ignored, because src is set
+      </script>
 ```
 
 We must choose: either it's an external `<script src="…">` or a regular `<script>` with code.
@@ -118,12 +116,11 @@ We must choose: either it's an external `<script src="…">` or a regular `<scri
 The example above can be split into two scripts to work:
 
 ```html
-<script src="file.js"></script>
-<script>
-  alert(1);
-</script>
+      <script src="file.js"></script>
+      <script>
+        alert(1);
+      </script>
 ```
-````
 
 ## Summary
 
