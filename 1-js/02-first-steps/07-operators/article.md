@@ -271,7 +271,7 @@ Increment/decrement chỉ có thể được áp dụng cho một biến. Nỗ l
 
 <br>
 
-Các toán tử `++` và` --` có thể được đặt cả sau và trước biến.
+Các toán tử `++` và `--` có thể được đặt cả sau và trước biến.
 
 - Khi toán tử đi sau biến, nó được gọi là "dạng hậu tố": `counter++`.
 - "Dạng tiền tố" là khi toán tử đứng trước biến: `++counter`.
