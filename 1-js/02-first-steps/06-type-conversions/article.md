@@ -6,9 +6,17 @@ For example, `alert` automatically converts any value to a string to show it. Ma
 
 There are also cases when we need to explicitly convert a value to put things right.
 
-```smart header="Not talking about objects yet"
-In this chapter we don't cover objects yet. Here we study primitives first. Later, after we learn objects, we'll see how object conversion works in the chapter <info:object-toprimitive>.
-```
+<br>
+
+> ---
+
+**📌 Not talking about objects yet**
+
+In this chapter we don't cover objects yet. Here we study primitives first. Later, after we learn objects, we'll see how object conversion works in the chapter **object-toprimitive**.
+
+> ---
+
+<br>
 
 ## ToString
 
@@ -18,14 +26,12 @@ For example, `alert(value)` does it to show the value.
 
 We can also use a call `String(value)` function for that:
 
-```js run
-let value = true;
-alert(typeof value); // boolean
+```js
+      let value = true;
+      alert(typeof value); // boolean
 
-*!*
-value = String(value); // now value is a string "true"
-alert(typeof value); // string
-*/!*
+      value = String(value); // now value is a string "true"
+      alert(typeof value); // string
 ```
 
 String conversion is mostly obvious. A `false` becomes `"false"`, `null` becomes `"null"` etc.
@@ -36,63 +42,71 @@ Numeric conversion happens in mathematical functions and expressions automatical
 
 For example, when division `/` is applied to non-numbers:
 
-```js run
-alert( "6" / "2" ); // 3, strings are converted to numbers
+```js
+      alert( "6" / "2" ); // 3, strings are converted to numbers
 ```
 
 We can use a `Number(value)` function to explicitly convert a `value`:
 
-```js run
-let str = "123";
-alert(typeof str); // string
+```js
+      let str = "123";
+      alert(typeof str); // string
 
-let num = Number(str); // becomes a number 123
+      let num = Number(str); // becomes a number 123
 
-alert(typeof num); // number
+      alert(typeof num); // number
 ```
 
 Explicit conversion is usually required when we read a value from a string-based source like a text form, but we expect a number to be entered.
 
 If the string is not a valid number, the result of such conversion is `NaN`, for instance:
 
-```js run
-let age = Number("an arbitrary string instead of a number");
+```js
+      let age = Number("an arbitrary string instead of a number");
 
-alert(age); // NaN, conversion failed
+      alert(age); // NaN, conversion failed
 ```
 
 Numeric conversion rules:
 
-| Value |  Becomes... |
-|-------|-------------|
-|`undefined`|`NaN`|
-|`null`|`0`|
-|<code>true&nbsp;and&nbsp;false</code> | `1` and `0` |
-| `string` | Whitespaces from the start and the end are removed. Then, if the remaining string is empty, the result is `0`. Otherwise, the number is "read" from the string. An error gives `NaN`. |
+| Value            |  Becomes... |
+|------------------|-------------|
+| `undefined`      | `NaN`       |
+| `null`           | `0`         |
+| `true and false` | `1` and `0` |
+| `string`         | Whitespaces from the start and the end are removed. Then, if the remaining string is empty, the result is                     `0`. Otherwise, the number is "read" from the string. An error gives `NaN`. |
 
 Examples:
 
-```js run
-alert( Number("   123   ") ); // 123
-alert( Number("123z") );      // NaN (error reading a number at "z")
-alert( Number(true) );        // 1
-alert( Number(false) );       // 0
+```js
+      alert( Number("   123   ") ); // 123
+      alert( Number("123z") );      // NaN (error reading a number at "z")
+      alert( Number(true) );        // 1
+      alert( Number(false) );       // 0
 ```
 
 Please note that `null` and `undefined` behave differently here: `null` becomes a zero, while `undefined` becomes `NaN`.
 
-````smart header="Addition '+' concatenates strings"
+<br>
+
+> ---
+
+**📌 Addition '+' concatenates strings**
+
 Almost all mathematical operations convert values to numbers. With a notable exception of the addition `+`. If one of the added values is a string then the other one is also converted to a string.
 
 Then it concatenates (joins) them:
 
-```js run
-alert( 1 + '2' ); // '12' (string to the right)
-alert( '1' + 2 ); // '12' (string to the left)
+```js
+      alert( 1 + '2' ); // '12' (string to the right)
+      alert( '1' + 2 ); // '12' (string to the left)
 ```
 
 That only happens when at least one of the arguments is a string. Otherwise, values are converted to numbers.
-````
+
+> ---
+
+<br>
 
 ## ToBoolean
 
@@ -107,23 +121,30 @@ The conversion rule:
 
 For instance:
 
-```js run
-alert( Boolean(1) ); // true
-alert( Boolean(0) ); // false
+```js
+      alert( Boolean(1) ); // true
+      alert( Boolean(0) ); // false
 
-alert( Boolean("hello") ); // true
-alert( Boolean("") ); // false
+      alert( Boolean("hello") ); // true
+      alert( Boolean("") ); // false
 ```
 
-````warn header="Please note: the string with zero `\"0\"` is `true`"
+<br>
+
+> ---
+
+**Please note: the string with zero `\"0\"` is `true`**
+
 Some languages (namely PHP) treat `"0"` as `false`. But in JavaScript a non-empty string is always `true`.
 
-```js run
-alert( Boolean("0") ); // true
-alert( Boolean(" ") ); // spaces, also true (any non-empty string is true)
+```js
+      alert( Boolean("0") ); // true
+      alert( Boolean(" ") ); // spaces, also true (any non-empty string is true)
 ```
-````
 
+> ---
+
+<br>
 
 ## Summary
 
@@ -135,21 +156,21 @@ The three most widely used type conversions are: to string, to number and to boo
 
 The conversion follows the rules:
 
-| Value |  Becomes... |
-|-------|-------------|
-|`undefined`|`NaN`|
-|`null`|`0`|
-|<code>true&nbsp;/&nbsp;false</code> | `1 / 0` |
-| `string` | The string is read "as is", whitespaces from both sides are ignored. An empty string becomes `0`. An error gives `NaN`. |
+| Value          |  Becomes... |
+|----------------|-------------|
+| `undefined`    | `NaN`       |
+| `null`         | `0`         |
+| `true / false` | `1 / 0`     |
+| `string`       | The string is read "as is", whitespaces from both sides are ignored. An empty string becomes `0`. An error                   gives `NaN`. |
 
 **`ToBoolean`** -- Occurs in logical operations, or can be performed with `Boolean(value)`.
 
 Follows the rules:
 
-| Value |  Becomes... |
-|-------|-------------|
-|`0`, `null`, `undefined`, `NaN`, `""` |`false`|
-|any other value| `true` |
+| Value                                 | Becomes...  |
+|---------------------------------------|-------------|
+| `0`, `null`, `undefined`, `NaN`, `""` | `false`     |
+| any other value                       | `true`      |
 
 
 Most of these rules are easy to understand and memorize. The notable exceptions where people usually make mistakes are:
@@ -157,4 +178,4 @@ Most of these rules are easy to understand and memorize. The notable exceptions 
 - `undefined` is `NaN` as a number, not `0`.
 - `"0"` and space-only strings like `"   "` are true as a boolean.
 
-Objects are not covered here, we'll return to them later in the chapter <info:object-toprimitive> that is devoted exclusively to objects, after we learn more basic things about JavaScript.
+Objects are not covered here, we'll return to them later in the chapter **object-toprimitive** that is devoted exclusively to objects, after we learn more basic things about JavaScript.
