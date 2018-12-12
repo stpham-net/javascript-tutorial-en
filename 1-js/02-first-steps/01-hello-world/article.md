@@ -129,4 +129,4 @@ Ví dụ trên có thể được chia thành hai tập lệnh để làm việc
 - Một script trong tệp bên ngoài có thể được chèn bằng `<script src="path/to/script.js"></script>`.
 
 
-Có nhiều hơn nữa để tìm hiểu về các browser script và sự tương tác của chúng với trang web. Nhưng hãy nhớ rằng phần này của hướng dẫn được dành cho ngôn ngữ JavaScript, vì vậy chúng ta không nên lạc hướng khỏi nó. Chúng ta sẽ sử dụng trình duyệt như một cách để chạy JavaScript, rất thuận tiện cho việc đọc trực tuyến, nhưng vẫn là một trong nhiều cách.
+Có nhiều hơn nữa để tìm hiểu về các browser script và sự tương tác của chúng với trang web. Nhưng hãy nhớ rằng phần này của hướng dẫn được dành cho ngôn ngữ JavaScript, vì vậy chúng ta không nên lạc hướng khỏi nó. Chúng ta sẽ sử dụng trình duyệt như một cách để chạy JavaScript, rất thuận tiện cho việc đọc trực tuyến, nhưng vẫn chỉ là một trong nhiều cách.
