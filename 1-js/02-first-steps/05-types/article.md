@@ -211,21 +211,21 @@ In other words, it works both with parentheses or without them. The result is th
 The call to `typeof x` returns a string with the type name:
 
 ```js
-    typeof undefined // "undefined"
+      typeof undefined // "undefined"
 
-    typeof 0 // "number"
+      typeof 0 // "number"
 
-    typeof true // "boolean"
+      typeof true // "boolean"
 
-    typeof "foo" // "string"
+      typeof "foo" // "string"
 
-    typeof Symbol("id") // "symbol"
+      typeof Symbol("id") // "symbol"
 
-    typeof Math // "object"  (1)
+      typeof Math // "object"  (1)
 
-    typeof null // "object"  (2)
+      typeof null // "object"  (2)
 
-    typeof alert // "function"  (3)
+      typeof alert // "function"  (3)
 ```
 
 The last three lines may need additional explanations:
