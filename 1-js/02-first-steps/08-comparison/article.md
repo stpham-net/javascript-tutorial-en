@@ -229,4 +229,3 @@ Không sử dụng so sánh `>= > < <=` với một biến có thể là `null/u
 - Khi các giá trị của các loại khác nhau được so sánh, chúng được chuyển đổi thành số (ngoại trừ kiểm tra bằng nhau nghiêm ngặt).
 - Các giá trị `null` và `undefined` bằng `==` lẫn nhau và không bằng bất kỳ giá trị nào khác.
 - Hãy cẩn thận khi sử dụng các phép so sánh như `>` hoặc `<` với các biến đôi khi có thể là `null/undefined`. Tạo một kiểm tra riêng cho `null/undefined` là một ý tưởng tốt.
-No search results.
