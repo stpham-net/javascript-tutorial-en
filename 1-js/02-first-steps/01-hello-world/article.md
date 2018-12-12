@@ -1,17 +1,17 @@
 # Hello, world!
 
-The tutorial that you're reading is about core JavaScript, which is platform-independent. Further on, you will learn Node.JS and other platforms that use it.
+Hướng dẫn mà bạn đang đọc là về JavaScript cốt lõi, độc lập với nền tảng. Sắp tới, bạn sẽ học Node.JS và các nền tảng khác sử dụng nó.
 
-But, we need a working environment to run our scripts, and, just because this book is online, the browser is a good choice. We'll keep the amount of browser-specific commands (like `alert`) to a minimum so that you don't spend time on them if you plan to concentrate on another environment like Node.JS. On the other hand, browser details are explained in detail in the [next part](/ui) of the tutorial.
+Nhưng, chúng ta cần một môi trường làm việc để chạy các tập lệnh của chúng ta và, chỉ vì cuốn sách này trực tuyến, trình duyệt là một lựa chọn tốt. Chúng ta sẽ giữ số lượng lệnh cụ thể của trình duyệt (như `alert`) ở mức tối thiểu để bạn không dành thời gian cho chúng nếu bạn dự định tập trung vào một môi trường khác như Node.JS. Mặt khác, chi tiết trình duyệt được giải thích chi tiết trong [phần tiếp theo](/ui) của hướng dẫn.
 
-So first, let's see how to attach a script to a webpage. For server-side environments, you can just execute it with a command like `"node my.js"` for Node.JS.
+Vì vậy, trước tiên, hãy xem cách đính kèm tập lệnh vào trang web. Đối với các môi trường phía máy chủ, bạn có thể thực thi nó bằng một lệnh như `"node my.js"` cho Node.js
 
 
-## The "script" tag
+## Thẻ "script"
 
-JavaScript programs can be inserted in any part of an HTML document with the help of the `<script>` tag.
+Các chương trình JavaScript có thể được chèn vào bất kỳ phần nào của tài liệu HTML với sự trợ giúp của thẻ `<script>`.
 
-For instance:
+Ví dụ:
 
 ```html
       <!DOCTYPE HTML>
@@ -22,7 +22,7 @@ For instance:
         <p>Before the script...</p>
 
         <script>
-          alert( 'Hello, world!' );
+          alert('Hello, world!');
         </script>
 
         <p>...After the script.</p>
@@ -33,24 +33,24 @@ For instance:
 ```
 
 
-The `<script>` tag contains JavaScript code which is automatically executed when the browser meets the tag.
+Thẻ `<script>` chứa mã JavaScript được tự động thực thi khi trình duyệt bắt gặp thẻ.
 
 
-## The modern markup
+## Đánh dấu hiện đại
 
-The `<script>` tag has a few attributes that are rarely used nowadays, but we can find them in old code:
+Thẻ `<script>` có một vài thuộc tính (attributes) hiếm khi được sử dụng ngày nay, nhưng chúng ta có thể tìm thấy chúng trong mã cũ:
 
 **The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>**
 
-The old standard HTML4 required a script to have a type. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern standard totally changed the meaning of this attribute. Now it can be used for Javascript modules. But that's an advanced topic; we'll talk about modules later in another part of the tutorial. 
+HTML4 tiêu chuẩn cũ yêu cầu một tập lệnh phải có một loại. Thông thường nó là `type="text/javascript"`. Nó không còn cần thiết nữa. Ngoài ra, tiêu chuẩn hiện đại đã thay đổi hoàn toàn ý nghĩa của thuộc tính này. Bây giờ nó có thể được sử dụng cho các mô-đun Javascript. Nhưng đó là một chủ đề nâng cao; chúng ta sẽ nói về các mô-đun sau trong phần khác của hướng dẫn. 
 
 **The `language` attribute: <code>&lt;script <u>language</u>=...&gt;</code>**
 
-This attribute was meant to show the language of the script. This attribute no longer makes sense, because JavaScript is the default language. No need to use it.
+Thuộc tính này có nghĩa là để hiển thị ngôn ngữ của kịch bản. Thuộc tính này không còn có ý nghĩa, bởi vì JavaScript là ngôn ngữ mặc định. Không cần sử dụng nó.
 
-**Comments before and after scripts.**
+**Comments trước và sau tập lệnh.**
 
-In really ancient books and guides, one may find comments inside `<script>`, like this:
+Trong những cuốn sách và hướng dẫn thực sự cổ xưa, người ta có thể tìm thấy những comment bên trong `<script>`, như thế này:
 
 ```
       <script type="text/javascript"><!--
@@ -58,29 +58,29 @@ In really ancient books and guides, one may find comments inside `<script>`, lik
       //--></script>
 ```
 
-This trick isn't used in modern JavaScript. These comments were used to hide the JavaScript code from old browsers that didn't know about a `<script>` tag. Since browsers released in the last 15 years don't have this issue, this kind of comment can help you identify really old code.
+Thủ thuật này không được sử dụng trong JavaScript hiện đại. Những comment này được sử dụng để ẩn mã JavaScript khỏi các trình duyệt cũ không biết về thẻ `<script>`. Vì các trình duyệt được phát hành trong 15 năm qua không có vấn đề này, loại comment này có thể giúp bạn xác định mã thực sự cũ.
 
 ## External scripts
 
-If we have a lot of JavaScript code, we can put it into a separate file.
+Nếu chúng ta có nhiều mã JavaScript, chúng ta có thể đặt nó vào một tệp riêng.
 
-The script file is attached to HTML with the `src` attribute:
+Tệp script được đính kèm với HTML với thuộc tính `src`:
 
 ```html
       <script src="/path/to/script.js"></script>
 ```
 
-Here `/path/to/script.js` is an absolute path to the file with the script (from the site root).
+Ở đây `/path/to/script.js` là một đường dẫn tuyệt đối đến tệp có script (từ site root).
 
-It is also possible to provide a path relative to the current page. For instance, `src="script.js"` would mean a file `"script.js"` in the current folder.
+Cũng có thể cung cấp một đường dẫn liên quan đến trang hiện tại. Chẳng hạn, `src="script.js"` có nghĩa là một tệp `"script.js"` trong thư mục hiện tại.
 
-We can give a full URL as well. For instance:
+Chúng ta cũng có thể cung cấp một URL đầy đủ. Ví dụ:
 
 ```html
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js"></script>
 ```
 
-To attach several scripts, use multiple tags:
+Để đính kèm một số tập lệnh, sử dụng nhiều thẻ:
 
 ```html
       <script src="/js/script1.js"></script>
@@ -88,22 +88,22 @@ To attach several scripts, use multiple tags:
       …
 ```
 
-**Please note:**
+**Xin lưu ý:**
 
-As a rule, only the simplest scripts are put into HTML. More complex ones reside in separate files.
+Theo quy định, chỉ các tập lệnh đơn giản nhất được đưa vào HTML. Những cái phức tạp hơn nằm trong các tập tin riêng biệt.
 
-The benefit of a separate file is that the browser will download it and then store it in its [cache](https://en.wikipedia.org/wiki/Web_cache).
+Lợi ích của một tệp riêng là trình duyệt sẽ tải xuống và sau đó lưu nó vào [bộ đệm](https://en.wikipedia.org/wiki/Web_cache).
 
-After this, other pages that want the same script will take it from the cache instead of downloading it. So the file is actually downloaded only once.
+Sau này, các trang khác muốn có cùng một tập lệnh sẽ lấy nó từ bộ đệm thay vì tải xuống. Vì vậy, tập tin thực sự chỉ được tải xuống một lần.
 
-That saves traffic and makes pages faster.
+Điều đó giúp tiết kiệm lưu lượng và làm cho các trang nhanh hơn.
 
 
-**If `src` is set, the script content is ignored.**
+** Nếu `src` được đặt, nội dung tập lệnh sẽ bị bỏ qua.**
 
-A single `<script>` tag can't have both the `src` attribute and the code inside.
+Một thẻ `<script>` duy nhất không thể có cả thuộc tính `src` và mã bên trong.
 
-This won't work:
+Điều này sẽ không hoạt động:
 
 ```html
       <script *!*src*/!*="file.js">
@@ -111,9 +111,9 @@ This won't work:
       </script>
 ```
 
-We must choose: either it's an external `<script src="…">` or a regular `<script>` with code.
+Chúng ta phải chọn: đó là một `<script src="…">` bên ngoài hoặc một `<script>` thông thường có mã.
 
-The example above can be split into two scripts to work:
+Ví dụ trên có thể được chia thành hai tập lệnh để làm việc:
 
 ```html
       <script src="file.js"></script>
@@ -122,11 +122,11 @@ The example above can be split into two scripts to work:
       </script>
 ```
 
-## Summary
+## Tóm lược
 
-- We can use a `<script>` tag to add JavaScript code to the page.
-- The `type` and `language` attributes are not required.
-- A script in an external file can be inserted with `<script src="path/to/script.js"></script>`.
+- Chúng ta có thể sử dụng thẻ `<script>` để thêm mã JavaScript vào trang.
+- Không yêu cầu thuộc tính `type` và `language`.
+- Một script trong tệp bên ngoài có thể được chèn bằng `<script src="path/to/script.js"></script>`.
 
 
-There is much more to learn about browser scripts and their interaction with the web-page. But let's keep in mind that this part of the tutorial is devoted to the JavaScript language, so we shouldn't distract ourselves from it. We'll be using a browser as a way to run JavaScript, which is very convenient for online reading, but yet one of many.
+Có nhiều hơn nữa để tìm hiểu về các browser script và sự tương tác của chúng với trang web. Nhưng hãy nhớ rằng phần này của hướng dẫn được dành cho ngôn ngữ JavaScript, vì vậy chúng ta không nên lạc hướng khỏi nó. Chúng ta sẽ sử dụng trình duyệt như một cách để chạy JavaScript, rất thuận tiện cho việc đọc trực tuyến, nhưng vẫn là một trong nhiều cách.
