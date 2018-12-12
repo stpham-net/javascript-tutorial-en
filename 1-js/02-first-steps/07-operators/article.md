@@ -461,4 +461,3 @@ Ví dụ:
 ```
 
 Các thủ thuật như vậy được sử dụng trong nhiều khung JavaScript, đó là lý do tại sao chúng ta đề cập đến chúng. Nhưng thông thường họ không cải thiện khả năng đọc mã, vì vậy chúng ta nên suy nghĩ kỹ trước khi viết như vậy.
-No search results.
