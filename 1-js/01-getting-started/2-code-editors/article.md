@@ -18,7 +18,7 @@ Nếu bạn chưa cân nhắc chọn IDE, hãy xem các biến thể sau:
 
 Tất cả các IDE đều đa nền tảng.
 
-Đối với Windows, cũng có trình chỉnh sửa "Visual Studio", đừng nhầm lẫn nó với "Visual Studio Code." "Visual Studio" là trình chỉnh sửa Windows trả phí và mạnh mẽ, rất phù hợp với nền tảng .NET. Phiên bản miễn phí của nó được gọi là ([Visual Studio Community](https://www.visualstudio.com/vs/community/)).
+Đối với Windows, cũng có trình chỉnh sửa "Visual Studio", đừng nhầm lẫn nó với "Visual Studio Code". "Visual Studio" là trình chỉnh sửa Windows trả phí và mạnh mẽ, rất phù hợp với nền tảng .NET. Phiên bản miễn phí của nó được gọi là ([Visual Studio Community](https://www.visualstudio.com/vs/community/)).
 
 Nhiều IDE phải trả tiền nhưng có thời gian dùng thử. Chi phí của họ thường không đáng kể so với mức lương của một nhà phát triển đủ điều kiện, vì vậy chỉ cần chọn một người tốt nhất cho bạn.
 
