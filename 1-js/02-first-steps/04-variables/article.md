@@ -60,6 +60,7 @@ The multiline variant is a bit longer, but easier to read:
 ```
 
 Some people also write many variables like that:
+
 ```js
       let user = 'John',
         age = 25,
