@@ -88,7 +88,9 @@ Chúng ta cũng có thể cung cấp một URL đầy đủ. Ví dụ:
       …
 ```
 
-**Xin lưu ý:**
+〰️〰️〰️
+
+🎐 **Xin lưu ý:**
 
 Theo quy định, chỉ các tập lệnh đơn giản nhất được đưa vào HTML. Những cái phức tạp hơn nằm trong các tập tin riêng biệt.
 
@@ -98,8 +100,12 @@ Sau này, các trang khác muốn có cùng một tập lệnh sẽ lấy nó t�
 
 Điều đó giúp tiết kiệm lưu lượng và làm cho các trang nhanh hơn.
 
+〰️〰️〰️
 
-**Nếu `src` được đặt, nội dung tập lệnh sẽ bị bỏ qua.**
+
+〰️〰️〰️ 
+
+⚠️ **Nếu `src` được đặt, nội dung tập lệnh sẽ bị bỏ qua.**
 
 Một thẻ `<script>` duy nhất không thể có cả thuộc tính `src` và mã bên trong.
 
@@ -121,6 +127,8 @@ Ví dụ trên có thể được chia thành hai tập lệnh để làm việc
         alert(1);
       </script>
 ```
+
+〰️〰️〰️ 
 
 ## Tóm lược
 
