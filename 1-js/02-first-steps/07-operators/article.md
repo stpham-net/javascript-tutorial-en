@@ -1,15 +1,15 @@
-# Operators
+# Toán tử
 
-Many operators are known to us from school. They are addition `+`, a multiplication `*`, a subtraction `-` and so on.
+Nhiều toán tử được biết đến với chúng ta từ trường học. Chúng là phép cộng `+`, phép nhân `*`, phép trừ `-`, v.v.
 
-In this chapter we concentrate on aspects that are not covered by school arithmetic.
+Trong chương này, chúng ta tập trung vào các khía cạnh không được bao gồm trong số học của trường học.
 
-## Terms: "unary", "binary", "operand"
+## Các điều kiện (Terms): "đơn phân (unary)", "nhị phân (binary)", "toán hạng (operand)"
 
-Before we move on, let's grasp the common terminology.
+Trước khi chúng ta tiếp tục, hãy nắm bắt các thuật ngữ phổ biến.
 
-- *An operand* -- is what operators are applied to. For instance in multiplication `5 * 2` there are two operands: the left operand is `5`, and the right operand is `2`. Sometimes people say "arguments" instead of "operands".
-- An operator is *unary* if it has a single operand. For example, the unary negation `-` reverses the sign of the number:
+- *Một Toán hạng (An operand)* -- là cái mà toán tử được áp dụng cho. Ví dụ, trong phép nhân `5 * 2` có hai toán hạng: toán hạng bên trái là `5` và toán hạng bên phải là `2`. Đôi khi người ta nói "đối số" thay vì "toán hạng".
+- Một toán tử là *đơn phân (unary)* nếu nó có một toán hạng đơn. Ví dụ: đơn phân phủ định (unary negation) `-` đảo ngược dấu của số:
 
     ```js
     let x = 1;
@@ -18,62 +18,62 @@ Before we move on, let's grasp the common terminology.
     alert( x ); // -1, unary negation was applied
     ```
     
-- An operator is *binary* if it has two operands. The same minus exists in the binary form as well:
+- Một toán tử là *nhị phân (binary)* nếu nó có hai toán hạng. Dấu trừ tương tự cũng tồn tại ở dạng nhị phân:
 
     ```js
     let x = 1, y = 3;
     alert( y - x ); // 2, binary minus subtracts values
     ```
 
-    Formally, we're talking about two different operators here: the unary negation (single operand, reverses the sign) and the binary subtraction (two operands, subtracts).
+    Chính thức, chúng ta đang nói về hai toán tử khác nhau ở đây: đơn phân phủ định (unary negation) (toán hạng đơn, đảo ngược dấu) và phép trừ nhị phân (hai toán hạng, phép trừ).
 
-## Strings concatenation, binary +
+## Nối chuỗi, nhị phân + (Strings concatenation, binary +)
 
-Now let's see special features of JavaScript operators that are beyond school arithmetics.
+Bây giờ chúng ta hãy xem các tính năng đặc biệt của các toán tử JavaScript vượt ra ngoài các trường đại học.
 
-Usually the plus operator `+` sums numbers.
+Thông thường toán tử cộng `+` tổng các số.
 
-But if the binary `+` is applied to strings, it merges (concatenates) them:
+Nhưng nếu nhị phân `+` được áp dụng cho các chuỗi, nó sẽ hợp nhất (merges) (nối) chúng:
 
 ```js
       let s = "my" + "string";
       alert(s); // mystring
 ```
 
-Note that if any of the operands is a string, then the other one is converted to a string too.
+Lưu ý rằng nếu bất kỳ toán hạng nào là một chuỗi, thì một toán hạng khác cũng được chuyển đổi thành một chuỗi.
 
-For example:
+Ví dụ:
 
 ```js
       alert( '1' + 2 ); // "12"
       alert( 2 + '1' ); // "21"
 ```
 
-See, it doesn't matter whether the first operand is a string or the second one. The rule is simple: if either operand is a string, then convert the other one into a string as well.
+Xem, không quan trọng là toán hạng thứ nhất là chuỗi hay chuỗi thứ hai. Quy tắc rất đơn giản: nếu một trong hai toán hạng là một chuỗi, thì cũng chuyển đổi một chuỗi khác thành một chuỗi.
 
-However, note that operations run from left to right. If there are two numbers followed by a string, the numbers will be added before being converted to a string:
+Tuy nhiên, lưu ý rằng các hoạt động chạy từ trái sang phải. Nếu có hai số được theo sau bởi một chuỗi, các số đó sẽ được thêm vào trước khi được chuyển đổi thành một chuỗi:
 
 
 ```js
       alert(2 + 2 + '1' ); // "41" and not "221"
 ```
 
-String concatenation and conversion is a special feature of the binary plus `+`. Other arithmetic operators work only with numbers. They always convert their operands to numbers.
+Nối chuỗi và chuyển đổi chuỗi là một tính năng đặc biệt của nhị phân cộng `+`. Các toán tử số học khác chỉ làm việc với các số. Chúng luôn chuyển đổi toán hạng của chúng thành số.
 
-For instance, subtraction and division:
+Ví dụ, phép trừ và phép chia:
 
 ```js
       alert( 2 - '1' ); // 1
       alert( '6' / '2' ); // 3
 ```
 
-## Numeric conversion, unary +
+## Chuyển đổi số, đơn phân + (Numeric conversion, unary +)
 
-The plus `+` exists in two forms. The binary form that we used above and the unary form.
+Dấu cộng `+` tồn tại ở hai dạng. Hình thức nhị phân mà chúng ta đã sử dụng ở trên và hình thức đơn phân.
 
-The unary plus or, in other words, the plus operator `+` applied to a single value, doesn't do anything with numbers, but if the operand is not a number, then it is converted into it.
+Đơn phân cộng hay nói cách khác, toán tử cộng `+` được áp dụng cho một giá trị duy nhất, không làm gì với các số, nhưng nếu toán hạng không phải là một số, thì nó được chuyển đổi thành số.
 
-For example:
+Ví dụ:
 
 ```js
       // No effect on numbers
@@ -88,13 +88,13 @@ For example:
       alert( +"" );   // 0
 ```
 
-It actually does the same as `Number(...)`, but is shorter.
+Nó thực sự hoạt động giống như `Number(...)`, nhưng ngắn hơn.
 
-A need to convert strings to numbers arises very often. For example, if we are getting values from HTML form fields, then they are usually strings.
+Một nhu cầu chuyển đổi chuỗi thành số phát sinh rất thường xuyên. Ví dụ: nếu chúng ta đang nhận các giá trị từ các trường biểu mẫu HTML, thì chúng thường là các chuỗi.
 
-What if we want to sum them?
+Nếu chúng ta muốn tổng hợp chúng thì sao?
 
-The binary plus would add them as strings:
+Phép cộng nhị phân sẽ thêm chúng dưới dạng chuỗi:
 
 ```js
       let apples = "2";
@@ -103,7 +103,7 @@ The binary plus would add them as strings:
       alert( apples + oranges ); // "23", the binary plus concatenates strings
 ```
 
-If we want to treat them as numbers, then we can convert and then sum:
+Nếu chúng ta muốn coi chúng là số, thì chúng ta có thể chuyển đổi và sau đó tổng hợp:
 
 ```js
       let apples = "2";
@@ -116,21 +116,21 @@ If we want to treat them as numbers, then we can convert and then sum:
       // alert( Number(apples) + Number(oranges) ); // 5
 ```
 
-From a mathematician's standpoint the abundance of pluses may seem strange. But from a programmer's standpoint, there's nothing special: unary pluses are applied first, they convert strings to numbers, and then the binary plus sums them up.
+Từ quan điểm của một nhà toán học, sự phong phú của các phép cộng có vẻ lạ. Nhưng theo quan điểm của một lập trình viên, không có gì đặc biệt: đơn phân cộng được áp dụng trước, chúng chuyển đổi chuỗi (strings) thành số (numbers) và sau đó nhị phân cộng cộng chúng lại.
 
-Why are unary pluses applied to values before the binary one? As we're going to see, that's because of their *higher precedence*.
+Tại sao các đơn phân cộng được áp dụng cho các giá trị trước nhị phân? Như chúng ta thấy, đó là vì *ưu tiên cao hơn* của chúng.
 
-## Operators precedence
+## Các toán tử ưu tiên
 
-If an expression has more than one operator, the execution order is defined by their *precedence*, or, in other words, there's an implicit priority order among the operators.
+Nếu một biểu thức có nhiều toán tử, thứ tự thực thi được xác định bởi *ưu tiên* của chúng, hay nói cách khác, có một thứ tự ưu tiên ngầm giữa các toán tử.
 
-From school we all know that the multiplication in the expression `1 + 2 * 2` should be calculated before the addition. That's exactly the precedence thing. The multiplication is said to have *a higher precedence* than the addition.
+Từ trường học, tất cả chúng ta đều biết rằng phép nhân trong biểu thức `1 + 2 * 2` nên được tính trước khi cộng. Đó chính xác là điều ưu tiên. Phép nhân được cho là có *độ ưu tiên cao hơn* phép cộng.
 
-Parentheses override any precedence, so if we're not satisfied with the order, we can use them, like: `(1 + 2) * 2`.
+Dấu ngoặc đơn ghi đè bất kỳ quyền ưu tiên nào, vì vậy nếu chúng ta không hài lòng với vị trí, chúng ta có thể sử dụng chúng, như: `(1 + 2) * 2`.
 
-There are many operators in JavaScript. Every operator has a corresponding precedence number. The one with the bigger number executes first. If the precedence is the same, the execution order is from left to right.
+Có nhiều toán tử trong JavaScript. Mỗi toán tử có một số ưu tiên tương ứng. Một trong những số lớn hơn thực hiện đầu tiên. Nếu quyền ưu tiên là như nhau, thứ tự thực hiện là từ trái sang phải.
 
-An extract from the [precedence table](https://developer.mozilla.org/en/JavaScript/Reference/operators/operator_precedence) (you don't need to remember this, but note that unary operators are higher than corresponding binary ones):
+Một trích xuất từ [bảng ưu tiên](https://developer.mozilla.org/en/JavaScript/Reference/operators/operator_precedence) (bạn không cần phải nhớ điều này, nhưng lưu ý rằng các toán tử đơn phân ưu tiên cao hơn các nhị phân tương ứng):
 
 | Precedence | Name           | Sign |
 |------------|----------------|------|
@@ -145,13 +145,13 @@ An extract from the [precedence table](https://developer.mozilla.org/en/JavaScri
 | 3          | assignment     | `=`  |
 | ...        | ...            | ...  |
 
-As we can see, the "unary plus" has a priority of `16`, which is higher than `13` for the "addition" (binary plus). That's why in the expression `"+apples + +oranges"` unary pluses work first, and then the addition.
+Như chúng ta có thể thấy, "unary plus" có mức độ ưu tiên là `16`, cao hơn `13` cho "phép cộng" (cộng nhị phân). Đó là lý do tại sao trong biểu thức `"+apples + +oranges"` unary pluses hoạt động trước, và sau đó là phép cộng.
 
-## Assignment
+## Phép gán
 
-Let's note that an assignment `=` is also an operator. It is listed in the precedence table with the very low priority of `3`.
+Chúng ta hãy lưu ý rằng một phép gán `=` cũng là một toán tử. Nó được liệt kê trong bảng ưu tiên với mức độ ưu tiên rất thấp là `3`.
 
-That's why when we assign a variable, like `x = 2 * 2 + 1`, then the calculations are done first, and afterwards the `=` is evaluated, storing the result in `x`.
+Đó là lý do tại sao khi chúng ta gán một biến, như `x = 2 * 2 + 1`, thì các phép tính được thực hiện trước và sau đó `=` được ước tính, lưu trữ kết quả trong` x`.
 
 ```js
       let x = 2 * 2 + 1;
@@ -159,7 +159,7 @@ That's why when we assign a variable, like `x = 2 * 2 + 1`, then the calculation
       alert( x ); // 5
 ```
 
-It is possible to chain assignments:
+Có thể xâu chuỗi các bài tập:
 
 ```js
       let a, b, c;
@@ -171,19 +171,19 @@ It is possible to chain assignments:
       alert( c ); // 4
 ```
 
-Chained assignments evaluate from right to left. First the rightmost expression `2 + 2` is evaluated then assigned to the variables on the left: `c`, `b` and `a`. At the end, all variables share a single value.
+Xâu chuỗi được đánh giá từ phải sang trái. Đầu tiên biểu thức ngoài cùng bên phải `2 + 2` được ước tính sau đó được gán cho các biến ở bên trái: `c`, `b` và `a`. Cuối cùng, tất cả các biến chia sẻ một giá trị duy nhất.
 
 <br>
 
 > ---
 
-**📌 The assignment operator `"="` returns a value**
+**📌 Toán tử gán `"="` trả về một giá trị**
 
-An operator always returns a value. That's obvious for most of them like an addition `+` or a multiplication `*`. But the assignment operator follows that rule too.
+Một toán tử luôn trả về một giá trị. Điều đó rõ ràng đối với hầu hết trong số chúng như một phép cộng `+` hoặc phép nhân `*`. Nhưng toán tử gán cũng tuân theo quy tắc đó.
 
-The call `x = value` writes the `value` into `x` *and then returns it*.
+Cuộc gọi `x = value` ghi `value` vào `x` *và sau đó trả về nó*.
 
-Here's the demo that uses an assignment as part of a more complex expression:
+Đây là demo sử dụng một phép gán như một phần của biểu thức phức tạp hơn:
 
 ```js
   let a = 1;
@@ -195,21 +195,21 @@ Here's the demo that uses an assignment as part of a more complex expression:
   alert( c ); // 0
 ```
 
-In the example above, the result of `(a = b + 1)` is the value which is assigned to `a` (that is `3`). It is then used to subtract from `3`.
+Trong ví dụ trên, kết quả của `(a = b + 1)` là giá trị được gán cho `a` (đó là `3`). Sau đó, nó được sử dụng để trừ đi `3`.
 
-Funny code, isn't it? We should understand how it works, because sometimes we can see it in 3rd-party libraries, but shouldn't write anything like that ourselves. Such tricks definitely don't make the code clearer and readable.
+Mã thật hài hước, phải không? Chúng ta nên hiểu cách thức hoạt động của nó, bởi vì đôi khi chúng ta có thể thấy nó trong các thư viện của bên thứ 3, nhưng chúng ta không nên tự viết bất cứ thứ gì như vậy. Những thủ thuật như vậy chắc chắn không làm cho mã rõ ràng hơn và dễ đọc hơn.
 
 > ---
 
 <br>
 
-## Remainder %
+## Phần dư % (Remainder %)
 
-The remainder operator `%` despite its look does not have a relation to percents.
+Toán tử lấy phần dư `%` mặc dù giao diện của nó trông rất giống nhưng nó không có liên quan đến phần trăm.
 
-The result of `a % b` is the remainder of the integer division of `a` by `b`.
+Kết quả của `a % b` là phần dư còn lại của phép chia số nguyên của `a` cho `b`.
 
-For instance:
+Ví dụ:
 
 ```js
       alert( 5 % 2 ); // 1 is a remainder of 5 divided by 2
@@ -217,13 +217,13 @@ For instance:
       alert( 6 % 3 ); // 0 is a remainder of 6 divided by 3
 ```
 
-## Exponentiation **
+## lũy thừa **
 
-The exponentiation operator `**` is a recent addition to the language.
+Toán tử lũy thừa `**` là một bổ sung gần đây cho ngôn ngữ JavaScript.
 
-For a natural number `b`, the result of `a ** b` is `a` multiplied by itself `b` times.
+Đối với một số tự nhiên `b`, kết quả của `a ** b` là `a` nhân với chính nó `b` lần.
 
-For instance:
+Ví dụ:
 
 ```js
       alert( 2 ** 2 ); // 4  (2 * 2)
@@ -231,27 +231,27 @@ For instance:
       alert( 2 ** 4 ); // 16 (2 * 2 * 2 * 2)
 ```
 
-The operator works for non-integer numbers of `a` and `b` as well, for instance:
+Toán tử cũng làm việc với các số không nguyên của `a` và `b`, ví dụ:
 
 ```js
       alert( 4 ** (1/2) ); // 2 (power of 1/2 is the same as a square root, that's maths)
       alert( 8 ** (1/3) ); // 2 (power of 1/3 is the same as a cubic root)
 ```
 
-## Increment/decrement
+## Tăng/giảm (Increment/decrement)
 
-Increasing or decreasing a number by one is among the most common numerical operations.
+Tăng hoặc giảm một số là một trong những thao tác số phổ biến nhất.
 
-So, there are special operators for that:
+Vì vậy, có các toán tử đặc biệt cho điều đó:
 
-- **Increment** `++` increases a variable by 1:
+- **Tăng (Increment)** `++` tăng một biến bằng 1:
 
     ```js
     let counter = 2;
     counter++;      // works the same as counter = counter + 1, but is shorter
     alert( counter ); // 3
     ```
-- **Decrement** `--` decreases a variable by 1:
+- **Giảm (Decrement)** `--` giảm một biến bằng 1:
 
     ```js
     let counter = 2;
@@ -263,26 +263,26 @@ So, there are special operators for that:
 
 > ---
 
-**📌 Important:**
+**📌 Quan trọng:**
 
-Increment/decrement can be applied only to a variable. An attempt to use it on a value like `5++` will give an error.
+Increment/decrement chỉ có thể được áp dụng cho một biến. Nỗ lực sử dụng nó trên một giá trị như `5++` sẽ báo lỗi.
 
 > ---
 
 <br>
 
-Operators `++` and `--` can be placed both after and before the variable.
+Các toán tử `++` và` --` có thể được đặt cả sau và trước biến.
 
-- When the operator goes after the variable, it is called a "postfix form": `counter++`.
-- The "prefix form" is when the operator stands before the variable: `++counter`.
+- Khi toán tử đi sau biến, nó được gọi là "dạng hậu tố": `counter++`.
+- "Dạng tiền tố" là khi toán tử đứng trước biến: `++counter`.
 
-Both of these records do the same: increase `counter` by `1`.
+Cả hai bản ghi này đều làm như nhau: tăng `counter` lên `1`.
 
-Is there any difference? Yes, but we can only see it if we use the returned value of `++/--`.
+Có sự khác biệt nào không? Có, nhưng chúng ta chỉ có thể thấy nó nếu chúng ta sử dụng giá trị trả về của `++/--`.
 
-Let's clarify. As we know, all operators return a value. Increment/decrement is not an exception here. The prefix form returns the new value, while the postfix form returns the old value (prior to increment/decrement).
+Hãy làm rõ. Như chúng ta biết, tất cả các toán tử trả về một giá trị. Increment/decrement không phải là một ngoại lệ ở đây. Biểu mẫu tiền tố trả về giá trị mới, trong khi biểu mẫu hậu tố trả về giá trị cũ (trước khi tăng/giảm).
 
-To see the difference, here's the example:
+Để thấy sự khác biệt, đây là ví dụ:
 
 ```js
       let counter = 1;
@@ -291,9 +291,9 @@ To see the difference, here's the example:
       alert(a); // 2
 ```
 
-Here in the line `(*)` the prefix call `++counter` increments `counter` and returns the new value that is `2`. So the `alert` shows `2`.
+Ở đây trong dòng `(*)` tiền tố gọi `++counter` tăng `counter` và trả về giá trị mới đó là `2`. Vì vậy, `alert` hiển thị `2`.
 
-Now let's use the postfix form:
+Bây giờ hãy sử dụng hậu tố:
 
 ```js
       let counter = 1;
@@ -302,11 +302,11 @@ Now let's use the postfix form:
       alert(a); // 1
 ```
 
-In the line `(*)` the *postfix* form `counter++` also increments `counter`, but returns the *old* value (prior to increment). So the `alert` shows `1`.
+Trong dòng `(*)` mẫu *hậu tố (postfix)* `counter++` cũng tăng `counter`, nhưng trả về giá trị *cũ* (trước khi tăng). Vì vậy, `alert` hiển thị `1`.
 
-To summarize:
+Để tóm tắt:
 
-- If the result of increment/decrement is not used, then there is no difference in which form to use:
+- Nếu kết quả increment/decrement không được sử dụng, thì không có sự khác biệt trong hình thức sử dụng:
 
     ```js
     let counter = 0;
@@ -314,13 +314,13 @@ To summarize:
     ++counter;
     alert( counter ); // 2, the lines above did the same
     ```
-- If we'd like to increase the value *and* use the result of the operator right now, then we need the prefix form:
+- Nếu chúng ta muốn tăng giá trị *và* sử dụng kết quả của toán tử ngay bây giờ, thì chúng ta cần biểu mẫu tiền tố:
 
     ```js
     let counter = 0;
     alert( ++counter ); // 1
     ```
-- If we'd like to increment, but use the previous value, then we need the postfix form:
+- Nếu chúng ta muốn tăng, nhưng sử dụng giá trị trước đó, thì chúng ta cần biểu mẫu hậu tố:
 
     ```js
     let counter = 0;
@@ -331,29 +331,29 @@ To summarize:
 
 > ---
 
-**📌 Increment/decrement among other operators**
+**📌 Tăng/giảm (Increment/decrement) giữa các toán tử khác**
 
-Operators `++/--` can be used inside an expression as well. Their precedence is higher than most other arithmetical operations.
+Toán tử `++/--` cũng có thể được sử dụng bên trong một biểu thức. Ưu tiên của chúng cao hơn hầu hết các hoạt động số học khác.
 
-For instance:
+Ví dụ:
 
 ```js
       let counter = 1;
       alert( 2 * ++counter ); // 4
 ```
 
-Compare with:
+So sánh với:
 
 ```js
       let counter = 1;
       alert( 2 * counter++ ); // 2, because counter++ returns the "old" value
 ```
 
-Though technically allowable, such notation usually makes the code less readable. One line does multiple things -- not good.
+Mặc dù về mặt kỹ thuật cho phép, ký hiệu như vậy thường làm cho mã khó đọc hơn. Một dòng làm nhiều việc -- không tốt.
 
-While reading the code, a fast "vertical" eye-scan can easily miss such `counter++`, and it won't be obvious that the variable increases.
+Trong khi đọc mã, quét mắt "dọc" nhanh có thể dễ dàng bỏ lỡ `counter++`, và không biết rõ ràng là biến sẽ tăng.
 
-The "one line -- one action" style is advised:
+Nên sử dụng kiểu "một dòng -- một hành động (one line -- one action)":
 
 ```js
       let counter = 1;
@@ -365,13 +365,13 @@ The "one line -- one action" style is advised:
 
 <br>
 
-## Bitwise operators
+## Các toán tử bitwise (Bitwise operators)
 
-Bitwise operators treat arguments as 32-bit integer numbers and work on the level of their binary representation.
+Các toán tử bitwise coi các đối số là số nguyên 32-bit và hoạt động ở mức độ biểu diễn nhị phân của chúng.
 
-These operators are not JavaScript-specific. They are supported in most programming languages.
+Các toán tử này không dành riêng cho JavaScript. Chúng được hỗ trợ trong hầu hết các ngôn ngữ lập trình.
 
-The list of operators:
+Danh sách các toán tử:
 
 - AND ( `&` )
 - OR ( `|` )
@@ -381,13 +381,13 @@ The list of operators:
 - RIGHT SHIFT ( `>>` )
 - ZERO-FILL RIGHT SHIFT ( `>>>` )
 
-These operators are used very rarely. To understand them, we should delve into low-level number representation, and it would not be optimal to do that right now. Especially because we won't need them any time soon. If you're curious, you can read the [Bitwise Operators](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) article in MDN. It would be more practical to do that when a real need arises.
+Các toán tử này rất hiếm khi được sử dụng. Để hiểu chúng, chúng ta nên đi sâu vào biểu diễn số cấp độ thấp và sẽ không tối ưu để làm điều đó ngay bây giờ. Đặc biệt là vì chúng ta sẽ không cần chúng sớm. Nếu bạn tò mò, bạn có thể đọc bài viết [Toán tử bit](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) trong MDN. Sẽ thực tế hơn để làm điều đó khi có nhu cầu thực sự.
 
-## Modify-in-place
+## Sửa đổi tại chỗ (Modify-in-place)
 
-We often need to apply an operator to a variable and store the new result in it.
+Chúng ta thường cần áp dụng một toán tử cho một biến và lưu trữ kết quả mới trong đó.
 
-For example:
+Ví dụ:
 
 ```js
       let n = 2;
@@ -395,7 +395,7 @@ For example:
       n = n * 2;
 ```
 
-This notation can be shortened using operators `+=` and `*=`:
+Ký hiệu này có thể được rút ngắn bằng cách sử dụng các toán tử `+ =` và `* =`:
 
 ```js
       let n = 2;
@@ -405,9 +405,9 @@ This notation can be shortened using operators `+=` and `*=`:
       alert( n ); // 14
 ```
 
-Short "modify-and-assign" operators exist for all arithmetical and bitwise operators: `/=`, `-=` etc.
+Các toán tử ngắn "sửa đổi và gán (modify-and-assign)" có sẵn cho tất cả các toán tử đối xứng và bitwise: `/=`, `-=`, v.v.
 
-Such operators have the same precedence as a normal assignment, so they run after most other calculations:
+Các toán tử như vậy có cùng mức ưu tiên như một phép gán thông thường, vì vậy chúng chạy sau hầu hết các phép tính khác:
 
 ```js
       let n = 2;
@@ -417,13 +417,13 @@ Such operators have the same precedence as a normal assignment, so they run afte
       alert( n ); // 16  (right part evaluated first, same as n *= 8)
 ```
 
-## Comma
+## Dấu phẩy (Comma)
 
-The comma operator `,` is one of most rare and unusual operators. Sometimes it's used to write shorter code, so we need to know it in order to understand what's going on.
+Toán tử dấu phẩy `,` là một trong những toán tử hiếm và ít sử dụng nhất. Đôi khi, nó được sử dụng để viết mã ngắn hơn, vì vậy chúng ta cần biết nó để hiểu những gì đang diễn ra.
 
-The comma operator allows us to evaluate several expressions, dividing them with a comma `,`. Each of them is evaluated, but the result of only the last one is returned.
+Toán tử dấu phẩy cho phép chúng ta đánh giá một số biểu thức, chia chúng bằng dấu phẩy `,`. Mỗi cái trong số chúng được đánh giá, nhưng kết quả của chỉ cái cuối cùng được trả về.
 
-For example:
+Ví dụ:
 
 ```js
       let a = (1 + 2, 3 + 4);
@@ -431,33 +431,34 @@ For example:
       alert( a ); // 7 (the result of 3 + 4)
 ```
 
-Here, the first expression `1 + 2` is evaluated, and its result is thrown away, then `3 + 4` is evaluated and returned as the result.
+Ở đây, biểu thức đầu tiên `1 + 2` được ước tính và kết quả của nó bị loại bỏ, sau đó `3 + 4` được ước tính và trả về kết quả.
 
 <br>
 
 > ---
 
-**📌 Comma has a very low precedence**
+**📌 Dấu phẩy có độ ưu tiên rất thấp**
 
-Please note that the comma operator has very low precedence, lower than `=`, so parentheses are important in the example above.
+Xin lưu ý rằng toán tử dấu phẩy có độ ưu tiên rất thấp, thấp hơn `=`, vì vậy dấu ngoặc đơn rất quan trọng trong ví dụ trên.
 
-Without them: `a = 1 + 2, 3 + 4` evaluates `+` first, summing the numbers into `a = 3, 7`, then the assignment operator `=` assigns `a = 3`, and then the number after the comma `7` is not processed anyhow, so it's ignored.
+Nếu không có chúng: `a = 1 + 2, 3 + 4` sẽ đánh giá `+` trước tiên, tính tổng các số thành `a = 3, 7`, sau đó toán tử gán `=` gán `a = 3`, rồi số sau khi dấu phẩy `7` không được xử lý, vì vậy nó bị bỏ qua.
 
 > ---
 
 <br>
 
-Why do we need such an operator which throws away everything except the last part?
+Tại sao chúng ta cần một toán tử như vậy mà vứt bỏ mọi thứ trừ phần cuối cùng?
 
-Sometimes people use it in more complex constructs to put several actions in one line.
+Đôi khi mọi người sử dụng nó trong các cấu trúc phức tạp hơn để đặt một số hành động trong một dòng.
 
-For example:
+Ví dụ:
 
 ```js
-      // three operations in one line
+      // ba thao tác trong một dòng
       for (a = 1, b = 3, c = a * b; a < 10; a++) {
        ...
       }
 ```
 
-Such tricks are used in many JavaScript frameworks, that's why we mention them. But usually they don't improve the code readability, so we should think well before writing like that.
+Các thủ thuật như vậy được sử dụng trong nhiều khung JavaScript, đó là lý do tại sao chúng ta đề cập đến chúng. Nhưng thông thường họ không cải thiện khả năng đọc mã, vì vậy chúng ta nên suy nghĩ kỹ trước khi viết như vậy.
+No search results.
