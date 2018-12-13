@@ -219,7 +219,7 @@ Tùy thuộc vào điều kiện `company == 'Netscape'`, phần đầu tiên ho
 
 Chúng ta không chỉ định một kết quả cho một biến ở đây. Ý tưởng là để thực thi mã khác nhau tùy thuộc vào điều kiện.
 
-** Không nên sử dụng toán tử dấu hỏi theo cách này.**
+**Không nên sử dụng toán tử dấu hỏi theo cách này.**
 
 Ký hiệu dường như ngắn hơn `if`, điều này hấp dẫn một số lập trình viên. Nhưng nó khó đọc hơn.
 
