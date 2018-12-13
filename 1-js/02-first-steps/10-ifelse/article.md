@@ -238,4 +238,3 @@ Ký hiệu dường như ngắn hơn `if`, điều này hấp dẫn một số l
 Mắt của chúng ta quét mã theo chiều dọc. Các cấu trúc trải dài trên một số dòng dễ hiểu hơn một tập lệnh ngang dài.
 
 Ý tưởng về một dấu hỏi `?` là trả về một hoặc một giá trị khác tùy theo điều kiện. Hãy sử dụng nó chính xác cho điều đó. Còn `if` để thực thi các nhánh khác nhau của mã.
-No search results.
