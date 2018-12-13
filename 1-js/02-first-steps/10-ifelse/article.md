@@ -98,7 +98,7 @@ Ví dụ:
       }
 ```
 
-Trong đoạn mã trên JavaScript, đầu tiên kiểm tra `year < 2015`. Nếu nó là giả thì nó sẽ chuyển sang điều kiện tiếp theo `year > 2015`, và nếu không thì hiển thị `alert` cuối cùng.
+Trong đoạn mã JavaScript trên, đầu tiên kiểm tra `year < 2015`. Nếu nó là giả thì nó sẽ chuyển sang điều kiện tiếp theo `year > 2015`, và nếu không thì hiển thị `alert` cuối cùng.
 
 Có thể có nhiều khối `else if`. Kết thúc `else` là tùy chọn.
 
