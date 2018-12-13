@@ -14,7 +14,7 @@ Toán tử "OR" được biểu thị bằng hai ký hiệu đường thẳng đ
       result = a || b;
 ```
 
-Trong lập trình cổ điển, logic OR có nghĩa là chỉ thao tác các giá trị boolean. Nếu bất kỳ đối số nào của nó là `true`, thì nó trả về` true`, nếu không, nó sẽ trả về `false`.
+Trong lập trình cổ điển, logic OR có nghĩa là chỉ thao tác các giá trị boolean. Nếu bất kỳ đối số nào của nó là `true`, thì nó trả về `true`, nếu không, nó sẽ trả về `false`.
 
 Trong JavaScript, toán tử phức tạp hơn và mạnh hơn một chút. Nhưng trước tiên hãy xem điều gì xảy ra với các giá trị boolean.
 
