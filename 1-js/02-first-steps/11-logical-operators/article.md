@@ -31,7 +31,7 @@ Như chúng ta có thể thấy, kết quả luôn là `true` ngoại trừ trư
 
 Nếu một toán hạng không phải là boolean, thì nó được chuyển đổi thành boolean để đánh giá.
 
-Chẳng hạn, một số `1` được coi là` true`, một số `0` - là `false`:
+Chẳng hạn, một số `1` được coi là `true`, một số `0` - là `false`:
 
 ```js
       if (1 || 0) { // works just like if( true || false )
@@ -118,7 +118,7 @@ Ví dụ:
 
     Các toán tử có thể không chỉ là các giá trị, mà là các biểu thức tùy ý. OR đánh giá và kiểm tra chúng từ trái sang phải. Việc đánh giá dừng lại khi đạt được giá trị trung thực và giá trị được trả về. Quá trình này được gọi là "đánh giá ngắn mạch", bởi vì nó diễn ra càng ngắn càng tốt từ trái sang phải.
 
-    Điều này được thấy rõ khi biểu thức được đưa ra làm đối số thứ hai có tác dụng phụ. Giống như một bài tập biến.
+    Điều này được thấy rõ khi biểu thức được đưa ra làm đối số thứ hai có tác dụng phụ. Giống như một biến gán.
 
     Nếu chúng ta chạy ví dụ dưới đây, `x` sẽ không được chỉ định:
 
@@ -263,11 +263,11 @@ Vì vậy, về cơ bản chúng ta có một tương tự cho:
       }
 ```
 
-Biến thể với `&&` dường như ngắn hơn. Nhưng 'if` rõ ràng hơn và có xu hướng dễ đọc hơn một chút.
+Biến thể với `&&` dường như ngắn hơn. Nhưng `if` rõ ràng hơn và có xu hướng dễ đọc hơn một chút.
 
 Vì vậy, nên sử dụng mọi cấu trúc cho mục đích của nó. Sử dụng `if` nếu chúng ta muốn if. Và sử dụng `&&` nếu chúng ta muốn AND.
 
-##! (NOT)
+## ! (NOT)
 
 Toán tử boolean NOT được biểu thị bằng dấu chấm than `!`.
 
