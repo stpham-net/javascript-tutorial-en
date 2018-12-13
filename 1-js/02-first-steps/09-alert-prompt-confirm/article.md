@@ -1,109 +1,112 @@
-# Interaction: alert, prompt, confirm
+# Tương tác: alert, prompt, confirm
 
-This part of the tutorial aims to cover JavaScript "as is", without environment-specific tweaks.
+Phần này của hướng dẫn nhằm mục đích tổng quan JavaScript "nguyên bản", mà không có các điều chỉnh cụ thể về môi trường (environment-specific tweaks).
 
-But still we use a browser as the demo environment. So we should know at least a few user-interface functions. In this chapter we'll get familiar with the browser functions `alert`, `prompt` and `confirm`.
+Nhưng chúng ta vẫn sử dụng một trình duyệt làm môi trường demo. Vì vậy, chúng ta nên biết ít nhất một vài chức năng giao diện người dùng. Trong chương này, chúng ta sẽ làm quen với các chức năng của trình duyệt `alert`,` prompt` và `confirm`.
 
 ## alert
 
-Syntax:
+Cú pháp:
 
 ```js
-alert(message);
+      alert(message);
 ```
 
-This shows a message and pauses the script execution until the user presses "OK".
+Điều này hiển thị một message và tạm dừng thực thi tập lệnh cho đến khi người dùng nhấn "OK".
 
-For example:
+Ví dụ:
 
-```js run
-alert("Hello");
+```js
+      alert("Hello");
 ```
 
-The mini-window with the message is called a *modal window*. The word "modal" means that the visitor can't interact with the rest of the page, press other buttons etc, until they have dealt with the window. In this case -- until they press "OK".
+Cửa sổ nhỏ với thông báo được gọi là *modal window*. Từ "modal" có nghĩa là khách truy cập không thể tương tác với phần còn lại của trang, nhấn các nút khác, v.v., cho đến khi họ xử lý với cửa sổ này. Trong trường hợp này -- cho đến khi họ nhấn "OK".
 
 ## prompt
 
-Function `prompt` accepts two arguments:
+Hàm `prompt` chấp nhận hai đối số:
 
-```js no-beautify
-result = prompt(title[, default]);
+```js
+      result = prompt(title[, default]);
 ```
 
-It shows a modal window with a text message, an input field for the visitor and buttons OK/CANCEL.
+Nó hiển thị một modal window với một message, một trường input cho khách truy cập và các nút OK/CANCEL.
 
-`title`
-: The text to show to the visitor.
+**`title`** Văn bản để hiển thị cho khách truy cập.
 
-`default`
-: An optional second parameter, the initial value for the input field.
+**`default`** Một tham số thứ hai tùy chọn, giá trị ban đầu cho trường input.
 
-The visitor may type something in the prompt input field and press OK. Or they can cancel the input by pressing the CANCEL button or hitting the `key:Esc` key.
+Khách truy cập có thể nhập nội dung nào đó vào trường nhập nhanh chóng (prompt input) và nhấn OK. Hoặc họ có thể hủy bỏ input bằng cách nhấn nút CANCEL hoặc nhấn phím `Esc`.
 
-The call to `prompt` returns the text from the field or `null` if the input was canceled.
+Cuộc gọi đến `prompt` trả về văn bản từ trường input hoặc `null` nếu input bị hủy.
 
-For instance:
+Ví dụ:
 
-```js run
-let age = prompt('How old are you?', 100);
+```js
+      let age = prompt('How old are you?', 100);
 
-alert(`You are ${age} years old!`); // You are 100 years old!
+      alert(`You are ${age} years old!`); // You are 100 years old!
 ```
 
-````warn header="IE: always supply a `default`"
-The second parameter is optional. But if we don't supply it, Internet Explorer would insert the text `"undefined"` into the prompt.
+<br>
 
-Run this code in Internet Explorer to see that:
+> ---
 
-```js run
-let test = prompt("Test");
+***📌 IE: luôn cung cấp một `default`***
+
+Tham số thứ hai là tùy chọn. Nhưng nếu chúng ta không cung cấp nó, Internet Explorer sẽ chèn văn bản `"undefined"` vào prompt.
+
+Chạy mã này trong Internet Explorer để thấy rằng:
+
+```js
+      let test = prompt("Test");
 ```
 
-So, to look good in IE, it's recommended to always provide the second argument:
+Vì vậy, để trông tốt hơn trong IE, bạn nên luôn cung cấp đối số thứ hai:
 
-```js run
-let test = prompt("Test", ''); // <-- for IE
+```js
+      let test = prompt("Test", ''); // <-- for IE
 ```
-````
+
+> ---
+
+<br>
 
 ## confirm
 
-The syntax:
+Cú pháp:
 
 ```js
-result = confirm(question);
+      result = confirm(question);
 ```
 
-Function `confirm` shows a modal window with a `question` and two buttons: OK and CANCEL.
+Hàm `confirm` hiển thị một modal window với một `question` và hai button: OK và CANCEL.
 
-The result is `true` if OK is pressed and `false` otherwise.
+Kết quả là `true` nếu nhấn OK và `false` nếu không.
 
-For example:
+Ví dụ:
 
-```js run
-let isBoss = confirm("Are you the boss?");
+```js
+      let isBoss = confirm("Are you the boss?");
 
-alert( isBoss ); // true if OK is pressed
+      alert( isBoss ); // true if OK is pressed
 ```
 
-## Summary
+## Tóm lược
 
-We covered 3 browser-specific functions to interact with the visitor:
+Chúng ta bao gồm 3 chức năng dành riêng cho trình duyệt để tương tác với khách truy cập:
 
-`alert`
-: shows a message.
+**`alert`** hiển thị một tin nhắn.
 
-`prompt`
-: shows a message asking the user to input text. It returns the text or, if CANCEL or `key:Esc` is clicked, all browsers return `null`.
+**`prompt`** hiển thị một message yêu cầu người dùng nhập văn bản. Nó trả về văn bản hoặc, nếu CANCEL hoặc `Esc` được nhấp, tất cả các trình duyệt trả về `null`.
 
-`confirm`
-: shows a message and waits for the user to press "OK" or "CANCEL". It returns `true` for OK and `false` for CANCEL/`key:Esc`.
+**`confirm`** hiển thị một message và chờ người dùng nhấn "OK" hoặc "CANCEL". Nó trả về `true` cho OK và `false` cho CANCEL/`Esc`.
 
-All these methods are modal: they pause the script execution and don't allow the visitor to interact with the rest of the page until the message has been dismissed.
+Tất cả các phương thức này là modal: chúng tạm dừng thực thi script và không cho phép khách truy cập tương tác với phần còn lại của trang cho đến khi message bị loại bỏ.
 
-There are two limitations shared by all the methods above:
+Có hai hạn chế được dùng chung bởi tất cả các phương pháp trên:
 
-1. The exact location of the modal window is determined by the browser. Usually it's in the center.
-2. The exact look of the window also depends on the browser. We can't modify it.
+1. Vị trí chính xác của modal window được xác định bởi trình duyệt. Thông thường nó ở center.
+2. Giao diện chính xác của cửa sổ cũng phụ thuộc vào trình duyệt. Chúng ta không thể sửa đổi nó.
 
-That is the price for simplicity. There are other ways to show nicer windows and richer interaction with the visitor, but if "bells and whistles" do not matter much, these methods work just fine.
+Đó là cái giá cho sự đơn giản. Có nhiều cách khác để hiển thị các cửa sổ đẹp hơn và tương tác phong phú hơn với khách truy cập, nhưng nếu "chuông và còi" không quan trọng lắm, các phương pháp này hoạt động tốt.
