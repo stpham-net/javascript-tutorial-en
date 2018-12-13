@@ -2,7 +2,7 @@
 
 Phần này của hướng dẫn nhằm mục đích tổng quan JavaScript "nguyên bản", mà không có các điều chỉnh cụ thể về môi trường (environment-specific tweaks).
 
-Nhưng chúng ta vẫn sử dụng một trình duyệt làm môi trường demo. Vì vậy, chúng ta nên biết ít nhất một vài chức năng giao diện người dùng. Trong chương này, chúng ta sẽ làm quen với các chức năng của trình duyệt `alert`,` prompt` và `confirm`.
+Nhưng chúng ta vẫn sử dụng một trình duyệt làm môi trường demo. Vì vậy, chúng ta nên biết ít nhất một vài chức năng giao diện người dùng. Trong chương này, chúng ta sẽ làm quen với các chức năng của trình duyệt `alert`, `prompt` và `confirm`.
 
 ## alert
 
