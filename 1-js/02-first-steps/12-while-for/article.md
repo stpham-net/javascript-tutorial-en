@@ -288,7 +288,7 @@ But as a side-effect we got one more nesting level (the `alert` call inside the 
 
 > ---
 
-**📌warn header="No `break/continue` to the right side of '?'**
+**📌No `break/continue` to the right side of '?'**
 
 Please note that syntax constructs that are not expressions cannot be used with the ternary operator `?`. In particular, directives such as `break/continue` are disallowed there.
 
