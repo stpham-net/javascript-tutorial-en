@@ -56,7 +56,7 @@ Một ví dụ về `switch`:
 
 Rồi `4`. Đó là một trùng khớp, vì vậy việc thực thi bắt đầu từ `case 4` cho đến khi `break` gần nhất.
 
-** Nếu không có `break` thì việc thực thi tiếp tục với `case` tiếp theo mà không có bất kỳ kiểm tra nào.**
+**Nếu không có `break` thì việc thực thi tiếp tục với `case` tiếp theo mà không có bất kỳ kiểm tra nào.**
 
 Một ví dụ không có `break`:
 
@@ -87,7 +87,7 @@ Trong ví dụ trên, chúng ta sẽ thấy thực thi tuần tự ba `alert`:
 
 > ---
 
-** Bất kỳ biểu thức nào cũng có thể là đối số `switch/case` **
+**📌 Bất kỳ biểu thức nào cũng có thể là đối số `switch/case`**
 
 Cả `switch` và `case` đều cho phép các biểu thức tùy ý.
 
