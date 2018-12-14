@@ -127,7 +127,7 @@ Các biến được khai báo bên ngoài bất kỳ hàm nào, chẳng hạn n
 
 Các biến toàn cầu (Global variable) có thể nhìn thấy từ bất kỳ function nào (trừ khi bị che khuất bởi locals).
 
-Thông thường, một hàm khai báo tất cả các biến cụ thể cho nhiệm vụ của nó. Các global variable chỉ lưu trữ dữ liệu cấp dự án, do đó, điều quan trọng là các biến này có thể truy cập được từ mọi nơi. Mã hiện đại có ít hoặc không có globals. Hầu hết các biến nằm trong chức năng của họ.
+Thông thường, một hàm khai báo tất cả các biến cụ thể cho nhiệm vụ của nó. Các global variable chỉ lưu trữ dữ liệu cấp dự án, do đó, điều quan trọng là các biến này có thể truy cập được từ mọi nơi. Mã hiện đại có ít hoặc không có globals. Hầu hết các biến nằm trong function của chúng.
 
 > ---
 
@@ -148,7 +148,7 @@ Trong ví dụ dưới đây, hàm có hai tham số: `from` và `text`.
       showMessage('Ann', "What's up?"); // Ann: What's up? (**)
 ```
 
-Khi hàm được gọi trong các dòng `(*)` và `(**)`, các giá trị đã cho sẽ được sao chép vào các biến cục bộ `from` và` text`. Sau đó, function sử dụng chúng.
+Khi hàm được gọi trong các dòng `(*)` và `(**)`, các giá trị đã cho sẽ được sao chép vào các biến cục bộ `from` và `text`. Sau đó, function sử dụng chúng.
 
 Dưới đây là một ví dụ nữa: chúng ta có một biến `from` và truyền nó cho hàm. Xin lưu ý: hàm thay đổi `from`, nhưng sự thay đổi không được nhìn thấy từ bên ngoài, bởi vì một hàm luôn nhận được một copy của value:
 
@@ -305,7 +305,7 @@ Trong đoạn mã trên, nếu `checkAge(age)` trả về `false`, thì `showMov
 
 > ---
 
-**📌 Một hàm có `return` trống hoặc không có nó trả về `undefined`***
+**📌 Một hàm có `return` trống hoặc không có nó trả về `undefined`**
 
 Nếu một hàm không trả về một giá trị, thì nó cũng giống như khi nó trả về `undefined`:
 
@@ -347,7 +347,7 @@ Một `return` trống cũng giống như `return undefined`:
        (some + long + expression + or + whatever * f(a) + f(b))
 ```
 
-Vì vậy, nó thực sự trở thành một sự empty return. Thay vào đó, chúng ta nên đặt giá trị trên cùng một dòng.
+Vì vậy, nó thực sự trở thành một empty return. Thay vào đó, chúng ta nên đặt giá trị trên cùng một dòng.
 
 > ---
 
@@ -355,7 +355,7 @@ Vì vậy, nó thực sự trở thành một sự empty return. Thay vào đó,
 
 ## Đặt tên hàm
 
-Cac function là hành động. Vì vậy, tên của chúng thường là một động từ. Nó phải ngắn gọn, chính xác nhất có thể và mô tả function làm gì, để ai đó đọc mã nhận được chỉ dẫn về function đó làm gì.
+Các function là hành động. Vì vậy, tên của chúng thường là một động từ. Nó phải ngắn gọn, chính xác nhất có thể và mô tả function làm gì, để ai đó đọc mã nhận được chỉ dẫn về function đó làm gì.
 
 Đó là một thực tế phổ biến để bắt đầu một function với tiền tố bằng lời nói mô tả mơ hồ hành động. Phải có một thỏa thuận trong nhóm về ý nghĩa của các tiền tố.
 
@@ -388,7 +388,7 @@ Với các tiền tố được đặt đúng chỗ, việc lướt qua một t�
 
 Một hàm nên làm chính xác những gì được đề xuất bởi tên của nó, không hơn.
 
-Hai hành động độc lập thường xứng đáng với hai function, ngay cả khi chúng thường được gọi cùng nhau (trong trường hợp đó chúng ta có thể thực hiện chức năng thứ 3 gọi hai function đó).
+Hai hành động độc lập thường xứng đáng với hai function, ngay cả khi chúng thường được gọi cùng nhau (trong trường hợp đó chúng ta có thể thực hiện function thứ 3 gọi hai function đó).
 
 Một vài ví dụ về việc phá vỡ quy tắc này:
 
@@ -405,7 +405,7 @@ Những ví dụ này giả định ý nghĩa phổ biến của tiền tố. Ý
 
 > ---
 
-**📌 Ultrashort function names***
+**📌 Ultrashort function names**
 
 Các hàm được sử dụng *rất thường xuyên* đôi khi có tên ultrashort.
 
@@ -425,7 +425,7 @@ Một function riêng biệt không chỉ dễ dàng hơn để kiểm tra và g
 
 Chẳng hạn, so sánh hai hàm `showPrimes(n)` bên dưới. Mỗi cái xuất ra [số nguyên tố](https://en.wikipedia.org/wiki/Prime_number) cho đến `n`.
 
-Biến thể đầu tiên sử dụng nhãn:
+Biến thể đầu tiên sử dụng label:
 
 ```js
 function showPrimes(n) {
