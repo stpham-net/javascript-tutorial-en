@@ -152,7 +152,7 @@ Here's what exactly happens in our case:
 Here the "counter" variable `i` is declared right in the loop. That's called an "inline" variable declaration. Such variables are visible only inside the loop.
 
 ```js
-      for (*!*let*/!* i = 0; i < 3; i++) {
+      for (let i = 0; i < 3; i++) {
         alert(i); // 0, 1, 2
       }
       alert(i); // error, no such variable
@@ -251,7 +251,7 @@ The loop below uses `continue` to output only odd values:
       for (let i = 0; i < 10; i++) {
 
         // if true, skip the remaining part of the body
-        *!*if (i % 2 == 0) continue;*/!*
+        if (i % 2 == 0) continue;
 
         alert(i); // 1, then 3, 5, 7, 9
       }
@@ -306,7 +306,7 @@ For example, if we take this code:
 
 
 ```js
-      (i > 5) ? alert(i) : *!*continue*/!*; // continue not allowed here
+      (i > 5) ? alert(i) : continue; // continue not allowed here
 ```
 
 ...Then it stops working. The code like this will give a syntax error:
