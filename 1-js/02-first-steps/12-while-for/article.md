@@ -288,7 +288,7 @@ But as a side-effect we got one more nesting level (the `alert` call inside the 
 
 > ---
 
-**📌No `break/continue` to the right side of '?'**
+**📌 No `break/continue` to the right side of '?'**
 
 Please note that syntax constructs that are not expressions cannot be used with the ternary operator `?`. In particular, directives such as `break/continue` are disallowed there.
 
@@ -387,7 +387,7 @@ The `continue` directive can also be used with a label. In this case the executi
 
 > ---
 
-**📌Labels are not a "goto"**
+**📌 Labels are not a "goto"**
 
 Labels do not allow us to jump into an arbitrary place of code.
 
