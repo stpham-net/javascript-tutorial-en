@@ -1,399 +1,431 @@
 # Functions
 
-Quite often we need to perform a similar action in many places of the script.
+Thông thường chúng ta hay cần thực hiện một hành động tương tự ở nhiều nơi của kịch bản.
 
-For example, we need to show a nice-looking message when a visitor logs in, logs out and maybe somewhere else.
+Ví dụ: chúng ta cần hiển thị một thông báo đẹp mắt khi khách truy cập đăng nhập, đăng xuất và có thể ở một nơi khác.
 
-Functions are the main "building blocks" of the program. They allow the code to be called many times without repetition.
+Functions là "khối xây dựng (building blocks)" chính của chương trình. Chúng cho phép mã được gọi nhiều lần mà không lặp lại.
 
-We've already seen examples of built-in functions, like `alert(message)`, `prompt(message, default)` and `confirm(question)`. But we can create functions of our own as well.
+Chúng ta đã thấy các ví dụ về các hàm dựng sẵn (built-in functions), như `alert(message)`, `prompt(message, default)` và `confirm(question)`. Nhưng chúng ta cũng có thể tạo ra các function của riêng mình.
 
-## Function Declaration
+## Khai báo hàm (Function Declaration)
 
-To create a function we can use a *function declaration*.
+Để tạo một hàm chúng ta có thể sử dụng một *khai báo hàm (function declaration)*.
 
-It looks like this:
+Nó trông như thế này:
 
 ```js
-function showMessage() {
-  alert( 'Hello everyone!' );
-}
+      function showMessage() {
+        alert( 'Hello everyone!' );
+      }
 ```
 
-The `function` keyword goes first, then goes the *name of the function*, then a list of *parameters* between the parentheses (empty in the example above) and finally the code of the function, also named "the function body", between curly braces.
+Từ khóa `function` đi trước, sau đó đến *tên của hàm*, sau đó là danh sách *tham số* giữa dấu ngoặc đơn (trống trong ví dụ trên) và cuối cùng là mã của hàm, cũng được đặt tên là "thân hàm (the function body)" , đặt giữa dấu ngoặc nhọn.
 
 ![](function_basics.png)
 
-Our new function can be called by its name: `showMessage()`.
+Hàm mới của chúng ta có thể được gọi bằng tên của nó: `showMessage()`.
 
-For instance:
+Ví dụ:
 
-```js run
-function showMessage() {
-  alert( 'Hello everyone!' );
-}
+```js
+      function showMessage() {
+        alert( 'Hello everyone!' );
+      }
 
-*!*
-showMessage();
-showMessage();
-*/!*
+      showMessage();
+      showMessage();
 ```
 
-The call `showMessage()` executes the code of the function. Here we will see the message two times.
+Cuộc gọi `showMessage()` thực thi mã của hàm. Ở đây chúng ta sẽ thấy message hai lần.
 
-This example clearly demonstrates one of the main purposes of functions: to avoid code duplication.
+Ví dụ này thể hiện rõ một trong những mục đích chính của các hàm: để tránh trùng lặp mã.
 
-If we ever need to change the message or the way it is shown, it's enough to modify the code in one place: the function which outputs it.
+Nếu chúng ta cần thay đổi message hoặc cách nó được hiển thị, thì chỉ cần sửa đổi mã ở một nơi: function xuất ra nó.
 
 ## Local variables
 
-A variable declared inside a function is only visible inside that function.
+Một biến được khai báo bên trong một hàm chỉ hiển thị bên trong hàm đó.
 
-For example:
+Ví dụ:
 
-```js run
-function showMessage() {
-*!*
-  let message = "Hello, I'm JavaScript!"; // local variable
-*/!*
+```js
+      function showMessage() {
+        let message = "Hello, I'm JavaScript!"; // local variable
 
-  alert( message );
-}
+        alert( message );
+      }
 
-showMessage(); // Hello, I'm JavaScript!
+      showMessage(); // Hello, I'm JavaScript!
 
-alert( message ); // <-- Error! The variable is local to the function
+      alert( message ); // <-- Error! The variable is local to the function
 ```
 
 ## Outer variables
 
-A function can access an outer variable as well, for example:
-
-```js run no-beautify
-let *!*userName*/!* = 'John';
-
-function showMessage() {
-  let message = 'Hello, ' + *!*userName*/!*;
-  alert(message);
-}
-
-showMessage(); // Hello, John
-```
-
-The function has full access to the outer variable. It can modify it as well.
-
-For instance:
-
-```js run
-let *!*userName*/!* = 'John';
-
-function showMessage() {
-  *!*userName*/!* = "Bob"; // (1) changed the outer variable
-
-  let message = 'Hello, ' + *!*userName*/!*;
-  alert(message);
-}
-
-alert( userName ); // *!*John*/!* before the function call
-
-showMessage();
-
-alert( userName ); // *!*Bob*/!*, the value was modified by the function
-```
-
-The outer variable is only used if there's no local one. So an occasional modification may happen if we forget `let`.
-
-If a same-named variable is declared inside the function then it *shadows* the outer one. For instance, in the code below the function uses the local `userName`. The outer one is ignored:
-
-```js run
-let userName = 'John';
-
-function showMessage() {
-*!*
-  let userName = "Bob"; // declare a local variable
-*/!*
-
-  let message = 'Hello, ' + userName; // *!*Bob*/!*
-  alert(message);
-}
-
-// the function will create and use its own userName
-showMessage();
-
-alert( userName ); // *!*John*/!*, unchanged, the function did not access the outer variable
-```
-
-```smart header="Global variables"
-Variables declared outside of any function, such as the outer `userName` in the code above, are called *global*.
-
-Global variables are visible from any function (unless shadowed by locals).
-
-Usually, a function declares all variables specific to its task. Global variables only store project-level data, so when it's important that these variables are accesible from anywhere. Modern code has few or no globals. Most variables reside in their functions.
-```
-
-## Parameters
-
-We can pass arbitrary data to functions using parameters (also called *function arguments*) .
-
-In the example below, the function has two parameters: `from` and `text`.
-
-```js run
-function showMessage(*!*from, text*/!*) { // arguments: from, text
-  alert(from + ': ' + text);
-}
-
-*!*
-showMessage('Ann', 'Hello!'); // Ann: Hello! (*)
-showMessage('Ann', "What's up?"); // Ann: What's up? (**)
-*/!*
-```
-
-When the function is called in lines `(*)` and `(**)`, the given values are copied to local variables `from` and `text`. Then the function uses them.
-
-Here's one more example: we have a variable `from` and pass it to the function. Please note: the function changes `from`, but the change is not seen outside, because a function always gets a copy of the value:
-
-
-```js run
-function showMessage(from, text) {
-
-*!*
-  from = '*' + from + '*'; // make "from" look nicer
-*/!*
-
-  alert( from + ': ' + text );
-}
-
-let from = "Ann";
-
-showMessage(from, "Hello"); // *Ann*: Hello
-
-// the value of "from" is the same, the function modified a local copy
-alert( from ); // Ann
-```
-
-## Default values
-
-If a parameter is not provided, then its value becomes `undefined`.
-
-For instance, the aforementioned function `showMessage(from, text)` can be called with a single argument:
+Một hàm cũng có thể truy cập một biến bên ngoài, ví dụ:
 
 ```js
-showMessage("Ann");
+      let userName = 'John';
+
+      function showMessage() {
+        let message = 'Hello, ' + userName;
+        alert(message);
+      }
+
+      showMessage(); // Hello, John
 ```
 
-That's not an error. Such a call would output `"Ann: undefined"`. There's no `text`, so it's assumed that `text === undefined`.
+Hàm có toàn quyền truy cập vào biến bên ngoài (outer variable). Nó cũng có thể sửa đổi nó.
 
-If we want to use a "default" `text` in this case, then we can specify it after `=`:
-
-```js run
-function showMessage(from, *!*text = "no text given"*/!*) {
-  alert( from + ": " + text );
-}
-
-showMessage("Ann"); // Ann: no text given
-```
-
-Now if the `text` parameter is not passed, it will get the value `"no text given"`
-
-Here `"no text given"` is a string, but it can be a more complex expression, which is only evaluated and assigned if the parameter is missing. So, this is also possible:
-
-```js run
-function showMessage(from, text = anotherFunction()) {
-  // anotherFunction() only executed if no text given
-  // its result becomes the value of text
-}
-```
-
-```smart header="Evaluation of default parameters"
-In JavaScript, a default parameter is evaluated every time the function is called without the respective parameter. In the example above, `anotherFunctions()` is called everytime `someMessage()` is called without the `text` parameter. This is in contrast to some other languages like Python, where any default parameters are evaluated only once during the initial interpretation.
-```
-
-
-````smart header="Default parameters old-style"
-Old editions of JavaScript did not support default parameters. So there are alternative ways to support them, that you can find mostly in the old scripts.
-
-For instance, an explicit check for being `undefined`:
+Ví dụ:
 
 ```js
-function showMessage(from, text) {
-*!*
-  if (text === undefined) {
-    text = 'no text given';
-  }
-*/!*
+      let userName = 'John';
 
-  alert( from + ": " + text );
-}
+      function showMessage() {
+        userName = "Bob"; // (1) changed the outer variable
+
+        let message = 'Hello, ' + userName;
+        alert(message);
+      }
+
+      alert( userName ); // John before the function call
+
+      showMessage();
+
+      alert( userName ); // Bob, the value was modified by the function
 ```
 
-...Or the `||` operator:
+Biến bên ngoài (outer variable) chỉ được sử dụng nếu không có biến cục bộ. Vì vậy, một sự sửa đổi không thường xuyên có thể xảy ra nếu chúng ta quên `let`.
+
+Nếu một biến cùng tên được khai báo bên trong hàm thì nó *đổ bóng (đè)* biến bên ngoài. Chẳng hạn, trong đoạn mã bên dưới, hàm sử dụng `userName` cục bộ. Cái bên ngoài bị bỏ qua:
 
 ```js
-function showMessage(from, text) {
-  // if text is falsy then text gets the "default" value
-  text = text || 'no text given';
-  ...
-}
+      let userName = 'John';
+
+      function showMessage() {
+        let userName = "Bob"; // declare a local variable
+
+        let message = 'Hello, ' + userName; // Bob
+        alert(message);
+      }
+
+      // the function will create and use its own userName
+      showMessage();
+
+      alert( userName ); // John, unchanged, the function did not access the outer variable
 ```
 
+<br>
 
-````
+> ---
 
+**📌 Biến toàn cầu (Global variables)**
 
-## Returning a value
+Các biến được khai báo bên ngoài bất kỳ hàm nào, chẳng hạn như `userName` bên ngoài trong đoạn mã trên, được gọi là *global*.
 
-A function can return a value back into the calling code as the result.
+Các biến toàn cầu (Global variable) có thể nhìn thấy từ bất kỳ function nào (trừ khi bị che khuất bởi locals).
 
-The simplest example would be a function that sums two values:
+Thông thường, một hàm khai báo tất cả các biến cụ thể cho nhiệm vụ của nó. Các global variable chỉ lưu trữ dữ liệu cấp dự án, do đó, điều quan trọng là các biến này có thể truy cập được từ mọi nơi. Mã hiện đại có ít hoặc không có globals. Hầu hết các biến nằm trong chức năng của họ.
 
-```js run no-beautify
-function sum(a, b) {
-  *!*return*/!* a + b;
-}
+> ---
 
-let result = sum(1, 2);
-alert( result ); // 3
-```
+<br>
 
-The directive `return` can be in any place of the function. When the execution reaches it, the function stops, and the value is returned to the calling code (assigned to `result` above).
+## Các tham số (Parameters)
 
-There may be many occurrences of `return` in a single function. For instance:
+Chúng ta có thể truyền dữ liệu tùy ý cho các hàm bằng các tham số (còn được gọi là *đối số hàm (function arguments)*).
 
-```js run
-function checkAge(age) {
-  if (age > 18) {
-*!*
-    return true;
-*/!*
-  } else {
-*!*
-    return confirm('Do you have permission from your parents?');
-*/!*
-  }
-}
-
-let age = prompt('How old are you?', 18);
-
-if ( checkAge(age) ) {
-  alert( 'Access granted' );
-} else {
-  alert( 'Access denied' );
-}
-```
-
-It is possible to use `return` without a value. That causes the function to exit immediately.
-
-For example:
+Trong ví dụ dưới đây, hàm có hai tham số: `from` và `text`.
 
 ```js
-function showMovie(age) {
-  if ( !checkAge(age) ) {
-*!*
-    return;
-*/!*
-  }
+      function showMessage(from, text) { // arguments: from, text
+        alert(from + ': ' + text);
+      }
 
-  alert( "Showing you the movie" ); // (*)
-  // ...
-}
+      showMessage('Ann', 'Hello!'); // Ann: Hello! (*)
+      showMessage('Ann', "What's up?"); // Ann: What's up? (**)
 ```
 
-In the code above, if `checkAge(age)` returns `false`, then `showMovie` won't proceed to the `alert`.
+Khi hàm được gọi trong các dòng `(*)` và `(**)`, các giá trị đã cho sẽ được sao chép vào các biến cục bộ `from` và` text`. Sau đó, function sử dụng chúng.
 
-````smart header="A function with an empty `return` or without it returns `undefined`"
-If a function does not return a value, it is the same as if it returns `undefined`:
+Dưới đây là một ví dụ nữa: chúng ta có một biến `from` và truyền nó cho hàm. Xin lưu ý: hàm thay đổi `from`, nhưng sự thay đổi không được nhìn thấy từ bên ngoài, bởi vì một hàm luôn nhận được một copy của value:
 
-```js run
-function doNothing() { /* empty */ }
-
-alert( doNothing() === undefined ); // true
-```
-
-An empty `return` is also the same as `return undefined`:
-
-```js run
-function doNothing() {
-  return;
-}
-
-alert( doNothing() === undefined ); // true
-```
-````
-
-````warn header="Never add a newline between `return` and the value"
-For a long expression in `return`, it might be tempting to put it on a separate line, like this:
 
 ```js
-return
- (some + long + expression + or + whatever * f(a) + f(b))
+      function showMessage(from, text) {
+
+        from = '*' + from + '*'; // make "from" look nicer
+
+        alert( from + ': ' + text );
+      }
+
+      let from = "Ann";
+
+      showMessage(from, "Hello"); // *Ann*: Hello
+
+      // the value of "from" is the same, the function modified a local copy
+      alert( from ); // Ann
 ```
-That doesn't work, because JavaScript assumes a semicolon after `return`. That'll work the same as:
+
+## Giá trị mặc định (Default values)
+
+Nếu một tham số không được cung cấp, thì giá trị của nó sẽ trở thành `undefined`.
+
+Chẳng hạn, hàm đã nói ở trên `showMessage(from, text)` có thể được gọi với một đối số duy nhất:
 
 ```js
-return*!*;*/!*
- (some + long + expression + or + whatever * f(a) + f(b))
+      showMessage("Ann");
 ```
-So, it effectively becomes an empty return. We should put the value on the same line instead.
-````
 
-## Naming a function [#function-naming]
+Đó không phải là một lỗi. Một cuộc gọi như vậy sẽ tạo ra `"Ann: undefined"`. Không có `text`, vì vậy nó giả định rằng `text === undefined`.
 
-Functions are actions. So their name is usually a verb. It should be brief, as accurate as possible and describe what the function does, so that someone reading the code gets an indication of what the function does.
+Nếu chúng ta muốn sử dụng một "default" `text` trong trường hợp này, thì chúng ta có thể chỉ định nó sau `=`:
 
-It is a widespread practice to start a function with a verbal prefix which vaguely describes the action. There must be an agreement within the team on the meaning of the prefixes.
+```js
+      function showMessage(from, text = "no text given") {
+        alert( from + ": " + text );
+      }
 
-For instance, functions that start with `"show"` usually show something.
+      showMessage("Ann"); // Ann: no text given
+```
 
-Function starting with...
+Bây giờ nếu tham số `text` không được thông qua, nó sẽ nhận được giá trị `"no text given"`
+
+Ở đây `"no text given"` là một chuỗi, nhưng nó có thể là một biểu thức phức tạp hơn, nó chỉ được ước tính và gán nếu tham số bị thiếu. Vì vậy, điều này cũng có thể:
+
+```js
+      function showMessage(from, text = anotherFunction()) {
+        // anotherFunction() only executed if no text given
+        // its result becomes the value of text
+      }
+```
+
+<br>
+
+> ---
+
+**📌 Đánh giá các tham số mặc định (Evaluation of default parameters)**
+
+Trong JavaScript, một tham số mặc định được đánh giá mỗi khi hàm được gọi mà không có tham số tương ứng. Trong ví dụ trên, `anotherFunctions()` được gọi mọi lúc `someMessage()` được gọi mà không có tham số `text`. Điều này trái ngược với một số ngôn ngữ khác như Python, trong đó mọi tham số mặc định chỉ được đánh giá một lần trong quá trình diễn giải ban đầu.
+
+> ---
+
+<br>
+<br>
+
+> ---
+
+**📌 Thông số mặc định kiểu cũ (Default parameters old-style)**
+
+Các phiên bản cũ của JavaScript không hỗ trợ các tham số mặc định. Vì vậy, có những cách khác để hỗ trợ chúng, mà bạn có thể tìm thấy chủ yếu trong các tập lệnh cũ.
+
+Chẳng hạn, một kiểm tra rõ ràng về việc `undefined`:
+
+```js
+      function showMessage(from, text) {
+        if (text === undefined) {
+          text = 'no text given';
+        }
+
+        alert( from + ": " + text );
+      }
+```
+
+...Hoặc toán tử `||`:
+
+```js
+      function showMessage(from, text) {
+        // if text is falsy then text gets the "default" value
+        text = text || 'no text given';
+        ...
+      }
+```
+
+> ---
+
+<br>
+
+## Trả lại một giá trị (Returning a value)
+
+Một hàm có thể trả một giá trị về cho mã gọi (calling code) như là kết quả.
+
+Ví dụ đơn giản nhất sẽ là một hàm tính tổng hai giá trị:
+
+```js
+      function sum(a, b) {
+        return a + b;
+      }
+
+      let result = sum(1, 2);
+      alert( result ); // 3
+```
+
+Lệnh `return` có thể ở bất kỳ vị trí nào của hàm. Khi thực thi bắt gặp nó, hàm dừng lại và giá trị được trả về mã gọi (calling code) (được gán cho `result` ở trên).
+
+Có thể có nhiều lần xuất hiện của `return` trong một hàm duy nhất. Ví dụ:
+
+```js
+      function checkAge(age) {
+        if (age > 18) {
+          return true;
+        } else {
+          return confirm('Do you have permission from your parents?');
+        }
+      }
+
+      let age = prompt('How old are you?', 18);
+
+      if ( checkAge(age) ) {
+        alert( 'Access granted' );
+      } else {
+        alert( 'Access denied' );
+      }
+```
+
+Có thể sử dụng `return` mà không có giá trị. Điều đó khiến function thoát ra ngay lập tức.
+
+Ví dụ:
+
+```js
+      function showMovie(age) {
+        if ( !checkAge(age) ) {
+          return;
+        }
+
+        alert( "Showing you the movie" ); // (*)
+        // ...
+      }
+```
+
+Trong đoạn mã trên, nếu `checkAge(age)` trả về `false`, thì `showMovie` sẽ không tiếp tục với `alert`.
+
+<br>
+
+> ---
+
+**📌 Một hàm có `return` trống hoặc không có nó trả về `undefined`***
+
+Nếu một hàm không trả về một giá trị, thì nó cũng giống như khi nó trả về `undefined`:
+
+```js
+      function doNothing() { /* empty */ }
+
+      alert( doNothing() === undefined ); // true
+```
+
+Một `return` trống cũng giống như `return undefined`:
+
+```js
+      function doNothing() {
+        return;
+      }
+
+      alert( doNothing() === undefined ); // true
+```
+
+> ---
+
+<br>
+<br>
+
+> ---
+
+**📌 Không bao giờ thêm một dòng mới giữa `return` và giá trị**
+
+Đối với một biểu thức dài trong `return`, có thể sẽ rất hấp dẫn khi đặt nó trên một dòng riêng biệt, như thế này:
+
+```js
+      return
+       (some + long + expression + or + whatever * f(a) + f(b))
+```
+Điều đó không hiệu quả, bởi vì JavaScript giả định sẽ có một dấu chấm phẩy sau khi `return`. Điều đó sẽ làm việc giống như:
+
+```js
+      return;
+       (some + long + expression + or + whatever * f(a) + f(b))
+```
+
+Vì vậy, nó thực sự trở thành một sự empty return. Thay vào đó, chúng ta nên đặt giá trị trên cùng một dòng.
+
+> ---
+
+<br>
+
+## Đặt tên hàm
+
+Cac function là hành động. Vì vậy, tên của chúng thường là một động từ. Nó phải ngắn gọn, chính xác nhất có thể và mô tả function làm gì, để ai đó đọc mã nhận được chỉ dẫn về function đó làm gì.
+
+Đó là một thực tế phổ biến để bắt đầu một function với tiền tố bằng lời nói mô tả mơ hồ hành động. Phải có một thỏa thuận trong nhóm về ý nghĩa của các tiền tố.
+
+Chẳng hạn, các hàm bắt đầu bằng `"show"` thường hiển thị một cái gì đó.
+
+Chức năng bắt đầu bằng ...
 
 - `"get…"` -- return a value,
 - `"calc…"` -- calculate something,
 - `"create…"` -- create something,
 - `"check…"` -- check something and return a boolean, etc.
 
-Examples of such names:
+Ví dụ về các tên như vậy:
 
-```js no-beautify
-showMessage(..)     // shows a message
-getAge(..)          // returns the age (gets it somehow)
-calcSum(..)         // calculates a sum and returns the result
-createForm(..)      // creates a form (and usually returns it)
-checkPermission(..) // checks a permission, returns true/false
+```js
+      showMessage(..)     // shows a message
+      getAge(..)          // returns the age (gets it somehow)
+      calcSum(..)         // calculates a sum and returns the result
+      createForm(..)      // creates a form (and usually returns it)
+      checkPermission(..) // checks a permission, returns true/false
 ```
 
-With prefixes in place, a glance at a function name gives an understanding what kind of work it does and what kind of value it returns.
+Với các tiền tố được đặt đúng chỗ, việc lướt qua một tên hàm cho biết về loại công việc và loại giá trị mà nó trả về.
 
-```smart header="One function -- one action"
-A function should do exactly what is suggested by its name, no more.
+<br>
 
-Two independent actions usually deserve two functions, even if they are usually called together (in that case we can make a 3rd function that calls those two).
+> ---
 
-A few examples of breaking this rule:
+**📌 Một chức năng - một hành động**
 
-- `getAge` -- would be bad if it shows an `alert` with the age (should only get).
-- `createForm` -- would be bad if it modifies the document, adding a form to it (should only create it and return).
-- `checkPermission` -- would be bad if displays the `access granted/denied` message (should only perform the check and return the result).
+Một hàm nên làm chính xác những gì được đề xuất bởi tên của nó, không hơn.
 
-These examples assume common meanings of prefixes. What they mean for you is determined by you and your team. Maybe it's pretty normal for your code to behave differently. But you should have a firm understanding of what a prefix means, what a prefixed function can and cannot do. All same-prefixed functions should obey the rules. And the team should share the knowledge.
-```
+Hai hành động độc lập thường xứng đáng với hai function, ngay cả khi chúng thường được gọi cùng nhau (trong trường hợp đó chúng ta có thể thực hiện chức năng thứ 3 gọi hai function đó).
 
-```smart header="Ultrashort function names"
-Functions that are used *very often* sometimes have ultrashort names.
+Một vài ví dụ về việc phá vỡ quy tắc này:
 
-For example, the [jQuery](http://jquery.com) framework defines a function with `$`. The [LoDash](http://lodash.com/) library has its core function named `_`.
+- `getAge` -- sẽ rất tệ nếu nó hiển thị một `alert` với age (nó chỉ nên get).
+- `createForm` -- sẽ rất tệ nếu nó sửa đổi tài liệu, thêm một biểu mẫu vào nó (nó chỉ nên tạo và trả về).
+- `checkPermission` -- sẽ rất tệ nếu hiển thị `access granted/denied` message (chỉ nên thực hiện kiểm tra và trả về kết quả).
 
-These are exceptions. Generally functions names should be concise and descriptive.
-```
+Những ví dụ này giả định ý nghĩa phổ biến của tiền tố. Ý nghĩa của chúng đối với bạn được quyết định bởi bạn và nhóm của bạn. Có lẽ nó khá bình thường khi mã của bạn hoạt động khác đi. Nhưng bạn nên có một sự hiểu biết vững chắc về ý nghĩa của tiền tố, chức năng tiền tố có thể và không thể làm gì. Tất cả các hàm có cùng tiền tố phải tuân theo các quy tắc. Và nhóm nên chia sẻ kiến thức.
+
+> ---
+
+<br>
+<br>
+
+> ---
+
+**📌 Ultrashort function names***
+
+Các hàm được sử dụng *rất thường xuyên* đôi khi có tên ultrashort.
+
+Ví dụ: khung [jQuery](http://jquery.com) định nghĩa một hàm với `$`. Thư viện [LoDash](http://lodash.com/) có core function có tên là `_`.
+
+Đây là những ngoại lệ. Tên hàm thường phải ngắn gọn và mô tả.
+
+> ---
+
+<br>
 
 ## Functions == Comments
 
-Functions should be short and do exactly one thing. If that thing is big, maybe it's worth it to split the function into a few smaller functions. Sometimes following this rule may not be that easy, but it's definitely a good thing.
+Các function nên ngắn và làm chính xác một điều. Nếu điều đó là lớn, có lẽ nó đáng để chia function thành một vài function nhỏ hơn. Đôi khi tuân theo quy tắc này có thể không dễ dàng, nhưng đó chắc chắn là một điều tốt.
 
-A separate function is not only easier to test and debug -- its very existence is a great comment!
+Một function riêng biệt không chỉ dễ dàng hơn để kiểm tra và gỡ lỗi -- chính sự tồn tại của nó là một comment tuyệt vời!
 
-For instance, compare the two functions `showPrimes(n)` below. Each one outputs [prime numbers](https://en.wikipedia.org/wiki/Prime_number) up to `n`.
+Chẳng hạn, so sánh hai hàm `showPrimes(n)` bên dưới. Mỗi cái xuất ra [số nguyên tố](https://en.wikipedia.org/wiki/Prime_number) cho đến `n`.
 
-The first variant uses a label:
+Biến thể đầu tiên sử dụng nhãn:
 
 ```js
 function showPrimes(n) {
@@ -408,13 +440,13 @@ function showPrimes(n) {
 }
 ```
 
-The second variant uses an additional function `isPrime(n)` to test for primality:
+Biến thể thứ hai sử dụng một hàm bổ sung `isPrime(n)` để kiểm tra tính nguyên thủy:
 
 ```js
 function showPrimes(n) {
 
   for (let i = 2; i < n; i++) {
-    *!*if (!isPrime(i)) continue;*/!*
+    if (!isPrime(i)) continue;
 
     alert(i);  // a prime
   }
@@ -428,13 +460,13 @@ function isPrime(n) {
 }
 ```
 
-The second variant is easier to understand, isn't it? Instead of the code piece we see a name of the action (`isPrime`). Sometimes people refer to such code as *self-describing*.
+Biến thể thứ hai dễ hiểu hơn phải không? Thay vì đoạn mã, chúng ta thấy một tên của hành động (`isPrime`). Đôi khi mọi người đề cập đến mã như *tự mô tả (self-describing)*.
 
-So, functions can be created even if we don't intend to reuse them. They structure the code and make it readable.
+Vì vậy, các function có thể được tạo ngay cả khi chúng ta không có ý định sử dụng lại chúng. Chúng cấu trúc mã và làm cho nó dễ đọc.
 
-## Summary
+## Tóm lược
 
-A function declaration looks like this:
+Một khai báo hàm trông như thế này:
 
 ```js
 function name(parameters, delimited, by, comma) {
@@ -442,18 +474,18 @@ function name(parameters, delimited, by, comma) {
 }
 ```
 
-- Values passed to a function as parameters are copied to its local variables.
-- A function may access outer variables. But it works only from inside out. The code outside of the function doesn't see its local variables.
-- A function can return a value. If it doesn't, then its result is `undefined`.
+- Các giá trị được truyền cho một hàm như các tham số được sao chép vào các biến cục bộ của nó.
+- Một function có thể truy cập các biến bên ngoài. Nhưng nó chỉ hoạt động từ trong ra ngoài. Mã bên ngoài hàm không thấy các biến cục bộ của nó.
+- Một hàm có thể trả về một giá trị. Nếu không, thì kết quả của nó là `undefined`.
 
-To make the code clean and easy to understand, it's recommended to use mainly local variables and parameters in the function, not outer variables.
+Để làm cho mã sạch và dễ hiểu, nên sử dụng chủ yếu các biến và tham số cục bộ trong hàm, không nên sử dụng các biến bên ngoài (outer variables).
 
-It is always easier to understand a function which gets parameters, works with them and returns a result than a function which gets no parameters, but modifies outer variables as a side-effect.
+Luôn luôn dễ dàng hơn để hiểu một hàm lấy tham số, làm việc với chúng và trả về kết quả so với hàm không có tham số, nhưng sửa đổi các biến bên ngoài như là hiệu ứng phụ.
 
 Function naming:
 
-- A name should clearly describe what the function does. When we see a function call in the code, a good name instantly gives us an understanding what it does and returns.
-- A function is an action, so function names are usually verbal.
-- There exist many well-known function prefixes like `create…`, `show…`, `get…`, `check…` and so on. Use them to hint what a function does.
+- Một tên nên mô tả rõ ràng những gì function làm. Khi chúng ta thấy một lệnh gọi hàm trong mã, một cái tên hay ngay lập tức cho chúng ta hiểu nó làm gì và trả về gì.
+- Hàm là một hành động, vì vậy tên hàm thường bằng lời nói.
+- Tồn tại nhiều tiền tố chức năng nổi tiếng như `create…`, `show…`, `get…`, `check…`, v.v. Sử dụng chúng để gợi ý những gì một function làm.
 
-Functions are the main building blocks of scripts. Now we've covered the basics, so we actually can start creating and using them. But that's only the beginning of the path. We are going to return to them many times, going more deeply into their advanced features.
+Các function là các khối xây dựng chính (main building blocks) của các kịch bản. Bây giờ chúng ta đã bao quát xong những điều cơ bản, vì vậy chúng ta thực sự có thể bắt đầu tạo và sử dụng chúng. Nhưng đó chỉ là sự khởi đầu của lộ trình. Chúng ta sẽ trở lại với chúng nhiều lần, đi sâu hơn vào các tính năng nâng cao của chúng.
