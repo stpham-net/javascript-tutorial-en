@@ -61,9 +61,9 @@ Nếu thân vòng lặp có một câu lệnh đơn, chúng ta có thể bỏ qu
 
 <br>
 
-## Vòng lặp "do.. while"
+## Vòng lặp "do…while"
 
-Kiểm tra điều kiện có thể được di chuyển *bên dưới* thân vòng lặp bằng cú pháp `do..while`:
+Kiểm tra điều kiện có thể được di chuyển *bên dưới* thân vòng lặp bằng cú pháp `do…while`:
 
 ```js
       do {
@@ -107,15 +107,14 @@ Hãy tìm hiểu ý nghĩa của những phần này bằng ví dụ. Vòng lặ
 
 Chúng ta hãy kiểm tra phần câu lệnh `for` theo từng phần:
 
-| phần | | |
-| ----------- | ------------ | ------------------------ -------------------------------------------------- - |
-| bắt đầu | `i = 0` | Thực hiện một lần khi vào vòng lặp.                                      |
-| điều kiện | `tôi <3` | Đã kiểm tra trước mỗi lần lặp lại, nếu thất bại thì vòng lặp dừng lại.              |
-| bước | `i ++` | Thực hiện sau khi cơ thể trên mỗi lần lặp, nhưng trước khi kiểm tra điều kiện. |
-| cơ thể | `cảnh báo (i)` | Chạy đi chạy lại trong khi điều kiện là sự thật |
+| part      |            |                                                                               |
+|-----------|------------|-------------------------------------------------------------------------------|
+| begin     | `i = 0`    | Thực hiện một lần khi vào vòng lặp.                                           |
+| condition | `i < 3`    | Đã kiểm tra trước mỗi lần lặp lại, nếu thất bại thì vòng lặp dừng lại.        |
+| step      | `i++`      | Thực hiện sau phần thân trên mỗi lần lặp, nhưng trước khi kiểm tra điều kiện. |
+| body      | `alert(i)` | Chạy đi chạy lại trong khi điều kiện là sự thật                               |
 
-
-Thuật toán vòng lặp chung hoạt động như thế này:
+Thuật toán vòng lặp nói chung hoạt động như thế này:
 
 ```
       Run begin
@@ -216,7 +215,7 @@ Xin lưu ý rằng hai dấu `;` của `for` phải có mặt, nếu không đó
 
 Thông thường vòng lặp thoát khi điều kiện trở nên sai.
 
-Nhưng chúng ta có thể bắt buộc thoát ra bất cứ lúc nào. Có một chỉ thị `break` đặc biệt cho điều đó.
+Nhưng chúng ta có thể bắt ép thoát ra bất cứ lúc nào. Có một chỉ thị `break` đặc biệt cho điều đó.
 
 Ví dụ: vòng lặp bên dưới yêu cầu người dùng cho một loạt các số, nhưng "breaks" khi không có số nào được nhập:
 
@@ -257,7 +256,7 @@ Vòng lặp bên dưới sử dụng `continue` để chỉ xuất các giá tr�
       }
 ```
 
-Đối với các giá trị chẵn của `i`, lệnh `continue` dừng thực thi body, chuyển điều khiển (control) sang lần lặp tiếp theo của `for` (với số tiếp theo). Vì vậy, `alert` chỉ được gọi cho các giá trị lẻ.
+Đối với các giá trị chẵn của `i`, lệnh `continue` dừng thực thi phần body tiếp theo bên dưới của lần lặp hiện tại, chuyển điều khiển (control) sang lần lặp tiếp theo của `for` (với số tiếp theo). Vì vậy, `alert` chỉ được gọi cho các giá trị lẻ.
 
 <br>
 
@@ -288,9 +287,9 @@ Nhưng như một hiệu ứng phụ, chúng ta có thêm một mức lồng nha
 
 > ---
 
-**📌 Không `break/continue` sang bên phải của '?'
+**📌 Không `break/continue` sang bên phải của '?'**
 
-Xin lưu ý rằng các cấu trúc cú pháp không phải là biểu thức có thể được sử dụng với toán tử ternary `?`. Cụ thể, các chỉ thị như 'break/continue` không được phép ở đó.
+Xin lưu ý rằng các cấu trúc cú pháp không phải là biểu thức không thể được sử dụng với toán tử ternary `?`. Cụ thể, các chỉ thị như `break/continue` không được phép ở đó.
 
 Ví dụ: nếu chúng tôi lấy mã này:
 
@@ -321,7 +320,7 @@ Ví dụ: nếu chúng tôi lấy mã này:
 
 Đôi khi chúng ta cần thoát ra khỏi nhiều vòng lặp lồng nhau cùng một lúc.
 
-Ví dụ, trong đoạn mã bên dưới, chúng tôi lặp lại `i` và `j` nhắc các tọa độ `(i, j)` từ `(0,0)` đến `(3,3)`:
+Ví dụ, trong đoạn mã bên dưới, chúng tôi lặp lại `i` và `j` để nhắc các tọa độ `(i, j)` từ `(0,0)` đến `(3,3)`:
 
 ```js
       for (let i = 0; i < 3; i++) {
@@ -338,9 +337,9 @@ Ví dụ, trong đoạn mã bên dưới, chúng tôi lặp lại `i` và `j` nh
       alert('Done!');
 ```
 
-Chúng tôi cần một cách để dừng quá trình nếu người dùng hủy bỏ đầu vào.
+Chúng ta cần một cách để dừng quá trình nếu người dùng hủy bỏ đầu vào.
 
-`Break` thông thường sau `input` sẽ chỉ phá vỡ vòng lặp bên trong. Điều đó là không đủ. Labels đến để cứu.
+`Break` thông thường sau `input` sẽ chỉ phá vỡ vòng lặp bên trong. Điều đó là không đủ. Labels đến để cứu giúp.
 
 Một *label* là mã định danh có dấu hai chấm trước vòng lặp:
 
@@ -372,7 +371,7 @@ Giống như ở đây:
 
 Trong đoạn mã trên, `break outer` nhìn lên trên cho label có tên `outer` và thoát ra khỏi vòng lặp đó.
 
-Vì vậy, điều khiển đi thẳng từ `(*)` đến `alert('Done!')`.
+Vì vậy, điều khiển (control) đi thẳng từ `(*)` đến `alert('Done!')`.
 
 Chúng ta cũng có thể di chuyển label lên một dòng riêng biệt:
 
@@ -389,7 +388,7 @@ Lệnh `continue` cũng có thể được sử dụng với label. Trong trư�
 
 **📌 Labels không phải là "goto"**
 
-Nhãn không cho phép chúng ta nhảy vào một nơi của mã tùy ý.
+Labels không cho phép chúng ta nhảy vào một nơi của mã tùy ý.
 
 Ví dụ, không thể làm điều này:
 
@@ -399,7 +398,7 @@ Ví dụ, không thể làm điều này:
       label: for (...)
 ```
 
-Cuộc gọi đến `break/continue` chỉ có thể thực hiện được từ bên trong vòng lặp và nhãn phải ở đâu đó từ chỉ dẫn.
+Cuộc gọi đến `break/continue` chỉ có thể thực hiện được từ bên trong vòng lặp và nhãn phải ở đâu đó bên trên để định hướng.
 
 > ---
 
@@ -413,9 +412,9 @@ Chúng ta bao gồm 3 loại loop:
 - `do..while` -- Điều kiện được kiểm tra sau mỗi lần lặp.
 - `for (;;)` -- Điều kiện được kiểm tra trước mỗi lần lặp, cài đặt bổ sung có sẵn (additional settings available).
 
-Để tạo một vòng lặp "vô hạn", thường sử dụng cấu trúc `while(true)`. Một vòng lặp như vậy, giống như bất kỳ vòng lặp nào khác, có thể được dừng lại bằng lệnh 'break`.
+Để tạo một vòng lặp "vô hạn", thường sử dụng cấu trúc `while(true)`. Một vòng lặp như vậy, giống như bất kỳ vòng lặp nào khác, có thể được dừng lại bằng lệnh `break`.
 
-Nếu chúng ta không muốn làm tiếp bất cứ điều gì trên lần lặp hiện tại và muốn chuyển tiếp đến lần tiếp theo, thì lệnh 'continue` sẽ thực hiện điều đó.
+Nếu chúng ta không muốn làm tiếp bất cứ điều gì trên lần lặp hiện tại và muốn chuyển tiếp đến lần tiếp theo, thì lệnh `continue` sẽ thực hiện điều đó.
 
 `break/continue` hỗ trợ labels trước vòng lặp. Một label là cách duy nhất để `break/continue` thoát khỏi lồng và đi ra ngoài vòng lặp.
-No search results.
+
