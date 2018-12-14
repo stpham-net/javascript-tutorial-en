@@ -60,7 +60,7 @@ Chúng ta có thể sao chép một hàm sang một biến khác:
 1. Khai báo hàm `(1)` tạo hàm và đặt nó vào biến có tên `sayHi`.
 2. Dòng `(2)` sao chép nó vào biến `func`.
 
-    Xin lưu ý lại: không có dấu ngoặc đơn sau `sayHi`. Nếu có, thì `func = sayHi ()` sẽ viết *kết quả của cuộc gọi* `sayHi()` vào `func`, chứ không phải *hàm*` sayHi`.
+    Xin lưu ý lại: không có dấu ngoặc đơn sau `sayHi`. Nếu có, thì `func = sayHi()` sẽ viết *kết quả của cuộc gọi* `sayHi()` vào `func`, chứ không phải *hàm* `sayHi`.
     
 3. Bây giờ hàm có thể được gọi là cả `sayHi()` và `func()`.
 
@@ -237,7 +237,7 @@ Function Declaration `sayHi` được tạo khi JavaScript đang chuẩn bị kh
 
 Các Function Expression được tạo khi thực thi bắt gặp chúng. Điều đó chỉ xảy ra trong dòng `(*)`. Quá muộn.
 
-** Khi một Function Declaration được thực hiện trong một khối mã (code block), nó có thể nhìn thấy ở mọi nơi trong khối đó. Nhưng không phải bên ngoài nó.**
+**Khi một Function Declaration được thực hiện trong một khối mã (code block), nó có thể nhìn thấy ở mọi nơi trong khối đó. Nhưng không phải bên ngoài nó.**
 
 Đôi khi, việc khai báo một hàm cục bộ chỉ cần trong khối đó là điều hữu ích. Nhưng tính năng đó cũng có thể gây ra vấn đề.
 
@@ -481,4 +481,3 @@ Các arrow function là tiện dụng cho một dòng. Chúng có hai hương v�
 
 1. Không có dấu ngoặc nhọn: `(...args) => expression` -- phía bên phải là một biểu thức: hàm đánh giá nó và trả về kết quả.
 2. Với dấu ngoặc nhọn: `(...args) => { body }` -- các dấu ngoặc cho phép chúng ta viết nhiều câu lệnh bên trong hàm, nhưng chúng ta cần một `return` rõ ràng để trả về một cái gì đó.
-No search results.
