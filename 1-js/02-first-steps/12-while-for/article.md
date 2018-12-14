@@ -145,7 +145,7 @@ Here's what exactly happens in our case:
 
 <br>
 
-> --
+> ---
 
 **📌 Inline variable declaration**
 
