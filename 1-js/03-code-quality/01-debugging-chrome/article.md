@@ -126,7 +126,7 @@ Now it's time to *trace* the script.
 
 There are buttons for it at the top of the right pane. Let's engage them.
 
-**<span class="devtools" style="background-position:-7px -76px"></span> -- continue the execution, hotkey `F8`.**
+**<span class="devtools" style="background-position:-7px -76px"></span>![](https://via.placeholder.com/20) -- continue the execution, hotkey `F8`.**
 
 Resumes the execution. If there are no additional breakpoints, then the execution just continues and the debugger loses control.
 
