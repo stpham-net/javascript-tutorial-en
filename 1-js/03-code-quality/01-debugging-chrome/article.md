@@ -11,7 +11,7 @@ We'll be using Chrome here, because it's probably the most feature-rich in this 
 Your Chrome version may look a little bit different, but it still should be obvious what's there.
 
 - Open the [example page](debugging/index.html) in Chrome.
-- Turn on developer tools with `key:F12` (Mac: `key:Cmd+Opt+I`).
+- Turn on developer tools with `F12` (Mac: `Cmd+Opt+I`).
 - Select the `sources` pane.
 
 Here's what you should see if you are doing it for the first time:
@@ -30,7 +30,7 @@ Here we can see three zones:
 2. The **Source zone** shows the source code.
 3. The **Information and control zone** is for debugging, we'll explore it soon.
 
-Now you could click the same toggler <span class="devtools" style="background-position:-200px -76px"></span> again to hide the resources list and give the code some space.
+Now you could click the same toggler ![](button-2.png) again to hide the resources list and give the code some space.
 
 ## Console
 
@@ -126,7 +126,7 @@ Now it's time to *trace* the script.
 
 There are buttons for it at the top of the right pane. Let's engage them.
 
-**<span class="devtools" style="background-position:-7px -76px"></span>![](https://via.placeholder.com/20) -- continue the execution, hotkey `F8`.**
+**![](button-3.png) -- continue the execution, hotkey `F8`.**
 
 Resumes the execution. If there are no additional breakpoints, then the execution just continues and the debugger loses control.
 
@@ -136,23 +136,23 @@ Here's what we can see after a click on it:
 
 The execution has resumed, reached another breakpoint inside `say()` and paused there. Take a look at the "Call stack" at the right. It has increased by one more call. We're inside `say()` now.
 
-**<span class="devtools" style="background-position:-137px -76px"></span> -- make a step (run the next command), but *don't go into the function*, hotkey `F10`.**
+**![](button-4.png) -- make a step (run the next command), but *don't go into the function*, hotkey `F10`.**
 
 If we click it now, `alert` will be shown. The important thing is that `alert` can be any function, the execution "steps over it", skipping the function internals.
 
-**<span class="devtools" style="background-position:-72px -76px"></span> -- make a step, hotkey `F11`.**
+**![](button-5.png) -- make a step, hotkey `F11`.**
 
 The same as the previous one, but "steps into" nested functions. Clicking this will step through all script actions one by one.
 
-**<span class="devtools" style="background-position:-104px -76px"></span> -- continue the execution till the end of the current function, hotkey `key:Shift+F11`.**
+**![](button-6.png) -- continue the execution till the end of the current function, hotkey `Shift+F11`.**
 
-The execution would stop at the very last line of the current function. That's handy when we accidentally entered a nested call using <span class="devtools" style="background-position:-72px -76px"></span>, but it does not interest us, and we want to continue to its end as soon as possible.
+The execution would stop at the very last line of the current function. That's handy when we accidentally entered a nested call using ![](button-5.png), but it does not interest us, and we want to continue to its end as soon as possible.
 
-**<span class="devtools" style="background-position:-7px -28px"></span> -- enable/disable all breakpoints.**
+**![](button-7.png) -- enable/disable all breakpoints.**
 
 That button does not move the execution. Just a mass on/off for breakpoints.
 
-**<span class="devtools" style="background-position:-264px -4px"></span> -- enable/disable automatic pause in case of an error.**
+**![](button-8.png) -- enable/disable automatic pause in case of an error.**
 
 When enabled, and the developer tools is open, a script error automatically pauses the execution. Then we can analyze variables to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
 
@@ -190,7 +190,7 @@ If we have enough logging in our code, then we can see what's going on from the 
 As we can see, there are three main ways to pause a script:
 1. A breakpoint.
 2. The `debugger` statements.
-3. An error (if dev tools are open and the button <span class="devtools" style="background-position:-264px -4px"></span> is "on")
+3. An error (if dev tools are open and the button ![](button-8.png) is "on")
 
 Then we can examine variables and step on to see where the execution goes wrong.
 
