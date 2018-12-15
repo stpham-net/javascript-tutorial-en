@@ -27,7 +27,7 @@ Thông thường, ngắt dòng cũng được coi là dấu phân cách, do đó
 
 Hầu hết các hướng dẫn về lối viết đều đồng ý rằng chúng ta nên đặt dấu chấm phẩy sau mỗi câu.
 
-Dấu chấm phẩy không bắt buộc sau các khối mã `{...}` và cấu trúc cú pháp với chúng như các vòng lặp:
+Dấu chấm phẩy không bắt buộc sau các khối mã `{...}` và các cấu trúc cú pháp với chúng như các vòng lặp:
 
 ```js
       function f() {
@@ -57,7 +57,7 @@ Lệnh phải ở đầu tập lệnh hoặc ở đầu hàm.
 
 Không có `"use strict"`, mọi thứ vẫn hoạt động, nhưng một số tính năng hoạt động theo kiểu cũ, "compatible" way. Chúng ta thường thích hành vi hiện đại.
 
-Một số tính năng hiện đại của ngôn ngữ (như các classe mà chúng ta sẽ học trong tương lai) bật chế độ nghiêm ngặt hoàn toàn.
+Một số tính năng hiện đại của ngôn ngữ (như các class mà chúng ta sẽ học trong tương lai) bật chế độ nghiêm ngặt hoàn toàn.
 
 Xem thêm tại: **strict-mode**.
 
@@ -88,7 +88,7 @@ Có 7 loại dữ liệu:
 - `boolean` cho các giá trị logic: `true/false`,
 - `null` -- một kiểu có một giá trị duy nhất `null`, có nghĩa là "empty" hoặc "does not exist",
 - `undefined` -- một kiểu có một giá trị duy nhất `undefined`, có nghĩa là "not assigned",
-- `object` và `symbol` - dành cho các cấu trúc dữ liệu phức tạp và các định danh duy nhất, chúng ta chưa học được chúng.
+- `object` và `symbol` - dành cho các cấu trúc dữ liệu phức tạp và các định danh duy nhất, chúng ta chưa học đến chúng.
 
 Toán tử `typeof` trả về kiểu cho một giá trị, với hai ngoại lệ:
 
@@ -101,7 +101,7 @@ Xem thêm tại: **variables** và **types**.
 
 ## Sự tương tác (Interaction)
 
-Chúng tôi đang sử dụng trình duyệt làm môi trường làm việc, vì vậy các chức năng UI cơ bản sẽ là:
+Chúng ta đang sử dụng trình duyệt làm môi trường làm việc, vì vậy các chức năng UI cơ bản sẽ là:
 
 **[`prompt(question[, default])`](mdn:api/Window/prompt)**: Hỏi một `câu hỏi` và trả lại những gì khách truy cập đã nhập hoặc `null` nếu họ nhấn "cancel".
 
@@ -140,7 +140,7 @@ Chuỗi nhị phân cộng (binary plus) `+` nối chuỗi. Và nếu bất kỳ
 
 **Phép gán**: Có một phép gán đơn giản: `a = b` và các phép gán kết hợp như `a *= 2`.
 
-** Bitwise **: Toán tử bitwise hoạt động với các số nguyên ở cấp độ bit: xem [docs](mdn:/JavaScript/Reference/Operators/Bitwise_Operators) để biết khi nào thì cần.
+**Bitwise**: Toán tử bitwise hoạt động với các số nguyên ở cấp độ bit: xem [docs](mdn:/JavaScript/Reference/Operators/Bitwise_Operators) để biết khi nào thì cần.
 
 **Ternary**: Toán tử duy nhất có ba tham số: `cond ? resultA : resultB`. Nếu `cond` là đúng, trả về `resultA`, nếu không thì `resultB`.
 
@@ -169,22 +169,22 @@ Xem thêm tại: **operators**, **comparison**, **logical-operators**.
 
 Chúng ta có bao gồm 3 loại loop:
 
-    ```js
-    // 1
-    while (condition) {
-      ...
-    }
+```js
+      // 1
+      while (condition) {
+        ...
+      }
 
-    // 2
-    do {
-      ...
-    } while (condition);
+      // 2
+      do {
+        ...
+      } while (condition);
 
-    // 3
-    for(let i = 0; i < 10; i++) {
-      ...
-    }
-    ```
+      // 3
+      for(let i = 0; i < 10; i++) {
+        ...
+      }
+```
 
 - Biến được khai báo trong vòng lặp `for(let...)` chỉ hiển thị bên trong vòng lặp. Nhưng chúng ta cũng có thể bỏ qua `let` và sử dụng lại một biến hiện có.
 
