@@ -138,9 +138,9 @@ Chuỗi nhị phân cộng (binary plus) `+` nối chuỗi. Và nếu bất kỳ
       alert( 1 + '2' ); // '12', string
 ```
 
-**Phép gán**: Có một phép gán đơn giản: `a = b` và các phép gán kết hợp như `a *= 2`.
+**Phép gán**: Có một phép gán đơn giản `a = b` và các phép gán kết hợp như `a *= 2`.
 
-**Bitwise**: Toán tử bitwise hoạt động với các số nguyên ở cấp độ bit: xem [docs](mdn:/JavaScript/Reference/Operators/Bitwise_Operators) để biết khi nào thì cần.
+**Bitwise**: Toán tử bitwise hoạt động với các số nguyên ở cấp độ bit, xem [docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) để biết khi nào thì cần.
 
 **Ternary**: Toán tử duy nhất có ba tham số: `cond ? resultA : resultB`. Nếu `cond` là đúng, trả về `resultA`, nếu không thì `resultB`.
 
