@@ -1,9 +1,6 @@
 # Ninja code
 
-
-```quote author="Confucius"
-Learning without thought is labor lost; thought without learning is perilous.
-```
+> ***Learning without thought is labor lost; thought without learning is perilous. - Confucius***
 
 Programmer ninjas of the past used these tricks to sharpen the mind of code maintainers.
 
@@ -13,11 +10,17 @@ Novice developers sometimes use them even better than programmer ninjas.
 
 Read them carefully and find out who you are -- a ninja, a novice, or maybe a code reviewer?
 
+<br>
 
-```warn header="Irony detected"
+> ---
+
+**📌 Irony detected**
+
 Many try to follow ninja paths. Few succeed.
-```
 
+> ---
+
+<br>
 
 ## Brevity is the soul of wit
 
@@ -28,8 +31,8 @@ Let subtle language features guide you.
 For instance, take a look at this ternary operator `'?'`:
 
 ```js
-// taken from a well-known javascript library
-i = i ? i < 0 ? Math.max(0, len + i) : i : 0;
+      // taken from a well-known javascript library
+      i = i ? i < 0 ? Math.max(0, len + i) : i : 0;
 ```
 
 Cool, right? If you write like that, a developer who comes across this line and tries to understand what is the value of `i` is going to have a merry time. Then come to you, seeking for an answer.
@@ -38,10 +41,7 @@ Tell them that shorter is always better. Initiate them into the paths of ninja.
 
 ## One-letter variables
 
-```quote author="Laozi (Tao Te Ching)"
-The Dao hides in wordlessness. Only the Dao is well begun and well
-completed.
-```
+> ***The Dao hides in wordlessness. Only the Dao is well begun and well completed. - Laozi (Tao Te Ching)***
 
 Another way to code faster is to use single-letter variable names everywhere. Like `a`, `b` or `c`.
 
@@ -66,12 +66,15 @@ Only the one with truly good intuition will be able to understand such names. Tr
 
 ## Soar high. Be abstract.
 
-```quote author="Laozi (Tao Te Ching)"
-The great square is cornerless<br>
-The great vessel is last complete,<br>
-The great note is rarified sound,<br>
-The great image has no form.
-```
+> ***The great square is cornerless***
+> 
+> ***The great vessel is last complete,***
+> 
+> ***The great note is rarified sound,***
+> 
+> ***The great image has no form.***
+> 
+> ***- Laozi (Tao Te Ching)***
 
 While choosing a name try to use the most abstract word. Like `obj`, `data`, `value`, `item`, `elem` and so on.
 
@@ -101,12 +104,9 @@ Mix them where you can.
 
 A quick read of such code becomes impossible. And when there's a typo... Ummm... We're stuck for long, time to drink tea.
 
-
 ## Smart synonyms
 
-```quote author="Confucius"
-The hardest thing of all is to find a black cat in a dark room, especially if there is no cat.
-```
+> ***The hardest thing of all is to find a black cat in a dark room, especially if there is no cat. - Confucius***
 
 Using *similar* names for *same* things makes life more interesting and shows your creativity to the public.
 
@@ -124,12 +124,13 @@ For instance, the function `printPage(page)` will use a printer. And the functio
 
 ## Reuse names
 
-```quote author="Laozi (Tao Te Ching)"
-Once the whole is divided, the parts<br>
-need names.<br>
-There are already enough names.<br>
-One must know when to stop.
-```
+> ***Once the whole is divided, the parts need names.***
+> 
+> ***There are already enough names.***
+> 
+> ***One must know when to stop.***
+> 
+> ***- Laozi (Tao Te Ching)***
 
 Add a new variable only when absolutely necessary.
 
@@ -144,13 +145,13 @@ That would make it really hard to identify what's exactly in the variable *now*.
 For instance:
 
 ```js
-function ninjaFunction(elem) {
-  // 20 lines of code working with elem
+      function ninjaFunction(elem) {
+        // 20 lines of code working with elem
 
-  elem = clone(elem);
+        elem = clone(elem);
 
-  // 20 more lines, now working with the clone of the elem!
-}
+        // 20 more lines, now working with the clone of the elem!
+      }
 ```
 
 A fellow programmer who wants to work with `elem` in the second half of the function will be surprised... Only during the debugging, after examining the code they will find out that he's working with a clone!
@@ -171,34 +172,32 @@ Let everyone see how magnificent your entities are! Names like `superElement`, `
 
 Indeed, from one hand, something is written: `super..`, `mega..`, `nice..` But from the other hand -- that brings no details. A reader may decide to look for a hidden meaning and meditate for an hour or two.
 
-
-
 ## Overlap outer variables
 
-```quote author="Guan Yin Zi"
-When in the light, can't see anything in the darkness.<br>
-When in the darkness, can see everything in the light.
-```
+> ***When in the light, can't see anything in the darkness.***
+> 
+> ***When in the darkness, can see everything in the light.***
+> 
+> ***- Guan Yin Zi***
 
 Use same names for variables inside and outside a function. As simple. No efforts required.
 
 ```js
-let *!*user*/!* = authenticateUser();
+      let user = authenticateUser();
 
-function render() {
-  let *!*user*/!* = anotherValue();
-  ...
-  ...many lines...
-  ...
-  ... // <-- a programmer wants to work with user here and...
-  ...
-}
+      function render() {
+        let user = anotherValue();
+        ...
+        ...many lines...
+        ...
+        ... // <-- a programmer wants to work with user here and...
+        ...
+      }
 ```
 
 A programmer who jumps inside the `render` will probably fail to notice that there's a local `user` shadowing the outer one.
 
 Then he'll try to work with `user` assuming that it's the external variable, the result of `authenticateUser()`... The trap is sprung! Hello, debugger...
-
 
 ## Side-effects everywhere!
 
@@ -214,13 +213,13 @@ Show your original thinking! Let the call of `checkPermission` return not `true/
 
 Those developers who try to write `if (checkPermission(..))`, will wonder why it doesn't work. Tell them: "Read the docs!". And give this article.
 
-
 ## Powerful functions!
 
-```quote author="Laozi (Tao Te Ching)"
-The great Tao flows everywhere,<br>
-both to the left and to the right.
-```
+> ***The great Tao flows everywhere,***
+> 
+> ***both to the left and to the right.***
+> 
+> ***- Laozi (Tao Te Ching)***
 
 Don't limit the function by what's written in its name. Be broader.
 
