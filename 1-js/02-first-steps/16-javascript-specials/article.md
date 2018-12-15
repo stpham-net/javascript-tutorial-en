@@ -1,234 +1,228 @@
-# JavaScript specials
+# Những đặc biệt của JavaScript
 
-This chapter briefly recaps the features of JavaScript that we've learned by now, paying special attention to subtle moments.
+Chương này tóm tắt ngắn gọn các tính năng của JavaScript mà chúng ta đã học, đặc biệt chú ý đến những khoảnh khắc tinh tế.
 
-## Code structure
+## Code structure (Cấu trúc mã)
 
-Statements are delimited with a semicolon:
-
-```js run no-beautify
-alert('Hello'); alert('World');
-```
-
-Usually, a line-break is also treated as a delimiter, so that would also work:
-
-```js run no-beautify
-alert('Hello')
-alert('World')
-```
-
-That's called "automatic semicolon insertion". Sometimes it doesn't work, for instance:
-
-```js run
-alert("There will be an error after this message")
-
-[1, 2].forEach(alert)
-```
-
-Most codestyle guides agree that we should put a semicolon after each statement.
-
-Semicolons are not required after code blocks `{...}` and syntax constructs with them like loops:
+Các câu được phân định bằng dấu chấm phẩy:
 
 ```js
-function f() {
-  // no semicolon needed after function declaration
-}
-
-for(;;) {
-  // no semicolon needed after the loop
-}
+      alert('Hello'); alert('World');
 ```
 
-...But even if we can put an "extra" semicolon somewhere, that's not an error. It will be ignored.
-
-More in: <info:structure>.
-
-## Strict mode
-
-To fully enable all features of modern JavaScript, we should start scripts with `"use strict"`.
+Thông thường, ngắt dòng cũng được coi là dấu phân cách, do đó như này cũng sẽ hoạt động:
 
 ```js
-'use strict';
-
-...
+      alert('Hello')
+      alert('World')
 ```
 
-The directive must be at the top of a script or at the beginning of a function.
+Đó gọi là "chèn dấu chấm phẩy tự động". Đôi khi, nó không hoạt động, ví dụ:
 
-Without `"use strict"`, everything still works, but some features behave in the old-fashion, "compatible" way. We'd generally prefer the modern behavior.
+```js
+      alert("There will be an error after this message")
 
-Some modern features of the language (like classes that we'll study in the future) enable strict mode implicitly.
+      [1, 2].forEach(alert)
+```
 
-More in: <info:strict-mode>.
+Hầu hết các hướng dẫn về lối viết đều đồng ý rằng chúng ta nên đặt dấu chấm phẩy sau mỗi câu.
 
-## Variables
+Dấu chấm phẩy không bắt buộc sau các khối mã `{...}` và các cấu trúc cú pháp với chúng như các vòng lặp:
 
-Can be declared using:
+```js
+      function f() {
+        // no semicolon needed after function declaration
+      }
+
+      for(;;) {
+        // no semicolon needed after the loop
+      }
+```
+
+...Nhưng ngay cả khi chúng ta có thể đặt dấu chấm phẩy "phụ" ở đâu đó, đó không phải là một lỗi. Nó sẽ bị bỏ qua.
+
+Xem thêm tại: **structure**.
+
+## Chế độ nghiêm ngặt (Strict mode)
+
+Để kích hoạt đầy đủ tất cả các tính năng của JavaScript hiện đại, chúng ta nên bắt đầu các tập lệnh với `"use strict"`.
+
+```js
+      'use strict';
+
+      ...
+```
+
+Lệnh phải ở đầu tập lệnh hoặc ở đầu hàm.
+
+Không có `"use strict"`, mọi thứ vẫn hoạt động, nhưng một số tính năng hoạt động theo kiểu cũ, "compatible" way. Chúng ta thường thích hành vi hiện đại.
+
+Một số tính năng hiện đại của ngôn ngữ (như các class mà chúng ta sẽ học trong tương lai) bật chế độ nghiêm ngặt hoàn toàn.
+
+Xem thêm tại: **strict-mode**.
+
+## Variables (Biến)
+
+Có thể được khai báo bằng cách sử dụng:
 
 - `let`
 - `const` (constant, can't be changed)
 - `var` (old-style, will see later)
 
-A variable name can include:
-- Letters and digits, but the first character may not be a digit.
-- Characters `$` and `_` are normal, on par with letters.
-- Non-Latin alphabets and hieroglyphs are also allowed, but commonly not used.
+Một tên biến có thể bao gồm:
+- Chữ cái và chữ số, nhưng ký tự đầu tiên không thể là một chữ số.
+- Các ký tự `$` và `_` là bình thường, ngang bằng với các chữ cái.
+- Bảng chữ cái và chữ tượng hình phi Latinh cũng được cho phép, nhưng thường không được sử dụng.
 
-Variables are dynamically typed. They can store any value:
+Các biến là kiểu động. Chúng có thể lưu trữ bất kỳ giá trị:
 
 ```js
-let x = 5;
-x = "John";
+      let x = 5;
+      x = "John";
 ```
 
-There are 7 data types:
+Có 7 loại dữ liệu:
 
-- `number` for both floating-point and integer numbers,
-- `string` for strings,
-- `boolean` for logical values: `true/false`,
-- `null` -- a type with a single value `null`, meaning "empty" or "does not exist",
-- `undefined` -- a type with a single value `undefined`, meaning "not assigned",
-- `object` and `symbol` -- for complex data structures and unique identifiers, we haven't learnt them yet.
+- `number` cho cả số nguyên và số thập phân,
+- `string` cho chuỗi,
+- `boolean` cho các giá trị logic: `true/false`,
+- `null` -- một kiểu có một giá trị duy nhất `null`, có nghĩa là "empty" hoặc "does not exist",
+- `undefined` -- một kiểu có một giá trị duy nhất `undefined`, có nghĩa là "not assigned",
+- `object` và `symbol` -- dành cho các cấu trúc dữ liệu phức tạp và các định danh duy nhất, chúng ta chưa học đến chúng.
 
-The `typeof` operator returns the type for a value, with two exceptions:
+Toán tử `typeof` trả về kiểu cho một giá trị, với hai ngoại lệ:
+
 ```js
-typeof null == "object" // error in the language
-typeof function(){} == "function" // functions are treated specially
+      typeof null == "object" // error in the language
+      typeof function(){} == "function" // functions are treated specially
 ```
 
-More in: <info:variables> and <info:types>.
+Xem thêm tại: **variables** và **types**.
 
-## Interaction
+## Sự tương tác (Interaction)
 
-We're using a browser as a working environment, so basic UI functions will be:
+Chúng ta đang sử dụng trình duyệt làm môi trường làm việc, vì vậy các chức năng UI cơ bản sẽ là:
 
-[`prompt(question[, default])`](mdn:api/Window/prompt)
-: Ask a `question`, and return either what the visitor entered or `null` if they pressed "cancel".
+**[`prompt(question[, default])`](mdn:api/Window/prompt)**: Hỏi một `câu hỏi` và trả lại những gì khách truy cập đã nhập hoặc `null` nếu họ nhấn "cancel".
 
-[`confirm(question)`](mdn:api/Window/confirm)
-: Ask a `question` and suggest to choose between Ok and Cancel. The choice is returned as `true/false`.
+**[`confirm(question)`](mdn:api/Window/confirm)**: Hỏi một `câu hỏi` và đề nghị chọn giữa Ok và Cancel. Sự lựa chọn được trả về là `true/false`.
 
-[`alert(message)`](mdn:api/Window/alert)
-: Output a `message`.
+**[`alert(message)`](mdn:api/Window/alert)**: Xuất ra một `message`.
 
-All these functions are *modal*, they pause the code execution and prevent the visitor from interacting with the page until they answer.
+Tất cả các chức năng này là *modal*, chúng tạm dừng thực thi mã và ngăn khách truy cập tương tác với trang cho đến khi họ trả lời.
 
-For instance:
+Ví dụ:
 
-```js run
-let userName = prompt("Your name?", "Alice");
-let isTeaWanted = confirm("Do you want some tea?");
+```js
+      let userName = prompt("Your name?", "Alice");
+      let isTeaWanted = confirm("Do you want some tea?");
 
-alert( "Visitor: " + userName ); // Alice
-alert( "Tea wanted: " + isTeaWanted ); // true
+      alert( "Visitor: " + userName ); // Alice
+      alert( "Tea wanted: " + isTeaWanted ); // true
 ```
 
-More in: <info:alert-prompt-confirm>.
+Xem thêm tại: **alert-prompt-confirm**.
 
-## Operators
+## Operators (Toán tử)
 
-JavaScript supports the following operators:
+JavaScript hỗ trợ các toán tử sau:
 
-Arithmetical
-: Regular: `* + - /`, also `%` for the remainder and `**` for power of a number.
+**Số học (Arithmetical)**
 
-    The binary plus `+` concatenates strings. And if any of the operands is a string, the other one is converted to string too:
+Thường là: `* + - /`, cũng là `%` cho phần còn lại và `**` cho sức mạnh của một số.
 
-    ```js run
-    alert( '1' + 2 ); // '12', string
-    alert( 1 + '2' ); // '12', string
-    ```
+Chuỗi nhị phân cộng (binary plus) `+` nối chuỗi. Và nếu bất kỳ toán hạng nào là một chuỗi, thì một toán hạng khác cũng được chuyển đổi thành chuỗi:
 
-Assignments
-: There is a simple assignment: `a = b` and combined ones like `a *= 2`.
-
-Bitwise
-: Bitwise operators work with integers on bit-level: see the [docs](mdn:/JavaScript/Reference/Operators/Bitwise_Operators) when they are needed.
-
-Ternary
-: The only operator with three parameters: `cond ? resultA : resultB`. If `cond` is truthy, returns `resultA`, otherwise `resultB`.
-
-Logical operators
-: Logical AND `&&` and OR `||` perform short-circuit evaluation and then return the value where it stopped.
-
-Comparisons
-: Equality check `==` for values of different types converts them to a number (except `null` and `undefined` that equal each other and nothing else), so these are equal:
-
-    ```js run
-    alert( 0 == false ); // true
-    alert( 0 == '' ); // true
-    ```
-
-    Other comparisons convert to a number as well.
-
-    The strict equality operator `===` doesn't do the conversion: different types always mean different values for it, so:
-
-    Values `null` and `undefined` are special: they equal `==` each other and don't equal anything else.
-
-    Greater/less comparisons compare strings character-by-character, other types are converted to a number.
-
-Logical operators
-: There are few others, like a comma operator.
-
-More in: <info:operators>, <info:comparison>, <info:logical-operators>.
-
-## Loops
-
-- We covered 3 types of loops:
-
-    ```js
-    // 1
-    while (condition) {
-      ...
-    }
-
-    // 2
-    do {
-      ...
-    } while (condition);
-
-    // 3
-    for(let i = 0; i < 10; i++) {
-      ...
-    }
-    ```
-
-- The variable declared in `for(let...)` loop is visible only inside the loop. But we can also omit `let` and reuse an existing variable.
-- Directives `break/continue` allow to exit the whole loop/current iteration. Use labels to break nested loops.
-
-Details in: <info:while-for>.
-
-Later we'll study more types of loops to deal with objects.
-
-## The "switch" construct
-
-The "switch" construct can replace multiple `if` checks. It uses `===` (strict equality) for comparisons.
-
-For instance:
-
-```js run
-let age = prompt('Your age?', 18);
-
-switch (age) {
-  case 18:
-    alert("Won't work"); // the result of prompt is a string, not a number
-
-  case "18":
-    alert("This works!");
-    break;
-
-  default:
-    alert("Any value not equal to one above");
-}
+```js
+      alert( '1' + 2 ); // '12', string
+      alert( 1 + '2' ); // '12', string
 ```
 
-Details in: <info:switch>.
+**Phép gán**: Có một phép gán đơn giản `a = b` và các phép gán kết hợp như `a *= 2`.
+
+**Bitwise**: Toán tử bitwise hoạt động với các số nguyên ở cấp độ bit, xem [docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) để biết khi nào thì cần.
+
+**Ternary**: Toán tử duy nhất có ba tham số: `cond ? resultA : resultB`. Nếu `cond` là đúng, trả về `resultA`, nếu không thì `resultB`.
+
+**Toán tử logic (Logical operators)**: Logic AND `&&` và OR `||` thực hiện đánh giá ngắn mạch và sau đó trả về giá trị khi nó dừng lại.
+
+**So sánh (Comparisons)**: Kiểm tra đẳng thức `==` cho các giá trị của các kiểu khác nhau chuyển đổi chúng thành một số (ngoại trừ `null` và `undefined` bằng nhau và không có gì khác), vì vậy các giá trị này bằng nhau:
+
+```js
+      alert( 0 == false ); // true
+      alert( 0 == '' ); // true
+```
+
+Các so sánh khác cũng sẽ chuyển đổi thành một số như vậy.
+
+Toán tử đẳng thức nghiêm ngặt `===` không thực hiện chuyển đổi: các kiểu khác nhau luôn có nghĩa là các giá trị khác nhau, vì vậy:
+
+Các giá trị `null` và `undefined` là đặc biệt: chúng bằng `==` lẫn nhau và không bằng bất cứ thứ gì khác.
+
+So sánh lớn hơn/ít hơn (Greater/less) so sánh các chuỗi ký tự theo từng ký tự, các loại khác được chuyển đổi thành một số.
+
+Toán tử logic: Có một vài toán tử khác, như toán tử dấu phẩy.
+
+Xem thêm tại: **operators**, **comparison**, **logical-operators**.
+
+## Vòng lặp (Loops)
+
+Chúng ta có bao gồm 3 loại loop:
+
+```js
+      // 1
+      while (condition) {
+        ...
+      }
+
+      // 2
+      do {
+        ...
+      } while (condition);
+
+      // 3
+      for(let i = 0; i < 10; i++) {
+        ...
+      }
+```
+
+- Biến được khai báo trong vòng lặp `for(let...)` chỉ hiển thị bên trong vòng lặp. Nhưng chúng ta cũng có thể bỏ qua `let` và sử dụng lại một biến hiện có.
+
+- Chỉ thị `break/continue` cho phép thoát toàn bộ vòng lặp hiện tại. Sử dụng labels để break các vòng lặp lồng nhau.
+
+Chi tiết tại: **while-for**.
+
+Sau này chúng ta sẽ nghiên cứu thêm các loại vòng lặp để đối phó với các đối tượng.
+
+## Cấu trúc "switch"
+
+Cấu trúc "switch" có thể thay thế nhiều kiểm tra `if`. Nó sử dụng `===` (đẳng thức nghiêm ngặt) để so sánh.
+
+Ví dụ:
+
+```js
+      let age = prompt('Your age?', 18);
+
+      switch (age) {
+        case 18:
+          alert("Won't work"); // the result of prompt is a string, not a number
+
+        case "18":
+          alert("This works!");
+          break;
+
+        default:
+          alert("Any value not equal to one above");
+      }
+```
+
+Chi tiết tại: **switch**.
 
 ## Functions
 
-We covered three ways to create a function in JavaScript:
+Chúng ta đã trình bày ba cách để tạo một hàm trong JavaScript:
 
-1. Function Declaration: the function in the main code flow
+1. Khai báo hàm (Function Declaration): hàm trong luồng mã chính
 
     ```js
     function sum(a, b) {
@@ -238,7 +232,7 @@ We covered three ways to create a function in JavaScript:
     }
     ```
 
-2. Function Expression: the function in the context of an expression
+2. Biểu thức hàm (Function Expression): hàm trong ngữ cảnh của biểu thức
 
     ```js
     let sum = function(a, b) {
@@ -248,9 +242,9 @@ We covered three ways to create a function in JavaScript:
     }
     ```
 
-    Function expressions can have a name, like `sum = function name(a, b)`, but that `name` is only visible inside that function.
+    Các function expression có thể có một tên, như `sum = function name(a, b)`, nhưng `name` chỉ hiển thị bên trong hàm đó.
 
-3. Arrow functions:
+3. Hàm mũi tên (Arrow functions)
 
     ```js
     // expression at the right side
@@ -269,19 +263,17 @@ We covered three ways to create a function in JavaScript:
     let double = n => n * 2;
     ```
 
+- Hàm có thể có các biến cục bộ: những biến được khai báo bên trong body của nó. Các biến như vậy chỉ được nhìn thấy bên trong hàm.
+- Tham số có thể có các giá trị mặc định: `function sum(a = 1, b = 2) {...}`.
+- Các hàm luôn trả về một cái gì đó. Nếu không có câu lệnh `return`, thì kết quả là `undefined`.
 
-- Functions may have local variables: those declared inside its body. Such variables are only visible inside the function.
-- Parameters can have default values: `function sum(a = 1, b = 2) {...}`.
-- Functions always return something. If there's no `return` statement, then the result is `undefined`.
+| Function Declaration            | Function Expression                               |
+|---------------------------------|---------------------------------------------------|
+| hiển thị trong toàn bộ khối mã  | được tạo khi thực thi gặp đến nó                  |
+| -                               | có thể có tên, chỉ hiển thị bên trong hàm         |
 
-
-| Function Declaration | Function Expression |
-|----------------------|---------------------|
-| visible in the whole code block | created when the execution reaches it |
-|   - | can have a name, visible only inside the function |
-
-More: see <info:function-basics>, <info:function-expressions-arrows>.
+Xem thêm tại: **function-basics**, **function-expressions-arrows**.
 
 ## More to come
 
-That was a brief list of JavaScript features. As of now we've studied only basics. Further in the tutorial you'll find more specials and advanced features of JavaScript.
+Đó là một danh sách ngắn gọn các tính năng của JavaScript. Cho đến bây giờ chúng ta mới chỉ nghiên cứu cơ bản. Còn nữa trong hướng dẫn, bạn sẽ tìm thấy nhiều tính năng đặc biệt và nâng cao hơn của JavaScript.
