@@ -220,7 +220,7 @@ Chi tiết tại: **switch**.
 
 ## Functions
 
-Chúng tôi đã trình bày ba cách để tạo một hàm trong JavaScript:
+Chúng ta đã trình bày ba cách để tạo một hàm trong JavaScript:
 
 1. Khai báo hàm (Function Declaration): hàm trong luồng mã chính
 
