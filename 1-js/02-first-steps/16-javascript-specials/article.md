@@ -169,22 +169,22 @@ More in: **operators**, **comparison**, **logical-operators**.
 
 - We covered 3 types of loops:
 
-```js
-      // 1
-      while (condition) {
-        ...
-      }
+    ```js
+    // 1
+    while (condition) {
+      ...
+    }
 
-      // 2
-      do {
-        ...
-      } while (condition);
+    // 2
+    do {
+      ...
+    } while (condition);
 
-      // 3
-      for(let i = 0; i < 10; i++) {
-        ...
-      }
-```
+    // 3
+    for(let i = 0; i < 10; i++) {
+      ...
+    }
+    ```
 
 - The variable declared in `for(let...)` loop is visible only inside the loop. But we can also omit `let` and reuse an existing variable.
 
