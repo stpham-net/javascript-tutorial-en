@@ -22,7 +22,7 @@ Nút toggler ![](button-1.png) mở tab với các tệp.
 
 Hãy nhấp vào nó và chọn `index.html` và sau đó `hello.js` trong chế độ xem dạng cây. Đây là những gì sẽ hiển thị:
 
-![](chrome-tab.png)
+![](chrome-tabs.png)
 
 Ở đây chúng ta có thể thấy ba khu vực:
 
