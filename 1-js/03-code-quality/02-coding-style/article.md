@@ -262,7 +262,7 @@ Ví dụ, đối với ESLint, bạn nên làm như sau:
 1. Cài đặt [Node.JS](https://nodejs.org/).
 2. Cài đặt ESLint bằng lệnh `npm install -g eslint` (npm là trình cài đặt gói JavaScript).
 3. Tạo một tệp cấu hình có tên `.eslintrc` trong thư mục gốc của dự án JavaScript của bạn (trong thư mục chứa tất cả các tệp của bạn).
-4. Cài đặt/kích hoạt plugin cho trình soạn thảo của bạn tích hợp với ESLint. Phần lớn các biên tập viên có một cái.
+4. Cài đặt/kích hoạt plugin cho trình soạn thảo của bạn tích hợp với ESLint. Phần lớn các editor có một cái.
 
 Đây là một ví dụ về tệp `.eslintrc`:
 
