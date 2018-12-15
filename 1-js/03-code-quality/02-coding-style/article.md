@@ -281,7 +281,7 @@ Ví dụ, đối với ESLint, bạn nên làm như sau:
       }
 ```
 
-Ở đây, lệnh `"extends"` biểu thị rằng cấu hình được dựa trên tập cài đặt "eslint:khuyên dùng". Sau đó, chúng ta chỉ định riêng của chúng ta.
+Ở đây, lệnh `"extends"` biểu thị rằng cấu hình được dựa trên tập cài đặt "eslint:recommended". Sau đó, chúng ta chỉ định riêng của chúng ta.
 
 Cũng có thể tải xuống các bộ quy tắc style từ web và mở rộng chúng. Xem <http://eslint.org/docs/user-guide/getting-started> để biết thêm chi tiết về cài đặt.
 
