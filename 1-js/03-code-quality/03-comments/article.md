@@ -1,14 +1,14 @@
 # Comments
 
-As we know from the chapter **structure**, comments can be single-line: starting with `//` and multiline: `/* ... */`.
+Như chúng ta đã biết từ chương **structure**, các comment có thể là một dòng: bắt đầu bằng `//` và nhiều dòng: `/ * ... */`.
 
-We normally use them to describe how and why the code works.
+Chúng ta thường sử dụng chúng để mô tả cách thức và lý do tại sao mã hoạt động.
 
-From the first sight, commenting might be obvious, but novices in programming usually get it wrong.
+Từ cái nhìn đầu tiên, commenting có thể là hiển nhiên, nhưng người mới trong lập trình thường hiểu sai.
 
 ## Bad comments
 
-Novices tend to use comments to explain "what is going on in the code". Like this:
+Người mới có xu hướng sử dụng các comment để giải thích "những gì đang diễn ra trong mã". Như thế này:
 
 ```js
       // This code will do this thing (...) and that thing (...)
@@ -18,13 +18,13 @@ Novices tend to use comments to explain "what is going on in the code". Like thi
       code;
 ```
 
-But in good code the amount of such "explanatory" comments should be minimal. Seriously, code should be easy to understand without them.
+Nhưng trong mã tốt, số lượng các comment "giải thích" như vậy nên tối thiểu. Nghiêm túc mà nói, mã nên dễ hiểu nếu không có chúng.
 
-There's a great rule about that: "if the code is so unclear that it requires a comment, then maybe it should be rewritten instead".
+Có một quy tắc tuyệt vời về điều đó: "nếu mã không rõ ràng đến mức nó yêu cầu một nhận xét, thì có lẽ nó nên được viết lại".
 
-### Recipe: factor out functions
+### Công thức: Đưa các function ra ngoài
 
-Sometimes it's beneficial to replace a code piece with a function, like here:
+Đôi khi, có ích khi thay thế một đoạn mã bằng một hàm, như ở đây:
 
 ```js
       function showPrimes(n) {
@@ -41,7 +41,7 @@ Sometimes it's beneficial to replace a code piece with a function, like here:
       }
 ```
 
-The better variant, with a factored out function `isPrime`:
+Biến thể tốt hơn, với chức năng bao gồm `isPrime`:
 
 ```js
       function showPrimes(n) {
@@ -62,11 +62,11 @@ The better variant, with a factored out function `isPrime`:
       }
 ```
 
-Now we can understand the code easily. The function itself becomes the comment. Such code is called *self-descriptive*.
+Bây giờ chúng ta có thể hiểu mã dễ dàng. Các function chính bản thân nó trở thành comment. Mã như vậy được gọi là *tự mô tả (self-descriptive)*.
 
-### Recipe: create functions
+### Recipe: tạo các function
 
-And if we have a long "code sheet" like this:
+Và nếu chúng ta có một "bảng mã" dài như thế này:
 
 ```js
       // here we add whiskey
@@ -87,7 +87,7 @@ And if we have a long "code sheet" like this:
       // ...
 ```
 
-Then it might be a better variant to refactor it into functions like:
+Sau đó, nó có thể là một biến thể tốt hơn để cấu trúc lại nó thành các function như:
 
 ```js
       addWhiskey(glass);
@@ -108,23 +108,23 @@ Then it might be a better variant to refactor it into functions like:
       }
 ```
 
-Once again, functions themselves tell what's going on. There's nothing to comment. And also the code structure is better when split. It's clear what every function does, what it takes and what it returns.
+Một lần nữa, các function tự cho biết những gì đang xảy ra. Không có gì để comment. Và cấu trúc mã cũng tốt hơn khi phân chia. Rõ ràng mọi function làm gì, những gì nó cần và những gì nó trả về.
 
-In reality, we can't totally avoid "explanatory" comments. There are complex algorithms. And there are smart "tweaks" for purposes of optimization. But generally we should try to keep the code simple and self-descriptive.
+Trong thực tế, chúng ta hoàn toàn không thể tránh những comment "giải thích". Có các thuật toán phức tạp. Và có những "tinh chỉnh" thông minh cho mục đích tối ưu hóa. Nhưng nhìn chung chúng ta nên cố gắng giữ mã đơn giản và tự mô tả.
 
 ## Good comments
 
-So, explanatory comments are usually bad. Which comments are good?
+Vì vậy, comment giải thích thường là xấu. Những comment nào là tốt?
 
-**Describe the architecture** 
+**Mô tả kiến trúc (Describe the architecture)** 
 
-Provide a high-level overview of components, how they interact, what's the control flow in various situations... In short -- the bird's eye view of the code. There's a special diagram language [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) for high-level architecture diagrams. Definitely worth studying.
+Cung cấp tổng quan cấp cao về các thành phần, cách chúng tương tác, luồng điều khiển trong các tình huống khác nhau ... Nói tóm lại -- cái nhìn của con chim (the bird's eye view) về mã. Có một ngôn ngữ sơ đồ đặc biệt [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) cho các sơ đồ kiến trúc cấp cao. Chắc chắn đáng học tập.
 
-**Document a function usage** 
+**Tài liệu sử dụng một function** 
 
-There's a special syntax [JSDoc](http://en.wikipedia.org/wiki/JSDoc) to document a function: usage, parameters, returned value.
+Có một cú pháp đặc biệt [JSDoc](http://en.wikipedia.org/wiki/JSDoc) để ghi lại một hàm: cách sử dụng, tham số, giá trị được trả về.
 
-For instance:
+Ví dụ:
 
 ```js
       /**
@@ -139,45 +139,45 @@ For instance:
       }
 ```
 
-Such comments allow us to understand the purpose of the function and use it the right way without looking in its code.
+Các comment như vậy cho phép chúng ta hiểu mục đích của function và sử dụng nó đúng cách mà không cần tìm trong mã của nó.
 
-By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) can understand them as well and use them to provide autocomplete and some automatic code-checking.
+Nhân tiện, nhiều editor như [WebStorm](https://www.jetbrains.com/webstorm/) cũng có thể hiểu chúng và sử dụng chúng để cung cấp autocomplete và một chút kiểm tra mã tự động (automatic code-checking).
 
-Also, there are tools like [JSDoc 3](https://github.com/jsdoc3/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <http://usejsdoc.org/>.
+Ngoài ra, có những công cụ như [JSDoc 3](https://github.com/jsdoc3/jsdoc) có thể tạo tài liệu HTML từ các comment. Bạn có thể đọc thêm thông tin về JSDoc tại <http://usejsdoc.org/>.
 
-**Why is the task solved this way?** 
+**Tại sao nhiệm vụ được giải quyết theo cách này?** 
 
-What's written is important. But what's *not* written may be even more important to understand what's going on. Why is the task solved exactly this way? The code gives no answer.
+Những gì được viết là quan trọng. Nhưng những gì *không* được viết có thể còn quan trọng hơn để hiểu những gì đang diễn ra. Tại sao nhiệm vụ được giải quyết chính xác theo cách này? Mã không đưa ra câu trả lời.
 
-If there are many ways to solve the task, why this one? Especially when it's not the most obvious one.
+Nếu có nhiều cách để giải quyết nhiệm vụ, tại sao lại có cách này? Đặc biệt là khi nó không phải là một trong những cách rõ ràng nhất.
 
-Without such comments the following situation is possible:
+Không có các comment như vậy tình huống sau đây là có thể:
 
-1. You (or your colleague) open the code written some time ago, and see that it's "suboptimal".
-2. You think: "How stupid I was then, and how much smarter I'm now", and rewrite using the "more obvious and correct" variant.
-3. ...The urge to rewrite was good. But in the process you see that the "more obvious" solution is actually lacking. You even dimly remember why, because you already tried it long ago. You revert to the correct variant, but the time was wasted.
+1. Bạn (hoặc đồng nghiệp của bạn) mở mã được viết cách đây một thời gian và thấy rằng đó là "tối ưu".
+2. Bạn nghĩ: "Lúc đó tôi ngu ngốc đến mức nào, và tôi thông minh hơn bao nhiêu", và viết lại bằng cách sử dụng biến thể "rõ ràng và đúng đắn hơn".
+3. ...Sự thôi thúc để viết lại là tốt. Nhưng trong quá trình bạn thấy rằng giải pháp "rõ ràng hơn" thực sự còn thiếu. Bạn thậm chí còn lờ mờ nhớ tại sao, bởi vì bạn đã thử nó từ lâu rồi. Bạn trở lại biến thể chính xác, nhưng thời gian đã bị lãng phí.
 
-Comments that explain the solution are very important. They help to continue development the right way.
+Các comment giải thích giải pháp là rất quan trọng. Họ giúp tiếp tục phát triển đúng cách.
 
-**Any subtle features of the code? Where they are used?** 
+**Bất kỳ tính năng tinh tế của mã? Chúng được sử dụng ở đâu?** 
 
-If the code has anything subtle and counter-intuitive, it's definitely worth commenting.
+Nếu mã có bất cứ điều gì tinh tế và phản trực giác, nó chắc chắn đáng để commenting.
 
-## Summary
+## Tóm lược
 
-An important sign of a good developer is comments: their presence and even their absence.
+Một dấu hiệu quan trọng của một nhà phát triển tốt là các comment: sự hiện diện của chúng và thậm chí sự vắng mặt của họ.
 
-Good comments allow us to maintain the code well, come back to it after a delay and use it more effectively.
+Comment tốt cho phép chúng ta duy trì mã tốt, quay lại mã sau khi trì hoãn và sử dụng mã hiệu quả hơn.
 
 **Comment this:**
 
-- Overall architecture, high-level view.
-- Function usage.
-- Important solutions, especially when not immediately obvious.
+- Kiến trúc tổng thể, cái nhìn cao cấp (high-level view).
+- Cách dùng function (Function usage).
+- Giải pháp quan trọng, đặc biệt là khi không rõ ràng ngay lập tức.
 
 **Avoid comments:**
 
-- That tell "how code works" and "what it does".
-- Put them only if it's impossible to make the code so simple and self-descriptive that it doesn't require those.
+- Điều đó cho biết "cách mã hoạt động" và "những gì nó làm".
+- Chỉ đặt chúng nếu không thể làm cho mã đơn giản và tự mô tả.
 
-Comments are also used for auto-documenting tools like JSDoc3: they read them and generate HTML-docs (or docs in another format).
+Các comment cũng được sử dụng cho các công cụ tạo tài liệu tự động như JSDoc3: họ đọc chúng và tạo tài liệu HTML (hoặc tài liệu ở định dạng khác).
