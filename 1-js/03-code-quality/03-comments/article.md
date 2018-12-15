@@ -117,9 +117,13 @@ In reality, we can't totally avoid "explanatory" comments. There are complex alg
 
 So, explanatory comments are usually bad. Which comments are good?
 
-**Describe the architecture:** Provide a high-level overview of components, how they interact, what's the control flow in various situations... In short -- the bird's eye view of the code. There's a special diagram language [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) for high-level architecture diagrams. Definitely worth studying.
+**Describe the architecture** 
 
-**Document a function usage:** There's a special syntax [JSDoc](http://en.wikipedia.org/wiki/JSDoc) to document a function: usage, parameters, returned value.
+Provide a high-level overview of components, how they interact, what's the control flow in various situations... In short -- the bird's eye view of the code. There's a special diagram language [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) for high-level architecture diagrams. Definitely worth studying.
+
+**Document a function usage** 
+
+There's a special syntax [JSDoc](http://en.wikipedia.org/wiki/JSDoc) to document a function: usage, parameters, returned value.
 
 For instance:
 
@@ -142,7 +146,9 @@ By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) ca
 
 Also, there are tools like [JSDoc 3](https://github.com/jsdoc3/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <http://usejsdoc.org/>.
 
-**Why is the task solved this way?:** What's written is important. But what's *not* written may be even more important to understand what's going on. Why is the task solved exactly this way? The code gives no answer.
+**Why is the task solved this way?** 
+
+What's written is important. But what's *not* written may be even more important to understand what's going on. Why is the task solved exactly this way? The code gives no answer.
 
 If there are many ways to solve the task, why this one? Especially when it's not the most obvious one.
 
@@ -154,7 +160,9 @@ Without such comments the following situation is possible:
 
 Comments that explain the solution are very important. They help to continue development the right way.
 
-**Any subtle features of the code? Where they are used?:** If the code has anything subtle and counter-intuitive, it's definitely worth commenting.
+**Any subtle features of the code? Where they are used?** 
+
+If the code has anything subtle and counter-intuitive, it's definitely worth commenting.
 
 ## Summary
 
