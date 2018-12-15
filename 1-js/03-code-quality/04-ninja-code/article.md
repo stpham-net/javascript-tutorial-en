@@ -1,148 +1,148 @@
 # Ninja code
 
-> *Learning without thought is labor lost; thought without learning is perilous. - Confucius*
+> *Học mà không suy nghĩ thì vô ích; nghĩ mà không học thì nguy hiểm. - Khổng Tử*
 
-Programmer ninjas of the past used these tricks to sharpen the mind of code maintainers.
+Các ninja lập trình trong quá khứ đã sử dụng các thủ thuật này để mài giũa tâm trí của những người duy trì mã.
 
-Code review gurus look for them in test tasks.
+Các chuyên gia đánh giá mã tìm kiếm chúng trong các nhiệm vụ thử nghiệm.
 
-Novice developers sometimes use them even better than programmer ninjas.
+Các nhà phát triển chưa có kinh nghiệm đôi khi sử dụng chúng thậm chí còn tốt hơn các ninja lập trình viên.
 
-Read them carefully and find out who you are -- a ninja, a novice, or maybe a code reviewer?
+Đọc chúng cẩn thận và tìm ra bạn là ai - một ninja, một người mới, hoặc có thể là một nhà phê bình mã?
 
 <br>
 
 > ---
 
-**📌 Irony detected**
+**📌 Irony Detected**
 
-Many try to follow ninja paths. Few succeed.
+Nhiều người cố gắng đi theo con đường ninja. Ít thành công.
 
 > ---
 
 <br>
 
-## Brevity is the soul of wit
+## Ngắn gọn là linh hồn của trí thông minh
 
-Make the code as short as possible. Show how smart you are.
+Làm cho mã càng ngắn càng tốt. Cho thấy bạn thông minh như thế nào.
 
-Let subtle language features guide you.
+Hãy để các tính năng ngôn ngữ tinh tế hướng dẫn bạn.
 
-For instance, take a look at this ternary operator `'?'`:
+Chẳng hạn, hãy xem toán tử ternary `'?'`:
 
 ```js
       // taken from a well-known javascript library
       i = i ? i < 0 ? Math.max(0, len + i) : i : 0;
 ```
 
-Cool, right? If you write like that, a developer who comes across this line and tries to understand what is the value of `i` is going to have a merry time. Then come to you, seeking for an answer.
+Thật tuyệt phải không? Nếu bạn viết như vậy, một nhà phát triển bắt gặp dòng này và cố gắng hiểu giá trị của `i` là gì sẽ có một thời gian vui vẻ. Sau đó đến với bạn, tìm kiếm một câu trả lời.
 
-Tell them that shorter is always better. Initiate them into the paths of ninja.
+Nói với họ rằng ngắn hơn luôn luôn tốt hơn. Họ bắt đầu đi vào con đường của ninja.
 
-## One-letter variables
+## Biến một chữ cái
 
-> *The Dao hides in wordlessness. Only the Dao is well begun and well completed. - Laozi (Tao Te Ching)*
+> * Người Dao ẩn mình trong không lời. Chỉ có Dao là bắt đầu tốt và hoàn thành tốt. - Laozi (Tao Te Ching)*
 
-Another way to code faster is to use single-letter variable names everywhere. Like `a`, `b` or `c`.
+Một cách khác để mã nhanh hơn là sử dụng tên biến một chữ cái ở mọi nơi. Giống như `a`, `b` hoặc `c`.
 
-A short variable disappears in the code like a real ninja in the forest. No one will be able to find it using "search" of the editor. And even if someone does, they won't be able to "decipher" what the name `a` or `b` means.
+Một biến ngắn biến mất trong mã giống như một ninja thực sự trong rừng. Không ai có thể tìm thấy nó bằng cách sử dụng "tìm kiếm" của trình soạn thảo. Và ngay cả khi ai đó làm như vậy, họ sẽ không thể "giải mã" ý nghĩa của tên `a` hoặc `b`.
 
-...But there's an exception. A real ninja will never use `i` as the counter in a `"for"` loop. Anywhere, but not here. Look around, there are many more exotic letters. For instance, `x` or `y`.
+...Nhưng có một ngoại lệ. Một ninja thực sự sẽ không bao giờ sử dụng `i` làm bộ đếm trong vòng lặp `"for"`. Bất cứ nơi nào, nhưng không phải ở đây. Nhìn xung quanh, có nhiều chữ kỳ lạ hơn. Chẳng hạn, `x` hoặc `y`.
 
-An exotic variable as a loop counter is especially cool if the loop body takes 1-2 pages (make it longer if you can). Then if someone looks deep inside the loop, they won't be able to quickly figure out that the variable named `x` is the loop counter.
+Một biến kỳ lạ như một bộ đếm vòng lặp đặc biệt thú vị nếu thân vòng lặp mất 1-2 trang (làm cho nó dài hơn nếu bạn có thể). Sau đó, nếu ai đó nhìn sâu vào bên trong vòng lặp, họ sẽ không thể nhanh chóng nhận ra rằng biến có tên `x` là bộ đếm vòng lặp.
 
-## Use abbreviations
+## Sử dụng chữ viết tắt
 
-If the team rules forbid the use of one-letter and vague names -- shorten them, make abbreviations.
+Nếu quy tắc nhóm cấm sử dụng tên một chữ cái và mơ hồ - rút ngắn chúng, hãy viết tắt.
 
-Like this:
+Như thế này:
 
 - `list` -> `lst`.
 - `userAgent` -> `ua`.
 - `browser` -> `brsr`.
 - ...etc
 
-Only the one with truly good intuition will be able to understand such names. Try to shorten everything. Only a worthy person should be able to uphold the development of your code.
+Chỉ người có trực giác thực sự tốt mới có thể hiểu được những cái tên như vậy. Hãy cố gắng rút ngắn mọi thứ. Chỉ một người xứng đáng mới có thể duy trì sự phát triển của mã của bạn.
 
-## Soar high. Be abstract.
+## Cao vút. Hãy trừu tượng.
 
-> *The great square is cornerless*
+> *Quảng trường lớn không có góc*
 > 
-> *The great vessel is last complete,*
+> *Tàu lớn hoàn thành cuối cùng,*
 > 
-> *The great note is rarified sound,*
+> *Ghi chú tuyệt vời là âm thanh hiếm,*
 > 
-> *The great image has no form.*
-> 
-> *- Laozi (Tao Te Ching)*
-
-While choosing a name try to use the most abstract word. Like `obj`, `data`, `value`, `item`, `elem` and so on.
-
-- **The ideal name for a variable is `data`.** Use it everywhere you can. Indeed, every variable holds *data*, right?
-
-    ...But what to do if `data` is already taken? Try `value`, it's also universal. After all, a variable eventually gets a *value*.
-
-- **Name a variable by its type: `str`, `num`...**
-
-    Give them a try. A young initiate may wonder -- are such names really useful for a ninja? Indeed, they are!
-
-    Sure, the variable name still means something. It says what's inside the variable: a string, a number or something else. But when an outsider tries to understand the code, he'll be surprised to see that there's actually no information at all! And will ultimately fail to alter your well-thought code.
-
-    The value type is easy to find out by debugging. But what's the meaning of the variable? Which string/number does it store?
-
-    There's just no way to figure out without a good meditation!
-
-- **...But what if there are no more such names?** Just add a number: `data1, item2, elem5`...
-
-## Attention test
-
-Only a truly attentive programmer should be able to understand your code. But how to check that?
-
-**One of the ways -- use similar variable names, like `date` and `data`.**
-
-Mix them where you can.
-
-A quick read of such code becomes impossible. And when there's a typo... Ummm... We're stuck for long, time to drink tea.
-
-## Smart synonyms
-
-> *The hardest thing of all is to find a black cat in a dark room, especially if there is no cat. - Confucius*
-
-Using *similar* names for *same* things makes life more interesting and shows your creativity to the public.
-
-For instance, consider function prefixes. If a function shows a message on the screen -- start it with `display…`, like `displayMessage`. And then if another function shows on the screen something else, like a user name, start it with `show…` (like `showName`).
-
-Insinuate that there's a subtle difference between such functions, while there is none.
-
-Make a pact with fellow ninjas of the team: if John starts "showing" functions with `display...` in his code, then Peter could use `render..`, and Ann -- `paint...`. Note how much more interesting and diverse the code became.
-
-...And now the hat trick!
-
-For two functions with important differences -- use the same prefix!
-
-For instance, the function `printPage(page)` will use a printer. And the function `printText(text)` will put the text on-screen. Let an unfamiliar reader think well over similarly named function `printMessage`: "Where does it put the message? To a printer or on the screen?". To make it really shine, `printMessage(message)` should output it in the new window!
-
-## Reuse names
-
-> *Once the whole is divided, the parts need names.*
-> 
-> *There are already enough names.*
-> 
-> *One must know when to stop.*
+> *Hình ảnh tuyệt vời không có hình thức.*
 > 
 > *- Laozi (Tao Te Ching)*
 
-Add a new variable only when absolutely necessary.
+Trong khi chọn một tên cố gắng sử dụng từ trừu tượng nhất. Giống như `obj`, `data`, `value`, `item`, `elem` v.v.
 
-Instead, reuse existing names. Just write new values into them.
+- **Tên lý tưởng cho một biến là `data`.** Sử dụng nó ở mọi nơi bạn có thể. Thật vậy, mỗi biến giữ *dữ liệu*, phải không?
 
-In a function try to use only variables passed as parameters.
+    ...Nhưng phải làm gì nếu `data` đã được sử dụng? Hãy thử `value`, nó cũng phổ quát. Rốt cuộc, một biến cuối cùng nhận được một *value*.
 
-That would make it really hard to identify what's exactly in the variable *now*. And also where it comes from. A person with weak intuition would have to analyze the code line-by-line and track the changes through every code branch.
+- **Đặt tên một biến theo kiểu của nó: `str`, `num`...**
 
-**An advanced variant of the approach is to covertly (!) replace the value with something alike in the middle of a loop or a function.**
+    Hãy thử chúng. Một đồng tu trẻ có thể tự hỏi - những cái tên như vậy có thực sự hữu ích cho một ninja không? Thực sự, chúng có!
 
-For instance:
+    Chắc chắn, tên biến vẫn có nghĩa. Nó nói những gì bên trong biến: một chuỗi, một số hoặc một cái gì đó khác. Nhưng khi một người ngoài cố gắng hiểu mã, anh ta sẽ ngạc nhiên khi thấy rằng thực sự không có thông tin nào cả! Và cuối cùng sẽ thất bại trong việc thay đổi mã được suy nghĩ tốt của bạn.
+
+    Kiểu giá trị dễ dàng tìm ra bằng cách gỡ lỗi. Nhưng ý nghĩa của biến là gì? Với string/number nào nó lưu trữ?
+
+    Không có cách nào để tìm ra mà không có một thiền định tốt!
+
+- **...Nhưng nếu không có nhiều tên như vậy thì sao?** Chỉ cần thêm một số: `data1, item2, elem5`...
+
+## Kiểm tra chú ý
+
+Chỉ có một lập trình viên thực sự chu đáo mới có thể hiểu mã của bạn. Nhưng làm thế nào để kiểm tra điều đó?
+
+**Một trong những cách - sử dụng các tên biến tương tự, như `date` và `data`.**
+
+Trộn chúng ở nơi bạn có thể.
+
+Việc đọc nhanh mã như vậy trở nên không thể. Và khi có một lỗi đánh máy ... Ừm ... Chúng tôi bị mắc kẹt trong thời gian dài để uống trà.
+
+## Từ đồng nghĩa thông minh
+
+> *Việc khó nhất trong mọi việc là tìm con mèo đen trong buồng tối, đặc biệt nếu chẳng có con mèo nào cả. - Khổng Tử*
+
+Sử dụng tên *tương tự* cho những thứ *giống nhau* làm cho cuộc sống thú vị hơn và thể hiện sự sáng tạo của bạn với công chúng.
+
+Ví dụ, xem xét các tiền tố chức năng. Nếu một chức năng hiển thị một thông báo trên màn hình - hãy khởi động nó bằng `display…`, như `displayMessage`. Và sau đó nếu một chức năng khác hiển thị trên màn hình một cái gì đó khác, như tên người dùng, hãy khởi động nó bằng `show…` (như `showName`).
+
+Khẳng định rằng có một sự khác biệt tinh tế giữa các chức năng như vậy, trong khi không có.
+
+Tạo một hiệp ước với các ninja đồng đội: nếu John bắt đầu "hiển thị" các chức năng với `display...` trong mã của mình, thì Peter có thể sử dụng `render..` và Ann - `paint...`. Lưu ý rằng mã trở nên thú vị và đa dạng hơn nhiều.
+
+...Và bây giờ là hat trick!
+
+Đối với hai hàm có sự khác biệt quan trọng - sử dụng cùng một tiền tố!
+
+Chẳng hạn, hàm `printPage(trang)` sẽ sử dụng máy in. Và hàm `printText(text)` sẽ đặt văn bản trên màn hình. Hãy để một người đọc xa lạ nghĩ tốt về chức năng có tên tương tự `printMessage`: "Nó đặt thông điệp ở đâu? Tới một máy in hoặc trên màn hình?". Để làm cho nó thực sự tỏa sáng, `printMessage(message)` nên xuất nó trong cửa sổ mới!
+
+## Tên sử dụng lại
+
+> *Một khi toàn bộ được chia, các phần cần tên.*
+> 
+> *Đã có đủ tên.*
+> 
+> *Người ta phải biết khi nào nên dừng lại.*
+> 
+> *- Laozi (Tao Te Ching) *
+
+Thêm một biến mới chỉ khi thực sự cần thiết.
+
+Thay vào đó, sử dụng lại tên hiện có. Chỉ cần viết các giá trị mới vào chúng.
+
+Trong một hàm cố gắng chỉ sử dụng các biến được truyền dưới dạng tham số.
+
+Điều đó sẽ khiến việc xác định chính xác những gì trong biến *bây giờ* rất khó khăn. Và nó cũng đến từ đâu. Một người có trực giác yếu sẽ phải phân tích từng dòng mã và theo dõi các thay đổi thông qua mỗi nhánh mã.
+
+**Một biến thể tiên tiến của phương pháp này là để ngấm ngầm (!) thay thế giá trị bằng một cái gì đó giống nhau ở giữa một vòng lặp hoặc một hàm.**
+
+Ví dụ:
 
 ```js
       function ninjaFunction(elem) {
@@ -154,33 +154,33 @@ For instance:
       }
 ```
 
-A fellow programmer who wants to work with `elem` in the second half of the function will be surprised... Only during the debugging, after examining the code they will find out that he's working with a clone!
+Một lập trình viên đồng nghiệp muốn làm việc với `elem` trong nửa sau của hàm sẽ ngạc nhiên ... Chỉ trong quá trình gỡ lỗi, sau khi kiểm tra mã họ sẽ phát hiện ra rằng anh ta đang làm việc với một bản sao!
 
-Seen in code regularly. Deadly effective even against an experienced ninja. 
+Nhìn thấy trong mã thường xuyên. Hiệu quả chết người thậm chí chống lại một ninja có kinh nghiệm. 
 
-## Underscores for fun
+## Underscores cho vui
 
-Put underscores `_` and `__` before variable names. Like `_name` or `__value`. It would be great if only you knew their meaning. Or, better, add them just for fun, without particular meaning at all. Or different meanings in different places.
+Đặt dấu gạch dưới `_` và `__` trước tên biến. Giống như `_name` hoặc `__value`. Sẽ thật tuyệt nếu chỉ có bạn biết ý nghĩa của chúng. Hoặc, tốt hơn, thêm chúng chỉ để cho vui, không có ý nghĩa đặc biệt nào cả. Hoặc ý nghĩa khác nhau ở những nơi khác nhau.
 
-You kill two rabbits with one shot. First, the code becomes longer and less readable, and the second, a fellow developer may spend a long time trying to figure out what the underscores mean.
+Bạn giết hai con thỏ bằng một phát súng. Đầu tiên, mã trở nên dài hơn và ít đọc hơn, và thứ hai, một nhà phát triển đồng nghiệp có thể mất nhiều thời gian để cố gắng tìm hiểu ý nghĩa của dấu gạch dưới.
 
-A smart ninja puts underscores at one spot of code and evades them at other places. That makes the code even more fragile and increases the probability of future errors.
+Một ninja thông minh đặt dấu gạch dưới tại một điểm mã và trốn chúng ở những nơi khác. Điều đó làm cho mã thậm chí còn dễ vỡ hơn và tăng xác suất xảy ra lỗi trong tương lai.
 
-## Show your love
+## Thể hiện tình yêu của bạn
 
-Let everyone see how magnificent your entities are! Names like `superElement`, `megaFrame` and `niceItem` will definitely enlighten a reader.
+Hãy để mọi người thấy thực thể của bạn tuyệt vời như thế nào! Những cái tên như `superEuity`, `megaFrame` và `beautifulItem` chắc chắn sẽ khai sáng cho người đọc.
 
-Indeed, from one hand, something is written: `super..`, `mega..`, `nice..` But from the other hand -- that brings no details. A reader may decide to look for a hidden meaning and meditate for an hour or two.
+Thật vậy, từ một tay, một cái gì đó được viết: `super..`, `mega..`, `nice..` Nhưng từ mặt khác - điều đó không mang lại chi tiết. Một người đọc có thể quyết định tìm kiếm một ý nghĩa ẩn và thiền trong một hoặc hai giờ.
 
-## Overlap outer variables
+## Chồng chéo các biến ngoài
 
-> *When in the light, can't see anything in the darkness.*
+> *Khi ở trong ánh sáng, không thể nhìn thấy bất cứ thứ gì trong bóng tối.*
 > 
-> *When in the darkness, can see everything in the light.*
+> *Khi ở trong bóng tối, có thể nhìn thấy mọi thứ trong ánh sáng.*
 > 
 > *- Guan Yin Zi*
 
-Use same names for variables inside and outside a function. As simple. No efforts required.
+Sử dụng cùng tên cho các biến trong và ngoài hàm. Như đơn giản. Không cần nỗ lực.
 
 ```js
       let user = authenticateUser();
@@ -195,46 +195,47 @@ Use same names for variables inside and outside a function. As simple. No effort
       }
 ```
 
-A programmer who jumps inside the `render` will probably fail to notice that there's a local `user` shadowing the outer one.
+Một lập trình viên nhảy vào bên trong `render` có thể sẽ không nhận thấy rằng có một 'user' cục bộ đang che giấu cái bên ngoài.
 
-Then he'll try to work with `user` assuming that it's the external variable, the result of `authenticateUser()`... The trap is sprung! Hello, debugger...
+Sau đó, anh ta sẽ cố gắng làm việc với `user` giả sử rằng đó là biến ngoài, kết quả của`authenticateUser()` ... Cái bẫy bị bung ra! Xin chào, trình gỡ lỗi ...
 
-## Side-effects everywhere!
+## Tác dụng phụ ở mọi nơi!
 
-There are functions that look like they don't change anything. Like `isReady()`, `checkPermission()`, `findTags()`... They are assumed to carry out calculations, find and return the data, without changing anything outside of them. In other words, without "side-effects".
+Có những chức năng trông giống như chúng không thay đổi bất cứ điều gì. Giống như `isReady()`, `checkPermission()`, `findTags()`... Họ được cho là thực hiện các tính toán, tìm và trả lại dữ liệu mà không thay đổi bất cứ điều gì bên ngoài chúng. Nói cách khác, không có "tác dụng phụ".
 
-**A really beautiful trick is to add a "useful" action to them, besides the main task.**
+**Một mẹo thực sự hay là thêm một hành động "hữu ích" cho họ, bên cạnh nhiệm vụ chính.**
 
-An expression of dazed surprise on the face of your colleague when they see a function named `is..`, `check..` or `find...` changing something -- will definitely broaden your boundaries of reason.
+Một biểu hiện ngạc nhiên kinh ngạc trên khuôn mặt của đồng nghiệp của bạn khi họ thấy một chức năng có tên là `is..`, `check..` hoặc `find...` thay đổi điều gì đó - chắc chắn sẽ mở rộng ranh giới lý trí của bạn.
 
-**Another way to surprise is to return a non-standard result.**
+**Một cách khác để gây bất ngờ là trả về kết quả không chuẩn.**
 
-Show your original thinking! Let the call of `checkPermission` return not `true/false`, but a complex object with the results of the check.
+Thể hiện suy nghĩ ban đầu của bạn! Hãy để cuộc gọi của `checkPermission` trả về không phải là `true/false`, mà là một đối tượng phức tạp với kết quả kiểm tra.
 
-Those developers who try to write `if (checkPermission(..))`, will wonder why it doesn't work. Tell them: "Read the docs!". And give this article.
+Những nhà phát triển cố gắng viết `if(checkPermission(..))`, sẽ tự hỏi tại sao nó không hoạt động. Nói với họ: "Đọc tài liệu!". Và đưa ra bài viết này.
 
-## Powerful functions!
+## Chức năng mạnh mẽ!
 
-> *The great Tao flows everywhere,*
+> *Đạo lớn chảy khắp nơi,*
 > 
-> *both to the left and to the right.*
+> *cả bên trái và bên phải.*
 > 
 > *- Laozi (Tao Te Ching)*
 
-Don't limit the function by what's written in its name. Be broader.
+Đừng giới hạn chức năng bởi những gì được viết trong tên của nó. Hãy rộng hơn.
 
-For instance, a function `validateEmail(email)` could (besides checking the email for correctness) show an error message and ask to re-enter the email.
+Chẳng hạn, một hàm `validateEmail(email)` có thể (bên cạnh việc kiểm tra tính chính xác của email) hiển thị thông báo lỗi và yêu cầu nhập lại email.
 
-Additional actions should not be obvious from the function name. A true ninja coder will make them not obvious from the code as well.
+Các hành động bổ sung không nên rõ ràng từ tên hàm. Một lập trình viên ninja thực thụ sẽ làm cho họ không rõ ràng từ mã.
 
-**Joining several actions into one protects your code from reuse.**
+**Kết hợp một số hành động thành một để bảo vệ mã của bạn khỏi việc sử dụng lại.**
 
-Imagine, another developer wants only to check the email, and not output any message. Your function  `validateEmail(email)` that does both will not suit them. So they won't break your meditation by asking anything about it.
+Hãy tưởng tượng, một nhà phát triển khác chỉ muốn kiểm tra email chứ không xuất ra bất kỳ tin nhắn nào. Hàm của bạn `validateEmail(email)` mà cả hai sẽ không phù hợp với họ. Vì vậy, họ sẽ không phá vỡ thiền của bạn bằng cách hỏi bất cứ điều gì về nó.
 
-## Summary
+## Tóm lược
 
-All "pieces of advice" above are from the real code... Sometimes, written by experienced developers. Maybe even more experienced than you are ;)
+Tất cả "những lời khuyên" ở trên là từ mã thực sự ... Đôi khi, được viết bởi các nhà phát triển có kinh nghiệm. Có thể thậm chí nhiều kinh nghiệm hơn bạn ;)
 
-- Follow some of them, and your code will become full of surprises.
-- Follow many of them, and your code will become truly yours, no one would want to change it.
-- Follow all, and your code will become a valuable lesson for young developers looking for enlightenment.
+- Thực hiện theo một số trong số chúng, và mã của bạn sẽ trở nên đầy bất ngờ.
+- Theo dõi nhiều trong số chúng, và mã của bạn sẽ thực sự trở thành của bạn, không ai muốn thay đổi nó.
+- Làm theo tất cả, và mã của bạn sẽ trở thành một bài học quý giá cho các nhà phát triển trẻ đang tìm kiếm sự giác ngộ.
+No search results.
