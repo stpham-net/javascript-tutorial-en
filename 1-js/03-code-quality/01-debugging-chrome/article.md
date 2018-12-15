@@ -18,7 +18,7 @@ Here's what you should see if you are doing it for the first time:
 
 ![](chrome-open-sources.png)
 
-The toggler button <span class="devtools" style="background-position:-168px -76px"></span> opens the tab with files.
+The toggler button ![](button-1.png) opens the tab with files.
 
 Let's click it and select `index.html` and then `hello.js` in the tree view. Here's what should show up:
 
