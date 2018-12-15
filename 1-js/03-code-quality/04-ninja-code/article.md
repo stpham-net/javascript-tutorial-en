@@ -41,7 +41,7 @@ Nói với họ rằng ngắn hơn luôn luôn tốt hơn. Họ bắt đầu đi
 
 ## Biến một chữ cái
 
-> * Người Dao ẩn mình trong không lời. Chỉ có Dao là bắt đầu tốt và hoàn thành tốt. - Laozi (Tao Te Ching)*
+> *Người Dao ẩn mình trong không lời. Chỉ có Dao là bắt đầu tốt và hoàn thành tốt. - Laozi (Tao Te Ching)*
 
 Một cách khác để mã nhanh hơn là sử dụng tên biến một chữ cái ở mọi nơi. Giống như `a`, `b` hoặc `c`.
 
@@ -130,7 +130,7 @@ Chẳng hạn, hàm `printPage(trang)` sẽ sử dụng máy in. Và hàm `print
 > 
 > *Người ta phải biết khi nào nên dừng lại.*
 > 
-> *- Laozi (Tao Te Ching) *
+> *- Laozi (Tao Te Ching)*
 
 Thêm một biến mới chỉ khi thực sự cần thiết.
 
@@ -197,7 +197,7 @@ Sử dụng cùng tên cho các biến trong và ngoài hàm. Như đơn giản.
 
 Một lập trình viên nhảy vào bên trong `render` có thể sẽ không nhận thấy rằng có một 'user' cục bộ đang che giấu cái bên ngoài.
 
-Sau đó, anh ta sẽ cố gắng làm việc với `user` giả sử rằng đó là biến ngoài, kết quả của`authenticateUser()` ... Cái bẫy bị bung ra! Xin chào, trình gỡ lỗi ...
+Sau đó, anh ta sẽ cố gắng làm việc với `user` giả sử rằng đó là biến ngoài, kết quả của `authenticateUser()` ... Cái bẫy bị bung ra! Xin chào, trình gỡ lỗi ...
 
 ## Tác dụng phụ ở mọi nơi!
 
@@ -236,6 +236,6 @@ Hãy tưởng tượng, một nhà phát triển khác chỉ muốn kiểm tra e
 Tất cả "những lời khuyên" ở trên là từ mã thực sự ... Đôi khi, được viết bởi các nhà phát triển có kinh nghiệm. Có thể thậm chí nhiều kinh nghiệm hơn bạn ;)
 
 - Thực hiện theo một số trong số chúng, và mã của bạn sẽ trở nên đầy bất ngờ.
-- Theo dõi nhiều trong số chúng, và mã của bạn sẽ thực sự trở thành của bạn, không ai muốn thay đổi nó.
+- Theo nhiều trong số chúng, và mã của bạn sẽ thực sự trở thành của bạn, không ai muốn thay đổi nó.
 - Làm theo tất cả, và mã của bạn sẽ trở thành một bài học quý giá cho các nhà phát triển trẻ đang tìm kiếm sự giác ngộ.
-No search results.
+
