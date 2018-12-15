@@ -54,7 +54,7 @@ Nó sẽ trông như thế này (màu xanh là nơi bạn nên nhấp):
 
 Một *điểm dừng (breakpoint)* là một điểm mã trong đó trình gỡ lỗi sẽ tự động tạm dừng thực thi JavaScript.
 
-Trong khi mã bị tạm dừng, chúng ta có thể kiểm tra các biến hiện tại, thực thi các lệnh trong bàn điều khiển, v.v. Nói cách khác, chúng ta có thể gỡ lỗi nó.
+Trong khi mã bị tạm dừng, chúng ta có thể kiểm tra các biến hiện tại, thực thi các lệnh trong console, v.v. Nói cách khác, chúng ta có thể gỡ lỗi nó.
 
 Chúng ta luôn có thể tìm thấy một danh sách các điểm dừng trong khung bên phải. Điều đó hữu ích khi chúng ta có nhiều điểm dừng trong các tệp khác nhau. Nó cho phép:
 - Nhanh chóng nhảy đến điểm dừng trong mã (bằng cách nhấp vào nó trong khung bên phải).
@@ -156,6 +156,8 @@ Nút đó không di chuyển thực thi. Chỉ là một loạt bật/tắt cho 
 
 Khi được bật và các công cụ dành cho nhà phát triển (developer tools) được mở, một lỗi tập lệnh sẽ tự động tạm dừng thực thi. Sau đó chúng ta có thể phân tích các biến để xem những gì đã sai. Vì vậy, nếu tập lệnh của chúng ta bị lỗi, chúng ta có thể mở trình gỡ lỗi, bật tùy chọn này và tải lại trang để xem nó chết ở đâu và bối cảnh tại thời điểm đó.
 
+<br>
+
 > ---
 
 **📌 Continue to here**
@@ -183,20 +185,19 @@ Chẳng hạn, điều này xuất các giá trị từ `0` đến `4` sang cons
 
 Người dùng thông thường không thấy đầu ra đó, nó nằm trong bảng điều khiển. Để xem nó, hãy mở tab Console của các công cụ dành cho nhà phát triển hoặc nhấn `Esc` trong khi ở một tab khác: để mở giao diện điều khiển ở phía dưới.
 
-Nếu chúng ta có đủ logging trong mã của chúng ta, thì chúng ta có thể thấy những gì đang diễn ra từ các bản ghi mà không cần trình gỡ lỗi.
+Nếu chúng ta có đủ logging trong mã của chúng ta, thì chúng ta có thể thấy những gì đang diễn ra từ các bản ghi (records) mà không cần trình gỡ lỗi.
 
 ## Tóm lược
 
 Như chúng ta có thể thấy, có ba cách chính để tạm dừng một tập lệnh:
 1. Một điểm dừng (breakpoint).
-2. Các câu lệnh `debugger'.
+2. Các câu lệnh `debugger`.
 3. Một lỗi (nếu công cụ dev đang mở và nút ![](button-8.png) đang "bật")
 
 Sau đó, chúng ta có thể kiểm tra các biến và bước tiếp (step on) để xem thực thi sai ở đâu.
 
-Có nhiều tùy chọn hơn trong các công cụ dành cho nhà phát triển hơn được đề cập ở đây. Hướng dẫn đầy đủ có tại <https://developers.google.com/web/tools/chrome-devtools>.
+Có nhiều tùy chọn hơn trong các công cụ dành cho nhà phát triển hơn những gì được đề cập ở đây. Hướng dẫn đầy đủ có tại <https://developers.google.com/web/tools/chrome-devtools>.
 
 Thông tin từ chương này là đủ để bắt đầu gỡ lỗi, nhưng sau đó, đặc biệt nếu bạn dùng nhiều công cụ trình duyệt, vui lòng đến đó và xem qua các khả năng nâng cao hơn của các công cụ dành cho nhà phát triển.
 
-Ồ, và bạn cũng có thể nhấp vào nhiều nơi khác nhau của các dev tools và chỉ cần xem những gì hiển thị. Đó có lẽ là con đường nhanh nhất để học các công cụ dev. Đừng quên nhấp chuột phải cũng tốt!
-1 result is available, use up and down arrow keys to navigate.
+Ồ, và bạn cũng có thể nhấp vào nhiều nơi khác nhau của các dev tools và chỉ cần xem những gì hiển thị. Đó có lẽ là con đường nhanh nhất để học các công cụ dev (dev tools). Đừng quên nhấp chuột phải cũng tốt!
