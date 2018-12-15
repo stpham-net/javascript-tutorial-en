@@ -1,6 +1,6 @@
 # Ninja code
 
-> ***Learning without thought is labor lost; thought without learning is perilous. - Confucius***
+> *Learning without thought is labor lost; thought without learning is perilous. - Confucius*
 
 Programmer ninjas of the past used these tricks to sharpen the mind of code maintainers.
 
@@ -41,7 +41,7 @@ Tell them that shorter is always better. Initiate them into the paths of ninja.
 
 ## One-letter variables
 
-> ***The Dao hides in wordlessness. Only the Dao is well begun and well completed. - Laozi (Tao Te Ching)***
+> *The Dao hides in wordlessness. Only the Dao is well begun and well completed. - Laozi (Tao Te Ching)*
 
 Another way to code faster is to use single-letter variable names everywhere. Like `a`, `b` or `c`.
 
@@ -66,15 +66,15 @@ Only the one with truly good intuition will be able to understand such names. Tr
 
 ## Soar high. Be abstract.
 
-> ***The great square is cornerless***
+> *The great square is cornerless*
 > 
-> ***The great vessel is last complete,***
+> *The great vessel is last complete,*
 > 
-> ***The great note is rarified sound,***
+> *The great note is rarified sound,*
 > 
-> ***The great image has no form.***
+> *The great image has no form.*
 > 
-> ***- Laozi (Tao Te Ching)***
+> *- Laozi (Tao Te Ching)*
 
 While choosing a name try to use the most abstract word. Like `obj`, `data`, `value`, `item`, `elem` and so on.
 
@@ -106,7 +106,7 @@ A quick read of such code becomes impossible. And when there's a typo... Ummm...
 
 ## Smart synonyms
 
-> ***The hardest thing of all is to find a black cat in a dark room, especially if there is no cat. - Confucius***
+> *The hardest thing of all is to find a black cat in a dark room, especially if there is no cat. - Confucius*
 
 Using *similar* names for *same* things makes life more interesting and shows your creativity to the public.
 
@@ -124,13 +124,13 @@ For instance, the function `printPage(page)` will use a printer. And the functio
 
 ## Reuse names
 
-> ***Once the whole is divided, the parts need names.***
+> *Once the whole is divided, the parts need names.*
 > 
-> ***There are already enough names.***
+> *There are already enough names.*
 > 
-> ***One must know when to stop.***
+> *One must know when to stop.*
 > 
-> ***- Laozi (Tao Te Ching)***
+> *- Laozi (Tao Te Ching)*
 
 Add a new variable only when absolutely necessary.
 
@@ -174,11 +174,11 @@ Indeed, from one hand, something is written: `super..`, `mega..`, `nice..` But f
 
 ## Overlap outer variables
 
-> ***When in the light, can't see anything in the darkness.***
+> *When in the light, can't see anything in the darkness.*
 > 
-> ***When in the darkness, can see everything in the light.***
+> *When in the darkness, can see everything in the light.*
 > 
-> ***- Guan Yin Zi***
+> *- Guan Yin Zi*
 
 Use same names for variables inside and outside a function. As simple. No efforts required.
 
@@ -215,11 +215,11 @@ Those developers who try to write `if (checkPermission(..))`, will wonder why it
 
 ## Powerful functions!
 
-> ***The great Tao flows everywhere,***
+> *The great Tao flows everywhere,*
 > 
-> ***both to the left and to the right.***
+> *both to the left and to the right.*
 > 
-> ***- Laozi (Tao Te Ching)***
+> *- Laozi (Tao Te Ching)*
 
 Don't limit the function by what's written in its name. Be broader.
 
