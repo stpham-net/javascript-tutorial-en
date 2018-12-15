@@ -34,7 +34,7 @@ Now you could click the same toggler <span class="devtools" style="background-po
 
 ## Console
 
-If we press `Esc`, then a console opens below. We can type commands there and press `key:Enter` to execute.
+If we press `Esc`, then a console opens below. We can type commands there and press `Enter` to execute.
 
 After a statement is executed, its result is shown below.
 
@@ -62,34 +62,39 @@ We can always find a list of breakpoints in the right pane. That's useful when w
 - Remove the breakpoint by right-clicking and selecting Remove.
 - ...And so on.
 
-```smart header="Conditional breakpoints"
+<br>
+
+> ---
+
+**📌 Conditional breakpoints**
+
 *Right click* on the line number allows to create a *conditional* breakpoint. It only triggers when the given expression is truthy.
 
 That's handy when we need to stop only for a certain variable value or for certain function parameters.
-```
+
+> ---
+
+<br>
 
 ## Debugger command
 
 We can also pause the code by using the `debugger` command, like this:
 
 ```js
-function hello(name) {
-  let phrase = `Hello, ${name}!`;
+      function hello(name) {
+        let phrase = `Hello, ${name}!`;
 
-*!*
-  debugger;  // <-- the debugger stops here
-*/!*
+        debugger;  // <-- the debugger stops here
 
-  say(phrase);
-}
+        say(phrase);
+      }
 ```
 
 That's very convenient when we are in a code editor and don't want to switch to the browser and look up the script in developer tools to set the breakpoint.
 
-
 ## Pause and look around
 
-In our example, `hello()` is called during the page load, so the easiest way to activate the debugger is to reload the page. So let's press `key:F5` (Windows, Linux) or `key:Cmd+R` (Mac).
+In our example, `hello()` is called during the page load, so the easiest way to activate the debugger is to reload the page. So let's press `F5` (Windows, Linux) or `Cmd+R` (Mac).
 
 As the breakpoint is set, the execution pauses at the 4th line:
 
@@ -106,6 +111,7 @@ Please open the informational dropdowns to the right (labeled with arrows). They
     At the current moment the debugger is inside `hello()` call, called by a script in `index.html` (no function there, so it's called "anonymous").
 
     If you click on a stack item, the debugger jumps to the corresponding code, and all its variables can be examined as well.
+    
 3. **`Scope` -- current variables.**
 
     `Local` shows local function variables. You can also see their values highlighted right over the source.
@@ -120,35 +126,47 @@ Now it's time to *trace* the script.
 
 There are buttons for it at the top of the right pane. Let's engage them.
 
-<span class="devtools" style="background-position:-7px -76px"></span> -- continue the execution, hotkey `key:F8`.
-: Resumes the execution. If there are no additional breakpoints, then the execution just continues and the debugger loses control.
+**<span class="devtools" style="background-position:-7px -76px"></span> -- continue the execution, hotkey `F8`.**
 
-    Here's what we can see after a click on it:
+Resumes the execution. If there are no additional breakpoints, then the execution just continues and the debugger loses control.
 
-    ![](chrome-sources-debugger-trace-1.png)
+Here's what we can see after a click on it:
 
-    The execution has resumed, reached another breakpoint inside `say()` and paused there. Take a look at the "Call stack" at the right. It has increased by one more call. We're inside `say()` now.
+![](chrome-sources-debugger-trace-1.png)
 
-<span class="devtools" style="background-position:-137px -76px"></span> -- make a step (run the next command), but *don't go into the function*, hotkey `key:F10`.
-: If we click it now, `alert` will be shown. The important thing is that `alert` can be any function, the execution "steps over it", skipping the function internals.
+The execution has resumed, reached another breakpoint inside `say()` and paused there. Take a look at the "Call stack" at the right. It has increased by one more call. We're inside `say()` now.
 
-<span class="devtools" style="background-position:-72px -76px"></span> -- make a step, hotkey `key:F11`.
-: The same as the previous one, but "steps into" nested functions. Clicking this will step through all script actions one by one.
+**<span class="devtools" style="background-position:-137px -76px"></span> -- make a step (run the next command), but *don't go into the function*, hotkey `F10`.**
 
-<span class="devtools" style="background-position:-104px -76px"></span> -- continue the execution till the end of the current function, hotkey `key:Shift+F11`.
-: The execution would stop at the very last line of the current function. That's handy when we accidentally entered a nested call using <span class="devtools" style="background-position:-72px -76px"></span>, but it does not interest us, and we want to continue to its end as soon as possible.
+If we click it now, `alert` will be shown. The important thing is that `alert` can be any function, the execution "steps over it", skipping the function internals.
 
-<span class="devtools" style="background-position:-7px -28px"></span> -- enable/disable all breakpoints.
-: That button does not move the execution. Just a mass on/off for breakpoints.
+**<span class="devtools" style="background-position:-72px -76px"></span> -- make a step, hotkey `F11`.**
 
-<span class="devtools" style="background-position:-264px -4px"></span> -- enable/disable automatic pause in case of an error.
-: When enabled, and the developer tools is open, a script error automatically pauses the execution. Then we can analyze variables to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
+The same as the previous one, but "steps into" nested functions. Clicking this will step through all script actions one by one.
 
-```smart header="Continue to here"
+**<span class="devtools" style="background-position:-104px -76px"></span> -- continue the execution till the end of the current function, hotkey `key:Shift+F11`.**
+
+The execution would stop at the very last line of the current function. That's handy when we accidentally entered a nested call using <span class="devtools" style="background-position:-72px -76px"></span>, but it does not interest us, and we want to continue to its end as soon as possible.
+
+**<span class="devtools" style="background-position:-7px -28px"></span> -- enable/disable all breakpoints.**
+
+That button does not move the execution. Just a mass on/off for breakpoints.
+
+**<span class="devtools" style="background-position:-264px -4px"></span> -- enable/disable automatic pause in case of an error.**
+
+When enabled, and the developer tools is open, a script error automatically pauses the execution. Then we can analyze variables to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
+
+> ---
+
+**📌 Continue to here**
+
 Right click on a line of code opens the context menu with a great option called "Continue to here".
 
 That's handy when we want to move multiple steps forward, but we're too lazy to set a breakpoint.
-```
+
+> ---
+
+<br>
 
 ## Logging
 
@@ -156,14 +174,14 @@ To output something to console, there's `console.log` function.
 
 For instance, this outputs values from `0` to `4` to console:
 
-```js run
-// open console to see
-for (let i = 0; i < 5; i++) {
-  console.log("value", i);
-}
+```js
+      // open console to see
+      for (let i = 0; i < 5; i++) {
+        console.log("value", i);
+      }
 ```
 
-Regular users don't see that output, it is in the console. To see it, either open the Console tab of developer tools or press `key:Esc` while in another tab: that opens the console at the bottom.
+Regular users don't see that output, it is in the console. To see it, either open the Console tab of developer tools or press `Esc` while in another tab: that opens the console at the bottom.
 
 If we have enough logging in our code, then we can see what's going on from the records, without the debugger.
 
