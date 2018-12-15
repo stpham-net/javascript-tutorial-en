@@ -172,6 +172,8 @@ Comments that explain the solution are very important. They help to continue dev
 
 If the code has anything subtle and counter-intuitive, it's definitely worth commenting.
 
+<br>
+
 ## Summary
 
 An important sign of a good developer is comments: their presence and even their absence.
