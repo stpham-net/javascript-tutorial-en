@@ -88,7 +88,7 @@ Có 7 loại dữ liệu:
 - `boolean` cho các giá trị logic: `true/false`,
 - `null` -- một kiểu có một giá trị duy nhất `null`, có nghĩa là "empty" hoặc "does not exist",
 - `undefined` -- một kiểu có một giá trị duy nhất `undefined`, có nghĩa là "not assigned",
-- `object` và `symbol` - dành cho các cấu trúc dữ liệu phức tạp và các định danh duy nhất, chúng ta chưa học đến chúng.
+- `object` và `symbol` -- dành cho các cấu trúc dữ liệu phức tạp và các định danh duy nhất, chúng ta chưa học đến chúng.
 
 Toán tử `typeof` trả về kiểu cho một giá trị, với hai ngoại lệ:
 
