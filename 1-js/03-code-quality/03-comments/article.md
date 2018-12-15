@@ -6,8 +6,6 @@ We normally use them to describe how and why the code works.
 
 From the first sight, commenting might be obvious, but novices in programming usually get it wrong.
 
-<br>
-
 ## Bad comments
 
 Novices tend to use comments to explain "what is going on in the code". Like this:
@@ -44,7 +42,6 @@ Sometimes it's beneficial to replace a code piece with a function, like here:
 ```
 
 The better variant, with a factored out function `isPrime`:
-
 
 ```js
       function showPrimes(n) {
@@ -115,19 +112,13 @@ Once again, functions themselves tell what's going on. There's nothing to commen
 
 In reality, we can't totally avoid "explanatory" comments. There are complex algorithms. And there are smart "tweaks" for purposes of optimization. But generally we should try to keep the code simple and self-descriptive.
 
-<br>
-
 ## Good comments
 
 So, explanatory comments are usually bad. Which comments are good?
 
-<br>
-
 **Describe the architecture** 
 
 Provide a high-level overview of components, how they interact, what's the control flow in various situations... In short -- the bird's eye view of the code. There's a special diagram language [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) for high-level architecture diagrams. Definitely worth studying.
-
-<br>
 
 **Document a function usage** 
 
@@ -154,8 +145,6 @@ By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) ca
 
 Also, there are tools like [JSDoc 3](https://github.com/jsdoc3/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <http://usejsdoc.org/>.
 
-<br>
-
 **Why is the task solved this way?** 
 
 What's written is important. But what's *not* written may be even more important to understand what's going on. Why is the task solved exactly this way? The code gives no answer.
@@ -170,13 +159,9 @@ Without such comments the following situation is possible:
 
 Comments that explain the solution are very important. They help to continue development the right way.
 
-<br>
-
 **Any subtle features of the code? Where they are used?** 
 
 If the code has anything subtle and counter-intuitive, it's definitely worth commenting.
-
-<br>
 
 ## Summary
 
