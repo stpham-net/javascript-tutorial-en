@@ -522,7 +522,7 @@ We can use any variable to access the cabinet and modify its contents:
 
       admin.name = 'Pete'; // changed by the "admin" reference
 
-      alert(*!*user.name*/!*); // 'Pete', changes are seen from the "user" reference
+      alert(user.name); // 'Pete', changes are seen from the "user" reference
 ```
 
 The example above demonstrates that there is only one object. As if we had a cabinet with two keys and used one of them (`admin`) to get into it. Then, if we later use the other key (`user`) we would see changes.
