@@ -23,15 +23,15 @@ Thật ra, có hai phần trong Babel:
 
 2. Thứ hai, polyfill.
 
-    Bộ chuyển mã viết lại mã, vì vậy các tính năng cú pháp được đề cập. Nhưng đối với các chức năng mới, chúng ta cần viết một tập lệnh đặc biệt thực hiện chúng. JavaScript là một ngôn ngữ rất năng động, các tập lệnh có thể không chỉ thêm các hàm mới mà còn sửa đổi các hàm dựng sẵn, để chúng hoạt động theo tiêu chuẩn hiện đại.
+    Bộ chuyển mã (transpiler) viết lại mã, vì vậy các cú pháp tính năng (syntax features) được bao gồm. Nhưng đối với các chức năng mới, chúng ta cần viết một script đặc biệt thực hiện chúng. JavaScript là một ngôn ngữ rất năng động, các script có thể không chỉ thêm các hàm mới mà còn sửa đổi các hàm dựng sẵn, để chúng hoạt động theo tiêu chuẩn hiện đại.
 
-    Có một thuật ngữ "polyfill" cho các tập lệnh "điền vào" khoảng trống và thêm các triển khai bị thiếu.
+    Có một thuật ngữ "polyfill" tức là để cho các script "thu hẹp" khoảng cách và thêm các triển khai bị thiếu.
 
     Hai polyfill thú vị là:
     - [babel polyfill](https://babeljs.io/docs/usage/polyfill/) hỗ trợ rất nhiều, nhưng lớn.
     - Dịch vụ [polyfill.io](http://polyfill.io) cho phép tải/xây dựng (load/construct) các polyfill theo yêu cầu, tùy thuộc vào các tính năng chúng ta cần.
 
-Vì vậy, chúng ta cần thiết lập bộ chuyển mã và thêm polyfill cho các engine cũ để hỗ trợ các tính năng hiện đại.
+Vì vậy, chúng ta cần thiết lập bộ chuyển mã (transpiler) và thêm polyfill cho các engine cũ để hỗ trợ các tính năng hiện đại.
 
 Nếu chúng ta hướng tới các engine hiện đại và không sử dụng các tính năng ngoại trừ các tính năng được hỗ trợ ở mọi nơi, thì chúng ta không cần sử dụng Babel.
 
