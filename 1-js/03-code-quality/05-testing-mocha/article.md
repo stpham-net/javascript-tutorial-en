@@ -26,7 +26,7 @@ Chẳng hạn, chúng ta đang tạo một hàm `f`. Đã viết một số mã,
 
 Chúng ta hãy sử dụng một kỹ thuật có tên [Phát triển hướng hành vi](http://en.wikipedia.org/wiki/Behavior-driven_development) hoặc nói ngắn gọn là BDD. Cách tiếp cận đó được sử dụng trong số nhiều dự án. BDD không chỉ là về kiểm thử. Còn nhiều hơn nữa.
 
-** BDD là ba điều trong một: kiểm tra VÀ tài liệu VÀ ví dụ.**
+**BDD là ba điều trong một: kiểm tra VÀ tài liệu VÀ ví dụ.**
 
 Đủ từ. Hãy xem ví dụ.
 
@@ -54,7 +54,7 @@ Một thông số kỹ thuật (spec) có ba khối xây dựng chính mà bạn
 
 **`describe("title", function() { ... })`**
 
-Chúng ta đang mô tả chức năng gì. Sử dụng để nhóm "công nhân" -- các khối `it`. Trong trường hợp của chúng ta, chúng ta mô tả chức năng `pow`.
+Chúng ta đang mô tả chức năng gì. Sử dụng để nhóm "workers" -- các khối `it`. Trong trường hợp của chúng ta, chúng ta mô tả chức năng `pow`.
 
 **`it("title", function() { ... })`**
 
@@ -141,9 +141,9 @@ Trang HTML đầy đủ với các khung này và `pow` spec:
 Trang này có thể được chia thành năm phần:
 
 1. `<head>` -- thêm các thư viện và styles của bên thứ ba để kiểm tra.
-2. Trong trường hợp của chúng ta, `<script>` có chức năng kiểm tra -- với mã cho `pow`.
-3. Các thử nghiệm -- trong trường hợp của chúng ta là một tập lệnh bên ngoài `test.js` có `description("pow", ...)` từ phía trên.
-4. Phần tử HTML `<div id ="mocha">` sẽ được Mocha sử dụng để xuất kết quả.
+2. Trong trường hợp của chúng ta, `<script>` với function cần kiểm tra -- với mã cho `pow`.
+3. Các thử nghiệm -- trong trường hợp của chúng ta là một tập lệnh bên ngoài `test.js` có `describe("pow", ...)` từ phía trên.
+4. Phần tử HTML `<div id="mocha">` sẽ được Mocha sử dụng để xuất kết quả.
 5. Các bài kiểm tra được bắt đầu bằng lệnh `mocha.run()`.
 
 Kết quả:
