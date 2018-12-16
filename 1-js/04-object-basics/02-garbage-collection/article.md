@@ -1,35 +1,35 @@
-# Garbage collection
+# Thu gom dữ liệu rác (Garbage collection)
 
-Memory management in JavaScript is performed automatically and invisibly to us. We create primitives, objects, functions... All that takes memory.
+Quản lý bộ nhớ trong JavaScript được thực hiện tự động và vô hình đối với chúng ta. Chúng ta tạo ra nguyên thủy, đối tượng, chức năng ... Tất cả đều cần có bộ nhớ.
 
-What happens when something is not needed any more? How does the JavaScript engine discover it and clean it up?
+Điều gì xảy ra khi một cái gì đó không cần thiết nữa? Làm thế nào để JavaScript engine phát hiện ra nó và dọn sạch nó?
 
-## Reachability
+## Khả năng tiếp cận (Reachability)
 
-The main concept of memory management in JavaScript is *reachability*.
+Khái niệm chính về quản lý bộ nhớ trong JavaScript là *khả năng tiếp cận (reachability)*.
 
-Simply put, "reachable" values are those that are accessible or usable somehow. They are guaranteed to be stored in memory.
+Nói một cách đơn giản, giá trị "có thể tiếp cận" là những giá trị có thể truy cập hoặc sử dụng được bằng cách nào đó. Chúng được đảm bảo được lưu trữ trong bộ nhớ.
 
-1. There's a base set of inherently reachable values, that cannot be deleted for obvious reasons.
+1. Có một bộ cơ sở của các giá trị vốn có thể tiếp cận, không thể xóa được vì những lý do rõ ràng.
 
-    For instance:
+    Ví dụ:
 
-    - Local variables and parameters of the current function.
-    - Variables and parameters for other functions on the current chain of nested calls.
-    - Global variables.
-    - (there are some other, internal ones as well)
+    - Các biến cục bộ (Local variables) và tham số của hàm hiện tại.
+    - Biến và tham số cho các function khác trên chuỗi các cuộc gọi lồng nhau hiện tại.
+    - Các biến toàn cầu (Global variables).
+    - (có một số khác, nội bộ cũng tốt)
 
-    These values are called *roots*.
+    Các giá trị này được gọi là *roots*.
 
-2. Any other value is considered reachable if it's reachable from a root by a reference or by a chain of references.
+2. Bất kỳ giá trị nào khác được coi là có thể tiếp cận nếu có thể tiếp cận từ root bằng một tham chiếu hoặc bởi một chuỗi các tham chiếu (chain of references).
 
-    For instance, if there's an object in a local variable, and that object has a property referencing another object, that object is considered reachable. And those that it references are also reachable. Detailed examples to follow.
+    Chẳng hạn, nếu có một đối tượng trong một biến cục bộ và đối tượng đó có một thuộc tính tham chiếu đến một đối tượng khác, thì đối tượng đó được coi là có thể tiếp cận. Và những cái mà nó tham chiếu cũng có thể tiếp cận. Ví dụ chi tiết để tìm hiểu.
 
-There's a background process in the JavaScript engine that is called [garbage collector](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)). It monitors all objects and removes those that have become unreachable.
+Có một quy trình nền (background process) trong JavaScript engine được gọi là [trình thu gom dữ liệu rác (garbage collector)](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)). Nó giám sát tất cả các đối tượng và loại bỏ những cái đã trở nên không thể truy cập được.
 
-## A simple example
+## Một ví dụ đơn giản
 
-Here's the simplest example:
+Đây là ví dụ đơn giản nhất:
 
 ```js
       // user has a reference to the object
@@ -40,9 +40,9 @@ Here's the simplest example:
 
 ![](memory-user-john.png)
 
-Here the arrow depicts an object reference. The global variable `"user"` references the object `{name: "John"}` (we'll call it John for brevity). The `"name"` property of John stores a primitive, so it's painted inside the object.
+Ở đây mũi tên mô tả một tham chiếu đối tượng. Biến toàn cục `"user"` tham chiếu đến đối tượng `{name: "John"}` (chúng ta sẽ gọi nó là John cho đơn giản). Thuộc tính `"name"` của John lưu trữ nguyên thủy, do đó, nó được vẽ bên trong đối tượng.
 
-If the value of `user` is overwritten, the reference is lost:
+Nếu giá trị của `user` bị ghi đè, tham chiếu sẽ bị mất:
 
 ```js
       user = null;
@@ -50,11 +50,11 @@ If the value of `user` is overwritten, the reference is lost:
 
 ![](memory-user-john-lost.png)
 
-Now John becomes unreachable. There's no way to access it, no references to it. Garbage collector will junk the data and free the memory.
+Bây giờ John trở nên không thể truy cập. Không có cách nào để truy cập nó, không có tham chiếu đến nó. Trình thu gom dữ liệu vô nghĩa sẽ loại bỏ dữ liệu và giải phóng bộ nhớ.
 
-## Two references
+## Hai tham chiếu (Two references)
 
-Now let's imagine we copied the reference from `user` to `admin`:
+Bây giờ hãy tưởng tượng chúng ta đã sao chép tham chiếu từ `user` sang `admin`:
 
 ```js
       // user has a reference to the object
@@ -67,17 +67,17 @@ Now let's imagine we copied the reference from `user` to `admin`:
 
 ![](memory-user-john-admin.png)
 
-Now if we do the same:
+Bây giờ nếu chúng ta làm như này:
 
 ```js
       user = null;
 ```
 
-...Then the object is still reachable via `admin` global variable, so it's in memory. If we overwrite `admin` too, then it can be removed.
+...Sau đó, đối tượng vẫn có thể truy cập thông qua biến toàn cục `admin`, vì vậy nó nằm trong bộ nhớ. Nếu chúng ta cũng ghi đè lên `admin`, thì nó có thể bị xóa.
 
-## Interlinked objects
+## Đối tượng liên kết với nhau (Interlinked objects)
 
-Now a more complex example. The family:
+Bây giờ là một ví dụ phức tạp hơn. Gia đình:
 
 ```js
       function marry(man, woman) {
@@ -97,15 +97,15 @@ Now a more complex example. The family:
       });
 ```
 
-Function `marry` "marries" two objects by giving them references to each other and returns a new object that contains them both.
+Hàm `marry` "kết hôn" hai đối tượng bằng cách cho chúng tham chiếu với nhau và trả về một đối tượng mới chứa cả hai.
 
-The resulting memory structure:
+Kết quả cấu trúc bộ nhớ:
 
 ![](family.png)
 
-As of now, all objects are reachable.
+Đến bây giờ, tất cả các đối tượng có thể truy cập.
 
-Now let's remove two references:
+Bây giờ hãy xóa hai tham chiếu:
 
 ```js
       delete family.father;
@@ -114,100 +114,100 @@ Now let's remove two references:
 
 ![](family-delete-refs.png)
 
-It's not enough to delete only one of these two references, because all objects would still be reachable.
+Chỉ xóa một trong hai tham chiếu này là không đủ, bởi vì tất cả các đối tượng vẫn có thể truy cập được.
 
-But if we delete both, then we can see that John has no incoming reference any more:
+Nhưng nếu chúng ta xóa cả hai, thì chúng ta có thể thấy rằng John không còn tham chiếu đến nữa:
 
 ![](family-no-father.png)
 
-Outgoing references do not matter. Only incoming ones can make an object reachable. So, John is now unreachable and will be removed from the memory with all its data that also became unaccessible.
+Các tham chiếu đi không quan trọng. Chỉ những tham chiếu đến mới có thể làm cho một đối tượng có thể truy cập. Vì vậy, John hiện không thể truy cập được và sẽ bị xóa khỏi bộ nhớ với tất cả dữ liệu của nó cũng không thể truy cập được.
 
-After garbage collection:
+Sau khi thu gom dữ liệu rác (garbage collection):
 
 ![](family-no-father-2.png)
 
-## Unreachable island
+## Đảo không thể tiếp cận (Unreachable island)
 
-It is possible that the whole island of interlinked objects becomes unreachable and is removed from the memory.
+Cũng có thể là toàn bộ đảo của các đối tượng được liên kết với nhau trở nên không thể truy cập được và bị xóa khỏi bộ nhớ.
 
-The source object is the same as above. Then:
+Đối tượng nguồn giống như trên. Rồi:
 
 ```js
       family = null;
 ```
 
-The in-memory picture becomes:
+Hình ảnh trong bộ nhớ trở thành:
 
 ![](family-no-family.png)
 
-This example demonstrates how important the concept of reachability is.
+Ví dụ này cho thấy tầm quan trọng của khả năng tiếp cận.
 
-It's obvious that John and Ann are still linked, both have incoming references. But that's not enough.
+Rõ ràng là John và Ann vẫn được liên kết, cả hai đều có các tham chiếu đến. Nhưng điều đó là không đủ.
 
-The former `"family"` object has been unlinked from the root, there's no reference to it any more, so the whole island becomes unreachable and will be removed.
+Đối tượng `"family"` trước đây đã bị hủy liên kết từ root, không còn tham chiếu đến nó nữa, vì vậy toàn bộ hòn đảo trở nên không thể truy cập được và sẽ bị xóa.
 
-## Internal algorithms
+## Thuật toán nội bộ (Internal algorithms)
 
-The basic garbage collection algorithm is called "mark-and-sweep".
+Thuật toán thu gom dữ liệu rác cơ bản được gọi là "mark-and-sweep".
 
-The following "garbage collection" steps are regularly performed:
+Các bước "thu gom dữ liệu rác" sau đây thường xuyên được thực hiện:
 
-- The garbage collector takes roots and "marks" (remembers) them.
-- Then it visits and "marks" all references from them.
-- Then it visits marked objects and marks *their* references. All visited objects are remembered, so as not to visit the same object twice in the future.
-- ...And so on until there are unvisited references (reachable from the roots).
-- All objects except marked ones are removed.
+- Trình thu gom dữ liệu vô nghĩa lấy roots và "đánh dấu (marks)" (ghi nhớ) chúng.
+- Sau đó, nó truy cập và "đánh dấu (marks)" tất cả các tham chiếu từ chúng.
+- Sau đó, nó truy cập các đối tượng được đánh dấu và đánh dấu tham chiếu của *chúng*. Tất cả các đối tượng đã truy cập được ghi nhớ, để không truy cập cùng một đối tượng hai lần trong tương lai.
+- ...Và như vậy cho đến khi có các tham chiếu không tới cái gì cả (có thể tiếp cận từ gốc).
+- Tất cả các đối tượng ngoại trừ những đối tượng được đánh dấu được loại bỏ.
 
-For instance, let our object structure look like this:
+Ví dụ, hãy để cấu trúc đối tượng của chúng ta trông như thế này:
 
 ![](garbage-collection-1.png)
 
-We can clearly see an "unreachable island" to the right side. Now let's see how "mark-and-sweep" garbage collector deals with it.
+Chúng ta có thể thấy rõ một "hòn đảo không thể đến được" ở phía bên phải. Bây giờ hãy xem cách trình thu gom dữ liệu vô nghĩa "đánh dấu và quét (mark-and-sweep)" xử lý nó.
 
-The first step marks the roots:
+Bước đầu tiên đánh dấu roots:
 
 ![](garbage-collection-2.png)
 
-Then their references are marked:
+Sau đó, các tham chiếu của chúng được đánh dấu:
 
 ![](garbage-collection-3.png)
 
-...And their references, while possible:
+...Và các tham chiếu của chúng, trong khi có thể:
 
 ![](garbage-collection-4.png)
 
-Now the objects that could not be visited in the process are considered unreachable and will be removed:
+Bây giờ các đối tượng không thể truy cập trong process được coi là không thể tiếp cận và sẽ bị xóa:
 
 ![](garbage-collection-5.png)
 
-That's the concept of how garbage collection works.
+Đó là khái niệm về cách thức hoạt động của thu gom dữ liệu rác.
 
-JavaScript engines apply many optimizations to make it run faster and not affect the execution.
+Các JavaScript engine áp dụng nhiều tối ưu hóa để làm cho nó chạy nhanh hơn và không ảnh hưởng đến việc thực thi.
 
-Some of the optimizations:
+Một số tối ưu hóa:
 
-- **Generational collection** -- objects are split into two sets: "new ones" and "old ones". Many  objects appear, do their job and die fast, they can be cleaned up aggressively. Those that survive for long enough, become "old" and are examined less often.
+- **Bộ sưu tập thế hệ (Generational collection)** -- các đối tượng được chia thành hai bộ: "bộ mới (new ones)" và "bộ cũ (old ones)". Nhiều đối tượng xuất hiện, làm công việc của chúng và chết nhanh chóng, chúng có thể được dọn dẹp mạnh mẽ. Những cái sót đủ lâu, trở nên "già" và được kiểm tra ít thường xuyên hơn.
 
-- **Incremental collection** -- if there are many objects, and we try to walk and mark the whole object set at once, it may take some time and introduce visible delays in the execution. So the engine tries to split the garbage collection into pieces. Then the pieces are executed one by one, separately. That requires some extra bookkeeping between them to track changes, but we have many tiny delays instead of a big one.
+- **Bộ sưu tập tăng dần (Incremental collection)** -- nếu có nhiều đối tượng và chúng ta cố gắng đi qua và đánh dấu toàn bộ đối tượng một lượt, có thể mất một khoảng thời gian và đưa ra sự chậm trễ có thể nhìn thấy trong quá trình thực thi. Vì vậy, engine cố gắng chia bộ sưu tập dữ liệu rác thành từng mảnh. Sau đó, các mảnh được thực hiện từng cái một, riêng biệt. Điều đó đòi hỏi một số sổ sách bổ sung giữa chúng để theo dõi các thay đổi, nhưng chúng ta có nhiều sự chậm trễ nhỏ thay vì lớn.
 
-- **Idle-time collection** -- the garbage collector tries to run only while the CPU is idle, to reduce the possible effect on the execution.
+- **Bộ sưu tập thời gian nhàn rỗi (Idle-time collection)** - trình thu gom dữ liệu rác chỉ cố chạy trong khi CPU không hoạt động, để giảm hiệu ứng có thể xảy ra đối với việc thực thi.
 
-There are other optimizations and flavours of garbage collection algorithms. As much as I'd like to describe them here, I have to hold off, because different engines implement different tweaks and techniques. And, what's even more important, things change as engines develop, so going deeper "in advance", without a real need is probably not worth that. Unless, of course, it is a matter of pure interest, then there will be some links for you below.
+Có những tối ưu hóa và hương vị khác của thuật toán thu gom dữ liệu rác. Nhiều như tôi muốn mô tả chúng ở đây, tôi phải chờ, bởi vì các engine khác nhau thực hiện các kỹ thuật và chỉnh sửa khác nhau. Và, điều thậm chí còn quan trọng hơn, mọi thứ thay đổi khi engine phát triển, vì vậy tiến sâu hơn "trước", mà không có nhu cầu thực sự có lẽ không đáng. Trừ khi, tất nhiên, đó là một vấn đề quan tâm thuần túy, sau đó sẽ có một số liên kết cho bạn dưới đây.
 
-## Summary
+## Tóm lược
 
-The main things to know:
+Những điều chính cần biết:
 
-- Garbage collection is performed automatically. We cannot force or prevent it.
-- Objects are retained in memory while they are reachable.
-- Being referenced is not the same as being reachable (from a root): a pack of interlinked objects can become unreachable as a whole.
+- Thu gom dữ liệu rác rác được thực hiện tự động. Chúng ta không thể ép buộc hoặc ngăn chặn nó.
+- Các đối tượng được giữ lại trong bộ nhớ trong khi chúng có thể tiếp cận.
+- Được tham chiếu không giống như có thể tiếp cận (từ root): một gói các đối tượng được liên kết với nhau có thể trở nên không thể tiếp cận được.
 
-Modern engines implement advanced algorithms of garbage collection.
+Các engine hiện đại thực hiện các thuật toán tiên tiến của thu gom dữ liệu rác.
 
-A general book "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones et al) covers some of them.
+Một cuốn sách chung "Cẩm nang thu gom dữ liệu rác: Nghệ thuật quản lý bộ nhớ tự động" (R. Jones et al) bao gồm một số trong số đó.
 
-If you are familiar with low-level programming, the more detailed information about V8 garbage collector is in the article [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
+Nếu bạn đã quen thuộc với lập trình cấp thấp (low-level programming), thông tin chi tiết hơn về trình thu gom dữ liệu rác của V8 có trong bài viết [Chuyến tham quan V8: Thu gom dữ liệu rác](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
 
-[V8 blog](http://v8project.blogspot.com/) also publishes articles about changes in memory management from time to time. Naturally, to learn the garbage collection, you'd better prepare by learning about V8 internals in general and read the blog of [Vyacheslav Egorov](http://mrale.ph) who worked as one of V8 engineers. I'm saying: "V8", because it is best covered with articles in the internet. For other engines, many approaches are similar, but garbage collection differs in many aspects.
+[Blog V8](http://v8project.blogspot.com/) cũng xuất bản các bài viết về các thay đổi trong quản lý bộ nhớ theo thời gian. Đương nhiên, để tìm hiểu thu gom dữ liệu rác, bạn nên chuẩn bị tốt hơn bằng cách tìm hiểu về nội bộ V8 nói chung và đọc blog của [Vyacheslav Egorov](http://mrale.ph), người từng làm kỹ sư V8. Tôi đang nói: "V8", bởi vì nó được bao phủ tốt nhất với các bài viết trên internet. Đối với các engine khác, nhiều cách tiếp cận tương tự nhau, nhưng thu gom dữ liệu rác khác nhau ở nhiều khía cạnh.
 
-In-depth knowledge of engines is good when you need low-level optimizations. It would be wise to plan that as the next step after you're familiar with the language.  
+Kiến thức chuyên sâu về các engine là tốt khi bạn cần tối ưu hóa ở mức độ thấp. Sẽ là khôn ngoan khi lập kế hoạch là bước tiếp theo sau khi bạn quen thuộc với ngôn ngữ này.  
