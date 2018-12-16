@@ -1,3 +1,3 @@
 # Code quality
 
-This chapter explains coding practices that we'll use further in the development. 
+Chương này giải thích các thực hành mã hóa mà chúng ta sẽ sử dụng hơn nữa trong quá trình phát triển.
