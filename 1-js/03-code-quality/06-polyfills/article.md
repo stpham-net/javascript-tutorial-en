@@ -15,7 +15,7 @@ Khi chúng ta sử dụng các tính năng hiện đại của ngôn ngữ, mộ
 
 Ở đây Babel đến giải cứu.
 
-[Babel](https://babeljs.io) là một [transpiler] (https://en.wikipedia.org/wiki/Source-to-source_compiler). Nó viết lại mã JavaScript hiện đại thành tiêu chuẩn trước đó.
+[Babel](https://babeljs.io) là một [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler). Nó viết lại mã JavaScript hiện đại thành tiêu chuẩn trước đó.
 
 Thật ra, có hai phần trong Babel:
 
