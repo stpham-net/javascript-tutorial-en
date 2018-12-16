@@ -120,9 +120,9 @@ Có một "ký hiệu ngoặc vuông" thay thế hoạt động với bất kỳ
       delete user["likes birds"];
 ```
 
-Bây giờ mọi thứ đều ổn. Xin lưu ý rằng chuỗi bên trong ngoặc là trích dẫn chính xác (bất kỳ kiểu nào của trích dẫn nào cũng vậy).
+Bây giờ mọi thứ đều ổn. Xin lưu ý rằng chuỗi bên trong ngoặc là trích dẫn chính xác (bất kỳ kiểu trích dẫn nào cũng vậy).
 
-Dấu ngoặc vuông cũng cung cấp một cách để có được tên thuộc tính là kết quả của bất kỳ biểu thức nào -- trái ngược với một chuỗi ký tự -- như từ một biến như sau:
+Dấu ngoặc vuông cũng cung cấp một cách để có được tên thuộc tính là kết quả của bất kỳ biểu thức nào -- như trả ngược lại với một chuỗi ký tự -- như từ một biến như sau:
 
 ```js
       let key = "likes birds";
@@ -188,7 +188,7 @@ Chúng ta có thể sử dụng các biểu thức phức tạp hơn trong dấu
       };
 ```
 
-Dấu ngoặc vuông mạnh hơn nhiều so với ký hiệu dấu chấm. Chúng cho phép bất kỳ tên thuộc tính và các biến. Nhưng chúng cũng cồng kềnh hơn để viết.
+Dấu ngoặc vuông mạnh hơn nhiều so với ký hiệu dấu chấm. Chúng cho phép sử dụng bất kỳ tên thuộc tính và các biến. Nhưng chúng cũng cồng kềnh hơn để viết.
 
 Vì vậy, hầu hết thời gian, khi tên thuộc tính được biết và đơn giản, dấu chấm được sử dụng. Và nếu chúng ta cần một cái gì đó phức tạp hơn, thì chúng ta chuyển sang dấu ngoặc vuông.
 
@@ -212,7 +212,7 @@ Nhưng đối với một thuộc tính đối tượng, không có hạn chế 
       alert( obj.for + obj.let + obj.return );  // 6
 ```
 
-Về cơ bản, bất kỳ tên nào cũng được cho phép, nhưng có một tên đặc biệt: `"__proto __"` được đối xử đặc biệt vì lý do lịch sử. Chẳng hạn, chúng ta không thể đặt nó thành một giá trị phi đối tượng:
+Về cơ bản, bất kỳ tên nào cũng được cho phép, nhưng có một tên đặc biệt: `"__proto __"` được đối xử đặc biệt vì lý do lịch sử. Chẳng hạn, chúng ta không thể đặt nó thành một giá trị non-object:
 
 ```js
       let obj = {};
@@ -278,7 +278,7 @@ Chúng ta có thể sử dụng cả thuộc tính bình thường và tốc ký
 
 ## Kiểm tra sự tồn tại
 
-Một tính năng đáng chú ý của object là có thể truy cập bất kỳ thuộc tính nào. Sẽ không có lỗi nếu thuộc tính không tồn tại! Truy cập một thuộc tính không tồn tại chỉ trả về `undefined`. Nó cung cấp một cách rất phổ biến để kiểm tra xem thuộc tính có tồn tại hay không -- để lấy nó và so sánh với không xác định:
+Một tính năng đáng chú ý của object là có thể truy cập bất kỳ thuộc tính nào. Sẽ không có lỗi nếu thuộc tính không tồn tại! Truy cập một thuộc tính không tồn tại chỉ trả về `undefined`. Nó cung cấp một cách rất phổ biến để kiểm tra xem thuộc tính có tồn tại hay không -- để lấy nó và so sánh với undefined:
 
 ```js
       let user = {};
@@ -337,7 +337,7 @@ Thông thường, so sánh nghiêm ngặt `"=== undefined"` kiểm tra hoạt đ
 
 Trong đoạn mã trên, thuộc tính `obj.test` về mặt kỹ thuật tồn tại. Vì vậy, toán tử `in` hoạt động đúng.
 
-Các tình huống như thế này rất hiếm khi xảy ra, vì `undefined` thường không được chỉ định. Chúng tôi chủ yếu sử dụng `null` cho các giá trị "unknown" hoặc "empty". Vì vậy, toán tử `in` là một vị khách kỳ lạ trong mã.
+Các tình huống như thế này rất hiếm khi xảy ra, vì `undefined` thường không được chỉ định. Chúng ta chủ yếu sử dụng `null` cho các giá trị "unknown" hoặc "empty". Vì vậy, toán tử `in` là một vị khách kỳ lạ trong mã.
 
 > ---
 
@@ -593,7 +593,7 @@ Vì vậy, sao chép một biến đối tượng sẽ tạo thêm một tham ch
 
 Nhưng nếu chúng ta cần sao chép một đối tượng thì sao? Tạo một bản sao độc lập, một nhân bản?
 
-Điều đó cũng có thể thực hiện được, nhưng khó khăn hơn một chút, vì không có phương thức tích hợp sẵn cho JavaScript. Trên thực tế, điều đó hiếm khi cần thiết. Sao chép bằng cách tham khảo là tốt hầu hết thời gian.
+Điều đó cũng có thể thực hiện được, nhưng khó khăn hơn một chút, vì không có phương thức tích hợp sẵn cho JavaScript. Trên thực tế, điều đó hiếm khi cần thiết. Sao chép bằng cách tham chiếu là tốt hầu hết thời gian.
 
 Nhưng nếu chúng ta thực sự muốn điều đó, thì chúng ta cần tạo một đối tượng mới và sao chép cấu trúc của đối tượng hiện có bằng cách lặp lại các thuộc tính của nó và sao chép chúng ở cấp độ nguyên thủy.
 
@@ -627,7 +627,7 @@ Cú pháp là:
 ```
 
 - Các đối số `dest` và  `src1, ..., srcN` (có thể nhiều như cần thiết) là các đối tượng.
-- Nó sao chép các thuộc tính của tất cả các đối tượng `src1, ..., srcN` thành `dest`. Nói cách khác, các thuộc tính của tất cả các đối số bắt đầu từ thứ 2 được sao chép vào thứ 1. Sau đó, nó trả về `dest`.
+- Nó sao chép các thuộc tính của tất cả các đối tượng `src1, ..., srcN` vào trong `dest`. Nói cách khác, các thuộc tính của tất cả các đối số bắt đầu từ thứ 2 được sao chép vào thứ 1. Sau đó, nó trả về `dest`.
 
 Chẳng hạn, chúng ta có thể sử dụng nó để hợp nhất một số đối tượng thành một:
 
@@ -683,7 +683,7 @@ Như thế này:
       alert( user.sizes.height ); // 182
 ```
 
-Bây giờ không đủ để sao chép `clone.sizes = user.sizes`, vì`user.sizes` là một đối tượng, nó sẽ được sao chép bằng tham chiếu. Vì vậy, `clone` và `user` sẽ có cùng kích thước:
+Bây giờ không đủ để sao chép `clone.sizes = user.sizes`, vì `user.sizes` là một đối tượng, nó sẽ được sao chép bằng tham chiếu. Vì vậy, `clone` và `user` sẽ có cùng sizes:
 
 Như thế này:
 
@@ -726,7 +726,7 @@ Toán tử bổ sung:
 - Để kiểm tra xem một thuộc tính có khóa đã cho có tồn tại không: `"key" in obj`.
 - Để lặp lại một đối tượng: vòng lặp `for(let key in obj)`.
 
-Các đối tượng được chỉ định và sao chép bằng cách tham chiếu. Nói cách khác, một biến lưu trữ không phải là "giá trị đối tượng", mà là "tham chiếu" (địa chỉ trong bộ nhớ) cho giá trị. Vì vậy, sao chép một biến như vậy hoặc chuyển nó dưới dạng đối số hàm sao chép tham chiếu đó, không phải đối tượng. Tất cả các hoạt động thông qua các tham chiếu được sao chép (như thêm/xóa các thuộc tính) được thực hiện trên cùng một đối tượng.
+Các đối tượng được chỉ định và sao chép bằng cách tham chiếu. Nói cách khác, một biến lưu trữ không phải là "giá trị đối tượng", mà là "tham chiếu" (địa chỉ trong bộ nhớ) cho giá trị. Vì vậy, sao chép một biến như vậy hoặc chuyển nó dưới dạng đối số của hàm sao chép tham chiếu đó, không phải đối tượng. Tất cả các hoạt động thông qua các tham chiếu được sao chép (như thêm/xóa các thuộc tính) được thực hiện trên cùng một đối tượng.
 
 Để tạo một "bản sao thực" (một nhân bản), chúng ta có thể sử dụng `Object.assign` hoặc [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
 
