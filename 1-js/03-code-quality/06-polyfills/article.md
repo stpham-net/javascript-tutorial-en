@@ -37,20 +37,13 @@ If we orient towards modern engines and do not use features except those support
 
 ## Examples in the tutorial
 
-
-````online
 Most examples are runnable at-place, like this:
 
-```js run
-alert('Press the "Play" button in the upper-right corner to run');
+```js
+      alert('Press the "Play" button in the upper-right corner to run');
 ```
 
 Examples that use modern JS will work only if your browser supports it.
-````
-
-```offline
-As you're reading the offline version, examples are not runnable. But they usually work :)
-```
 
 [Chrome Canary](https://www.google.com/chrome/browser/canary.html) is good for all examples, but other modern browsers are mostly fine too.
 
