@@ -1,50 +1,38 @@
 
-# Polyfills
+# Polyfill
 
-The JavaScript language steadily evolves. New proposals to the language appear regularly, they are analyzed and, if considered worthy, are appended to the list at <https://tc39.github.io/ecma262/> and then progress to the [specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm).
+Ngôn ngữ JavaScript phát triển đều đặn. Các đề xuất mới cho ngôn ngữ xuất hiện thường xuyên, chúng được phân tích và, nếu được coi là xứng đáng, được thêm vào danh sách tại <https://tc39.github.io/ecma262/> và sau đó chuyển sang [specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm).
 
-Teams behind JavaScript engines have their own ideas about what to implement first. They may decide to implement proposals that are in draft and postpone things that are already in the spec, because they are less interesting or just harder to do.
+Các nhóm đằng sau các công cụ JavaScript có ý tưởng riêng của họ về những gì cần triển khai trước. Họ có thể quyết định thực hiện các đề xuất trong dự thảo và hoãn lại những điều đã có trong thông số kỹ thuật (spec), bởi vì chúng ít thú vị hơn hoặc chỉ khó thực hiện hơn.
 
-So it's quite common for an engine to implement only the part of the standard.
+Vì vậy, nó khá phổ biến đối với một engine chỉ thực hiện một phần của tiêu chuẩn.
 
-A good page to see the current state of support for language features is <https://kangax.github.io/compat-table/es6/> (it's big, we have a lot to study yet).
+Một trang tốt để xem trạng thái hỗ trợ hiện tại cho các tính của năng ngôn ngữ là <https://kangax.github.io/compat-table/es6/> (nó thật lớn, chúng ta còn nhiều điều phải nghiên cứu).
 
 ## Babel
 
-When we use modern features of the language, some engines may fail to support such code. Just as said, not all features are implemented everywhere.
+Khi chúng ta sử dụng các tính năng hiện đại của ngôn ngữ, một số engine có thể không hỗ trợ mã đó. Như đã nói, không phải tất cả các tính năng được thực hiện ở khắp mọi nơi.
 
-Here Babel comes to the rescue.
+Ở đây Babel đến giải cứu.
 
-[Babel](https://babeljs.io) is a [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler). It rewrites modern JavaScript code into the previous standard.
+[Babel](https://babeljs.io) là một [transpiler] (https://en.wikipedia.org/wiki/Source-to-source_compiler). Nó viết lại mã JavaScript hiện đại thành tiêu chuẩn trước đó.
 
-Actually, there are two parts in Babel:
+Thật ra, có hai phần trong Babel:
 
-1. First, the transpiler program, which rewrites the code. The developer runs it on their own computer. It rewrites the code into the older standard. And then the code is delivered to the website for users. Modern project build system like [webpack](http://webpack.github.io/) or [brunch](http://brunch.io/) provide means to run transpiler automatically on every code change, so that doesn't involve any time loss from our side.
+1. Đầu tiên, chương trình transpiler, viết lại mã. Nhà phát triển chạy nó trên máy tính của riêng họ. Nó viết lại mã thành tiêu chuẩn cũ hơn. Và sau đó mã được gửi đến trang web cho người dùng. Hệ thống xây dựng dự án hiện đại như [webpack](http://webpack.github.io/) hoặc [brunch](http://brunch.io/) cung cấp phương tiện để chạy transpiler tự động trên mỗi thay đổi mã, do đó không mất thêm bất kì thời gian cho việc đó từ phía chúng ta.
 
-2. Second, the polyfill.
+2. Thứ hai, polyfill.
 
-    The transpiler rewrites the code, so syntax features are covered. But for new functions we need to write a special script that implements them. JavaScript is a highly dynamic language, scripts may not just add new functions, but also modify built-in ones, so that they behave according to the modern standard.
+    Bộ chuyển mã viết lại mã, vì vậy các tính năng cú pháp được đề cập. Nhưng đối với các chức năng mới, chúng ta cần viết một tập lệnh đặc biệt thực hiện chúng. JavaScript là một ngôn ngữ rất năng động, các tập lệnh có thể không chỉ thêm các hàm mới mà còn sửa đổi các hàm dựng sẵn, để chúng hoạt động theo tiêu chuẩn hiện đại.
 
-    There's a term "polyfill" for scripts that "fill in" the gap and add missing implementations.
+    Có một thuật ngữ "polyfill" cho các tập lệnh "điền vào" khoảng trống và thêm các triển khai bị thiếu.
 
-    Two interesting polyfills are:
-    - [babel polyfill](https://babeljs.io/docs/usage/polyfill/) that supports a lot, but is big.
-    - [polyfill.io](http://polyfill.io) service that allows to load/construct polyfills on-demand, depending on the features we need.
+    Hai polyfill thú vị là:
+    - [babel polyfill](https://babeljs.io/docs/usage/polyfill/) hỗ trợ rất nhiều, nhưng lớn.
+    - Dịch vụ [polyfill.io](http://polyfill.io) cho phép tải/xây dựng (load/construct) các polyfill theo yêu cầu, tùy thuộc vào các tính năng chúng ta cần.
 
-So, we need to setup the transpiler and add the polyfill for old engines to support modern features.
+Vì vậy, chúng ta cần thiết lập bộ chuyển mã và thêm polyfill cho các engine cũ để hỗ trợ các tính năng hiện đại.
 
-If we orient towards modern engines and do not use features except those supported everywhere, then we don't need to use Babel.
+Nếu chúng ta hướng tới các engine hiện đại và không sử dụng các tính năng ngoại trừ các tính năng được hỗ trợ ở mọi nơi, thì chúng ta không cần sử dụng Babel.
 
-## Examples in the tutorial
-
-Most examples are runnable at-place, like this:
-
-```js
-      alert('Press the "Play" button in the upper-right corner to run');
-```
-
-Examples that use modern JS will work only if your browser supports it.
-
-[Chrome Canary](https://www.google.com/chrome/browser/canary.html) is good for all examples, but other modern browsers are mostly fine too.
-
-Note that on production we can use Babel to translate the code into suitable for less recent browsers, so there will be no such limitation, the code will run everywhere.
+Lưu ý rằng khi sản xuất (production) chúng ta có thể sử dụng Babel để dịch mã thành phù hợp với các trình duyệt ít gần đây hơn, do đó sẽ không có giới hạn như vậy, mã sẽ chạy ở mọi nơi.
