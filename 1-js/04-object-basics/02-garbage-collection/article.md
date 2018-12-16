@@ -32,10 +32,10 @@ There's a background process in the JavaScript engine that is called [garbage co
 Here's the simplest example:
 
 ```js
-// user has a reference to the object
-let user = {
-  name: "John"
-};
+      // user has a reference to the object
+      let user = {
+        name: "John"
+      };
 ```
 
 ![](memory-user-john.png)
@@ -45,7 +45,7 @@ Here the arrow depicts an object reference. The global variable `"user"` referen
 If the value of `user` is overwritten, the reference is lost:
 
 ```js
-user = null;
+      user = null;
 ```
 
 ![](memory-user-john-lost.png)
@@ -57,21 +57,20 @@ Now John becomes unreachable. There's no way to access it, no references to it. 
 Now let's imagine we copied the reference from `user` to `admin`:
 
 ```js
-// user has a reference to the object
-let user = {
-  name: "John"
-};
+      // user has a reference to the object
+      let user = {
+        name: "John"
+      };
 
-*!*
-let admin = user;
-*/!*
+      let admin = user;
 ```
 
 ![](memory-user-john-admin.png)
 
 Now if we do the same:
+
 ```js
-user = null;
+      user = null;
 ```
 
 ...Then the object is still reachable via `admin` global variable, so it's in memory. If we overwrite `admin` too, then it can be removed.
@@ -81,21 +80,21 @@ user = null;
 Now a more complex example. The family:
 
 ```js
-function marry(man, woman) {
-  woman.husband = man;
-  man.wife = woman;
+      function marry(man, woman) {
+        woman.husband = man;
+        man.wife = woman;
 
-  return {
-    father: man,
-    mother: woman
-  }
-}
+        return {
+          father: man,
+          mother: woman
+        }
+      }
 
-let family = marry({
-  name: "John"
-}, {
-  name: "Ann"
-});
+      let family = marry({
+        name: "John"
+      }, {
+        name: "Ann"
+      });
 ```
 
 Function `marry` "marries" two objects by giving them references to each other and returns a new object that contains them both.
@@ -109,8 +108,8 @@ As of now, all objects are reachable.
 Now let's remove two references:
 
 ```js
-delete family.father;
-delete family.mother.husband;
+      delete family.father;
+      delete family.mother.husband;
 ```
 
 ![](family-delete-refs.png)
@@ -134,7 +133,7 @@ It is possible that the whole island of interlinked objects becomes unreachable 
 The source object is the same as above. Then:
 
 ```js
-family = null;
+      family = null;
 ```
 
 The in-memory picture becomes:
@@ -188,7 +187,9 @@ JavaScript engines apply many optimizations to make it run faster and not affect
 Some of the optimizations:
 
 - **Generational collection** -- objects are split into two sets: "new ones" and "old ones". Many  objects appear, do their job and die fast, they can be cleaned up aggressively. Those that survive for long enough, become "old" and are examined less often.
+
 - **Incremental collection** -- if there are many objects, and we try to walk and mark the whole object set at once, it may take some time and introduce visible delays in the execution. So the engine tries to split the garbage collection into pieces. Then the pieces are executed one by one, separately. That requires some extra bookkeeping between them to track changes, but we have many tiny delays instead of a big one.
+
 - **Idle-time collection** -- the garbage collector tries to run only while the CPU is idle, to reduce the possible effect on the execution.
 
 There are other optimizations and flavours of garbage collection algorithms. As much as I'd like to describe them here, I have to hold off, because different engines implement different tweaks and techniques. And, what's even more important, things change as engines develop, so going deeper "in advance", without a real need is probably not worth that. Unless, of course, it is a matter of pure interest, then there will be some links for you below.
