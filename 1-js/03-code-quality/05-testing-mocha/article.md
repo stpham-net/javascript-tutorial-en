@@ -1,44 +1,44 @@
-# Automated testing with mocha
+# Kiểm tra tự động với mocha
 
-Automated testing will be used in further tasks.
+Kiểm tra tự động sẽ được sử dụng trong các nhiệm vụ tiếp theo.
 
-It's actually a part of the "educational minimum" of a developer.
+Nó thực sự là một phần của "mức giáo dục tối thiểu" của nhà phát triển.
 
-## Why we need tests?
+## Tại sao chúng ta cần kiểm tra?
 
-When we write a function, we can usually imagine what it should do: which parameters give which results.
+Khi chúng ta viết một hàm, chúng ta thường có thể tưởng tượng nó nên làm gì: tham số nào cho kết quả nào.
 
-During development, we can check the function by running it and comparing the outcome with the expected one. For instance, we can do it in the console.
+Trong quá trình phát triển, chúng ta có thể kiểm tra function bằng cách chạy nó và so sánh kết quả với dự kiến. Ví dụ, chúng ta có thể làm điều đó trong console.
 
-If something is wrong -- then we fix the code, run again, check the result -- and so on till it works.
+Nếu có gì đó không đúng - sau đó chúng ta sửa mã, chạy lại, kiểm tra kết quả -- và cứ thế cho đến khi nó hoạt động.
 
-But such manual "re-runs" are imperfect.
+Nhưng "chạy lại (re-runs)" thủ công như vậy là không hoàn hảo.
 
-**When testing a code by manual re-runs, it's easy to miss something.**
+**Khi kiểm tra mã bằng cách chạy lại thủ công, thật dễ dàng bỏ lỡ điều gì đó.**
 
-For instance, we're creating a function `f`. Wrote some code, testing: `f(1)` works, but `f(2)` doesn't work. We fix the code and now `f(2)` works. Looks complete? But we forgot to re-test `f(1)`. That may lead to an error.
+Chẳng hạn, chúng ta đang tạo một hàm `f`. Đã viết một số mã, kiểm tra: `f(1)` hoạt động, nhưng `f(2)` không hoạt động. Chúng ta sửa mã và bây giờ `f(2)` hoạt động. Trông xong chưa? Nhưng chúng ta đã quên kiểm tra lại `f(1)`. Điều đó có thể dẫn đến một lỗi.
 
-That's very typical. When we develop something, we keep a lot of possible use cases in mind. But it's hard to expect a programmer to check all of them manually after every change. So it becomes easy to fix one thing and break another one.
+Điều đó rất điển hình. Khi chúng ta phát triển một cái gì đó, chúng ta ghi nhớ rất nhiều trường hợp sử dụng có thể. Nhưng thật khó để mong đợi một lập trình viên kiểm tra tất cả chúng theo cách thủ công sau mỗi thay đổi. Vì vậy, nó trở nên dễ dàng để sửa chữa một điều và phá vỡ một điều khác.
 
-**Automated testing means that tests are written separately, in addition to the code. They can be executed easily and check all the main use cases.**
+**Kiểm thử tự động có nghĩa là các kiểm tra được viết riêng, là mã phụ bổ xung thêm cho mã chính. Chúng có thể được thực hiện dễ dàng và kiểm tra tất cả các trường hợp sử dụng chính.**
 
-## Behavior Driven Development (BDD)
+## Phát triển hướng hành vi (BDD)
 
-Let's use a technique named [Behavior Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development) or, in short, BDD. That approach is used among many projects. BDD is not just about testing. That's more.
+Chúng ta hãy sử dụng một kỹ thuật có tên [Phát triển hướng hành vi](http://en.wikipedia.org/wiki/Behavior-driven_development) hoặc nói ngắn gọn là BDD. Cách tiếp cận đó được sử dụng trong số nhiều dự án. BDD không chỉ là về kiểm thử. Còn nhiều hơn nữa.
 
-**BDD is three things in one: tests AND documentation AND examples.**
+** BDD là ba điều trong một: kiểm tra VÀ tài liệu VÀ ví dụ.**
 
-Enough words. Let's see the example.
+Đủ từ. Hãy xem ví dụ.
 
-## Development of "pow": the spec
+## Phát triển "pow": thông số kỹ thuật (the spec)
 
-Let's say we want to make a function `pow(x, n)` that raises `x` to an integer power `n`. We assume that `n≥0`.
+Giả sử chúng ta muốn tạo một hàm `pow(x, n)` làm tăng `x` thành một số nguyên `n`. Chúng ta giả sử rằng `n ≥ 0`.
 
-That task is just an example: there's the `**` operator in JavaScript that can do that, but here we concentrate on the development flow that can be applied to more complex tasks as well.
+Nhiệm vụ đó chỉ là một ví dụ: có toán tử `**` trong JavaScript có thể làm điều đó, nhưng ở đây chúng ta tập trung vào luồng phát triển có thể được áp dụng cho các tác vụ phức tạp hơn.
 
-Before creating the code of `pow`, we can imagine what the function should do and describe it.
+Trước khi tạo mã của `pow`, chúng ta có thể tưởng tượng hàm nên làm gì và mô tả nó.
 
-Such description is called a *specification* or, in short, a spec, and looks like this:
+Mô tả như vậy được gọi là *đặc tả* hoặc nói ngắn gọn là một thông số kỹ thuật (a spec) và trông như thế này:
 
 ```js
       describe("pow", function() {
@@ -50,51 +50,51 @@ Such description is called a *specification* or, in short, a spec, and looks lik
       });
 ```
 
-A spec has three main building blocks that you can see above:
+Một thông số kỹ thuật (spec) có ba khối xây dựng chính mà bạn có thể thấy ở trên:
 
 **`describe("title", function() { ... })`**
 
-What functionality we're describing. Uses to group "workers" -- the `it` blocks. In our case we're describing the function `pow`.
+Chúng ta đang mô tả chức năng gì. Sử dụng để nhóm "công nhân" -- các khối `it`. Trong trường hợp của chúng ta, chúng ta mô tả chức năng `pow`.
 
 **`it("title", function() { ... })`**
 
-In the title of `it` we *in a human-readable way* describe the particular use case, and the second argument is a function that tests it.
+Trong title của `it` chúng ta *theo cách có thể đọc được của con người* mô tả trường hợp sử dụng cụ thể và đối số thứ hai là một hàm kiểm tra nó.
 
 **`assert.equal(value1, value2)`**
 
-The code inside `it` block, if the implementation is correct, should execute without errors.
+Mã bên trong khối `it`, nếu việc triển khai là chính xác, sẽ thực thi không có lỗi.
 
-Functions `assert.*` are used to check whether `pow` works as expected. Right here we're using one of them -- `assert.equal`, it compares arguments and yields an error if they are not equal. Here it checks that the result of `pow(2, 3)` equals `8`.
+Các hàm `assert.*` Được sử dụng để kiểm tra xem `pow` có hoạt động như mong đợi không. Ngay tại đây, chúng ta đang sử dụng một trong số chúng -- `assert.equal`, nó so sánh các đối số và đưa ra lỗi nếu chúng không bằng nhau. Ở đây nó kiểm tra xem kết quả của `pow(2, 3)` bằng `8`.
 
-There are other types of comparisons and checks that we'll see further.
+Có nhiều loại so sánh và kiểm tra khác mà chúng ta sẽ xem thêm.
 
-## The development flow
+## Luồng phát triển
 
-The flow of development usually looks like this:
+Dòng phát triển thường trông như thế này:
 
-1. An initial spec is written, with tests for the most basic functionality.
-2. An initial implementation is created.
-3. To check whether it works, we run the testing framework [Mocha](http://mochajs.org/) (more details soon) that runs the spec. Errors are displayed. We make corrections until everything works.
-4. Now we have a working initial implementation with tests.
-5. We add more use cases to the spec, probably not yet supported by the implementations. Tests start to fail.
-6. Go to 3, update the implementation till tests give no errors.
-7. Repeat steps 3-6 till the functionality is ready.
+1. Một thông số ban đầu được viết, với các bài kiểm tra cho các chức năng cơ bản nhất.
+2. Một triển khai ban đầu được tạo ra.
+3. Để kiểm tra xem nó có hoạt động hay không, chúng ta chạy khung thử nghiệm [Mocha](http://mochajs.org/) (chi tiết sẽ sớm biết) để chạy thông số kỹ thuật (spec). Lỗi được hiển thị. Chúng ta sửa chữa cho đến khi mọi thứ hoạt động.
+4. Bây giờ chúng ta có một triển khai ban đầu làm việc với các bài kiểm tra.
+5. Chúng ta thêm nhiều trường hợp sử dụng vào spec, có thể chưa được hỗ trợ bởi việc triển khai. Các thử nghiệm bắt đầu thất bại.
+6. Tới 3, cập nhật việc thực hiện cho đến khi các bài kiểm tra không có lỗi.
+7. Lặp lại các bước 3-6 cho đến khi chức năng đã sẵn sàng.
 
-So, the development is *iterative*. We write the spec, implement it, make sure tests pass, then write more tests, make sure they work etc. At the end we have both a working implementation and tests for it.
+Vì vậy, sự phát triển là *lặp lại*. Chúng ta viết spec, thực hiện nó, đảm bảo kiểm tra vượt qua, sau đó viết thêm các bài kiểm tra, đảm bảo chúng hoạt động, v.v ... Cuối cùng, chúng ta có cả việc thực hiện và kiểm tra cho nó.
 
-In our case, the first step is complete: we have an initial spec for `pow`. So let's make an implementation. But before that let's make a "zero" run of the spec, just to see that tests are working (they will all fail).
+Trong trường hợp của chúng ta, bước đầu tiên đã hoàn tất: chúng ta có một thông số ban đầu cho `pow`. Vì vậy, hãy thực hiện. Nhưng trước đó, hãy thực hiện một bước chạy "không (zero)" của spec, chỉ để thấy rằng các thử nghiệm đang hoạt động (tất cả chúng sẽ đều thất bại).
 
 ## The spec in action
 
-Here in the tutorial we'll be using the following JavaScript libraries for tests:
+Ở đây trong hướng dẫn, chúng ta sẽ sử dụng các thư viện JavaScript sau đây để kiểm tra:
 
-- [Mocha](http://mochajs.org/) -- the core framework: it provides common testing functions including `describe` and `it` and the main function that runs tests.
-- [Chai](http://chaijs.com) -- the library with many assertions. It allows to use a lot of different assertions, for now we need only `assert.equal`.
-- [Sinon](http://sinonjs.org/) -- a library to spy over functions, emulate built-in functions and more, we'll need it much later.
+- [Mocha](http://mochajs.org/) -- khung cốt lõi: nó cung cấp các chức năng kiểm tra phổ biến bao gồm `description` và `it` và chức năng chính chạy thử nghiệm.
+- [Chai](http://chaijs.com) -- thư viện với nhiều xác nhận. Nó cho phép sử dụng rất nhiều xác nhận khác nhau, bây giờ chúng ta chỉ cần `assert.equal`.
+- [Sinon](http://sinonjs.org/) - một thư viện để theo dõi các chức năng, mô phỏng các chức năng tích hợp và hơn thế nữa, chúng ta sẽ cần nó nhiều hơn sau này.
 
-These libraries are suitable for both in-browser and server-side testing. Here we'll consider the browser variant.
+Các thư viện này phù hợp cho cả thử nghiệm trên trình duyệt và phía máy chủ. Ở đây chúng ta sẽ xem xét các biến thể trình duyệt.
 
-The full HTML page with these frameworks and `pow` spec:
+Trang HTML đầy đủ với các khung này và `pow` spec:
 
 ```html
       <!DOCTYPE html>
@@ -138,25 +138,25 @@ The full HTML page with these frameworks and `pow` spec:
       </html>
 ```
 
-The page can be divided into five parts:
+Trang này có thể được chia thành năm phần:
 
-1. The `<head>` -- add third-party libraries and styles for tests.
-2. The `<script>` with the function to test, in our case -- with the code for `pow`.
-3. The tests -- in our case an external script `test.js` that has `describe("pow", ...)` from above.
-4. The HTML element `<div id="mocha">` will be used by Mocha to output results.
-5. The tests are started by the command `mocha.run()`.
+1. `<head>` -- thêm các thư viện và styles của bên thứ ba để kiểm tra.
+2. Trong trường hợp của chúng ta, `<script>` có chức năng kiểm tra -- với mã cho `pow`.
+3. Các thử nghiệm -- trong trường hợp của chúng ta là một tập lệnh bên ngoài `test.js` có `description("pow", ...)` từ phía trên.
+4. Phần tử HTML `<div id ="mocha">` sẽ được Mocha sử dụng để xuất kết quả.
+5. Các bài kiểm tra được bắt đầu bằng lệnh `mocha.run()`.
 
-The result:
+Kết quả:
 
 <http://plnkr.co/edit/Coz2HZNfrPtUhbE5oXTv?p=preview>
 
-As of now, the test fails, there's an error. That's logical: we have an empty function code in `pow`, so `pow(2,3)` returns `undefined` instead of `8`.
+Đến bây giờ, thử nghiệm thất bại, có một lỗi. Điều đó hợp lý: chúng ta có một empty function code trong `pow`, vì vậy `pow(2,3)` trả về `undefined` thay vì `8`.
 
-For the future, let's note that there are advanced test-runners, like [karma](https://karma-runner.github.io/) and others. So it's generally not a problem to setup many different tests.
+Trong tương lai, chúng ta hãy lưu ý rằng có những test-runners nâng cao, như [karma](https://karma-runner.github.io/) và những cái khác. Vì vậy, nói chung không phải là vấn đề để thiết lập nhiều thử nghiệm khác nhau.
 
-## Initial implementation
+## Triển khai ban đầu
 
-Let's make a simple implementation of `pow`, for tests to pass:
+Chúng ta hãy thực hiện đơn giản `pow`, để các bài kiểm tra vượt qua:
 
 ```js
       function pow() {
@@ -164,21 +164,21 @@ Let's make a simple implementation of `pow`, for tests to pass:
       }
 ```
 
-Wow, now it works!
+Wow, bây giờ nó hoạt động!
 
 <http://plnkr.co/edit/N0g8BSrn0BYt0YnL2xyt?p=preview>
 
-## Improving the spec
+## Cải thiện thông số kỹ thuật (Improving the spec)
 
-What we've done is definitely a cheat. The function does not work: an attempt to calculate `pow(3,4)` would give an incorrect result, but tests pass.
+Những gì chúng ta đã làm chắc chắn là một mánh gian lận. Hàm không hoạt động: một nỗ lực để tính toán `pow(3,4)` sẽ cho kết quả không chính xác, nhưng các bài kiểm tra đã vượt qua.
 
-...But the situation is quite typical, it happens in practice. Tests pass, but the function works wrong. Our spec is imperfect. We need to add more use cases to it.
+...Nhưng tình huống khá điển hình, nó xảy ra trong thực tế. Kiểm tra vượt qua, nhưng chức năng hoạt động sai. Spec của chúng ta là không hoàn hảo. Chúng ta cần thêm nhiều trường hợp sử dụng cho nó.
 
-Let's add one more test to see if `pow(3, 4) = 81`.
+Hãy thêm một bài kiểm tra nữa để xem nếu `pow(3, 4) = 81`.
 
-We can select one of two ways to organize the test here:
+Chúng ta có thể chọn một trong hai cách để tổ chức kiểm tra tại đây:
 
-1. The first variant -- add one more `assert` into the same `it`:
+1. Biến thể đầu tiên -- thêm một `assert` vào cùng `it`:
 
     ```js
     describe("pow", function() {
@@ -191,7 +191,7 @@ We can select one of two ways to organize the test here:
     });
     ```
     
-2. The second -- make two tests:
+2. Thứ hai - thực hiện hai bài kiểm tra:
 
     ```js
     describe("pow", function() {
@@ -207,27 +207,27 @@ We can select one of two ways to organize the test here:
     });
     ```
 
-The principal difference is that when `assert` triggers an error, the `it` block immediately terminates. So, in the first variant if the first `assert` fails, then we'll never see the result of the second `assert`.
+Sự khác biệt chính là khi `assert` gây ra lỗi, khối `it` ngay lập tức chấm dứt. Vì vậy, trong biến thể đầu tiên nếu `assert` đầu tiên thất bại, thì chúng ta sẽ không bao giờ thấy kết quả của` assert` thứ hai.
 
-Making tests separate is useful to get more information about what's going on, so the second variant is better.
+Làm cho các thử nghiệm riêng biệt là hữu ích để có thêm thông tin về những gì đang diễn ra, vì vậy biến thể thứ hai là tốt hơn.
 
-And besides that, there's one more rule that's good to follow.
+Và bên cạnh đó, có thêm một quy tắc nữa là tốt để tuân theo.
 
-**One test checks one thing.**
+**Một bài kiểm tra kiểm tra một điều.**
 
-If we look at the test and see two independent checks in it, it's better to split it into two simpler ones.
+Nếu chúng ta xem xét test và thấy hai kiểm tra độc lập trong đó, tốt hơn là chia nó thành hai kiểm tra đơn giản hơn.
 
-So let's continue with the second variant.
+Vì vậy, hãy tiếp tục với biến thể thứ hai.
 
-The result:
+Kết quả:
 
 <http://plnkr.co/edit/8OHMbIy9NpwZC7F08vpn?p=preview>
 
-As we could expect, the second test failed. Sure, our function always returns `8`, while the `assert` expects `27`.
+Như chúng ta có thể mong đợi, thử nghiệm thứ hai đã thất bại. Chắc chắn, hàm của chúng ta luôn trả về `8`, trong khi `assert` mong đợi `27`.
 
-## Improving the implementation
+## Cải thiện việc thực hiện
 
-Let's write something more real for tests to pass:
+Hãy viết một cái gì đó thực tế hơn để các bài kiểm tra vượt qua:
 
 ```js
       function pow(x, n) {
@@ -241,7 +241,7 @@ Let's write something more real for tests to pass:
       }
 ```
 
-To be sure that the function works well, let's test it for more values. Instead of writing `it` blocks manually, we can generate them in `for`:
+Để chắc chắn rằng chức năng hoạt động tốt, hãy kiểm tra nó để biết thêm giá trị. Thay vì viết các khối `it` bằng tay, chúng ta có thể tạo chúng trong `for`:
 
 ```js
       describe("pow", function() {
@@ -260,15 +260,15 @@ To be sure that the function works well, let's test it for more values. Instead 
       });
 ```
 
-The result:
+Kết quả:
 
 <http://plnkr.co/edit/hT6N6WZh57etjFpVrgxF?p=preview>
 
-## Nested describe
+## Mô tả lồng nhau (Nested describe)
 
-We're going to add even more tests. But before that let's note that the helper function `makeTest` and `for` should be grouped together. We won't need `makeTest` in other tests, it's needed only in `for`: their common task is to check how `pow` raises into the given power.
+Chúng ta sẽ thêm nhiều bài kiểm tra hơn nữa. Nhưng trước đó, hãy lưu ý rằng hàm trợ giúp `makeTest` và `for` nên được nhóm lại với nhau. Chúng ta sẽ không cần `makeTest` trong các thử nghiệm khác, nó chỉ cần trong `for`: nhiệm vụ chung của chúng là kiểm tra xem `pow` tăng như thế nào.
 
-Grouping is done with a nested `describe`:
+Nhóm được thực hiện với một `describe` lồng nhau:
 
 ```js
       describe("pow", function() {
@@ -292,21 +292,21 @@ Grouping is done with a nested `describe`:
       });
 ```
 
-The nested `describe` defines a new "subgroup" of tests. In the output we can see the titled indentation:
+`describe` lồng nhau định nghĩa một "nhóm con" mới của thử nghiệm. Trong đầu ra, chúng ta có thể thấy thụt lề có tiêu đề:
 
-<http://plnkr.co/edit/niGy475DwHAz1rMgUKKQ?p=preview>
+<http://plnkr.co/edit/niGy485DwHAz1rMgUKKQ?p=preview>
 
-In the future we can add more `it` and `describe` on the top level with helper functions of their own, they won't see `makeTest`.
+Trong tương lai, chúng ta có thể thêm nhiều `it` và `describe` ở cấp cao nhất với các hàm trợ giúp của riêng họ, họ sẽ không thấy `makeTest`.
 
 <br>
 
 > ---
 
-**📌 `before/after` and `beforeEach/afterEach`**
+**📌 `before/after` và `beforeEach/afterEach`**
 
-We can setup `before/after` functions that execute before/after running tests, and also `beforeEach/afterEach` functions that execute before/after *every* `it`.
+Chúng ta có thể thiết lập các hàm `before/after` thực thi before/after khi chạy thử nghiệm và cả các hàm `beforeEach/afterEach` thực thi before/after *every* `it`.
 
-For instance:
+Ví dụ:
 
 ```js
       describe("test", function() {
@@ -323,7 +323,7 @@ For instance:
       });
 ```
 
-The running sequence will be:
+Trình tự chạy sẽ là:
 
 ```
       Testing started – before all tests (before)
@@ -336,25 +336,25 @@ The running sequence will be:
       Testing finished – after all tests (after)
 ```
 
-Open the example in the sandbox.:
+Mở ví dụ trong sandbox.:
 
 <http://plnkr.co/edit/tYilLAivTy7nYUEN9mJS?p=preview>
 
-Usually, `beforeEach/afterEach` (`before/each`) are used to perform initialization, zero out counters or do something else between the tests (or test groups).
+Thông thường, `beforeEach/afterEach` (`before/each`) được sử dụng để thực hiện khởi tạo, zero out counters hoặc làm một cái gì đó khác giữa các thử nghiệm (hoặc nhóm thử nghiệm).
 
 > ---
 
 <br>
 
-## Extending the spec
+## Mở rộng thông số kỹ thuật (Extending the spec)
 
-The basic functionality of `pow` is complete. The first iteration of the development is done. When we're done celebrating and drinking champagne -- let's go on and improve it.
+Chức năng cơ bản của `pow` đã hoàn tất. Lặp lại đầu tiên của sự phát triển được thực hiện. Khi chúng ta hoàn thành lễ kỷ niệm và uống rượu sâm banh -- hãy tiếp tục và cải thiện nó.
 
-As it was said, the function `pow(x, n)` is meant to work with positive integer values `n`.
+Như đã nói, hàm `pow(x, n)` có nghĩa là hoạt động với các giá trị nguyên dương `n`.
 
-To indicate a mathematical error, JavaScript functions usually return `NaN`. Let's do the same for invalid values of `n`.
+Để chỉ ra lỗi toán học, các hàm JavaScript thường trả về `NaN`. Chúng ta hãy làm tương tự với các giá trị không hợp lệ của `n`.
 
-Let's first add the behavior to the spec(!):
+Trước tiên, hãy thêm hành vi vào spec(!):
 
 ```js
       describe("pow", function() {
@@ -372,32 +372,32 @@ Let's first add the behavior to the spec(!):
       });
 ```
 
-The result with new tests:
+Kết quả với các thử nghiệm mới:
 
 <http://plnkr.co/edit/yXhjMSLW2aZm5g211G70?p=preview>
 
-The newly added tests fail, because our implementation does not support them. That's how BDD is done: first we write failing tests, and then make an implementation for them.
+Các thử nghiệm mới được thêm không thành công, vì việc triển khai của chúng ta không hỗ trợ chúng. Đó là cách BDD được thực hiện: đầu tiên chúng ta viết các bài kiểm tra thất bại, và sau đó thực hiện chúng.
 
 > ---
 
-**📌 Other assertions**
+**📌 Các khẳng định khác (Other assertions)**
 
-Please note the assertion `assert.isNaN`: it checks for `NaN`.
+Vui lòng lưu ý khẳng định `assert.isNaN`: nó kiểm tra `NaN`.
 
-There are other assertions in Chai as well, for instance:
+Có những khẳng định khác trong Chai, ví dụ:
 
-- `assert.equal(value1, value2)` -- checks the equality  `value1 == value2`.
-- `assert.strictEqual(value1, value2)` -- checks the strict equality `value1 === value2`.
-- `assert.notEqual`, `assert.notStrictEqual` -- inverse checks to the ones above.
-- `assert.isTrue(value)` -- checks that `value === true`
-- `assert.isFalse(value)` -- checks that `value === false`
-- ...the full list is in the [docs](http://chaijs.com/api/assert/)
+- `assert.equal(value1, value2)` -- kiểm tra bằng nhau `value1 == value2`.
+- `assert.strictEqual(value1, value2)` -- kiểm tra đẳng thức nghiêm ngặt (strict equality) `value1 === value2`.
+- `assert.notEqual`, `assert.notStrictEqual` -- kiểm tra ngược lại với những cái ở trên.
+- `assert.isTrue(value)` -- kiểm tra xem `value === true`
+- `assert.isFalse(value)` - kiểm tra xem `value === false`
+- ... danh sách đầy đủ có trong [tài liệu](http://chaijs.com/api/assert/)
 
 > ---
 
 <br>
 
-So we should add a couple of lines to `pow`:
+Vì vậy, chúng ta nên thêm một vài dòng vào `pow`:
 
 ```js
       function pow(x, n) {
@@ -414,43 +414,43 @@ So we should add a couple of lines to `pow`:
       }
 ```
 
-Now it works, all tests pass:
+Bây giờ nó hoạt động, tất cả các bài kiểm tra vượt qua:
 
 <http://plnkr.co/edit/WitPVCCVX3cyxuYEbwpk?p=preview>
 
-## Summary
+## Tóm lược
 
-In BDD, the spec goes first, followed by implementation. At the end we have both the spec and the code.
+Trong BDD, spec đi trước, tiếp theo là thực hiện. Cuối cùng, chúng ta có cả thông số kỹ thuật (spec) và mã.
 
-The spec can be used in three ways:
+The spec có thể được sử dụng theo ba cách:
 
-1. **Tests** guarantee that the code works correctly.
-2. **Docs** -- the titles of `describe` and `it` tell what the function does.
-3. **Examples** -- the tests are actually working examples showing how a function can be used.
+1. **Kiểm thử** đảm bảo rằng mã hoạt động chính xác.
+2. **Tài liệu (Docs)** -- tiêu đề của `describe` và `it` cho biết function này làm gì.
+3. **Ví dụ (Examples)** -- các thử nghiệm thực sự là các ví dụ hoạt động cho thấy cách sử dụng một chức năng.
 
-With the spec, we can safely improve, change, even rewrite the function from scratch and make sure it still works right.
+Với spec, chúng ta có thể cải thiện một cách an toàn, thay đổi, thậm chí viết lại function từ đầu và đảm bảo nó vẫn hoạt động tốt.
 
-That's especially important in large projects when a function is used in many places. When we change such a function, there's just no way to manually check if every place that uses it still works right.
+Điều đó đặc biệt quan trọng trong các dự án lớn khi một function được sử dụng ở nhiều nơi. Khi chúng ta thay đổi một function như vậy, sẽ không có cách nào để kiểm tra thủ công nếu mọi nơi sử dụng function đó vẫn hoạt động tốt.
 
-Without tests, people have two ways:
+Không có kiểm thử, mọi người có hai cách:
 
-1. To perform the change, no matter what. And then our users meet bugs and report them. If we can afford that.
-2. Or people become afraid to modify such functions, if the punishment for errors is harsh. Then it becomes old, overgrown with cobwebs, no one wants to get into it, and that's not good.
+1. Thực hiện thay đổi, không quan tâm vấn đề là gì. Và sau đó người dùng của chúng ta gặp lỗi và báo cáo chúng. Nếu chúng ta có thể đủ khả năng đó.
+2. Hoặc mọi người trở nên sợ sửa đổi các function như vậy, nếu hình phạt cho lỗi là khắc nghiệt. Sau đó, nó trở nên cũ kỹ, phát triển quá mức với mạng nhện, không ai muốn vào đó và điều đó không tốt.
 
-**Automatically tested code is contrary to that!**
+**Mã được kiểm tra tự động là trái với điều đó!**
 
-If the project is covered with tests, there's just no such problem. We can run tests and see a lot of checks made in a matter of seconds.
+Nếu dự án được bảo hiểm với các thử nghiệm, sẽ không có vấn đề như vậy. Chúng ta có thể chạy thử nghiệm và xem rất nhiều kiểm tra được thực hiện trong vài giây.
 
-**Besides, a well-tested code has better architecture.**
+**Bên cạnh đó, một mã được kiểm tra tốt có kiến trúc tốt hơn.**
 
-Naturally, that's because it's easier to change and improve it. But not only that.
+Đương nhiên, đó là vì nó dễ dàng hơn để thay đổi và cải thiện nó. Nhưng không chỉ có thế.
 
-To write tests, the code should be organized in such a way that every function has a clearly described task, well-defined input and output. That means a good architecture from the beginning.
+Để viết các bài kiểm tra, mã phải được tổ chức theo cách sao cho mọi hàm đều có một nhiệm vụ được mô tả rõ ràng, đầu vào và đầu ra được xác định rõ. Điều đó có nghĩa là một kiến trúc tốt ngay từ đầu.
 
-In real life that's sometimes not that easy. Sometimes it's difficult to write a spec before the actual code, because it's not yet clear how it should behave. But in general writing tests makes development faster and more stable.
+Trong cuộc sống thực, điều đó đôi khi không dễ dàng. Đôi khi thật khó để viết một thông số trước mã thực tế, vì vẫn chưa rõ nó nên hoạt động như thế nào. Nhưng nhìn chung viết kiểm thử làm cho sự phát triển nhanh hơn và ổn định hơn.
 
 ## What now?
 
-Later in the tutorial you will meet many tasks with tests baked-in. So you'll see more practical examples.
+Cuối cùng xuyên suốt hướng dẫn, bạn sẽ gặp nhiều nhiệm vụ với các bài kiểm tra. Vì vậy, bạn sẽ thấy nhiều ví dụ thực tế hơn.
 
-Writing tests requires good JavaScript knowledge. But we're just starting to learn it. So, to settle down everything, as of now you're not required to write tests, but you should already be able to read them even if they are a little bit more complex than in this chapter.
+Viết kiểm thử đòi hỏi kiến thức JavaScript tốt. Nhưng chúng ta mới bắt đầu học nó. Vì vậy, để giải quyết mọi thứ, hiện tại bạn không bắt buộc phải viết kiểm thử, nhưng bạn đã có thể đọc chúng ngay cả khi chúng phức tạp hơn một chút so với trong chương này.
