@@ -336,7 +336,9 @@ The running sequence will be:
       Testing finished – after all tests (after)
 ```
 
-[Open the example in the sandbox.]<http://plnkr.co/edit/tYilLAivTy7nYUEN9mJS?p=preview>
+Open the example in the sandbox.:
+
+<http://plnkr.co/edit/tYilLAivTy7nYUEN9mJS?p=preview>
 
 Usually, `beforeEach/afterEach` (`before/each`) are used to perform initialization, zero out counters or do something else between the tests (or test groups).
 
