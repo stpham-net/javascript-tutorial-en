@@ -18,15 +18,15 @@ An object
 
 One of the best things about objects is that we can store a function as one of its properties.
 
-```js run
-let john = {
-  name: "John",
-  sayHi: function() {
-    alert("Hi buddy!");
-  }
-};
+```js
+      let john = {
+        name: "John",
+        sayHi: function() {
+          alert("Hi buddy!");
+        }
+      };
 
-john.sayHi(); // Hi buddy!
+      john.sayHi(); // Hi buddy!
 ```
 
 So here we've made an object `john` with the method `sayHi`.
@@ -56,10 +56,10 @@ For instance, there exists a method [str.toUpperCase()](https://developer.mozill
 
 Here's how it works:
 
-```js run
-let str = "Hello";
+```js
+      let str = "Hello";
 
-alert( str.toUpperCase() ); // HELLO
+      alert( str.toUpperCase() ); // HELLO
 ```
 
 Simple, right? Here's what actually happens in `str.toUpperCase()`:
@@ -74,54 +74,65 @@ The JavaScript engine highly optimizes this process. It may even skip the creati
 
 A number has methods of its own, for instance, [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) rounds the number to the given precision:
 
-```js run
-let n = 1.23456;
+```js
+      let n = 1.23456;
 
-alert( n.toFixed(2) ); // 1.23
+      alert( n.toFixed(2) ); // 1.23
 ```
 
-We'll see more specific methods in chapters <info:number> and <info:string>.
+We'll see more specific methods in chapters **number** and **string**.
 
+<br>
 
-````warn header="Constructors `String/Number/Boolean` are for internal use only"
+> ---
+
+**📌 Constructors `String/Number/Boolean` are for internal use only**
+
 Some languages like Java allow us to create "wrapper objects" for primitives explicitly using a syntax like `new Number(1)` or `new Boolean(false)`.
 
 In JavaScript, that's also possible for historical reasons, but highly **unrecommended**. Things will go crazy in several places.
 
 For instance:
 
-```js run
-alert( typeof 1 ); // "number"
+```js
+      alert( typeof 1 ); // "number"
 
-alert( typeof new Number(1) ); // "object"!
+      alert( typeof new Number(1) ); // "object"!
 ```
 
 And because what follows, `zero`, is an object, the alert will show up:
 
-```js run
-let zero = new Number(0);
+```js
+      let zero = new Number(0);
 
-if (zero) { // zero is true, because it's an object
-  alert( "zero is truthy?!?" );
-}
+      if (zero) { // zero is true, because it's an object
+        alert( "zero is truthy?!?" );
+      }
 ```
 
 On the other hand, using the same functions `String/Number/Boolean` without `new` is a totally sane and useful thing. They convert a value to the corresponding type: to a string, a number, or a boolean (primitive).
 
 For example, this is entirely valid:
+
 ```js
-let num = Number("123"); // convert a string to number
+      let num = Number("123"); // convert a string to number
 ```
-````
 
+> ---
 
-````warn header="null/undefined have no methods"
+<br>
+<br>
+
+> ---
+
+**📌 null/undefined have no methods**
+
 The special primitives `null` and `undefined` are exceptions. They have no corresponding "wrapper objects" and provide no methods. In a sense, they are "the most primitive".
 
 An attempt to access a property of such value would give the error:
 
-```js run
-alert(null.test); // error
+```js
+      alert(null.test); // error
 ````
 
 ## Summary
