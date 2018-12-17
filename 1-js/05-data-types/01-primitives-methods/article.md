@@ -9,7 +9,7 @@ Chúng ta hãy xem xét sự khác biệt chính giữa nguyên thủy và đố
 Một nguyên thủy
 
 - Là một giá trị của một kiểu nguyên thủy.
-- Có 6 kiểu nguyên thủy: `string`, `number`, `boolean`,` symbol`, `null` và `undefined`.
+- Có 6 kiểu nguyên thủy: `string`, `number`, `boolean`, `symbol`, `null` và `undefined`.
 
 Một đối tượng
 
@@ -29,7 +29,7 @@ Một trong những điều tốt nhất về các đối tượng là chúng ta
       john.sayHi(); // Hi buddy!
 ```
 
-Vì vậy, ở đây chúng tôi đã tạo ra một đối tượng `john` với phương thức `sayHi`.
+Vì vậy, ở đây chúng ta đã tạo ra một đối tượng `john` với phương thức `sayHi`.
 
 Nhiều built-in objects đã tồn tại, chẳng hạn như các đối tượng hoạt động với dates, errors, HTML elements, etc, v.v. Chúng có các thuộc tính và phương thức khác nhau.
 
@@ -70,7 +70,7 @@ Chẳng hạn, tồn tại một phương thức [str.toUpperCase()](https://dev
 
 Vì vậy, nguyên thủy có thể cung cấp các phương thức, nhưng chúng vẫn nhẹ.
 
-JavaScript engine tối ưu hóa quá trình này. Nó thậm chí có thể bỏ qua việc tạo ra các đối tượng bổ sung. Nhưng nó vẫn phải tuân thủ các đặc điểm kỹ thuật và hành xử như thể nó tạo ra một.
+JavaScript engine tối ưu hóa quá trình này. Nó thậm chí có thể bỏ qua việc tạo ra các đối tượng bổ sung. Nhưng nó vẫn phải tuân thủ các đặc điểm kỹ thuật và hành xử như thể nó tạo ra một đối tượng.
 
 Ví dụ, một số có các phương thức của riêng nó, [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) làm tròn số tới độ chính xác:
 
@@ -143,4 +143,4 @@ Cố gắng truy cập vào một thuộc tính có giá trị như vậy sẽ g
 
 - Nguyên thủy ngoại trừ `null` và `undefined` cung cấp nhiều phương thức hữu ích. Chúng ta sẽ nghiên cứu chúng trong các chương sắp tới.
 - Chính thức, các phương thức này hoạt động thông qua các đối tượng tạm thời, nhưng các JavaScript engines được điều chỉnh tốt để tối ưu hóa nội bộ đó, vì vậy chúng không tốn kém để gọi.
-No search results.
+
