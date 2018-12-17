@@ -1,31 +1,29 @@
 
-# Object to primitive conversion
+# Chuyển đổi đối tượng sang nguyên thủy
 
-What happens when objects are added `obj1 + obj2`, subtracted `obj1 - obj2` or printed using `alert(obj)`?
+Điều gì xảy ra khi các đối tượng được thêm `obj1 + obj2`, hoặc trừ `obj1 - obj2` hoặc được in bằng cách sử dụng `alert(obj)`?
 
-There are special methods in objects that do the conversion.
+Có các phương thức đặc biệt trong các đối tượng thực hiện chuyển đổi.
 
-In the chapter **type-conversions** we've seen the rules for numeric, string and boolean conversions of primitives. But we left a gap for objects. Now, as we know about methods and symbols it becomes possible to close it.
+Trong chương **chuyển đổi kiểu** chúng ta đã thấy các quy tắc cho chuyển đổi số, chuỗi và boolean của nguyên thủy. Nhưng chúng ta đã để lại một khoảng cách (gap) cho các đối tượng. Bây giờ, khi chúng ta biết về các methods và symbols, cũng là lúc có thể đóng khoảng cách đó lại.
 
-For objects, there's no to-boolean conversion, because all objects are `true` in a boolean context. So there are only string and numeric conversions.
+Đối với các đối tượng, không có chuyển đổi thành boolean, bởi vì tất cả các đối tượng là `true` trong bối cảnh boolean. Vì vậy, chỉ có chuyển đổi chuỗi và số.
 
-The numeric conversion happens when we subtract objects or apply mathematical functions. For instance, `Date` objects (to be covered in the chapter **date**) can be subtracted, and the result of `date1 - date2` is the time difference between two dates.
+Việc chuyển đổi số xảy ra khi chúng ta trừ các đối tượng hoặc áp dụng các hàm toán học. Chẳng hạn, các đối tượng `Date` (sẽ được đề cập trong chương **date**) có thể bị trừ và kết quả của `date1 - date2` là chênh lệch thời gian giữa hai ngày.
 
-As for the string conversion -- it usually happens when we output an object like `alert(obj)` and in similar contexts.
+Đối với chuyển đổi chuỗi -- nó thường xảy ra khi chúng ta xuất ra một đối tượng như `alert(obj)` và trong các bối cảnh tương tự.
 
 ## ToPrimitive
 
-When an object is used in the context where a primitive is required, for instance, in an `alert` or mathematical operations, it's converted to a primitive value using the `ToPrimitive` algorithm ([specification](https://tc39.github.io/ecma262/#sec-toprimitive)).
+Khi một đối tượng được sử dụng trong bối cảnh một nguyên thủy là bắt buộc,  ví dụ, trong một `alert` hoặc các phép tính toán học, nó sẽ chuyển đổi thành giá trị nguyên thủy bằng thuật toán `ToPrimitive` ([specification](https://tc39.github.io/ecma262/#sec-toprimitive)).
 
-That algorithm allows us to customize the conversion using a special object method.
+Thuật toán đó cho phép chúng ta tùy chỉnh chuyển đổi sử dụng một object method đặc biệt.
 
-Depending on the context, the conversion has a so-called "hint".
-
-There are three variants:
+Tùy thuộc vào ngữ cảnh, chuyển đổi có cái gọi là "gợi ý (hint)".
 
 **`"string"`** 
 
-When an operation expects a string, for object-to-string conversions, like `alert`:
+Khi một phép tính mong đợi một chuỗi, cho các chuyển đổi object-to-string, như `alert`:
 
 ```js
       // output
@@ -37,7 +35,7 @@ When an operation expects a string, for object-to-string conversions, like `aler
 
 **`"number"`** 
 
-When an operation expects a number, for object-to-number conversions, like maths:
+Khi một phép tính mong đợi một số, cho các chuyển đổi object-to-number, như toán học:
 
 ```js
       // explicit conversion
@@ -53,9 +51,9 @@ When an operation expects a number, for object-to-number conversions, like maths
 
 **`"default"`** 
 
-Occurs in rare cases when the operator is "not sure" what type to expect.
+Xảy ra trong những trường hợp hiếm hoi khi phép tính "không chắc chắn" sẽ mong đợi kiểu nào.
 
-For instance, binary plus `+` can work both with strings (concatenates them) and numbers (adds them), so both strings and numbers would do. Or when an object is compared using `==` with a string, number or a symbol.
+Chẳng hạn, nhị phân cộng `+` có thể hoạt động cả với chuỗi (nối chúng) và số (thêm chúng), vì vậy cả chuỗi và số đều có thể. Hoặc khi một đối tượng được so sánh bằng cách sử dụng `==` với một chuỗi, số hoặc một symbol.
 
 ```js
       // binary plus
@@ -65,23 +63,23 @@ For instance, binary plus `+` can work both with strings (concatenates them) and
       if (user == 1) { ... };
 ```
 
-The greater/less operator `<>` can work with both strings and numbers too. Still, it uses "number" hint, not "default". That's for historical reasons.
+Toán tử lớn hơn/ít hơn `<>` cũng có thể hoạt động với cả chuỗi và số. Tuy nhiên, nó sử dụng gợi ý "number", không phải "default". Đó là vì lý do lịch sử.
 
-In practice, all built-in objects except for one case (`Date` object, we'll learn it later) implement `"default"` conversion the same way as `"number"`. And probably we should do the same.
+Trong thực tế, tất cả các  built-in objects ngoại trừ một trường hợp (đối tượng `Date`, chúng ta sẽ tìm hiểu sau) thực hiện chuyển đổi `"default"` giống như `"number"`. Và có lẽ chúng ta nên làm như vậy.
 
-Please note -- there are only three hints. It's that simple. There is no "boolean" hint (all objects are `true` in boolean context) or anything else. And if we treat `"default"` and `"number"` the same, like most built-ins do, then there are only two conversions.
+Xin lưu ý -- chỉ có ba gợi ý. Nó đơn giản mà. Không có gợi ý "boolean" (tất cả các đối tượng là `true` trong ngữ cảnh boolean) hoặc bất cứ điều gì khác. Và nếu chúng ta đối xử với `"default"` và `"number"` giống nhau, giống như hầu hết các công cụ dựng sẵn, thì chỉ có hai chuyển đổi.
 
-**To do the conversion, JavaScript tries to find and call three object methods:**
+**Để thực hiện chuyển đổi, JavaScript cố gắng tìm và gọi ba phương thức đối tượng:**
 
-1. Call `obj[Symbol.toPrimitive](hint)` if the method exists,
-2. Otherwise if hint is `"string"`
-    - try `obj.toString()` and `obj.valueOf()`, whatever exists.
-3. Otherwise if hint is `"number"` or `"default"`
-    - try `obj.valueOf()` and `obj.toString()`, whatever exists.
+1. Gọi `obj[Symbol.toPrimitive](hint)` nếu phương thức tồn tại,
+2. Mặt khác, nếu gợi ý là `"string"`
+    - thử `obj.toString()` và `obj.valueOf()`, bất cứ điều gì tồn tại.
+3. Mặt khác, nếu gợi ý là `"number"` hoặc `"default"`
+    - hãy thử `obj.valueOf()` và `obj.toString()`, bất cứ điều gì tồn tại.
 
 ## Symbol.toPrimitive
 
-Let's start from the first method. There's a built-in symbol named `Symbol.toPrimitive` that should be used to name the conversion method, like this:
+Hãy bắt đầu từ phương pháp đầu tiên. Có một built-in symbol có tên `Symbol.toPrimitive` nên được sử dụng để đặt tên cho phương thức chuyển đổi, như sau:
 
 ```js
       obj[Symbol.toPrimitive] = function(hint) {
@@ -90,7 +88,7 @@ Let's start from the first method. There's a built-in symbol named `Symbol.toPri
       }
 ```
 
-For instance, here `user` object implements it:
+Chẳng hạn, ở đây đối tượng `user` thực hiện nó:
 
 ```js
       let user = {
@@ -109,18 +107,18 @@ For instance, here `user` object implements it:
       alert(user + 500); // hint: default -> 1500
 ```
 
-As we can see from the code, `user` becomes a self-descriptive string or a money amount depending on the conversion. The single method `user[Symbol.toPrimitive]` handles all conversion cases.
+Như chúng ta có thể thấy từ mã, `user` trở thành một chuỗi tự mô tả hoặc một số tiền tùy thuộc vào chuyển đổi. Phương thức duy nhất `user[Symbol.toPrimitive]` xử lý tất cả các trường hợp chuyển đổi.
 
 ## toString/valueOf
 
-Methods `toString` and `valueOf` come from ancient times. They are not symbols (symbols did not exist that long ago), but rather "regular" string-named methods. They provide an alternative "old-style" way to implement the conversion.
+Các phương thức `toString` và` valueOf` có từ thời cổ đại. Chúng không phải là symbols (symbols không tồn tại từ lâu), mà là các phương thức có tên chuỗi "thông thường". Chúng cung cấp một cách "old-style" khác để thực hiện chuyển đổi.
 
-If there's no `Symbol.toPrimitive` then JavaScript tries to find them and try in the order:
+Nếu không có `Symbol.toPrimitive` thì JavaScript sẽ cố gắng tìm chúng và thử theo thứ tự:
 
-- `toString -> valueOf` for "string" hint.
-- `valueOf -> toString` otherwise.
+- `toString -> valueOf` cho gợi ý "string".
+- `valueOf -> toString` nếu không.
 
-For instance, here `user` does the same as above using a combination of `toString` and `valueOf`:
+Chẳng hạn, ở đây `user` thực hiện tương tự như trên bằng cách sử dụng kết hợp `toString` và `valueOf`:
 
 ```js
       let user = {
@@ -144,7 +142,7 @@ For instance, here `user` does the same as above using a combination of `toStrin
       alert(user + 500); // valueOf -> 1500
 ```
 
-Often we want a single "catch-all" place to handle all primitive conversions. In this case we can implement `toString` only, like this:
+Thông thường chúng ta muốn một nơi "bắt tất cả (catch-all)" để xử lý tất cả các chuyển đổi nguyên thủy. Trong trường hợp này, chúng ta chỉ cần triển khai `toString`, như thế này:
 
 ```js
       let user = {
@@ -159,21 +157,21 @@ Often we want a single "catch-all" place to handle all primitive conversions. In
       alert(user + 500); // toString -> John500
 ```
 
-In the absence of `Symbol.toPrimitive` and `valueOf`, `toString` will handle all primitive conversions.
+Trong trường hợp không có `Symbol.toPrimitive` và `valueOf`, `toString` sẽ xử lý tất cả các chuyển đổi nguyên thủy.
 
-## ToPrimitive and ToString/ToNumber
+## ToPrimitive và ToString/ToNumber
 
-The important thing to know about all primitive-conversion methods is that they do not necessarily return the "hinted" primitive.
+Điều quan trọng cần biết về tất cả các phương thức chuyển đổi nguyên thủy là chúng không nhất thiết phải trả về nguyên thủy "đã gợi ý".
 
-There is no control whether `toString()` returns exactly a string, or whether `Symbol.toPrimitive` method returns a number for a hint "number".
+Không có kiểm soát nào cho dù `toString()` trả về chính xác một chuỗi hay liệu phương thức `Symbol.toPrimitive` trả về một số cho một gợi ý "number".
 
-**The only mandatory thing: these methods must return a primitive.**
+**Điều bắt buộc duy nhất: các phương thức này phải trả về nguyên thủy.**
 
-An operation that initiated the conversion gets that primitive, and then continues to work with it, applying further conversions if necessary.
+Một phép tính bắt đầu chuyển đổi có được tính nguyên thủy đó, và sau đó tiếp tục làm việc với nó, áp dụng các chuyển đổi tiếp theo nếu cần thiết.
 
-For instance:
+Ví dụ:
 
-- Mathematical operations (except binary plus) perform `ToNumber` conversion:
+- Các phép tính toán (trừ binary plus) thực hiện chuyển đổi `ToNumber`:
 
     ```js
     let obj = {
@@ -185,11 +183,11 @@ For instance:
     alert(obj * 2); // 4, ToPrimitive gives "2", then it becomes 2
     ```
 
-- Binary plus checks the primitive -- if it's a string, then it does concatenation, otherwise it performs `ToNumber` and works with numbers.
+- Nhị phân cộng (binary plus) kiểm tra nguyên thủy -- nếu đó là một chuỗi, thì nó thực hiện nối, nếu không nó thực hiện `ToNumber` và làm việc với các số.
 
-    String example:
+    Chuỗi ví dụ:
     
-    ```js run
+    ```js
     let obj = {
       toString() {
         return "2";
@@ -199,7 +197,7 @@ For instance:
     alert(obj + 2); // 22 (ToPrimitive returned string => concatenation)
     ```
 
-    Number example:
+    Số ví dụ:
     
     ```js
     let obj = {
@@ -215,34 +213,34 @@ For instance:
 
 > ---
 
-**📌 Historical notes**
+**📌 Ghi chú lịch sử**
 
-For historical reasons, methods `toString` or `valueOf` *should* return a primitive: if any of them returns an object, then there's no error, but that object is ignored (like if the method didn't exist).
+Vì các lý do lịch sử, các phương thức `toString` hoặc `valueOf` *nên* trả về một nguyên thủy: nếu bất kỳ trong số chúng trả về một đối tượng, thì không có lỗi, nhưng đối tượng đó bị bỏ qua (giống như nếu phương thức không tồn tại).
 
-In contrast, `Symbol.toPrimitive` *must* return a primitive, otherwise, there will be an error.
+Ngược lại, `Symbol.toPrimitive` *phải* trả về một nguyên thủy, nếu không, sẽ có lỗi.
 
 > ---
 
 <br>
 
-## Summary
+## Tóm lược
 
-The object-to-primitive conversion is called automatically by many built-in functions and operators that expect a primitive as a value.
+Chuyển đổi object-to-primitive được gọi tự động bởi nhiều built-in functions và operators mong đợi một giá trị nguyên thủy là một giá trị.
 
-There are 3 types (hints) of it:
+Có 3 loại (gợi ý) của nó:
 
-- `"string"` (for `alert` and other string conversions)
-- `"number"` (for maths)
-- `"default"` (few operators)
+- `"string"` (đối với `alert` và các chuyển đổi chuỗi khác)
+- `"number"` (đối với toán học)
+- `"default"` (vài toán tử)
 
-The specification describes explicitly which operator uses which hint. There are very few operators that "don't know what to expect" and use the `"default"` hint. Usually for built-in objects `"default"` hint is handled the same way as `"number"`, so in practice the last two are often merged together.
+Đặc tả mô tả rõ ràng toán tử nào sử dụng gợi ý nào. Có rất ít toán tử "không biết phải trông đợi điều gì" và sử dụng gợi ý `"default"`. Thông thường đối với các built-in objects, gợi ý `"default"` được xử lý giống như `"number"`, vì vậy trong thực tế, hai đối tượng cuối cùng thường được hợp nhất với nhau.
 
-The conversion algorithm is:
+Thuật toán chuyển đổi là:
 
-1. Call `obj[Symbol.toPrimitive](hint)` if the method exists,
-2. Otherwise if hint is `"string"`
-    - try `obj.toString()` and `obj.valueOf()`, whatever exists.
-3. Otherwise if hint is `"number"` or `"default"`
-    - try `obj.valueOf()` and `obj.toString()`, whatever exists.
+1. Gọi `obj[Symbol.toPrimitive](hint)` nếu phương thức tồn tại,
+2. Mặt khác, nếu gợi ý là `"string"`
+    - hãy thử `obj.toString()` và `obj.valueOf()`, bất cứ điều gì tồn tại.
+3. Mặt khác, nếu gợi ý là `"number"` hoặc `"default"`
+    - hãy thử `obj.valueOf()` và `obj.toString()`, bất cứ điều gì tồn tại.
 
-In practice, it's often enough to implement only `obj.toString()` as a "catch-all" method for all conversions that return a "human-readable" representation of an object, for logging or debugging purposes.  
+Trong thực tế, thường chỉ cần triển khai `obj.toString()` như một phương thức "bắt tất cả (catch-all)" cho tất cả các chuyển đổi trả về đại diện "có thể đọc được" của một đối tượng, cho mục đích logging hoặc gỡ lỗi.  
