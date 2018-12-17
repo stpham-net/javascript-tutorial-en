@@ -133,7 +133,11 @@ An attempt to access a property of such value would give the error:
 
 ```js
       alert(null.test); // error
-````
+```
+
+> ---
+
+<br>
 
 ## Summary
 
