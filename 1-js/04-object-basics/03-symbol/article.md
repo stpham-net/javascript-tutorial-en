@@ -78,7 +78,7 @@ Chẳng hạn, nếu chúng ta muốn lưu trữ một "định danh" cho đối
       alert( user[id] ); // we can access the data using the symbol as the key
 ```
 
-Lợi ích của việc sử dụng `Symbol("id")` trên một chuỗi `"id"` là gì?
+Lợi ích của việc sử dụng `Symbol("id")` thay vì một chuỗi `"id"` là gì?
 
 Hãy làm cho ví dụ sâu hơn một chút để thấy điều đó.
 
@@ -256,7 +256,7 @@ Ví dụ:
 
 Tồn tại nhiều "system" symbols mà JavaScript sử dụng bên trong và chúng ta có thể sử dụng chúng để tinh chỉnh các khía cạnh khác nhau của các đối tượng.
 
-Chúng được liệt kê trong đặc tả trong bảng [Symbols thường được biết tới] (https://tc39.github.io/ecma262/#sec-well-known-symbols):
+Chúng được liệt kê trong đặc tả trong bảng [Symbols thường được biết tới](https://tc39.github.io/ecma262/#sec-well-known-symbols):
 
 - `Symbol.hasInstance`
 - `Symbol.isConcatSpreadable`
@@ -284,4 +284,4 @@ Các symbol có hai trường hợp sử dụng chính:
 
 2. Có nhiều system symbols được sử dụng bởi JavaScript có thể truy cập dưới dạng `Symbol.*`. Chúng ta có thể sử dụng chúng để thay đổi một số hành vi tích hợp. Chẳng hạn, sau này trong hướng dẫn, chúng ta sẽ sử dụng `Symbol.iterator` cho **iterable**, `Symbol.toPrimitive` để thiết lập **object-to-primitive conversion**, v.v.
 
-Về mặt kỹ thuật, các symbol không được ẩn 100%. Có một phương thức tích hợp Object.getOwnPropertySymbols(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols) cho phép chúng ta get tất cả các symbols. Ngoài ra, có một phương thức có tên [Reflect.ownKeys(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/ownKeys) trả về *tất cả* khóa của một đối tượng bao gồm cả những symbolic. Vì vậy, chúng không thực sự ẩn. Nhưng hầu hết các thư viện, các phương thức tích hợp và cấu trúc cú pháp đều tuân thủ một thỏa thuận chung mà chúng là. Và người gọi rõ ràng các phương pháp đã nói ở trên có thể hiểu rõ những gì anh ta đang làm.
+Về mặt kỹ thuật, các symbol không được ẩn 100%. Có một phương thức tích hợp [Object.getOwnPropertySymbols(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols) cho phép chúng ta get tất cả các symbols. Ngoài ra, có một phương thức có tên [Reflect.ownKeys(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/ownKeys) trả về *tất cả* khóa của một đối tượng bao gồm cả những symbolic. Vì vậy, chúng không thực sự ẩn. Nhưng hầu hết các thư viện, các phương thức tích hợp và cấu trúc cú pháp đều tuân thủ một thỏa thuận chung mà chúng là. Và người gọi rõ ràng các phương pháp đã nói ở trên có thể hiểu rõ những gì anh ta đang làm.
