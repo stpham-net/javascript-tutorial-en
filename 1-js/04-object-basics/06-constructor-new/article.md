@@ -58,7 +58,7 @@ Bây giờ nếu chúng ta muốn tạo người dùng khác, chúng ta có th�
 
 Đó là mục đích chính của các constructors -- để thực hiện mã tạo đối tượng có thể sử dụng lại.
 
-Chúng ta hãy lưu ý một lần nữa -- về mặt kỹ thuật, bất kỳ function nào cũng có thể được sử dụng như một constructor. Tức là: bất kỳ hàm nào cũng có thể được chạy với `new` và nó sẽ thực thi thuật toán ở trên. "Chữ hoa đầu tiên" là một thỏa thuận chung, để làm rõ rằng một chức năng sẽ được chạy với `new`.
+Chúng ta hãy lưu ý một lần nữa -- về mặt kỹ thuật, bất kỳ function nào cũng có thể được sử dụng như một constructor. Tức là: bất kỳ hàm nào cũng có thể được chạy với `new` và nó sẽ thực thi thuật toán ở trên. "Chữ hoa đầu tiên" là một thỏa thuận chung, để làm rõ rằng một function sẽ được chạy với `new`.
 
 <br>
 
