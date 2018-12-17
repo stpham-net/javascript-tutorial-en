@@ -1,17 +1,17 @@
 # Constructor, operator "new"
 
-The regular `{...}` syntax allows to create one object. But often we need to create many similar objects, like multiple users or menu items and so on.
+Cú pháp `{...}` thông thường cho phép tạo một đối tượng. Nhưng thường thì chúng ta cần tạo nhiều đối tượng tương tự, như nhiều người dùng hoặc các mục menu, v.v.
 
-That can be done using constructor functions and the `"new"` operator.
+Điều đó có thể được thực hiện bằng cách sử dụng các hàm tạo và toán tử `"new"`.
 
 ## Constructor function
 
-Constructor functions technically are regular functions. There are two conventions though:
+Constructor functions về mặt kỹ thuật là các hàm thông thường. Có hai quy ước:
 
-1. They are named with capital letter first.
-2. They should be executed only with `"new"` operator.
+1. Chúng được đặt tên bằng chữ in hoa đầu tiên.
+2. Chúng chỉ nên được thực hiện với toán tử `"new"`.
 
-For instance:
+Ví dụ:
 
 ```js
       function User(name) {
@@ -25,13 +25,13 @@ For instance:
       alert(user.isAdmin); // false
 ```
 
-When a function is executed as `new User(...)`, it does the following steps:
+Khi một hàm được thực thi là `new User(...)`, nó sẽ thực hiện các bước sau:
 
-1. A new empty object is created and assigned to `this`.
-2. The function body executes. Usually it modifies `this`, adds new properties to it.
-3. The value of `this` is returned.
+1. Một empty object mới được tạo và gán cho `this`.
+2. Các function body thực thi. Thông thường nó sửa đổi `this`, thêm các thuộc tính mới cho nó.
+3. Giá trị của `this` được trả về.
 
-In other words, `new User(...)` does something like:
+Nói cách khác, `new User(...)` thực hiện một số thứ như:
 
 ```js
       function User(name) {
@@ -45,7 +45,7 @@ In other words, `new User(...)` does something like:
       }
 ```
 
-So the result of `new User("Jack")` is the same object as:
+Vì vậy, kết quả của `new User("Jack")` là cùng một đối tượng như:
 
 ```js
       let user = {
@@ -54,11 +54,11 @@ So the result of `new User("Jack")` is the same object as:
       };
 ```
 
-Now if we want to create other users, we can call `new User("Ann")`, `new User("Alice")` and so on. Much shorter than using literals every time, and also easy to read.
+Bây giờ nếu chúng ta muốn tạo người dùng khác, chúng ta có thể gọi `new User("Ann")`, `new User("Alice")`, v.v. Ngắn hơn nhiều so với việc sử dụng literals mỗi lần, và cũng dễ đọc.
 
-That's the main purpose of constructors -- to implement reusable object creation code.
+Đó là mục đích chính của các constructors -- để thực hiện mã tạo đối tượng có thể sử dụng lại.
 
-Let's note once again -- technically, any function can be used as a constructor. That is: any function can be run with `new`, and it will execute the algorithm above. The "capital letter first" is a common agreement, to make it clear that a function is to be run with `new`.
+Chúng ta hãy lưu ý một lần nữa -- về mặt kỹ thuật, bất kỳ function nào cũng có thể được sử dụng như một constructor. Tức là: bất kỳ hàm nào cũng có thể được chạy với `new` và nó sẽ thực thi thuật toán ở trên. "Chữ hoa đầu tiên" là một thỏa thuận chung, để làm rõ rằng một chức năng sẽ được chạy với `new`.
 
 <br>
 
@@ -66,7 +66,7 @@ Let's note once again -- technically, any function can be used as a constructor.
 
 **📌 new function() { ... }**
 
-If we have many lines of code all about creation of a single complex object, we can wrap them in constructor function, like this:
+Nếu chúng ta có nhiều dòng mã về việc tạo một đối tượng phức tạp duy nhất, chúng ta có thể gói chúng trong hàm tạo (constructor function), như thế này:
 
 ```js
       let user = new function() {
@@ -79,7 +79,7 @@ If we have many lines of code all about creation of a single complex object, we 
       };
 ```
 
-The constructor can't be called again, because it is not saved anywhere, just created and called. So this trick aims to encapsulate the code that constructs the single object, without future reuse.
+Constructor này không thể được gọi lại, bởi vì nó không được lưu ở bất cứ đâu, chỉ đã được tạo và được gọi. Vì vậy, thủ thuật này nhằm mục đích đóng gói mã xây dựng đối tượng duy nhất, mà không sử dụng lại trong tương lai.
 
 > ---
 
@@ -91,17 +91,17 @@ The constructor can't be called again, because it is not saved anywhere, just cr
 
 > ---
 
-**📌 Advanced stuff**
+**📌 Nội dung nâng cao**
 
-The syntax from this section is rarely used, skip it unless you want to know everything.
+Cú pháp từ phần này hiếm khi được sử dụng, bỏ qua nó trừ khi bạn muốn biết mọi thứ.
 
 > ---
 
 <br>
 
-Inside a function, we can check whether it was called with `new` or without it, using a special `new.target` property.
+Bên trong một hàm, chúng ta có thể kiểm tra xem nó được gọi với `new` hay không, bằng cách sử dụng thuộc tính `new.target` đặc biệt.
 
-It is empty for regular calls and equals the function if called with `new`:
+Nó empty đối với các cuộc gọi thông thường và bằng với hàm nếu được gọi với `new`:
 
 ```js
       function User() {
@@ -115,7 +115,7 @@ It is empty for regular calls and equals the function if called with `new`:
       new User(); // function User { ... }
 ```
 
-That can be used to allow both `new` and regular calls to work the same. That is, create the same object:
+Điều đó có thể được sử dụng để cho phép cả hai cuộc gọi `new` và cuộc gọi thông thường hoạt động như nhau. Đó là, tạo cùng một đối tượng:
 
 ```js
       function User(name) {
@@ -130,22 +130,22 @@ That can be used to allow both `new` and regular calls to work the same. That is
       alert(john.name); // John
 ```
 
-This approach is sometimes used in libraries to make the syntax more flexible. So that people may call the function with or without `new`, and it still works.
+Cách tiếp cận này đôi khi được sử dụng trong các thư viện để làm cho cú pháp linh hoạt hơn. Vì vậy, mọi người có thể gọi hàm có hoặc không có `new` và nó vẫn hoạt động.
 
-Probably not a good thing to use everywhere though, because omitting `new` makes it a bit less obvious what's going on. With `new` we all know that the new object is being created.
+Có lẽ không phải là một thứ tốt để sử dụng ở mọi nơi, bởi vì việc bỏ qua `new` làm cho nó ít rõ ràng hơn những gì đang diễn ra. Với `new` chúng ta đều biết rằng đối tượng mới đang được tạo.
 
 ## Return from constructors
 
-Usually, constructors do not have a `return` statement. Their task is to write all necessary stuff into `this`, and it automatically becomes the result.
+Thông thường, các constructor không có câu lệnh `return`. Nhiệm vụ của họ là viết tất cả những thứ cần thiết vào `this`, và nó tự động trở thành kết quả.
 
-But if there is a `return` statement, then the rule is simple:
+Nhưng nếu có câu lệnh `return`, thì quy tắc rất đơn giản:
 
-- If `return` is called with object, then it is returned instead of `this`.
-- If `return` is called with a primitive, it's ignored.
+- Nếu `return` được gọi với đối tượng, thì nó được trả về thay vì `this`.
+- Nếu `return` được gọi với một nguyên thủy, nó sẽ bị bỏ qua.
 
-In other words, `return` with an object returns that object, in all other cases `this` is returned.
+Nói cách khác, `return` với một đối tượng trả về đối tượng đó, trong tất cả các trường hợp khác `this` được trả về.
 
-For instance, here `return` overrides `this` by returning an object:
+Chẳng hạn, ở đây `return` ghi đè `this` bằng cách trả về một đối tượng:
 
 ```js
       function BigUser() {
@@ -158,7 +158,7 @@ For instance, here `return` overrides `this` by returning an object:
       alert( new BigUser().name );  // Godzilla, got that object ^^
 ```
 
-And here's an example with an empty `return` (or we could place a primitive after it, doesn't matter):
+Và đây là một ví dụ với một empty `return` (hoặc chúng ta có thể đặt một nguyên thủy sau nó, không thành vấn đề):
 
 ```js
       function SmallUser() {
@@ -174,15 +174,15 @@ And here's an example with an empty `return` (or we could place a primitive afte
       alert( new SmallUser().name );  // John
 ```
 
-Usually constructors don't have a `return` statement. Here we mention the special behavior with returning objects mainly for the sake of completeness.
+Thông thường các constructors không có câu lệnh `return`. Ở đây chúng ta đề cập đến hành vi đặc biệt với các đối tượng returning chủ yếu vì mục đích hoàn chỉnh.
 
 <br>
 
 > ---
 
-**📌 Omitting parentheses**
+**📌 Bỏ dấu ngoặc đơn (Omitting parentheses)**
 
-By the way, we can omit parentheses after `new`, if it has no arguments:
+Nhân tiện, chúng ta có thể bỏ qua dấu ngoặc đơn sau `new`, nếu nó không có đối số:
 
 ```js
       let user = new User; // <-- no parentheses
@@ -190,19 +190,19 @@ By the way, we can omit parentheses after `new`, if it has no arguments:
       let user = new User();
 ```
 
-Omitting parentheses here is not considered a "good style", but the syntax is permitted by specification.
+Bỏ dấu ngoặc đơn ở đây không được coi là "good style", nhưng cú pháp được đặc tả cho phép.
 
 > ---
 
 <br>
 
-## Methods in constructor
+## Các phương thức trong constructor
 
-Using constructor functions to create objects gives a great deal of flexibility. The constructor function may have parameters that define how to construct the object, and what to put in it.
+Sử dụng các constructor functions để tạo các đối tượng mang lại sự linh hoạt cao. The constructor function có thể có các tham số xác định cách xây dựng (construct) đối tượng và những gì cần đặt trong đó.
 
-Of course, we can add to `this` not only properties, but methods as well.
+Tất nhiên, chúng ta có thể thêm vào `this` không chỉ các thuộc tính, mà cả các phương thức.
 
-For instance, `new User(name)` below creates an object with the given `name` and the method `sayHi`:
+Chẳng hạn, `new User(name)` bên dưới tạo một đối tượng với `name` đã cho và phương thức `sayHi`:
 
 ```js
       function User(name) {
@@ -225,23 +225,23 @@ For instance, `new User(name)` below creates an object with the given `name` and
       */
 ```
 
-## Summary
+## Tóm lược
 
-- Constructor functions or, briefly, constructors, are regular functions, but there's a common agreement to name them with capital letter first.
-- Constructor functions should only be called using `new`. Such a call implies a creation of empty `this` at the start and returning the populated one at the end.
+- Constructor functions hoặc, ngắn gọn, constructors, là các hàm thông thường, nhưng trước tiên có một thỏa thuận chung để đặt tên chúng bằng chữ in hoa.
+- Các constructor functions chỉ nên được gọi bằng cách sử dụng `new`. Một cuộc gọi như vậy ngụ ý việc tạo ra `this` trống lúc bắt đầu và trả lại cái được điền vào cuối.
 
-We can use constructor functions to make multiple similar objects.
+Chúng ta có thể sử dụng các constructor functions để tạo nhiều đối tượng tương tự.
 
-JavaScript provides constructor functions for many built-in language objects: like `Date` for dates, `Set` for sets and others that we plan to study.
+JavaScript cung cấp các constructor functions cho nhiều built-in language objects: như `Date` cho ngày, `Set` cho các tập hợp và các cái khác mà chúng ta dự định sẽ nghiên cứu.
 
 <br>
 
 > ---
 
-**📌 Objects, we'll be back!**
+**📌 Đối tượng, chúng ta sẽ trở lại!**
 
-In this chapter we only cover the basics about objects and constructors. They are essential for learning more about data types and functions in the next chapters.
+Trong chương này, chúng ta chỉ đề cập đến những điều cơ bản về các đối tượng và các constructors. Chúng rất cần thiết để tìm hiểu thêm về các kiểu dữ liệu và functions trong các chương tiếp theo.
 
-After we learn that, in the chapter **object-oriented-programming** we return to objects and cover them in-depth, including inheritance and classes.
+Sau khi chúng ta biết điều đó, trong chương **lập trình hướng đối tượng** chúng ta quay trở lại các đối tượng và trình bày chúng sâu hơn, bao gồm cả kế thừa và các lớp.
 
 > ---
