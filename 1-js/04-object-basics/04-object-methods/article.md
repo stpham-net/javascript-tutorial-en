@@ -325,7 +325,7 @@ When parentheses `()` are called on the Reference Type, they receive the full in
 
 Any other operation like assignment `hi = user.hi` discards the reference type as a whole, takes the value of `user.hi` (a function) and passes it on. So any further operation "loses" `this`.
 
-So, as the result, the value of `this` is only passed the right way if the function is called directly using a dot `obj.method()` or square brackets `obj['method']()` syntax (they do the same here). Later in this tutorial, we will learn various ways to solve this problem such as [func.bind()](/bind#solution-2-bind).
+So, as the result, the value of `this` is only passed the right way if the function is called directly using a dot `obj.method()` or square brackets `obj['method']()` syntax (they do the same here). Later in this tutorial, we will learn various ways to solve this problem such as **func.bind()**.
 
 ## Arrow functions have no "this"
 
@@ -333,7 +333,7 @@ Arrow functions are special: they don't have their "own" `this`. If we reference
 
 For instance, here `arrow()` uses `this` from the outer `user.sayHi()` method:
 
-```js run
+```js
       let user = {
         firstName: "Ilya",
         sayHi() {
