@@ -1,7 +1,7 @@
 
 # Chuyển đổi đối tượng sang nguyên thủy
 
-Điều gì xảy ra khi các đối tượng được thêm `obj1 + obj2`, hoặc trừ `obj1 - obj2` hoặc được in bằng cách sử dụng `alert(obj)`?
+Điều gì xảy ra khi các đối tượng được cộng `obj1 + obj2`, hoặc trừ `obj1 - obj2` hoặc được in bằng cách sử dụng `alert(obj)`?
 
 Có các phương thức đặc biệt trong các đối tượng thực hiện chuyển đổi.
 
@@ -75,7 +75,7 @@ Xin lưu ý -- chỉ có ba gợi ý. Nó đơn giản mà. Không có gợi ý 
 2. Mặt khác, nếu gợi ý là `"string"`
     - thử `obj.toString()` và `obj.valueOf()`, bất cứ điều gì tồn tại.
 3. Mặt khác, nếu gợi ý là `"number"` hoặc `"default"`
-    - hãy thử `obj.valueOf()` và `obj.toString()`, bất cứ điều gì tồn tại.
+    - thử `obj.valueOf()` và `obj.toString()`, bất cứ điều gì tồn tại.
 
 ## Symbol.toPrimitive
 
@@ -225,7 +225,7 @@ Ngược lại, `Symbol.toPrimitive` *phải* trả về một nguyên thủy, n
 
 ## Tóm lược
 
-Chuyển đổi object-to-primitive được gọi tự động bởi nhiều built-in functions và operators mong đợi một giá trị nguyên thủy là một giá trị.
+Chuyển đổi object-to-primitive được gọi tự động bởi nhiều built-in functions và operators để mong đợi một giá trị nguyên thủy là một giá trị.
 
 Có 3 loại (gợi ý) của nó:
 
@@ -239,8 +239,8 @@ Thuật toán chuyển đổi là:
 
 1. Gọi `obj[Symbol.toPrimitive](hint)` nếu phương thức tồn tại,
 2. Mặt khác, nếu gợi ý là `"string"`
-    - hãy thử `obj.toString()` và `obj.valueOf()`, bất cứ điều gì tồn tại.
+    - thử `obj.toString()` và `obj.valueOf()`, bất cứ điều gì tồn tại.
 3. Mặt khác, nếu gợi ý là `"number"` hoặc `"default"`
-    - hãy thử `obj.valueOf()` và `obj.toString()`, bất cứ điều gì tồn tại.
+    - thử `obj.valueOf()` và `obj.toString()`, bất cứ điều gì tồn tại.
 
 Trong thực tế, thường chỉ cần triển khai `obj.toString()` như một phương thức "bắt tất cả (catch-all)" cho tất cả các chuyển đổi trả về đại diện "có thể đọc được" của một đối tượng, cho mục đích logging hoặc gỡ lỗi.  
