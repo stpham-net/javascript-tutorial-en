@@ -13,85 +13,92 @@ There exists a special data structure named `Array`, to store ordered collection
 There are two syntaxes for creating an empty array:
 
 ```js
-let arr = new Array();
-let arr = [];
+      let arr = new Array();
+      let arr = [];
 ```
 
 Almost all the time, the second syntax is used. We can supply initial elements in the brackets:
 
 ```js
-let fruits = ["Apple", "Orange", "Plum"];
+      let fruits = ["Apple", "Orange", "Plum"];
 ```
 
 Array elements are numbered, starting with zero.
 
 We can get an element by its number in square brackets:
 
-```js run
-let fruits = ["Apple", "Orange", "Plum"];
+```js
+      let fruits = ["Apple", "Orange", "Plum"];
 
-alert( fruits[0] ); // Apple
-alert( fruits[1] ); // Orange
-alert( fruits[2] ); // Plum
+      alert( fruits[0] ); // Apple
+      alert( fruits[1] ); // Orange
+      alert( fruits[2] ); // Plum
 ```
 
 We can replace an element:
 
 ```js
-fruits[2] = 'Pear'; // now ["Apple", "Orange", "Pear"]
+      fruits[2] = 'Pear'; // now ["Apple", "Orange", "Pear"]
 ```
 
 ...Or add a new one to the array:
 
 ```js
-fruits[3] = 'Lemon'; // now ["Apple", "Orange", "Pear", "Lemon"]
+      fruits[3] = 'Lemon'; // now ["Apple", "Orange", "Pear", "Lemon"]
 ```
 
 The total count of the elements in the array is its `length`:
 
-```js run
-let fruits = ["Apple", "Orange", "Plum"];
+```js
+      let fruits = ["Apple", "Orange", "Plum"];
 
-alert( fruits.length ); // 3
+      alert( fruits.length ); // 3
 ```
 
 We can also use `alert` to show the whole array.
 
-```js run
-let fruits = ["Apple", "Orange", "Plum"];
+```js
+      let fruits = ["Apple", "Orange", "Plum"];
 
-alert( fruits ); // Apple,Orange,Plum
+      alert( fruits ); // Apple,Orange,Plum
 ```
 
 An array can store elements of any type.
 
 For instance:
 
-```js run no-beautify
-// mix of values
-let arr = [ 'Apple', { name: 'John' }, true, function() { alert('hello'); } ];
+```js
+      // mix of values
+      let arr = [ 'Apple', { name: 'John' }, true, function() { alert('hello'); } ];
 
-// get the object at index 1 and then show its name
-alert( arr[1].name ); // John
+      // get the object at index 1 and then show its name
+      alert( arr[1].name ); // John
 
-// get the function at index 3 and run it
-arr[3](); // hello
+      // get the function at index 3 and run it
+      arr[3](); // hello
 ```
 
+<br>
 
-````smart header="Trailing comma"
+> ---
+
+**📌 Trailing comma**
+
 An array, just like an object, may end with a comma:
+
 ```js 
-let fruits = [
-  "Apple", 
-  "Orange", 
-  "Plum"*!*,*/!*
-];
+      let fruits = [
+        "Apple", 
+        "Orange", 
+        "Plum"*!*,*/!*
+      ];
 ```
 
 The "trailing comma" style makes it easier to insert/remove items, because all lines become alike.
-````
 
+> ---
+
+<br>
 
 ## Methods pop/push, shift/unshift
 
@@ -127,64 +134,68 @@ In computer science the data structure that allows it is called [deque](https://
 
 **Methods that work with the end of the array:**
 
-`pop`
-: Extracts the last element of the array and returns it:
+**`pop`**
 
-    ```js run
-    let fruits = ["Apple", "Orange", "Pear"];
+Extracts the last element of the array and returns it:
 
-    alert( fruits.pop() ); // remove "Pear" and alert it
+```js
+      let fruits = ["Apple", "Orange", "Pear"];
 
-    alert( fruits ); // Apple, Orange
-    ```
+      alert( fruits.pop() ); // remove "Pear" and alert it
 
-`push`
-: Append the element to the end of the array:
+      alert( fruits ); // Apple, Orange
+```
 
-    ```js run
-    let fruits = ["Apple", "Orange"];
+**`push`**
 
-    fruits.push("Pear");
+Append the element to the end of the array:
 
-    alert( fruits ); // Apple, Orange, Pear
-    ```
+```js
+      let fruits = ["Apple", "Orange"];
 
-    The call `fruits.push(...)` is equal to `fruits[fruits.length] = ...`.
+      fruits.push("Pear");
+
+      alert( fruits ); // Apple, Orange, Pear
+```
+
+The call `fruits.push(...)` is equal to `fruits[fruits.length] = ...`.
 
 **Methods that work with the beginning of the array:**
 
-`shift`
-: Extracts the first element of the array and returns it:
+**`shift`**
 
-    ```js
-    let fruits = ["Apple", "Orange", "Pear"];
+Extracts the first element of the array and returns it:
 
-    alert( fruits.shift() ); // remove Apple and alert it
+```js
+      let fruits = ["Apple", "Orange", "Pear"];
 
-    alert( fruits ); // Orange, Pear
-    ```
+      alert( fruits.shift() ); // remove Apple and alert it
 
-`unshift`
-: Add the element to the beginning of the array:
+      alert( fruits ); // Orange, Pear
+```
 
-    ```js
-    let fruits = ["Orange", "Pear"];
+**`unshift`**
 
-    fruits.unshift('Apple');
+Add the element to the beginning of the array:
 
-    alert( fruits ); // Apple, Orange, Pear
-    ```
+```js
+      let fruits = ["Orange", "Pear"];
+
+      fruits.unshift('Apple');
+
+      alert( fruits ); // Apple, Orange, Pear
+```
 
 Methods `push` and `unshift` can add multiple elements at once:
 
-```js run
-let fruits = ["Apple"];
+```js
+      let fruits = ["Apple"];
 
-fruits.push("Orange", "Peach");
-fruits.unshift("Pineapple", "Lemon");
+      fruits.push("Orange", "Peach");
+      fruits.unshift("Pineapple", "Lemon");
 
-// ["Pineapple", "Lemon", "Apple", "Orange", "Peach"]
-alert( fruits );
+      // ["Pineapple", "Lemon", "Apple", "Orange", "Peach"]
+      alert( fruits );
 ```
 
 ## Internals
@@ -197,16 +208,16 @@ Remember, there are only 7 basic types in JavaScript. Array is an object and thu
 
 For instance, it is copied by reference:
 
-```js run
-let fruits = ["Banana"]
+```js
+      let fruits = ["Banana"]
 
-let arr = fruits; // copy by reference (two variables reference the same array)
+      let arr = fruits; // copy by reference (two variables reference the same array)
 
-alert( arr === fruits ); // true
- 
-arr.push("Pear"); // modify the array by reference
+      alert( arr === fruits ); // true
 
-alert( fruits ); // Banana, Pear - 2 items now
+      arr.push("Pear"); // modify the array by reference
+
+      alert( fruits ); // Banana, Pear - 2 items now
 ```
 
 ...But what makes arrays really  special is their internal representation. The engine tries to store its elements in the contiguous memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well, to make arrays work really fast.
@@ -216,11 +227,11 @@ But they all break if we quit working with an array as with an "ordered collecti
 For instance, technically we can do this:
 
 ```js
-let fruits = []; // make an array
+      let fruits = []; // make an array
 
-fruits[99999] = 5; // assign a property with the index far greater than its length
+      fruits[99999] = 5; // assign a property with the index far greater than its length
 
-fruits.age = 25; // create a property with an arbitrary name
+      fruits.age = 25; // create a property with an arbitrary name
 ```
 
 That's possible, because arrays are objects at their base. We can add any properties to them.
@@ -244,7 +255,7 @@ Methods `push/pop` run fast, while `shift/unshift` are slow.
 Why is it faster to work with the end of an array than with its beginning? Let's see what happens during the execution:
 
 ```js
-fruits.shift(); // take 1 element from the start
+      fruits.shift(); // take 1 element from the start
 ```
 
 It's not enough to take and remove the element with the number `0`. Other elements need to be renumbered as well.
@@ -266,7 +277,7 @@ And what's with `push/pop`? They do not need to move anything. To extract an ele
 The actions for the `pop` operation:
 
 ```js
-fruits.pop(); // take 1 element from the end
+      fruits.pop(); // take 1 element from the end
 ```
 
 ![](array-pop.png)
@@ -279,39 +290,35 @@ The similar thing with the `push` method.
 
 One of the oldest ways to cycle array items is the `for` loop over indexes:
 
-```js run
-let arr = ["Apple", "Orange", "Pear"];
+```js
+      let arr = ["Apple", "Orange", "Pear"];
 
-*!*
-for (let i = 0; i < arr.length; i++) {
-*/!*
-  alert( arr[i] );
-}
+      for (let i = 0; i < arr.length; i++) {
+        alert( arr[i] );
+      }
 ```
 
 But for arrays there is another form of loop, `for..of`:
 
-```js run
-let fruits = ["Apple", "Orange", "Plum"];
+```js
+      let fruits = ["Apple", "Orange", "Plum"];
 
-// iterates over array elements
-for (let fruit of fruits) {
-  alert( fruit ); 
-}
+      // iterates over array elements
+      for (let fruit of fruits) {
+        alert( fruit ); 
+      }
 ```
 
 The `for..of` doesn't give access to the number of the current element, just its value, but in most cases that's enough. And it's shorter.
 
 Technically, because arrays are objects, it is also possible to use `for..in`:
 
-```js run
-let arr = ["Apple", "Orange", "Pear"];
+```js
+      let arr = ["Apple", "Orange", "Pear"];
 
-*!*
-for (let key in arr) {
-*/!*
-  alert( arr[key] ); // Apple, Orange, Pear
-}
+      for (let key in arr) {
+        alert( arr[key] ); // Apple, Orange, Pear
+      }
 ```
 
 But that's actually a bad idea. There are potential problems with it:
@@ -331,11 +338,11 @@ The `length` property automatically updates when we modify the array. To be prec
 
 For instance, a single element with a large index gives a big length:
 
-```js run
-let fruits = [];
-fruits[123] = "Apple";
+```js
+      let fruits = [];
+      fruits[123] = "Apple";
 
-alert( fruits.length ); // 124
+      alert( fruits.length ); // 124
 ```
 
 Note that we usually don't use arrays like that. 
@@ -344,25 +351,25 @@ Another interesting thing about the `length` property is that it's writable.
 
 If we increase it manually, nothing interesting happens. But if we decrease it, the array is truncated. The process is irreversible, here's the example:
 
-```js run
-let arr = [1, 2, 3, 4, 5];
+```js
+      let arr = [1, 2, 3, 4, 5];
 
-arr.length = 2; // truncate to 2 elements
-alert( arr ); // [1, 2]
+      arr.length = 2; // truncate to 2 elements
+      alert( arr ); // [1, 2]
 
-arr.length = 5; // return length back
-alert( arr[3] ); // undefined: the values do not return
+      arr.length = 5; // return length back
+      alert( arr[3] ); // undefined: the values do not return
 ```
 
 So, the simplest way to clear the array is: `arr.length = 0;`.
 
 
-## new Array() [#new-array]
+## new Array()
 
 There is one more syntax to create an array:
 
 ```js
-let arr = *!*new Array*/!*("Apple", "Pear", "etc");
+      let arr = new Array("Apple", "Pear", "etc");
 ```
 
 It's rarely used, because square brackets `[]` are shorter. Also there's a tricky feature with it.
@@ -371,12 +378,12 @@ If `new Array` is called with a single argument which is a number, then it creat
 
 Let's see how one can shoot themself in the foot:
 
-```js run
-let arr = new Array(2); // will it create an array of [2] ?
+```js
+      let arr = new Array(2); // will it create an array of [2] ?
 
-alert( arr[0] ); // undefined! no elements.
+      alert( arr[0] ); // undefined! no elements.
 
-alert( arr.length ); // length 2
+      alert( arr.length ); // length 2
 ```
 
 In the code above, `new Array(number)` has all elements `undefined`.
@@ -387,14 +394,14 @@ To evade such surprises, we usually use square brackets, unless we really know w
 
 Arrays can have items that are also arrays. We can use it for multidimensional arrays, to store matrices:
 
-```js run
-let matrix = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9]
-];
+```js
+      let matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]
+      ];
 
-alert( matrix[1][1] ); // the central element
+      alert( matrix[1][1] ); // the central element
 ```
 
 ## toString
@@ -403,30 +410,29 @@ Arrays have their own implementation of `toString` method that returns a comma-s
 
 For instance:
 
+```js
+      let arr = [1, 2, 3];
 
-```js run
-let arr = [1, 2, 3];
-
-alert( arr ); // 1,2,3
-alert( String(arr) === '1,2,3' ); // true
+      alert( arr ); // 1,2,3
+      alert( String(arr) === '1,2,3' ); // true
 ```
 
 Also, let's try this:
 
-```js run
-alert( [] + 1 ); // "1"
-alert( [1] + 1 ); // "11"
-alert( [1,2] + 1 ); // "1,21"
+```js
+      alert( [] + 1 ); // "1"
+      alert( [1] + 1 ); // "11"
+      alert( [1,2] + 1 ); // "1,21"
 ```
 
 Arrays do not have `Symbol.toPrimitive`, neither a viable `valueOf`, they implement only `toString` conversion, so here `[]` becomes an empty string, `[1]` becomes `"1"` and `[1,2]` becomes `"1,2"`.
 
 When the binary plus `"+"` operator adds something to a string, it converts it to a string as well, so the next step looks like this:
 
-```js run
-alert( "" + 1 ); // "1"
-alert( "1" + 1 ); // "11"
-alert( "1,2" + 1 ); // "1,21"
+```js
+      alert( "" + 1 ); // "1"
+      alert( "1" + 1 ); // "11"
+      alert( "1,2" + 1 ); // "1,21"
 ```
 
 ## Summary
@@ -446,6 +452,7 @@ Array is a special kind of object, suited to storing and managing ordered data i
     The call to `new Array(number)` creates an array with the given length, but without elements.
 
 - The `length` property is the array length or, to be precise, its last numeric index plus one. It is auto-adjusted by array methods. 
+
 - If we shorten `length` manually, the array is truncated.
 
 We can use an array as a deque with the following operations:
@@ -456,9 +463,10 @@ We can use an array as a deque with the following operations:
 - `unshift(...items)` adds items to the beginning.
 
 To loop over the elements of the array:
+
   - `for (let i=0; i<arr.length; i++)` -- works fastest, old-browser-compatible.
   - `for (let item of arr)` -- the modern syntax for items only,
   - `for (let i in arr)` -- never use.
 
-We will return to arrays and study more methods to add, remove, extract elements and sort arrays in the chapter <info:array-methods>.
+We will return to arrays and study more methods to add, remove, extract elements and sort arrays in the chapter **array-methods**.
 
