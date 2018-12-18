@@ -71,17 +71,17 @@ alert( `Hello
 World` );
 ```
 
-Có những nhân vật "đặc biệt" khác ít phổ biến hơn. Đây là danh sách:
+Có những characters "đặc biệt" khác ít phổ biến hơn. Đây là danh sách:
 
-| Nhân vật | Mô tả |
-| -------------- | --------------- |
-| `\ b` | Backspace |
-| `\ f` | Thức ăn mẫu |
-| `\ n` | Dòng mới |
-| `\ r` | Vận chuyển trở lại |
-| `\ t` | Tab |
-| `\ uNNNN` | Ký hiệu unicode có mã hex` NNNN`, ví dụ `\ u00A9` - là một unicode cho ký hiệu bản quyền` © `. Nó phải chính xác là 4 chữ số hex. |
-| `\ u {NNNNNNNN}` | Một số ký tự hiếm được mã hóa bằng hai ký hiệu unicode, chiếm tối đa 4 byte. Unicode dài này yêu cầu niềng răng xung quanh nó.|
+| Character    | Description   |
+|--------------|---------------|
+|`\b`          |Backspace      |
+|`\f`          |Form feed      |
+|`\n`          |New line       |
+|`\r`          |Carriage return|
+|`\t`          |Tab            |
+|`\uNNNN`      |A unicode symbol with the hex code `NNNN`, for instance `\u00A9` -- is a unicode for the copyright symbol `©`. It must be exactly 4 hex digits. |
+|`\u{NNNNNNNN}`|Some rare characters are encoded with two unicode symbols, taking up to 4 bytes. This long unicode requires braces around it.|
 
 Ví dụ với unicode:
 
@@ -122,13 +122,13 @@ Nhưng điều gì sẽ xảy ra nếu chúng ta cần hiển thị dấu gạch
 ## Chiều dài chuỗi
 
 
-Thuộc tính `length` có độ dài chuỗi:
+Thuộc tính `length` để lấy độ dài chuỗi:
 
 ```js
       alert( `My\n`.length ); // 3
 ```
 
-Lưu ý rằng `\n` là một ký tự "đặc biệt" đơn lẻ, vì vậy độ dài thực sự là` `3`.
+Lưu ý rằng `\n` là một ký tự "đặc biệt" đơn lẻ, vì vậy độ dài thực sự là `3`.
 
 <br>
 
@@ -214,7 +214,7 @@ Các phương thức [toLowerCase()](https://developer.mozilla.org/en-US/docs/We
       alert( 'Interface'.toLowerCase() ); // interface
 ```
 
-Hoặc, nếu chúng ta muốn một ký tự duy nhất hạ thấp:
+Hoặc, nếu chúng ta muốn một ký tự duy nhất trở thành chữ thường:
 
 ```js
       alert( 'Interface'[0].toLowerCase() ); // 'i'
@@ -288,7 +288,7 @@ Thuật toán tương tự có thể được trình bày ngắn hơn:
 
 **📌 `str.lastIndexOf(substr, position)`**
 
-Ngoài ra còn có một phương thức tương tự [str.lastIndexOf(substr, position)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf) tìm kiếm từ cuối của một chuỗi để nó bắt đầu.
+Ngoài ra còn có một phương thức tương tự [str.lastIndexOf(substr, position)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf) bắt đầu tìm kiếm từ cuối của một chuỗi.
 
 Nó sẽ liệt kê các lần xuất hiện theo thứ tự ngược lại.
 
@@ -451,7 +451,7 @@ Ngược lại với các phương thức trước đó, phương thức này ch
       alert( str.substr(2, 4) ); // ring, from the 2nd position get 4 characters
 ```
 
-Đối số đầu tiên có thể là phủ định, để tính từ cuối:
+Đối số đầu tiên có thể là âm, để tính từ cuối:
 
 ```js
       let str = "stringify";
@@ -460,17 +460,17 @@ Ngược lại với các phương thức trước đó, phương thức này ch
 
 Hãy tóm tắt lại các phương pháp này để tránh mọi nhầm lẫn:
 
-| phương pháp | chọn ... | phủ định |
-| ------------------------- | ----------------------- ------------------------------- | ------------------ ------- |
-| `lát (bắt đầu, kết thúc)` | từ `start` đến` end` (không bao gồm` end`) | cho phép phủ định |
-| `chuỗi con (bắt đầu, kết thúc)` | giữa `start` và` end` | giá trị âm có nghĩa là `0` |
-| `chất nền (bắt đầu, chiều dài)` | từ `start` get` length` ký tự | cho phép phủ định `start` |
+| method                  | selects...                                           | negatives               |
+|-------------------------|------------------------------------------------------|-------------------------|
+| `slice(start, end)`     | from `start` to `end` (not including `end`)          | allows negatives        |
+| `substring(start, end)` | between `start` and `end`                            | negative values mean `0`|
+| `substr(start, length)` | from `start` get `length` characters                 | allows negative `start` |
 
 <br>
 
 > ---
 
-** Chọn cái nào?**
+**📌 Chọn cái nào?**
 
 Tất cả đều có thể làm được việc. Chính thức, `substr` có một nhược điểm nhỏ: nó được mô tả không phải trong đặc tả JavaScript cốt lõi, mà trong Phụ lục B, bao gồm các tính năng chỉ dành cho trình duyệt tồn tại chủ yếu vì lý do lịch sử. Vì vậy, môi trường không có trình duyệt có thể không hỗ trợ nó. Nhưng trong thực tế nó hoạt động ở khắp mọi nơi.
 
