@@ -96,7 +96,7 @@ Các trường hợp sử dụng phổ biến cho việc này là:
 
 - **base=16** được sử dụng cho màu hex, mã hóa ký tự, v.v., chữ số có thể là `0..9` hoặc `A..F`.
 - **base=2** chủ yếu là để gỡ lỗi các phép tính bitwise, các chữ số có thể là `0` hoặc `1`.
-- **base=36** là mức tối đa, các chữ số có thể là `0..9` hoặc `A..Z`. Toàn bộ bảng chữ cái Latin được sử dụng để đại diện cho một số. Một trường hợp hài hước nhưng hữu ích cho `36` là khi chúng ta cần biến một số nhận dạng số dài thành một cái gì đó ngắn hơn, ví dụ để tạo một url ngắn. Có thể chỉ đơn giản là biểu diễn nó trong hệ thống số với cơ sở `36`:
+- **base=36** là mức tối đa, các chữ số có thể là `0..9` hoặc `A..Z`. Toàn bộ bảng chữ cái Latin được sử dụng để đại diện cho một số. Một trường hợp hài hước nhưng hữu ích cho `36` là khi chúng ta cần biến một số nhận dạng số dài thành một cái gì đó ngắn hơn, ví dụ để tạo một url ngắn. Có thể chỉ đơn giản là biểu diễn nó trong hệ thống số với base `36`:
 
     ```js
     alert( 123456..toString(36) ); // 2n9c
@@ -108,7 +108,7 @@ Các trường hợp sử dụng phổ biến cho việc này là:
 
 **📌 Hai dấu chấm để gọi một phương thức**
 
-Xin lưu ý rằng hai dấu chấm trong `123456..toString (36)` không phải là một lỗi đánh máy. Nếu chúng ta muốn gọi một phương thức trực tiếp trên một số, như `toString` trong ví dụ trên, thì chúng ta cần đặt hai dấu chấm `..` sau nó.
+Xin lưu ý rằng hai dấu chấm trong `123456..toString(36)` không phải là một lỗi đánh máy. Nếu chúng ta muốn gọi một phương thức trực tiếp trên một số, như `toString` trong ví dụ trên, thì chúng ta cần đặt hai dấu chấm `..` sau nó.
 
 Nếu chúng ta đặt một dấu chấm đơn: `123456.toString(36)`, thì sẽ có lỗi, vì cú pháp JavaScript bao hàm phần thập phân sau dấu chấm đầu tiên. Và nếu chúng ta đặt thêm một dấu chấm, thì JavaScript biết rằng phần thập phân trống và bây giờ đi tới phương thức.
 
@@ -142,17 +142,16 @@ Xóa bất cứ thứ gì sau dấu thập phân mà không làm tròn: `3.1` tr
 
 Đây là bảng để tóm tắt sự khác biệt giữa chúng:
 
-| | `Math.floor` | `Toán.ceil` | `Toán.round` | `Toán.trunc` |
-| ------ | -------------- | ------------- | ------------- - | -------------- |
-| `3.1` | `3` | `4` | `3` | `3` |
-| `3.6` | `3` | `4` | `4` | `3` |
-| `-1.1` | `-2` | `-1` | `-1` | `-1` |
-| `-1.6` | `-2` | `-1` | `-2` | `-1` |
-
+|      | `Math.floor` | `Math.ceil` | `Math.round` | `Math.trunc` |
+|------|--------------|-------------|--------------|--------------|
+|`3.1` |  `3`         |   `4`       |    `3`       |   `3`        |
+|`3.6` |  `3`         |   `4`       |    `4`       |   `3`        |
+|`-1.1`|  `-2`        |   `-1`      |    `-1`      |   `-1`       |
+|`-1.6`|  `-2`        |   `-1`      |    `-2`      |   `-1`       |
 
 Các hàm này bao gồm tất cả các cách có thể để xử lý phần thập phân của một số. Nhưng điều gì sẽ xảy ra nếu chúng ta muốn làm tròn số thành `n-th` chữ số sau số thập phân?
 
-Chẳng hạn, chúng ta có `1.2345` và muốn làm tròn nó thành 2 chữ số, chỉ nhận được` 1.23`.
+Chẳng hạn, chúng ta có `1.2345` và muốn làm tròn nó thành 2 chữ số, chỉ nhận được `1.23`.
 
 Có hai cách để làm như vậy:
 
@@ -166,7 +165,7 @@ Có hai cách để làm như vậy:
     alert( Math.floor(num * 100) / 100 ); // 1.23456 -> 123.456 -> 123 -> 1.23
     ```
 
-2. Phương thức [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) làm tròn số thành `n` chữ số sau điểm và trả về một chuỗi đại diện của kết quả.
+2. Phương thức [toFixed(n)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) làm tròn số thành `n` chữ số sau the point và trả về một chuỗi đại diện của kết quả.
         
     ```js
     let num = 12.34;
@@ -204,7 +203,7 @@ Nếu một số quá lớn, nó sẽ tràn bộ nhớ 64 bit, có khả năng m
 Hãy xem xét test này (falsy!): 
 
 ```js
-      alert( 0.1 + 0.2 == 0.3 ); // *!*false*/!*
+      alert( 0.1 + 0.2 == 0.3 ); // false
 ```
 
 Điều đó đúng, nếu chúng ta kiểm tra xem tổng của `0.1` và `0.2` có phải là `0.3` hay không, chúng ta sẽ nhận được `false`. 
@@ -317,12 +316,12 @@ Trong hầu hết các trường hợp, sự khác biệt là không đáng chú
 
 ## Bài kiểm tra: isFinite và isNaN
 
-Ghi nhớ hai giá trị số đặc biệt này?
+Bạn có nhớ có hai giá trị số đặc biệt này?
 
 - `Infinity` (và `-Infinity`) là một giá trị số đặc biệt lớn hơn (nhỏ hơn) bất cứ thứ gì.
 - `NaN` đại diện cho một lỗi.
 
-Chúng thuộc kiểu `number`, nhưng không phải là số "bình thường ", do đó, có các hàm đặc biệt để kiểm tra chúng:
+Chúng thuộc kiểu `number`, nhưng không phải là số "bình thường", do đó, có các hàm đặc biệt để kiểm tra chúng:
 
 - `isNaN(value)` chuyển đổi đối số của nó thành một số và sau đó kiểm tra xem nó có phải là `NaN`:
 
@@ -331,7 +330,7 @@ Chúng thuộc kiểu `number`, nhưng không phải là số "bình thường "
     alert( isNaN("str") ); // true
     ```
 
-    Nhưng chúng ta có cần chức năng này không? Chúng ta không thể sử dụng phép so sánh `=== NaN` sao? Xin lỗi, nhưng câu trả lời là không. Giá trị `NaN` là duy nhất ở chỗ nó không bằng bất cứ thứ gì, kể cả chính nó:
+    Nhưng chúng ta có cần function này không? Chúng ta không thể sử dụng phép so sánh `=== NaN` sao? Xin lỗi, nhưng câu trả lời là không. Giá trị `NaN` là duy nhất ở chỗ nó không bằng bất cứ thứ gì, kể cả chính nó:
 
     ```js
     alert( NaN === NaN ); // false
@@ -385,7 +384,7 @@ Chuyển đổi số bằng cách sử dụng dấu cộng `+` hoặc `Number()`
 
 Ngoại lệ duy nhất là khoảng trắng ở đầu hoặc cuối chuỗi, vì chúng bị bỏ qua.
 
-Nhưng trong cuộc sống thực, chúng ta thường có các giá trị theo đơn vị, như ``"100px"` hoặc `"12pt"` trong CSS. Ngoài ra ở nhiều quốc gia, ký hiệu tiền tệ đi sau số tiền, vì vậy chúng ta có `"19€"` và muốn trích xuất một giá trị số từ đó.
+Nhưng trong cuộc sống thực, chúng ta thường có các giá trị theo đơn vị, như `"100px"` hoặc `"12pt"` trong CSS. Ngoài ra ở nhiều quốc gia, ký hiệu tiền tệ đi sau số tiền, vì vậy chúng ta có `"19€"` và muốn trích xuất một giá trị số từ đó.
 
 Đó là những gì `parseInt` và `parseFloat` dành cho.
 
@@ -442,7 +441,7 @@ Trả về một số ngẫu nhiên từ 0 đến 1 (không bao gồm 1)
 
 **`Math.max(a, b, c...)` / `Math.min(a, b, c...)`**
 
-Trả về giá trị lớn nhất/nhỏ nhất từ dãy số tùy ý của các đối số.
+Trả về giá trị lớn nhất/nhỏ nhất từ những số tùy ý của các đối số.
 
 ```js
       alert( Math.max(3, 5, -10, 0, 1) ); // 5
