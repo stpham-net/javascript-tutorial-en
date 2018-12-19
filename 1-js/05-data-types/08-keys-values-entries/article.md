@@ -13,11 +13,11 @@ Chúng được hỗ trợ cho:
 - `Set`
 - `Array` (except `arr.values()`)
 
-Các đối tượng đơn giản cũng hỗ trợ các phương thức tương tự, nhưng cú pháp hơi khác một chút.
+Các đối tượng bình thường cũng hỗ trợ các phương thức tương tự, nhưng cú pháp hơi khác một chút.
 
 ## Object.keys, values, entries
 
-Đối với các đối tượng đơn giản, các phương thức sau đây có sẵn:
+Đối với các đối tượng bình thường, các phương thức sau đây có sẵn:
 
 - [Object.keys(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) -- trả về một loạt các khóa.
 - [Object.values(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values) -- trả về một mảng các giá trị.
