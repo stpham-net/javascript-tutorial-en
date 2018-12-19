@@ -5,7 +5,7 @@ Hãy bước ra khỏi các cấu trúc dữ liệu riêng lẻ và nói về c�
 
 Trong chương trước, chúng ta đã thấy các phương thức `map.keys()`, `map.values()`, `map.entries()`.
 
-Các phương thức này có đặc điểm chung, có một thỏa thuận chung để sử dụng chúng cho các cấu trúc dữ liệu. Nếu chúng ta tự tạo một cấu trúc dữ liệu, chúng ta cũng nên thực hiện chúng. 
+Các phương thức này có đặc điểm chung, có một thỏa thuận chung là sử dụng chúng cho các cấu trúc dữ liệu. Nếu chúng ta tự tạo một cấu trúc dữ liệu, chúng ta cũng nên thực hiện chúng. 
 
 Chúng được hỗ trợ cho:
 
