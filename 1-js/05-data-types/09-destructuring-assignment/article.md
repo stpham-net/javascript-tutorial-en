@@ -267,7 +267,7 @@ Dấu hai chấm hiển thị "what : goes where". Trong ví dụ trên thuộc 
       alert(height); // 200
 ```
 
-Giống như với các mảng hoặc tham số hàm, các giá trị mặc định có thể là bất kỳ biểu thức hoặc thậm chí các lệnh gọi hàm. Họ sẽ được đánh giá nếu giá trị không được cung cấp.
+Giống như với các mảng hoặc tham số hàm, các giá trị mặc định có thể là bất kỳ biểu thức hoặc thậm chí các lệnh gọi hàm. Chúng sẽ được đánh giá nếu giá trị không được cung cấp.
 
 Mã dưới đây yêu cầu chiều rộng, nhưng không phải tiêu đề.
 
@@ -282,7 +282,7 @@ Mã dưới đây yêu cầu chiều rộng, nhưng không phải tiêu đề.
       alert(width);  // (whatever you the result of prompt is)
 ```
 
-Chúng ta cũng có thể kết hợp cả dấu hai chấm và đẳng thức:
+Chúng ta cũng có thể kết hợp cả dấu hai chấm và dấu bằng:
 
 ```js
       let options = {
