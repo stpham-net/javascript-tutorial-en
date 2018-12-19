@@ -70,7 +70,7 @@ Xin lưu ý rằng một JSON-encoded object có một số khác biệt quan tr
 
 `JSON.stringify` cũng có thể được áp dụng cho các kiểu nguyên thủy.
 
-Các loại JSON được hỗ trợ nguyên bản là:
+Các kiểu JSON nguyên bản được hỗ trợ là:
 
 - Objects `{ ... }`
 - Arrays `[ ... ]`
@@ -183,7 +183,7 @@ Mảng các thuộc tính để mã hóa hoặc một hàm ánh xạ (mapping fu
 
 Số lượng space sử dụng để định dạng
 
-Hầu hết thời gian, `JSON.stringify` chỉ được sử dụng với đối số đầu tiên. Nhưng nếu chúng ta cần tinh chỉnh quá trình thay thế, như lọc ra các tham chiếu lòng vòng, chúng ta có thể sử dụng đối số thứ hai của `JSON.stringify`.
+Hầu hết thời gian, `JSON.stringify` chỉ được sử dụng với đối số đầu tiên. Nhưng nếu chúng ta cần tinh chỉnh quá trình chuyển đổi, như lọc ra các tham chiếu lòng vòng, chúng ta có thể sử dụng đối số thứ hai của `JSON.stringify`.
 
 Nếu chúng ta truyền một mảng các thuộc tính cho nó, chỉ các thuộc tính này sẽ được mã hóa.
 
