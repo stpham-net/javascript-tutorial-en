@@ -168,14 +168,14 @@ Chúng ta sẽ lặp lại một chuỗi giống như `for..of`, nhưng với c�
       }
 ```
 
-Điều đó hiếm khi cần thiết, nhưng cho chúng ta nhiều quyền kiểm soát quá trình hơn là 'for..of`. Chẳng hạn, chúng ta có thể phân chia quá trình lặp: lặp lại một chút, sau đó dừng lại, làm một cái gì đó khác, và sau đó tiếp tục lại sau.
+Điều đó hiếm khi cần thiết, nhưng cho chúng ta nhiều quyền kiểm soát quá trình hơn là `for..of`. Chẳng hạn, chúng ta có thể phân chia quá trình lặp: lặp lại một chút, sau đó dừng lại, làm một cái gì đó khác, và sau đó tiếp tục lại sau.
 
 ## Iterables and array-likes
 
 Có hai thuật ngữ chính thức trông giống nhau, nhưng rất khác nhau. Hãy chắc chắn rằng bạn hiểu rõ về chúng để tránh nhầm lẫn.
 
-- *Iterables* là các đối tượng triển khai phương thức `Symbol.iterator`, như được mô tả ở trên.
-- **Array-likes* là các đối tượng có chỉ mục và `length`, vì vậy chúng trông giống như mảng.
+- **Iterables** là các đối tượng triển khai phương thức `Symbol.iterator`, như được mô tả ở trên.
+- **Array-likes** là các đối tượng có chỉ mục và `length`, vì vậy chúng trông giống như mảng.
 
 Đương nhiên, các tính chất này có thể kết hợp. Chẳng hạn, các chuỗi đều có thể iterable (`for..of` hoạt động trên chúng) và array-like (chúng có các chỉ mục số và `length`).
 
@@ -302,6 +302,6 @@ Các đối tượng có thể được sử dụng trong `for..of` được g�
 
 Các đối tượng có thuộc tính được lập chỉ mục (indexed properties) và `length` được gọi là *array-like*. Các đối tượng như vậy cũng có thể có các thuộc tính và phương thức khác, nhưng thiếu các built-in methods của mảng.
 
-Nếu chúng ta nhìn vào bên trong đặc tả -- chúng ta sẽ thấy rằng hầu hết các built-in methods đều cho rằng chúng hoạt động với các iterables hoặc array-likes thay vì mảng "thực", vì điều đó trừu tượng hơn.
+Nếu chúng ta nhìn vào bên trong đặc tả -- chúng ta sẽ thấy rằng hầu hết các built-in methods đều cho rằng chúng hoạt động với các iterables hoặc array-likes thay vì các mảng "thực", vì điều đó trừu tượng hơn.
 
 `Array.from(obj[, mapFn, thisArg])` tạo một `Array` thật từ một iterable hoặc array-like `obj`, và chúng ta có thể sử dụng array methods trên nó. Các đối số tùy chọn `mapFn` và `thisArg` cho phép chúng ta áp dụng một hàm cho mỗi item.
