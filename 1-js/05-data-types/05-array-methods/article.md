@@ -1,23 +1,23 @@
 # Array methods
 
-Arrays provide a lot of methods. To make things easier, in this chapter they are split into groups.
+Mảng cung cấp rất nhiều phương thức. Để làm cho mọi thứ dễ dàng hơn, trong chương này, chúng được chia thành các nhóm.
 
 ## Add/remove items
 
-We already know methods that add and remove items from the beginning or the end:
+Chúng ta đã biết các phương thức thêm và xóa các mục từ đầu hoặc cuối:
 
-- `arr.push(...items)` -- adds items to the end,
-- `arr.pop()` -- extracts an item from the end,
-- `arr.shift()` -- extracts an item from the beginning,
-- `arr.unshift(...items)` -- adds items to the beginning.
+- `arr.push(...items)` -- thêm các items vào cuối,
+- `arr.pop()` -- trích xuất một item từ cuối,
+- `arr.shift()` -- trích xuất một item từ đầu,
+- `arr.unshift(...items)` -- thêm các items vào đầu.
 
-Here are few others.
+Đây là một vài phương thức khác.
 
 ### splice
 
-How to delete an element from the array?
+Làm thế nào để xóa một phần tử từ mảng?
 
-The arrays are objects, so we can try to use `delete`:
+Các mảng là các đối tượng, vì vậy chúng ta có thể thử sử dụng `delete`:
 
 ```js
       let arr = ["I", "go", "home"];
@@ -30,25 +30,25 @@ The arrays are objects, so we can try to use `delete`:
       alert( arr.length ); // 3
 ```
 
-The element was removed, but the array still has 3 elements, we can see that `arr.length == 3`.
+Phần tử đã bị xóa, nhưng mảng vẫn có 3 phần tử, chúng ta có thể thấy rằng `arr.length == 3`.
 
-That's natural, because `delete obj.key` removes a value by the `key`. It's all it does. Fine for objects. But for arrays we usually want the rest of elements to shift and occupy the freed place. We expect to have a shorter array now.
+Điều đó là tự nhiên, bởi vì `delete obj.key` sẽ xóa một giá trị bằng `key`. Đó là tất cả những gì nó làm. Tốt cho objects. Nhưng đối với các mảng, chúng ta thường muốn các phần tử còn lại dịch chuyển và chiếm vị trí tự do. Chúng ta hy vọng sẽ có một mảng ngắn hơn bây giờ.
 
-So, special methods should be used.
+Vì vậy, nên sử dụng các phương thức đặc biệt.
 
-The [arr.splice(str)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) method is a swiss army knife for arrays. It can do everything: add, remove and insert elements.
+Phương thức [arr.splice(str)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) là một con dao quân đội cho các mảng. Nó có thể làm mọi thứ: thêm, xóa và chèn các phần tử.
 
-The syntax is:
+Cú pháp là:
 
 ```js
       arr.splice(index[, deleteCount, elem1, ..., elemN])
 ```
 
-It starts from the position `index`: removes `deleteCount` elements and then inserts `elem1, ..., elemN` at their place. Returns the array of removed elements.
+Nó bắt đầu từ vị trí `index`: loại bỏ các phần tử `deleteCount` và sau đó chèn `elem1, ..., elemN` vào vị trí của chúng. Trả về mảng các phần tử bị loại bỏ.
 
-This method is easy to grasp by examples.
+Phương pháp này dễ nắm bắt bằng các ví dụ.
 
-Let's start with the deletion:
+Hãy bắt đầu với việc xóa:
 
 ```js
       let arr = ["I", "study", "JavaScript"];
@@ -58,9 +58,9 @@ Let's start with the deletion:
       alert( arr ); // ["I", "JavaScript"]
 ```
 
-Easy, right? Starting from the index `1` it removed `1` element.
+Dễ chứ nhỉ? Bắt đầu từ chỉ mục `1` nó đã loại bỏ phần tử `1`.
 
-In the next example we remove 3 elements and replace them with the other two:
+Trong ví dụ tiếp theo, chúng ta loại bỏ 3 phần tử và thay thế chúng bằng hai phần tử còn lại:
 
 ```js
       let arr = ["I", "study", "JavaScript", "right", "now"];
@@ -71,9 +71,9 @@ In the next example we remove 3 elements and replace them with the other two:
       alert( arr ) // now ["Let's", "dance", "right", "now"]
 ```
 
-Here we can see that `splice` returns the array of removed elements:
+Ở đây chúng ta có thể thấy rằng `splice` trả về mảng các phần tử bị loại bỏ:
 
-```js run
+```js
       let arr = ["I", "study", "JavaScript", "right", "now"];
 
       // remove 2 first elements
@@ -82,7 +82,7 @@ Here we can see that `splice` returns the array of removed elements:
       alert( removed ); // "I", "study" <-- array of removed elements
 ```
 
-The `splice` method is also able to insert the elements without any removals. For that we need to set `deleteCount` to `0`:
+Phương thức `splice` cũng có thể chèn các phần tử mà không cần loại bỏ. Vì vậy, chúng ta cần đặt `deleteCount` thành `0`:
 
 ```js
       let arr = ["I", "study", "JavaScript"];
@@ -99,9 +99,9 @@ The `splice` method is also able to insert the elements without any removals. Fo
 
 > ---
 
-**📌 Negative indexes allowed**
+**📌 Chỉ mục âm được phép (Negative indexes allowed)**
 
-Here and in other array methods, negative indexes are allowed. They specify the position from the end of the array, like here:
+Ở đây và trong các phương thức mảng khác, các Chỉ mục âm được cho phép. Họ chỉ định vị trí từ cuối mảng, như ở đây:
 
 ```js
       let arr = [1, 2, 5];
@@ -120,19 +120,19 @@ Here and in other array methods, negative indexes are allowed. They specify the 
 
 ### slice
 
-The method [arr.slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) is much simpler than similar-looking `arr.splice`.
+Phương thức [arr.slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) đơn giản hơn nhiều so với `arr.splice` tương tự.
 
-The syntax is:
+Cú pháp là:
 
 ```js
       arr.slice(start, end)
 ```
 
-It returns a new array where it copies all items start index `"start"` to `"end"` (not including `"end"`). Both `start` and `end` can be negative, in that case position from array end is assumed.
+Nó trả về một mảng mới nơi nó sao chép tất cả các items bắt đầu từ chỉ mục `"start"` tới `"end"` (không bao gồm `"end"`). Cả `start` và `end` đều có thể âm, trong trường hợp đó, vị trí từ cuối mảng được giả sử.
 
-It works like `str.slice`, but makes subarrays instead of substrings.
+Nó hoạt động như `str.slice`, nhưng tạo các phân đoạn (subarrays) thay vì các chuỗi con (substrings).
 
-For instance:
+Ví dụ:
 
 ```js
       let str = "test";
@@ -147,21 +147,21 @@ For instance:
 
 ### concat
 
-The method [arr.concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) joins the array with other arrays and/or items.
+Phương thức [arr.concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) kết hợp mảng với các mảng khác và/hoặc các items khác.
 
-The syntax is:
+Cú pháp là:
 
 ```js
       arr.concat(arg1, arg2...)
 ```
 
-It accepts any number of arguments -- either arrays or values.
+Nó chấp nhận bất kỳ số lượng đối số -- các mảng hoặc các giá trị.
 
-The result is a new array containing items from `arr`, then `arg1`, `arg2` etc.
+Kết quả là một mảng mới chứa các items từ `arr`, sau đó `arg1`, `arg2`, v.v.
 
-If an argument is an array or has `Symbol.isConcatSpreadable` property, then all its elements are copied. Otherwise, the argument itself is copied.
+Nếu một đối số là một mảng hoặc có thuộc tính `Symbol.isConcatSpreadable`, thì tất cả các phần tử của nó được sao chép. Mặt khác, chính đối số được sao chép.
 
-For instance:
+Ví dụ:
 
 ```js
       let arr = [1, 2];
@@ -176,7 +176,7 @@ For instance:
       alert( arr.concat([3, 4], 5, 6)); // 1,2,3,4,5,6
 ```
 
-Normally, it only copies elements from arrays ("spreads" them). Other objects, even if they look like arrays, added as a whole:
+Thông thường, nó chỉ sao chép các phần tử từ các mảng ("mở rộng (spreads)" chúng). Các đối tượng khác, ngay cả khi chúng trông giống như các mảng, được thêm vào như một tổng thể:
 
 ```js
       let arr = [1, 2];
@@ -190,7 +190,7 @@ Normally, it only copies elements from arrays ("spreads" them). Other objects, e
       //[1, 2, arrayLike]
 ```
 
-...But if an array-like object has `Symbol.isConcatSpreadable` property, then its elements are added instead:
+...Nhưng nếu một đối tượng giống như mảng có thuộc tính `Symbol.isConcatSpreadable`, thì các phần tử của nó được thêm vào:
 
 ```js
       let arr = [1, 2];
@@ -207,17 +207,17 @@ Normally, it only copies elements from arrays ("spreads" them). Other objects, e
 
 ## Searching in array
 
-These are methods to search for something in an array.
+Đây là những phương pháp để tìm kiếm một cái gì đó trong một mảng.
 
 ### indexOf/lastIndexOf and includes
 
-The methods [arr.indexOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf), [arr.lastIndexOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf) and [arr.includes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) have the same syntax and do essentially the same as their string counterparts, but operate on items instead of characters:
+Các phương thức [arr.indexOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf), [arr.lastIndexOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf) và [arr.includes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) có cùng một cú pháp và về cơ bản giống như các đối tác chuỗi của chúng, nhưng hoạt động trên các items thay vì các ký tự:
 
-- `arr.indexOf(item, from)` looks for `item` starting from index `from`, and returns the index where it was found, otherwise `-1`.
-- `arr.lastIndexOf(item, from)` -- same, but looks from right to left.
-- `arr.includes(item, from)` -- looks for `item` starting from index `from`, returns `true` if found.
+- `arr.indexOf(item, from)` tìm kiếm `item` bắt đầu từ chỉ mục `from` và trả về chỉ mục nơi nó được tìm thấy, nếu không thì `-1`.
+- `arr.lastIndexOf(item, from)` -- giống nhau, nhưng tìm từ phải sang trái.
+- `arr.includes(item, from)` -- tìm kiếm `item` bắt đầu từ chỉ mục `from`, trả về `true` nếu tìm thấy.
 
-For instance:
+Ví dụ:
 
 ```js
       let arr = [1, 0, false];
@@ -229,11 +229,11 @@ For instance:
       alert( arr.includes(1) ); // true
 ```
 
-Note that the methods use `===` comparison. So, if we look for `false`, it finds exactly `false` and not the zero.
+Lưu ý rằng các phương thức sử dụng so sánh `===`. Vì vậy, nếu chúng ta tìm kiếm `false`, nó sẽ tìm thấy chính xác `false` chứ không phải số không.
 
-If we want to check for inclusion, and don't want to know the exact index, then `arr.includes` is preferred.
+Nếu chúng ta muốn kiểm tra sự bao gồm và không muốn biết chỉ số chính xác, thì `arr.includes` được ưu tiên.
 
-Also, a very minor difference of `includes` is that it correctly handles `NaN`, unlike `indexOf/lastIndexOf`:
+Ngoài ra, một điểm khác biệt rất nhỏ của `includes` là nó xử lý chính xác `NaN`, không giống như `indexOf/lastIndexOf`:
 
 ```js
       const arr = [NaN];
@@ -243,11 +243,11 @@ Also, a very minor difference of `includes` is that it correctly handles `NaN`, 
 
 ### find and findIndex
 
-Imagine we have an array of objects. How do we find an object with the specific condition?
+Hãy tưởng tượng chúng ta có một mảng các đối tượng. Làm thế nào để chúng ta tìm thấy một đối tượng với quy tắc cụ thể?
 
-Here the [arr.find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) method comes in handy.
+Ở đây, phương thức [arr.find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) có ích.
 
-The syntax is:
+Cú pháp là:
 
 ```js
       let result = arr.find(function(item, index, array) {
@@ -255,15 +255,15 @@ The syntax is:
       });
 ```
 
-The function is called repetitively for each element of the array:
+Hàm được gọi là lặp lại cho từng phần tử của mảng:
 
-- `item` is the element.
-- `index` is its index.
-- `array` is the array itself.
+- `item` là phần tử.
+- `index` là chỉ mục của nó.
+- `mảng` là mảng chính nó.
 
-If it returns `true`, the search is stopped, the `item` is returned. If nothing found, `undefined` is returned.
+Nếu nó trả về `true`, tìm kiếm bị dừng lại ,`item` được trả về. Nếu không tìm thấy gì, `undefined` được trả về.
 
-For example, we have an array of users, each with the fields `id` and `name`. Let's find the one with `id == 1`:
+Ví dụ: chúng ta có một mảng người dùng, mỗi người có các trường `id` và `name`. Hãy tìm một cái có `id == 1`:
 
 ```js
       let users = [
@@ -277,19 +277,19 @@ For example, we have an array of users, each with the fields `id` and `name`. Le
       alert(user.name); // John
 ```
 
-In real life arrays of objects is a common thing, so the `find` method is very useful.
+Trong thực tế các mảng của các đối tượng là một điều phổ biến, vì vậy phương thức `find` rất hữu ích.
 
-Note that in the example we provide to `find` a single-argument function `item => item.id == 1`. Other parameters of `find` are rarely used.
+Lưu ý rằng trong ví dụ chúng ta cung cấp cho `find` một hàm đối số duy nhất `item => item.id == 1`. Các tham số khác của `find` hiếm khi được sử dụng.
 
-The [arr.findIndex](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex) method is essentially the same, but it returns the index where the element was found instead of the element itself.
+Phương thức [arr.findIndex](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex) về cơ bản là giống nhau, nhưng nó trả về chỉ mục nơi phần tử được tìm thấy thay vì các phần tử.
 
 ### filter
 
-The `find` method looks for a single (first) element that makes the function return `true`.
+Phương thức `find` tìm kiếm một phần tử (đầu tiên) làm cho hàm trả về `true`.
 
-If there may be many, we can use [arr.filter(fn)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
+Nếu có thể có nhiều, chúng ta có thể sử dụng [arr.filter(fn)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
-The syntax is roughly the same as `find`, but it returns an array of matching elements:
+Cú pháp gần giống như `find`, nhưng nó trả về một mảng các phần tử khớp:
 
 ```js
       let results = arr.filter(function(item, index, array) {
@@ -297,7 +297,7 @@ The syntax is roughly the same as `find`, but it returns an array of matching el
       });
 ```
 
-For instance:
+Ví dụ:
 
 ```js
       let users = [
@@ -314,14 +314,14 @@ For instance:
 
 ## Transform an array
 
-This section is about the methods transforming or reordering the array.
+Phần này là về các phương thức chuyển đổi hoặc sắp xếp lại mảng.
 
 
 ### map
 
-The [arr.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) method is one of the most useful and often used.
+Phương thức [arr.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) là một trong những phương thức hữu ích và thường được sử dụng nhất.
 
-The syntax is:
+Cú pháp là:
 
 ```js
       let result = arr.map(function(item, index, array) {
@@ -329,9 +329,9 @@ The syntax is:
       })
 ```
 
-It calls the function for each element of the array and returns the array of results.
+Nó gọi hàm cho từng phần tử của mảng và trả về mảng kết quả.
 
-For instance, here we transform each element into its length:
+Chẳng hạn, ở đây chúng ta biến đổi từng phần tử thành chiều dài của nó:
 
 ```js
       let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length);
@@ -340,9 +340,9 @@ For instance, here we transform each element into its length:
 
 ### sort(fn)
 
-The method [arr.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) sorts the array *in place*.
+Phương thức [arr.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) sắp xếp mảng *tại chỗ*.
 
-For instance:
+Ví dụ:
 
 ```js
       let arr = [ 1, 2, 15 ];
@@ -353,17 +353,17 @@ For instance:
       alert( arr );  // 1, 15, 2
 ```
 
-Did you notice anything strange in the outcome?
+Bạn có nhận thấy điều gì kỳ lạ trong kết quả không?
 
-The order became `1, 15, 2`. Incorrect. But why?
+Thứ tự trở thành `1, 15, 2`. Sai. Nhưng tại sao?
 
-**The items are sorted as strings by default.**
+**Các items được sắp xếp theo chuỗi theo mặc định.**
 
-Literally, all elements are converted to strings and then compared. So, the lexicographic ordering is applied and indeed `"2" > "15"`.
+Theo nghĩa đen, tất cả các yếu tố được chuyển đổi thành chuỗi và sau đó so sánh. Vì vậy, thứ tự từ điển được áp dụng và thực sự `"2" > "15"`.
 
-To use our own sorting order, we need to supply a function of two arguments as the argument of `arr.sort()`.
+Để sử dụng thứ tự sắp xếp riêng của chúng ta, chúng ta cần cung cấp một hàm gồm hai đối số làm đối số của `arr.sort()`.
 
-The function should work like this:
+Hàm nên hoạt động như thế này:
 
 ```js
       function compare(a, b) {
@@ -373,7 +373,7 @@ The function should work like this:
       }
 ```
 
-For instance:
+Ví dụ:
 
 ```js
       function compareNumeric(a, b) {
@@ -389,13 +389,13 @@ For instance:
       alert(arr);  // 1, 2, 15
 ```
 
-Now it works as intended.
+Bây giờ nó hoạt động như dự định.
 
-Let's step aside and think what's happening. The `arr` can be array of anything, right? It may contain numbers or strings or html elements or whatever. We have a set of *something*. To sort it, we need an *ordering function* that knows how to compare its elements. The default is a string order.
+Hãy bước sang một bên và nghĩ những gì đang xảy ra. `arr` có thể là mảng của bất cứ thứ gì, phải không? Nó có thể chứa số hoặc chuỗi hoặc phần tử html hoặc bất cứ điều gì. Chúng ta có một bộ *cái gì đó*. Để sắp xếp nó, chúng ta cần một *function sắp xếp* biết cách so sánh các yếu tố của nó. Mặc định là một thứ tự chuỗi.
 
-The `arr.sort(fn)` method has a built-in implementation of sorting algorithm. We don't need to care how it exactly works (an optimized [quicksort](https://en.wikipedia.org/wiki/Quicksort) most of the time). It will walk the array, compare its elements using the provided function and reorder them, all we need is to provide the `fn` which does the comparison.
+Phương thức `arr.sort(fn)` có built-in thực hiện thuật toán sắp xếp. Chúng ta không cần quan tâm làm thế nào nó hoạt động chính xác (một [quicksort](https://en.wikipedia.org/wiki/Quicksort) được tối ưu hóa hầu hết thời gian). Nó sẽ đi theo mảng, so sánh các phần tử của nó bằng cách sử dụng hàm được cung cấp và sắp xếp lại chúng, tất cả những gì chúng ta cần là cung cấp `fn` để so sánh.
 
-By the way, if we ever want to know which elements are compared -- nothing prevents from alerting them:
+Nhân tiện, nếu chúng ta muốn biết những yếu tố nào được so sánh -- không có gì ngăn cản alerting chúng:
 
 ```js
       [1, -2, 15, 2, 0, 8].sort(function(a, b) {
@@ -403,17 +403,17 @@ By the way, if we ever want to know which elements are compared -- nothing preve
       });
 ```
 
-The algorithm may compare an element multiple times in the process, but it tries to make as few comparisons as possible.
+Thuật toán có thể so sánh một yếu tố nhiều lần trong quy trình, nhưng nó cố gắng thực hiện càng ít so sánh càng tốt.
 
 <br>
 
 > ---
 
-**📌 A comparison function may return any number**
+**📌 Hàm so sánh có thể trả về bất kỳ số nào**
 
-Actually, a comparison function is only required to return a positive number to say "greater" and a negative number to say "less".
+Trên thực tế, một hàm so sánh chỉ được yêu cầu trả về một số dương để nói "lớn hơn" và một số âm để nói "ít hơn".
 
-That allows to write shorter functions:
+Điều đó cho phép viết các hàm ngắn hơn:
 
 ```js
       let arr = [ 1, 2, 15 ];
@@ -430,15 +430,15 @@ That allows to write shorter functions:
 
 > ---
 
-**📌 Arrow functions for the best**
+**📌 Arrow functions cho tốt nhất (Arrow functions for the best)**
 
-Remember **arrow functions**? We can use them here for neater sorting:
+Còn nhớ **arrow functions**? Chúng ta có thể sử dụng chúng ở đây để sắp xếp gọn gàng hơn:
 
 ```js
       arr.sort( (a, b) => a - b );
 ```
 
-This works exactly the same as the other, longer, version above.
+Điều này hoạt động chính xác như phiên bản khác, dài hơn, ở trên.
 
 > ---
 
@@ -446,9 +446,9 @@ This works exactly the same as the other, longer, version above.
 
 ### reverse
 
-The method [arr.reverse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) reverses the order of elements in `arr`.
+Phương thức [arr.reverse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse) đảo ngược thứ tự các phần tử trong `arr`.
 
-For instance:
+Ví dụ:
 
 ```js
       let arr = [1, 2, 3, 4, 5];
@@ -457,15 +457,15 @@ For instance:
       alert( arr ); // 5,4,3,2,1
 ```
 
-It also returns the array `arr` after the reversal.
+Nó cũng trả về mảng `arr` sau khi đảo ngược.
 
 ### split and join
 
-Here's the situation from the real life. We are writing a messaging app, and the person enters the comma-delimited list of receivers: `John, Pete, Mary`. But for us an array of names would be much more comfortable than a single string. How to get it?
+Đây là tình huống từ cuộc sống thực. Chúng ta đang viết một ứng dụng nhắn tin và người này enters danh sách người nhận được phân tách bằng dấu phẩy: `John, Pete, Mary`. Nhưng đối với chúng ta, một loạt các tên sẽ thoải mái hơn nhiều so với một chuỗi. Làm thế nào để có được nó?
 
-The [str.split(delim)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) method does exactly that. It splits the string into an array by the given delimiter `delim`.
+Phương thức [str.split(delim)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) thực hiện chính xác điều đó. Nó phân tách chuỗi thành một mảng bởi dấu phân cách đã cho `delim`.
 
-In the example below, we split by a comma followed by space:
+Trong ví dụ dưới đây, chúng ta phân chia bằng dấu phẩy theo sau là khoảng trắng:
 
 ```js
       let names = 'Bilbo, Gandalf, Nazgul';
@@ -477,7 +477,7 @@ In the example below, we split by a comma followed by space:
       }
 ```
 
-The `split` method has an optional second numeric argument -- a limit on the array length. If it is provided, then the extra elements are ignored. In practice it is rarely used though:
+Phương thức `split` có một đối số số thứ hai tùy chọn -- giới hạn về độ dài mảng. Nếu nó được cung cấp, sau đó các phần tử bổ sung được bỏ qua. Trong thực tế, nó hiếm khi được sử dụng:
 
 ```js
       let arr = 'Bilbo, Gandalf, Nazgul, Saruman'.split(', ', 2);
@@ -489,9 +489,9 @@ The `split` method has an optional second numeric argument -- a limit on the arr
 
 > ---
 
-**📌 Split into letters**
+**📌 Chia thành các chữ cái (Split into letters)**
 
-The call to `split(s)` with an empty `s` would split the string into an array of letters:
+Cuộc gọi tới `split(s)` với một `s` trống sẽ chia chuỗi thành một mảng các chữ cái:
 
 ```js
       let str = "test";
@@ -503,9 +503,9 @@ The call to `split(s)` with an empty `s` would split the string into an array of
 
 <br>
 
-The call [arr.join(str)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) does the reverse to `split`. It creates a string of `arr` items glued by `str` between them.
+Cuộc gọi [arr.join(str)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) thực hiện ngược lại với `split`. Nó tạo ra một chuỗi các `arr` items được dán bởi `str` giữa chúng.
 
-For instance:
+Ví dụ:
 
 ```js
       let arr = ['Bilbo', 'Gandalf', 'Nazgul'];
@@ -517,13 +517,13 @@ For instance:
 
 ### reduce/reduceRight
 
-When we need to iterate over an array -- we can use `forEach`.
+Khi chúng ta cần lặp lại qua một mảng --  chúng ta có thể sử dụng `forEach`.
 
-When we need to iterate and return the data for each element -- we can use `map`.
+Khi chúng ta cần lặp lại và trả lại dữ liệu cho từng phần tử -- chúng ta có thể sử dụng `map`.
 
-The methods [arr.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) and [arr.reduceRight](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight) also belong to that breed, but are a little bit more intricate. They are used to calculate a single value based on the array.
+Các phương thức [arr.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) và arr.reduceRight](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight) cũng thuộc dạng đó, nhưng phức tạp hơn một chút. Chúng được sử dụng để tính toán một giá trị duy nhất dựa trên mảng.
 
-The syntax is:
+Cú pháp là:
 
 ```js
       let value = arr.reduce(function(previousValue, item, index, arr) {
@@ -531,19 +531,19 @@ The syntax is:
       }, initial);
 ```
 
-The function is applied to the elements. You may notice the familiar arguments, starting from the 2nd:
+Function được áp dụng cho các yếu tố. Bạn có thể nhận thấy các đối số quen thuộc, bắt đầu từ thứ 2:
 
-- `item` -- is the current array item.
-- `index` -- is its position.
-- `arr` -- is the array.
+- `item` - là mục mảng hiện tại.
+- `index` - là vị trí của nó.
+- `arr` - là mảng.
 
-So far, like `forEach/map`. But there's one more argument:
+Cho đến nay, trông giống như `forEach/map`. Nhưng có thêm một đối số:
 
-- `previousValue` -- is the result of the previous function call, `initial` for the first call.
+- `previousValue` -- là kết quả của lệnh gọi hàm trước, `initial` cho cuộc gọi đầu tiên.
 
-The easiest way to grasp that is by example.
+Cách dễ nhất để nắm bắt đó là ví dụ.
 
-Here we get a sum of array in one line:
+Ở đây chúng ta nhận được một mảng của một dòng:
 
 ```js
       let arr = [1, 2, 3, 4, 5];
@@ -553,31 +553,31 @@ Here we get a sum of array in one line:
       alert(result); // 15
 ```
 
-Here we used the most common variant of `reduce` which uses only 2 arguments.
+Ở đây, chúng ta đã sử dụng biến thể phổ biến nhất của `reduce` chỉ sử dụng 2 đối số.
 
-Let's see the details of what's going on.
+Hãy xem chi tiết những gì đang diễn ra.
 
-1. On the first run, `sum` is the initial value (the last argument of `reduce`), equals `0`, and `current` is the first array element, equals `1`. So the result is `1`.
-2. On the second run, `sum = 1`, we add the second array element (`2`) to it and return.
-3. On the 3rd run, `sum = 3` and we add one more element to it, and so on...
+1. Trong lần chạy đầu tiên, `sum` là giá trị ban đầu (đối số cuối cùng của `reduce`), bằng `0` và `current` là phần tử mảng đầu tiên, bằng `1`. Vì vậy, kết quả là `1`.
+2. Trong lần chạy thứ hai, `sum = 1`, chúng ta thêm phần tử mảng thứ hai (`2`) vào nó và trả về.
+3. Trong lần chạy thứ 3, `sum = 3` và chúng ta thêm một phần tử nữa vào đó, v.v.
 
-The calculation flow:
+Luồng tính toán:
 
 ![](reduce.png)
 
-Or in the form of a table, where each row represents is a function call on the next array element:
+Hoặc ở dạng bảng, trong đó mỗi hàng đại diện là một lệnh gọi hàm trên phần tử mảng tiếp theo:
 
-|               |`sum`|`current`|`result` |
-|---------------|-----|---------|---------|
-|the first call |`0`  |`1`      |`1`      |
-|the second call|`1`  |`2`      |`3`      |
-|the third call |`3`  |`3`      |`6`      |
-|the fourth call|`6`  |`4`      |`10`     |
-|the fifth call |`10` |`5`      |`15`     |
+| | `sum` |` hiện tại` | `result` |
+| --------------- | ----- | --------- | --------- |
+| cuộc gọi đầu tiên | `0` |` 1` | `1` |
+| cuộc gọi thứ hai | `1` |` 2` | `3` |
+| cuộc gọi thứ ba | `3` |` 3` | `6` |
+| cuộc gọi thứ tư | `6` |` 4` | `10` |
+| cuộc gọi thứ năm | `10` |` 5` | `15` |
 
-As we can see, the result of the previous call becomes the first argument of the next one.
+Như chúng ta có thể thấy, kết quả của cuộc gọi trước trở thành đối số đầu tiên của cuộc gọi tiếp theo.
 
-We also can omit the initial value:
+Chúng ta cũng có thể bỏ qua giá trị ban đầu:
 
 ```js
       let arr = [1, 2, 3, 4, 5];
@@ -588,13 +588,13 @@ We also can omit the initial value:
       alert( result ); // 15
 ```
 
-The result is the same. That's because if there's no initial, then `reduce` takes the first element of the array as the initial value and starts the iteration from the 2nd element.
+Kết quả là như nhau. Đó là bởi vì nếu không có khởi tạo ban đầu, thì `reduce` lấy phần tử đầu tiên của mảng làm giá trị ban đầu và bắt đầu phép lặp từ phần tử thứ 2.
 
-The calculation table is the same as above, minus the first row.
+Bảng tính toán giống như trên, trừ hàng đầu tiên.
 
-But such use requires an extreme care. If the array is empty, then `reduce` call without initial value gives an error.
+Nhưng việc sử dụng như vậy đòi hỏi một sự cẩn thận cao độ. Nếu mảng trống, thì cuộc gọi `reduce` không có giá trị ban đầu sẽ báo lỗi.
 
-Here's an example:
+Đây là một ví dụ:
 
 ```js
       let arr = [];
@@ -605,15 +605,15 @@ Here's an example:
 ```
 
 
-So it's advised to always specify the initial value.
+Vì vậy, nên luôn luôn chỉ định giá trị ban đầu.
 
-The method [arr.reduceRight](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight) does the same, but goes from right to left.
+Phương thức [arr.reduceRight](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight) cũng tương tự, nhưng đi từ phải sang trái.
 
 ## Iterate: forEach
 
-The [arr.forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) method allows to run a function for every element of the array.
+Phương thức [arr.forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) cho phép chạy một hàm cho mọi phần tử của mảng.
 
-The syntax:
+Cú pháp:
 
 ```js
       arr.forEach(function(item, index, array) {
@@ -621,14 +621,14 @@ The syntax:
       });
 ```
 
-For instance, this shows each element of the array:
+Ví dụ, điều này cho thấy từng phần tử của mảng:
 
 ```js
       // for each element call alert
       ["Bilbo", "Gandalf", "Nazgul"].forEach(alert);
 ```
 
-And this code is more elaborate about their positions in the target array:
+Và mã này chi tiết hơn về vị trí của chúng trong mảng mục tiêu:
 
 ```js
       ["Bilbo", "Gandalf", "Nazgul"].forEach((item, index, array) => {
@@ -636,20 +636,20 @@ And this code is more elaborate about their positions in the target array:
       });
 ```
 
-The result of the function (if it returns any) is thrown away and ignored.
+Kết quả của hàm (nếu nó trả về bất kỳ) bị bỏ đi và bỏ qua.
 
 ## Array.isArray
 
-Arrays do not form a separate language type. They are based on objects.
+Mảng không tạo thành một kiểu ngôn ngữ riêng biệt. Chúng dựa trên các đối tượng.
 
-So `typeof` does not help to distinguish a plain object from an array:
+Vì vậy, `typeof` không giúp phân biệt một đối tượng đơn giản với một mảng:
 
 ```js
       alert(typeof {}); // object
       alert(typeof []); // same
 ```
 
-...But arrays are used so often that there's a special method for that: [Array.isArray(value)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray). It returns `true` if the `value` is an array, and `false` otherwise.
+...Nhưng các mảng được sử dụng thường xuyên đến nỗi có một phương thức đặc biệt cho chúng: [Array.isArray(value)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray). Nó trả về `true` nếu `value` là một mảng và `false` nếu không.
 
 ```js
       alert(Array.isArray({})); // false
@@ -657,13 +657,13 @@ So `typeof` does not help to distinguish a plain object from an array:
       alert(Array.isArray([])); // true
 ```
 
-## Most methods support "thisArg"
+## Hầu hết các phương thức hỗ trợ "thisArg"
 
-Almost all array methods that call functions -- like `find`, `filter`, `map`, with a notable exception of `sort`, accept an optional additional parameter `thisArg`.
+Hầu như tất cả các phương thức mảng gọi các hàm -- như `find`, `filter`, `map`, với một ngoại lệ đáng chú ý là `sort`, chấp nhận một tham số bổ sung tùy chọn `thisArg`.
 
-That parameter is not explained in the sections above, because it's rarely used. But for completeness we have to cover it.
+Tham số đó không được giải thích trong các phần trên, vì nó hiếm khi được sử dụng. Nhưng để hoàn thiện chúng ta phải bao gồm nó.
 
-Here's the full syntax of these methods:
+Đây là cú pháp đầy đủ của các phương thức này:
 
 ```js
       arr.find(func, thisArg);
@@ -673,9 +673,9 @@ Here's the full syntax of these methods:
       // thisArg is the optional last argument
 ```
 
-The value of `thisArg` parameter becomes `this` for `func`.
+Giá trị của tham số `thisArg` trở thành `this` cho `func`.
 
-For instance, here we use an object method as a filter and `thisArg` comes in handy:
+Ví dụ, ở đây chúng ta sử dụng một phương thức đối tượng làm bộ lọc và `thisArg` có ích:
 
 ```js
       let user = {
@@ -697,56 +697,56 @@ For instance, here we use an object method as a filter and `thisArg` comes in ha
       alert(youngerUsers.length); // 2
 ```
 
-In the call above, we use `user.younger` as a filter and also provide `user` as the context for it. If we didn't provide the context, `users.filter(user.younger)` would call `user.younger` as a standalone function, with `this=undefined`. That would mean an instant error.
+Trong cuộc gọi ở trên, chúng ta sử dụng `user.younger` làm bộ lọc và cũng cung cấp `user` làm bối cảnh cho nó. Nếu chúng ta không cung cấp ngữ cảnh, `users.filter(user.younger)` sẽ gọi `user.younger` là một hàm độc lập, với `this=undefined`. Điều đó có nghĩa là một lỗi ngay lập tức.
 
-## Summary
+## Tóm lược
 
-A cheatsheet of array methods:
+Một loạt các phương thức mảng:
 
-- To add/remove elements:
-  - `push(...items)` -- adds items to the end,
-  - `pop()` -- extracts an item from the end,
-  - `shift()` -- extracts an item from the beginning,
-  - `unshift(...items)` -- adds items to the beginning.
-  - `splice(pos, deleteCount, ...items)` -- at index `pos` delete `deleteCount` elements and insert `items`.
-  - `slice(start, end)` -- creates a new array, copies elements from position `start` till `end` (not inclusive) into it.
-  - `concat(...items)` -- returns a new array: copies all members of the current one and adds `items` to it. If any of `items` is an array, then its elements are taken.
+- Để add/remove các phần tử:
+  - `push(...items)` -- thêm các items vào cuối,
+  - `pop()` -- trích xuất một item từ cuối,
+  - `shift()` -- trích xuất một item từ đầu,
+  - `unshift(...items)` -- thêm các mục vào đầu.
+  - `splice(pos, deleteCount, ...items)` -- tại chỉ mục `pos` xóa các phần tử `deleteCount` và chèn `items`.
+  - `slice(start, end)` -- tạo một mảng mới, sao chép các phần tử từ vị trí `start` đến `end` (không bao gồm) vào nó.
+  - `concat(...items)` -- trả về một mảng mới: sao chép tất cả các thành viên của mảng hiện tại và thêm `items` vào nó. Nếu bất kỳ `items` nào là một mảng, thì các phần tử của nó được lấy.
 
-- To search among elements:
-  - `indexOf/lastIndexOf(item, pos)` -- look for `item` starting from position `pos`, return the index or `-1` if not found.
-  - `includes(value)` -- returns `true` if the array has `value`, otherwise `false`.
-  - `find/filter(func)` -- filter elements through the function, return first/all values that make it return `true`.
-  - `findIndex` is like `find`, but returns the index instead of a value.
+- Để tìm kiếm giữa các phần tử:
+  - `indexOf/lastIndexOf(item, pos)` -- tìm kiếm `item` bắt đầu từ vị trí `pos`, trả về chỉ mục hoặc `-1` nếu không tìm thấy.
+  - `includes(value)` -- trả về `true` nếu mảng có `value`, nếu không thì `false`.
+  - `find/filter(func)` -- lọc các phần tử thông qua hàm, trả về đầu tiên/tất cả các giá trị làm cho nó trả về `true`.
+  - `findIndex` giống như `find`, nhưng trả về chỉ mục thay vì giá trị.
 
-- To transform the array:
-  - `map(func)` -- creates a new array from results of calling `func` for every element.
-  - `sort(func)` -- sorts the array in-place, then returns it.
-  - `reverse()` -- reverses the array in-place, then returns it.
-  - `split/join` -- convert a string to array and back.
-  - `reduce(func, initial)` -- calculate a single value over the array by calling `func` for each element and passing an intermediate result between the calls.
+- Để chuyển đổi mảng:
+  - `map(func)` -- tạo ra một mảng mới từ kết quả của việc gọi `func` cho mọi phần tử.
+  - `sort(func)` -- sắp xếp mảng tại chỗ, sau đó trả về nó.
+  - `reverse()` -- đảo ngược mảng tại chỗ, sau đó trả về nó.
+  - `split/join` -- chuyển đổi một chuỗi thành mảng và trả lại.
+  - `reduce(func, initial)` -- tính một giá trị đơn trên mảng bằng cách gọi `func` cho mỗi phần tử và truyền kết quả trung gian giữa các lệnh gọi.
 
-- To iterate over elements:
-  - `forEach(func)` -- calls `func` for every element, does not return anything.
+- Để lặp lại các phần tử:
+  - `forEach(func)` -- gọi `func` cho mọi phần tử, không trả về bất cứ thứ gì.
 
-- Additionally:
-  - `Array.isArray(arr)` checks `arr` for being an array.
+- Ngoài ra:
+  - `Array.isArray(arr)` kiểm tra `arr` là một mảng.
 
-Please note that methods `sort`, `reverse` and `splice` modify the array itself.
+Xin lưu ý rằng các phương thức `sort`, `reverse` và `splice` tự sửa đổi mảng.
 
-These methods are the most used ones, they cover 99% of use cases. But there are few others:
+Những phương thức này là những phương thức được sử dụng nhiều nhất, chúng bao gồm 99% trường hợp sử dụng. Nhưng có một vài cái khác:
 
-- [arr.some(fn)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)/[arr.every(fn)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every) checks the array.
+- [arr.some(fn)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)/[arr.every(fn)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every) kiểm tra mảng.
 
-  The function `fn` is called on each element of the array similar to `map`. If any/all results are `true`, returns `true`, otherwise `false`.
+  Hàm `fn` được gọi trên mỗi phần tử của mảng tương tự như `map`. Nếu bất kỳ/tất cả các kết quả là `true`, trả về `true`, nếu không thì `false`.
 
-- [arr.fill(value, start, end)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) -- fills the array with repeating `value` from index `start` to `end`.
+- [arr.fill(value, start, end)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill) -- lấp đầy mảng bằng cách lặp lại `value` từ chỉ mục `start` đến `end`.
 
-- [arr.copyWithin(target, start, end)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin) -- copies its elements from position `start` till position `end` into *itself*, at position `target` (overwrites existing).
+- [arr.copyWithin(target, start, end)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin) -- sao chép các phần tử của nó từ vị trí `start` cho đến vị trí `end` thành *chính nó*, tại vị trí `target` (ghi đè lên hiện tại).
 
-For the full list, see the [manual](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array).
+Để biết danh sách đầy đủ, xem [hướng dẫn](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array).
 
-From the first sight it may seem that there are so many methods, quite difficult to remember. But actually that's much easier than it seems.
+Ngay từ cái nhìn đầu tiên có vẻ như có rất nhiều phương thức, khá khó nhớ. Nhưng thật ra điều đó dễ hơn nhiều so với vẻ ngoài của nó.
 
-Look through the cheatsheet just to be aware of them. Then solve the tasks of this chapter to practice, so that you have experience with array methods.
+Nhìn qua chiếc áo chỉ để nhận ra chúng. Sau đó, giải quyết các nhiệm vụ của chương này để thực hành, để bạn có kinh nghiệm với các phương thức mảng.
 
-Afterwards whenever you need to do something with an array, and you don't know how -- come here, look at the cheatsheet and find the right method. Examples will help you to write it correctly. Soon you'll automatically remember the methods, without specific efforts from your side.
+Sau đó, bất cứ khi nào bạn cần làm một cái gì đó với một mảng, và bạn không biết làm thế nào - hãy đến đây, nhìn vào chiếc áo choàng và tìm phương thức phù hợp. Ví dụ sẽ giúp bạn viết nó một cách chính xác. Bạn sẽ sớm tự động ghi nhớ các phương thức mà không cần nỗ lực cụ thể từ phía bạn.
