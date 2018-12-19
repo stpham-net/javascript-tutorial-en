@@ -101,7 +101,7 @@ Phương thức `splice` cũng có thể chèn các phần tử mà không cần
 
 **📌 Chỉ mục âm được phép (Negative indexes allowed)**
 
-Ở đây và trong các phương thức mảng khác, các Chỉ mục âm được cho phép. Họ chỉ định vị trí từ cuối mảng, như ở đây:
+Ở đây và trong các phương thức mảng khác, các Chỉ mục âm được cho phép. Chúng chỉ định vị trí từ cuối mảng, như ở đây:
 
 ```js
       let arr = [1, 2, 5];
@@ -120,7 +120,7 @@ Phương thức `splice` cũng có thể chèn các phần tử mà không cần
 
 ### slice
 
-Phương thức [arr.slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) đơn giản hơn nhiều so với `arr.splice` tương tự.
+Phương thức [arr.slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) đơn giản hơn nhiều so với `arr.splice`.
 
 Cú pháp là:
 
@@ -207,7 +207,7 @@ Thông thường, nó chỉ sao chép các phần tử từ các mảng ("mở r
 
 ## Searching in array
 
-Đây là những phương pháp để tìm kiếm một cái gì đó trong một mảng.
+Đây là những phương thức để tìm kiếm một cái gì đó trong một mảng.
 
 ### indexOf/lastIndexOf and includes
 
@@ -259,7 +259,7 @@ Hàm được gọi là lặp lại cho từng phần tử của mảng:
 
 - `item` là phần tử.
 - `index` là chỉ mục của nó.
-- `mảng` là mảng chính nó.
+- `array` là mảng chính nó.
 
 Nếu nó trả về `true`, tìm kiếm bị dừng lại ,`item` được trả về. Nếu không tìm thấy gì, `undefined` được trả về.
 
@@ -279,7 +279,7 @@ Ví dụ: chúng ta có một mảng người dùng, mỗi người có các tr�
 
 Trong thực tế các mảng của các đối tượng là một điều phổ biến, vì vậy phương thức `find` rất hữu ích.
 
-Lưu ý rằng trong ví dụ chúng ta cung cấp cho `find` một hàm đối số duy nhất `item => item.id == 1`. Các tham số khác của `find` hiếm khi được sử dụng.
+Lưu ý rằng trong ví dụ chúng ta cung cấp cho `find` một đối số hàm duy nhất `item => item.id == 1`. Các tham số khác của `find` hiếm khi được sử dụng.
 
 Phương thức [arr.findIndex](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex) về cơ bản là giống nhau, nhưng nó trả về chỉ mục nơi phần tử được tìm thấy thay vì các phần tử.
 
@@ -357,7 +357,7 @@ Bạn có nhận thấy điều gì kỳ lạ trong kết quả không?
 
 Thứ tự trở thành `1, 15, 2`. Sai. Nhưng tại sao?
 
-**Các items được sắp xếp theo chuỗi theo mặc định.**
+**Các items được sắp xếp như chuỗi theo mặc định.**
 
 Theo nghĩa đen, tất cả các yếu tố được chuyển đổi thành chuỗi và sau đó so sánh. Vì vậy, thứ tự từ điển được áp dụng và thực sự `"2" > "15"`.
 
@@ -521,7 +521,7 @@ Khi chúng ta cần lặp lại qua một mảng --  chúng ta có thể sử d�
 
 Khi chúng ta cần lặp lại và trả lại dữ liệu cho từng phần tử -- chúng ta có thể sử dụng `map`.
 
-Các phương thức [arr.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) và arr.reduceRight](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight) cũng thuộc dạng đó, nhưng phức tạp hơn một chút. Chúng được sử dụng để tính toán một giá trị duy nhất dựa trên mảng.
+Các phương thức [arr.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) và [arr.reduceRight](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight) cũng thuộc dạng đó, nhưng phức tạp hơn một chút. Chúng được sử dụng để tính toán một giá trị duy nhất dựa trên mảng.
 
 Cú pháp là:
 
@@ -537,7 +537,7 @@ Function được áp dụng cho các yếu tố. Bạn có thể nhận thấy 
 - `index` - là vị trí của nó.
 - `arr` - là mảng.
 
-Cho đến nay, trông giống như `forEach/map`. Nhưng có thêm một đối số:
+Cho đến bây giờ, trông giống như `forEach/map`. Nhưng có thêm một đối số:
 
 - `previousValue` -- là kết quả của lệnh gọi hàm trước, `initial` cho cuộc gọi đầu tiên.
 
@@ -567,13 +567,13 @@ Luồng tính toán:
 
 Hoặc ở dạng bảng, trong đó mỗi hàng đại diện là một lệnh gọi hàm trên phần tử mảng tiếp theo:
 
-| | `sum` |` hiện tại` | `result` |
-| --------------- | ----- | --------- | --------- |
-| cuộc gọi đầu tiên | `0` |` 1` | `1` |
-| cuộc gọi thứ hai | `1` |` 2` | `3` |
-| cuộc gọi thứ ba | `3` |` 3` | `6` |
-| cuộc gọi thứ tư | `6` |` 4` | `10` |
-| cuộc gọi thứ năm | `10` |` 5` | `15` |
+|               |`sum`|`current`|`result` |
+|---------------|-----|---------|---------|
+|the first call |`0`  |`1`      |`1`      |
+|the second call|`1`  |`2`      |`3`      |
+|the third call |`3`  |`3`      |`6`      |
+|the fourth call|`6`  |`4`      |`10`     |
+|the fifth call |`10` |`5`      |`15`     |
 
 Như chúng ta có thể thấy, kết quả của cuộc gọi trước trở thành đối số đầu tiên của cuộc gọi tiếp theo.
 
@@ -722,7 +722,7 @@ Một loạt các phương thức mảng:
   - `map(func)` -- tạo ra một mảng mới từ kết quả của việc gọi `func` cho mọi phần tử.
   - `sort(func)` -- sắp xếp mảng tại chỗ, sau đó trả về nó.
   - `reverse()` -- đảo ngược mảng tại chỗ, sau đó trả về nó.
-  - `split/join` -- chuyển đổi một chuỗi thành mảng và trả lại.
+  - `split/join` -- chuyển đổi một chuỗi thành mảng và ngược lại.
   - `reduce(func, initial)` -- tính một giá trị đơn trên mảng bằng cách gọi `func` cho mỗi phần tử và truyền kết quả trung gian giữa các lệnh gọi.
 
 - Để lặp lại các phần tử:
