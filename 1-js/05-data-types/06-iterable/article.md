@@ -1,20 +1,20 @@
 
-# Iterables
+# Lặp lại (Iterables)
 
-*Iterable* objects is a generalization of arrays. That's a concept that allows to make any object useable in a `for..of` loop.
+Các đối tượng *iterable* là một tổng quát của các mảng. Đó là một khái niệm cho phép làm cho bất kỳ đối tượng nào có thể sử dụng được trong một vòng lặp `for..of`.
 
-Of course, Arrays are iterable. But there are many other built-in objects, that are iterable as well. For instance, Strings are iterable also. As we'll see, many built-in operators and methods rely on them.
+Tất nhiên, Mảng là lặp đi lặp lại. Nhưng có nhiều built-in objects khác, cũng có thể lặp lại. Chẳng hạn, Strings cũng có thể lặp lại. Như chúng ta sẽ thấy, nhiều built-in toán tử và phương thức dựa vào chúng.
 
-If an object represents a collection (list, set) of something, then `for..of` is a great syntax to loop over it, so let's see how to make it work.
+Nếu một đối tượng đại diện cho một bộ sưu tập (danh sách, tập hợp) của một cái gì đó, thì `for..of` là một cú pháp tuyệt vời để lặp lại nó, vì vậy hãy xem cách làm cho nó làm việc.
 
 
 ## Symbol.iterator
 
-We can easily grasp the concept of iterables by making one of our own.
+Chúng ta có thể dễ dàng nắm bắt khái niệm lặp đi lặp lại (concept of iterables) bằng cách tạo ra một trong những cái chúng ta sở hữu.
 
-For instance, we have an object, that is not an array, but looks suitable for `for..of`.
+Chẳng hạn, chúng ta có một đối tượng, đó không phải là một mảng, nhưng có vẻ phù hợp với `for..of`.
 
-Like a `range` object that represents an interval of numbers:
+Giống như một đối tượng `range` đại diện cho một khoảng số:
 
 ```js
       let range = {
@@ -26,14 +26,14 @@ Like a `range` object that represents an interval of numbers:
       // for(let num of range) ... num=1,2,3,4,5
 ```
 
-To make the `range` iterable (and thus let `for..of` work) we need to add a method to the object named `Symbol.iterator` (a special built-in symbol just for that).
+Để làm cho `range` có thể lặp lại (và để cho `for..of` làm việc), chúng ta cần thêm một phương thức vào đối tượng có tên là `Symbol.iterator` (một built-in symbol đặc biệt chỉ dành cho điều đó).
 
-1. When `for..of` starts, it calls that method once (or errors if not found). The method must return an *iterator* -- an object with the method `next`.
-2. Onward, `for..of` works *only with that returned object*.
-3. When `for..of` wants the next value, it calls `next()` on that object.
-4. The result of `next()` must have the form `{done: Boolean, value: any}`, where `done=true`  means that the iteration is finished, otherwise `value` must be the new value.
+1. Khi `for..of` bắt đầu, nó gọi phương thức đó một lần (hoặc lỗi nếu không tìm thấy). Phương thức phải trả về một *iterator* -- một đối tượng có phương thức `next`.
+2. Tử đó trở đi, `for..of` làm việc *chỉ với đối tượng được trả về*.
+3. Khi `for..of` muốn giá trị tiếp theo, nó gọi `next()` trên đối tượng đó.
+4. Kết quả của `next()` phải có dạng `{done: Boolean, value: any}`, trong đó `done=true` có nghĩa là việc lặp lại đã kết thúc, nếu không thì `value` phải là giá trị mới.
 
-Here's the full implementation for `range`:
+Đây là cách thực hiện đầy đủ cho `range`:
 
 ```js
       let range = {
@@ -68,16 +68,16 @@ Here's the full implementation for `range`:
       }
 ```
 
-Please note the core feature of iterables: an important separation of concerns:
+Xin lưu ý tính năng cốt lõi của iterables: một [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) quan trọng:
 
-- The `range` itself does not have the `next()` method.
-- Instead, another object, a so-called "iterator" is created by the call to `range[Symbol.iterator]()`, and it handles the whole iteration.
+- Bản thân `range` không có phương thức `next()`.
+- Thay vào đó, một đối tượng khác, cái gọi là "iterator" được tạo bởi lệnh gọi tới `range[Symbol.iterator]()` và nó xử lý toàn bộ lần lặp (iteration).
 
-So, the iterator object is separate from the object it iterates over.
+Vì vậy, đối tượng iterator tách biệt với đối tượng mà nó lặp đi lặp lại.
 
-Technically, we may merge them and use `range` itself as the iterator to make the code simpler.
+Về mặt kỹ thuật, chúng ta có thể hợp nhất chúng và sử dụng chính `range` làm trình lặp (iterator) để làm cho mã đơn giản hơn.
 
-Like this:
+Như thế này:
 
 ```js
       let range = {
@@ -103,31 +103,31 @@ Like this:
       }
 ```
 
-Now `range[Symbol.iterator]()` returns the `range` object itself:  it has the necessary `next()` method and remembers the current iteration progress in `this.current`. Shorter? Yes. And sometimes that's fine too.
+Bây giờ `range[Symbol.iterator]()` trả về chính đối tượng `range`: nó có phương thức `next()` cần thiết và ghi nhớ tiến trình lặp hiện tại trong `this.current`. Ngắn hơn? Vâng. Và đôi khi điều đó cũng tốt.
 
-The downside is that now it's impossible to have two `for..of` loops running over the object simultaneously: they'll share the iteration state, because there's only one iterator -- the object itself. But two parallel for-ofs is a rare thing, doable with some async scenarios.
+Nhược điểm là bây giờ không thể có hai vòng lặp `for..of` chạy trên đối tượng cùng một lúc: chúng sẽ chia sẻ trạng thái lặp, bởi vì chỉ có một vòng lặp -- chính đối tượng đó. Nhưng hai for-ofs song song là một điều hiếm gặp, có thể được thực hiện với một số tình huống không đồng bộ.
 
 <br>
 
 > ---
 
-**📌 Infinite iterators**
+**📌 Lặp lại vô hạn (Infinite iterators)**
 
-Infinite iterators are also possible. For instance, the `range` becomes infinite for `range.to = Infinity`. Or we can make an iterable object that generates an infinite sequence of pseudorandom numbers. Also can be useful.
+Lặp đi lặp lại vô hạn cũng có thể. Chẳng hạn, `range` trở thành vô hạn với `range.to = Infinity`. Hoặc chúng ta có thể tạo một iterable object để tạo ra một chuỗi vô số các số giả ngẫu nhiên. Cũng có thể hữu ích.
 
-There are no limitations on `next`, it can return more and more values, that's normal.
+Không có giới hạn nào về `next`, nó có thể trả về ngày càng nhiều giá trị, điều đó là bình thường.
 
-Of course, the `for..of` loop over such an iterable would be endless. But we can always stop it using `break`.
+Tất nhiên, the `for..of` loop trên một vòng lặp như vậy sẽ là vô tận. Nhưng chúng ta luôn có thể stop nó bằng cách sử dụng `break`.
 
 > ---
 
 <br>
 
-## String is iterable
+## Chuỗi có thể lặp lại (String is iterable)
 
-Arrays and strings are most widely used built-in iterables.
+Mảng và chuỗi được sử dụng built-in iterables rộng rãi nhất.
 
-For a string, `for..of` loops over its characters:
+Đối với một chuỗi, `for..of` lặp trên các ký tự của nó:
 
 ```js
       for (let char of "test") {
@@ -136,7 +136,7 @@ For a string, `for..of` loops over its characters:
       }
 ```
 
-And it works correctly with surrogate pairs!
+Và nó hoạt động chính xác với các cặp thay thế (surrogate pairs)!
 
 ```js
       let str = '𝒳😂';
@@ -145,13 +145,13 @@ And it works correctly with surrogate pairs!
       }
 ```
 
-## Calling an iterator explicitly
+## Gọi một trình lặp rõ ràng (iterator explicitly)
 
-Normally, internals of iterables are hidden from the external code. There's a `for..of` loop, that works, that's all it needs to know.
+Thông thường, phần bên trong của iterables được ẩn khỏi mã bên ngoài. Có một vòng lặp `for..of`, hoạt động, đó là tất cả những gì nó cần biết.
 
-But to understand things a little bit deeper let's see how to create an iterator explicitly.
+Nhưng để hiểu mọi thứ sâu hơn một chút, hãy xem cách tạo ra một trình lặp một cách rõ ràng.
 
-We'll iterate over a string the same way as `for..of`, but with direct calls. This code gets a string iterator and calls it "manually":
+Chúng ta sẽ lặp lại một chuỗi giống như `for..of`, nhưng với các cuộc gọi trực tiếp. Mã này nhận được một trình vòng lặp chuỗi và gọi nó là "thủ công (manually)":
 
 ```js
       let str = "Hello";
@@ -168,22 +168,22 @@ We'll iterate over a string the same way as `for..of`, but with direct calls. Th
       }
 ```
 
-That is rarely needed, but gives us more control over the process than `for..of`. For instance, we can split the iteration process: iterate a bit, then stop, do something else, and then resume later.
+Điều đó hiếm khi cần thiết, nhưng cho chúng ta nhiều quyền kiểm soát quá trình hơn là 'for..of`. Chẳng hạn, chúng ta có thể phân chia quá trình lặp: lặp lại một chút, sau đó dừng lại, làm một cái gì đó khác, và sau đó tiếp tục lại sau.
 
 ## Iterables and array-likes
 
-There are two official terms that look similar, but are very different. Please make sure you understand them well to avoid the confusion.
+Có hai thuật ngữ chính thức trông giống nhau, nhưng rất khác nhau. Hãy chắc chắn rằng bạn hiểu rõ về chúng để tránh nhầm lẫn.
 
-- *Iterables* are objects that implement the `Symbol.iterator` method, as described above.
-- *Array-likes* are objects that have indexes and `length`, so they look like arrays.
+- *Iterables* là các đối tượng triển khai phương thức `Symbol.iterator`, như được mô tả ở trên.
+- **Array-likes* là các đối tượng có chỉ mục và `length`, vì vậy chúng trông giống như mảng.
 
-Naturally, these properties can combine. For instance, strings are both iterable (`for..of` works on them) and array-like (they have numeric indexes and `length`).
+Đương nhiên, các tính chất này có thể kết hợp. Chẳng hạn, các chuỗi đều có thể iterable (`for..of` hoạt động trên chúng) và array-like (chúng có các chỉ mục số và `length`).
 
-But an iterable may be not array-like. And vice versa an array-like may be not iterable.
+Nhưng một iterable có thể không array-like. Và ngược lại, một array-like có thể không iterable.
 
-For example, the `range` in the example above is iterable, but not array-like, because it does not have indexed properties and `length`.
+Ví dụ, `range` trong ví dụ trên là có thể iterable, nhưng không array-like, vì nó không có các thuộc tính được lập chỉ mục và `length`.
 
-And here's the object that is array-like, but not iterable:
+Và đây là đối tượng array-like, nhưng không iterable:
 
 ```js
       let arrayLike = { // has indexes and length => array-like
@@ -196,13 +196,13 @@ And here's the object that is array-like, but not iterable:
       for (let item of arrayLike) {}
 ```
 
-What do they have in common? Both iterables and array-likes are usually *not arrays*, they don't have `push`, `pop` etc. That's rather inconvenient if we have such an object and want to work with it as with an array.
+Chúng có đặc điểm gì chung? Cả iterables và array-likes thường *không phải mảng*, chúng không có `push`, `pop`, v.v ... Điều đó khá bất tiện nếu chúng ta có một đối tượng như vậy và muốn làm việc với nó như với một mảng.
 
 ## Array.from
 
-There's a universal method [Array.from](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from) that brings them together. It takes an iterable or array-like value and makes a "real" `Array` from it. Then we can call array methods on it.
+Có một phương thức phổ biến [Array.from](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from) mang chúng lại với nhau. Nó nhận một giá trị iterable hoặc array-like và tạo ra một `Array` "thật" từ nó. Sau đó chúng ta có thể gọi các phương thức mảng trên nó.
 
-For instance:
+Ví dụ:
 
 ```js
       let arrayLike = {
@@ -215,9 +215,9 @@ For instance:
       alert(arr.pop()); // World (method works)
 ```
 
-`Array.from` at the line `(*)` takes the object, examines it for being an iterable or array-like, then makes a new array and copies there all items.
+`Array.from` tại dòng `(*)` lấy đối tượng, kiểm tra xem nó có phải là dạng iterable hoặc array-like không, sau đó tạo một mảng mới và sao chép tất cả các items.
 
-The same happens for an iterable:
+Điều tương tự cũng xảy ra đối với một iterable:
 
 ```js
       // assuming that range is taken from the example above
@@ -225,15 +225,15 @@ The same happens for an iterable:
       alert(arr); // 1,2,3,4,5 (array toString conversion works)
 ```
 
-The full syntax for `Array.from` allows to provide an optional "mapping" function:
+Cú pháp đầy đủ cho `Array.from` cho phép cung cấp một tùy chọn function "ánh xạ (mapping)":
 
 ```js
       Array.from(obj[, mapFn, thisArg])
 ```
 
-The second argument `mapFn` should be the function to apply to each element before adding to the array, and `thisArg` allows to set `this` for it.
+Đối số thứ hai `mapFn` phải là hàm để áp dụng cho từng phần tử trước khi thêm vào mảng và `thisArg` cho phép đặt `this` cho nó.
 
-For instance:
+Ví dụ:
 
 ```js
       // assuming that range is taken from the example above
@@ -244,9 +244,9 @@ For instance:
       alert(arr); // 1,4,9,16,25
       ```
 
-      Here we use `Array.from` to turn a string into an array of characters:
+      Ở đây chúng ta sử dụng `Array.from` để biến một chuỗi thành một mảng các ký tự:
 
-      ```js run
+      ```js
       let str = '𝒳😂';
 
       // splits str into array of characters
@@ -257,9 +257,9 @@ For instance:
       alert(chars.length); // 2
 ```
 
-Unlike `str.split`, it relies on the iterable nature of the string and so, just like `for..of`, correctly works with surrogate pairs.
+Không giống như `str.split`, nó dựa vào tính chất iterable của chuỗi và do đó, giống như `for..of`, hoạt động chính xác với các cặp thay thế.
 
-Technically here it does the same as:
+Về mặt kỹ thuật, nó hoạt động giống như:
 
 ```js
       let str = '𝒳😂';
@@ -272,9 +272,9 @@ Technically here it does the same as:
       alert(chars);
 ```
 
-...But is shorter.    
+...Nhưng ngắn hơn.    
 
-We can even build surrogate-aware `slice` on it:
+Chúng ta thậm chí có thể xây dựng surrogate-aware `slice` trên nó:
 
 ```js
       function slice(str, start, end) {
@@ -289,20 +289,19 @@ We can even build surrogate-aware `slice` on it:
       alert( str.slice(1, 3) ); // garbage (two pieces from different surrogate pairs)
 ```
 
-## Summary
+## Tóm lược
 
-Objects that can be used in `for..of` are called *iterable*.
+Các đối tượng có thể được sử dụng trong `for..of` được gọi là *iterable*.
 
-- Technically, iterables must implement the method named `Symbol.iterator`.
-    - The result of `obj[Symbol.iterator]` is called an *iterator*. It handles the further iteration process.
-    - An iterator must have the method named `next()` that returns an object `{done: Boolean, value: any}`, here `done:true` denotes the iteration end, otherwise the `value` is the next value.
-- The `Symbol.iterator` method is called automatically by `for..of`, but we also can do it directly.
-- Built-in iterables like strings or arrays, also implement `Symbol.iterator`.
-- String iterator knows about surrogate pairs.
+- Về mặt kỹ thuật, các iterables phải thực hiện phương thức có tên `Symbol.iterator`.
+    - Kết quả của `obj[Symbol.iterator]` được gọi là *iterator*. Nó xử lý quá trình lặp đi lặp lại.
+    - Trình lặp phải có phương thức có tên `next()` trả về một đối tượng `{done: Boolean, value: any}`, ở đây `done:true` biểu thị kết thúc lặp, nếu không thì `value` là giá trị tiếp theo.
+- Phương thức `Symbol.iterator` được gọi tự động bởi `for..of`, nhưng chúng ta cũng có thể trực tiếp thực hiện nó.
+- Các built-in iterables như chuỗi hoặc mảng, cũng triển khai `Symbol.iterator`.
+- String iterator biết về các cặp thay thế.
 
+Các đối tượng có thuộc tính được lập chỉ mục (indexed properties) và `length` được gọi là *array-like*. Các đối tượng như vậy cũng có thể có các thuộc tính và phương thức khác, nhưng thiếu các built-in methods của mảng.
 
-Objects that have indexed properties and `length` are called *array-like*. Such objects may also have other properties and methods, but lack the built-in methods of arrays.
+Nếu chúng ta nhìn vào bên trong đặc tả -- chúng ta sẽ thấy rằng hầu hết các built-in methods đều cho rằng chúng hoạt động với các iterables hoặc array-likes thay vì mảng "thực", vì điều đó trừu tượng hơn.
 
-If we look inside the specification -- we'll see that most built-in methods assume that they work with iterables or array-likes instead of "real" arrays, because that's more abstract.
-
-`Array.from(obj[, mapFn, thisArg])` makes a real `Array` of an iterable or array-like `obj`, and we can then use array methods on it. The optional arguments `mapFn` and `thisArg` allow us to apply a function to each item.
+`Array.from(obj[, mapFn, thisArg])` tạo một `Array` thật từ một iterable hoặc array-like `obj`, và chúng ta có thể sử dụng array methods trên nó. Các đối số tùy chọn `mapFn` và `thisArg` cho phép chúng ta áp dụng một hàm cho mỗi item.
