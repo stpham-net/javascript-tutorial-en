@@ -1,3 +1,3 @@
 # Data types
 
-More data structures and more in-depth study of the types.
+Nhiều cấu trúc dữ liệu và nghiên cứu sâu hơn về các kiểu.
