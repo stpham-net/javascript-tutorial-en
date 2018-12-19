@@ -1,28 +1,28 @@
 
 # Map, Set, WeakMap and WeakSet
 
-Now we've learned about the following complex data structures:
+Bây giờ chúng ta đã tìm hiểu về các cấu trúc dữ liệu phức tạp sau:
 
-- Objects for storing keyed collections.
-- Arrays for storing ordered collections.
+- Đối tượng để lưu trữ các bộ sưu tập có khóa.
+- Mảng để lưu trữ các bộ sưu tập theo thứ tự.
 
-But that's not enough for real life. That's why `Map` and `Set` also exist.
+Nhưng điều đó là không đủ cho cuộc sống thực. Đó là lý do tại sao `Map` và `Set` cũng tồn tại.
 
 ## Map
 
-[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) is a collection of keyed data items, just like an `Object`. But the main difference is that `Map` allows keys of any type.
+[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) là một tập hợp các items dữ liệu có khóa, giống như một `Object`. Nhưng sự khác biệt chính là `Map` cho phép các kiểu khóa.
 
-The main methods are:
+Các phương thức chính là:
 
-- `new Map()` -- creates the map.
-- `map.set(key, value)` -- stores the value by the key.
-- `map.get(key)` -- returns the value by the key, `undefined` if `key` doesn't exist in map.
-- `map.has(key)` -- returns `true` if the `key` exists, `false` otherwise.
-- `map.delete(key)` -- removes the value by the key.
-- `map.clear()` -- clears the map
-- `map.size` -- returns the current element count.
+- `new Map()` -- tạo map.
+- `map.set(key, value)` -- lưu trữ giá trị theo khóa.
+- `map.get(key)` -- trả về giá trị theo khóa, `undefined` nếu` key` không tồn tại trong map.
+- `map.has(key)` -- trả về `true` nếu `key` tồn tại, `false` nếu không.
+- `map.delete(key)` -- xóa giá trị bằng khóa.
+- `map.clear()` -- xóa map.
+- `map.size` -- trả về số phần tử hiện tại.
 
-For instance:
+Ví dụ:
 
 ```js
       let map = new Map();
@@ -39,11 +39,11 @@ For instance:
       alert( map.size ); // 3
 ```
 
-As we can see, unlike objects, keys are not converted to strings. Any type of key is possible.
+Như chúng ta có thể thấy, không giống như các đối tượng, các khóa không được chuyển đổi thành chuỗi. Bất kỳ kiểu của khóa là có thể.
 
-**Map can also use objects as keys.**
+**Map cũng có thể sử dụng các đối tượng làm khóa.**
 
-For instance:
+Ví dụ:
 
 ```js
       let john = { name: "John" };
@@ -57,9 +57,9 @@ For instance:
       alert( visitsCountMap.get(john) ); // 123
 ```
 
-Using objects as keys is one of most notable and important `Map` features. For string keys, `Object` can be fine, but it would be difficult to replace the `Map` with a regular `Object` in the example above.
+Sử dụng các đối tượng làm khóa là một trong những tính năng `Map` đáng chú ý và quan trọng nhất. Đối với các string keys, `Object` có thể ổn, nhưng sẽ khó có thể thay thế `Map` bằng một `Object` thông thường như trong ví dụ trên.
 
-In the old times, before `Map` existed, people added unique identifiers to objects for that:
+Vào thời xa xưa, trước khi `Map` tồn tại, mọi người đã thêm các định danh độc nhất (unique identifiers) vào các đối tượng cho điều đó:
 
 ```js
       // we add the id field
@@ -73,17 +73,17 @@ In the old times, before `Map` existed, people added unique identifiers to objec
       alert( visitsCounts[john.id] ); // 123
 ```
 
-...But `Map` is much more elegant.
+...Nhưng 'Map` thanh lịch hơn nhiều.
 
 <br>
 
 > ---
 
-**📌 How `Map` compares keys**
+**📌 Cách `Map` so sánh các khóa**
 
-To test values for equivalence, `Map` uses the algorithm [SameValueZero](https://tc39.github.io/ecma262/#sec-samevaluezero). It is roughly the same as strict equality `===`, but the difference is that `NaN` is considered equal to `NaN`. So `NaN` can be used as the key as well.
+Để kiểm tra các giá trị tương đương, `Map` sử dụng thuật toán [SameValueZero](https://tc39.github.io/ecma262/#sec-samevaluezero). Nó gần giống như đẳng thức nghiêm ngặt `===`, nhưng sự khác biệt là `NaN` được coi là bằng với `NaN`. Vì vậy, `NaN` cũng có thể được sử dụng làm khóa.
 
-This algorithm can't be changed or customized.
+Thuật toán này không thể thay đổi hoặc tùy chỉnh.
 
 > ---
 
@@ -92,9 +92,9 @@ This algorithm can't be changed or customized.
 
 > ---
 
-**📌 Chaining**
+**📌 Xâu chuỗi (Chaining)**
 
-Every `map.set` call returns the map itself, so we can "chain" the calls:
+Mỗi lệnh gọi `map.set` trả về map, vì vậy chúng ta có thể "xâu chuỗi (chain)" các cuộc gọi:
 
 ```js
       map.set('1', 'str1')
@@ -108,7 +108,7 @@ Every `map.set` call returns the map itself, so we can "chain" the calls:
 
 ## Map from Object
 
-When a `Map` is created, we can pass an array (or another iterable) with key-value pairs, like this:
+Khi một `Map` được tạo, chúng ta có thể truyền một mảng (hoặc một iterable khác) với các cặp key-value, như thế này:
 
 ```js
       // array of [key, value] pairs
@@ -119,9 +119,9 @@ When a `Map` is created, we can pass an array (or another iterable) with key-val
       ]);
 ```
 
-There is a built-in method [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) that returns an array of key/value pairs for an object exactly in that format.
+Có một phương thức tích hợp [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) trả về một mảng của các cặp key/value cho một đối tượng chính xác theo định dạng đó.
 
-So we can initialize a map from an object like this:
+Vì vậy, chúng ta có thể khởi tạo map từ một object như thế này:
 
 ```js
       let map = new Map(Object.entries({
@@ -130,17 +130,17 @@ So we can initialize a map from an object like this:
       }));
 ```
 
-Here, `Object.entries` returns the array of key/value pairs: `[ ["name","John"], ["age", 30] ]`. That's what `Map` needs.
+Ở đây, `Object.entries` trả về mảng các cặp key/value: `[ ["name","John"], ["age", 30] ]`. Đó là những gì `Map` cần.
 
-## Iteration over Map
+## Lặp lại trên Map (Iteration over Map)
 
-For looping over a `map`, there are 3 methods:
+Để lặp qua một `map`, có 3 phương thức:
 
-- `map.keys()` -- returns an iterable for keys,
-- `map.values()` -- returns an iterable for values,
-- `map.entries()` -- returns an iterable for entries `[key, value]`, it's used by default in `for..of`.
+- `map.keys()` -- trả về một iterable cho các khóa,
+- `map.values()` -- trả về một iterable cho các giá trị,
+- `map.entries()` -- trả về một lần lặp cho các mục `[key, value]`, nó được sử dụng theo mặc định trong `for..of`.
 
-For instance:
+Ví dụ:
 
 ```js
       let recipeMap = new Map([
@@ -169,15 +169,15 @@ For instance:
 
 > ---
 
-**📌 The insertion order is used**
+**📌 Thứ tự chèn được sử dụng**
 
-The iteration goes in the same order as the values were inserted. `Map` preserves this order, unlike a regular `Object`.
+The iteration đi theo thứ tự giống như các giá trị được chèn vào. `Map` duy trì trật tự này, không giống như một `Object` thông thường.
 
 > ---
 
 <br>
 
-Besides that, `Map` has a built-in `forEach` method, similar to `Array`:
+Bên cạnh đó, `Map` có một built-in `forEach` method, tương tự như `Array`:
 
 ```js
       recipeMap.forEach( (value, key, map) => {
@@ -187,20 +187,20 @@ Besides that, `Map` has a built-in `forEach` method, similar to `Array`:
 
 ## Set
 
-A `Set` is a collection of values, where each value may occur only once.
+Một `Set` là một tập hợp các giá trị, trong đó mỗi giá trị chỉ có thể xuất hiện một lần.
 
-Its main methods are:
+Phương thức chính của nó là:
 
-- `new Set(iterable)` -- creates the set, optionally from an array of values (any iterable will do).
-- `set.add(value)` -- adds a value, returns the set itself.
-- `set.delete(value)` -- removes the value, returns `true` if `value` existed at the moment of the call, otherwise `false`.
-- `set.has(value)` -- returns `true` if the value exists in the set, otherwise `false`.
-- `set.clear()` -- removes everything from the set.
-- `set.size` -- is the elements count.
+- `new Set(iterable)` -- tạo set, tùy ý từ một mảng các giá trị (bất kỳ iterable nào cũng sẽ làm được).
+- `set.add(value)` -- thêm một giá trị, trả về chính set đó.
+- `set.delete(value)` -- xóa giá trị, trả về `true` nếu `value` tồn tại tại thời điểm cuộc gọi, nếu không thì `false`.
+- `set.has(value)` -- trả về `true` nếu giá trị tồn tại trong set, ngược lại là `false`.
+- `set.clear()` -- xóa mọi thứ khỏi the set.
+- `set.size` -- là số phần tử được tính.
 
-For example, we have visitors coming, and we'd like to remember everyone. But repeated visits should not lead to duplicates. A visitor must be "counted" only once.
+Ví dụ: chúng ta có khách truy cập đến và chúng ta muốn ghi nhớ mọi người. Nhưng các chuyến thăm lặp đi lặp lại không nên dẫn đến trùng lặp. Một khách truy cập phải được "tính" chỉ một lần.
 
-`Set` is just the right thing for that:
+`Set` chỉ là điều đúng đắn cho điều đó:
 
 ```js
       let set = new Set();
@@ -224,11 +224,11 @@ For example, we have visitors coming, and we'd like to remember everyone. But re
       }
 ```
 
-The alternative to `Set` could be an array of users, and the code to check for duplicates on every insertion using [arr.find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find). But the performance would be much worse, because this method walks through the whole array checking every element. `Set` is much better optimized internally for uniqueness checks.
+Thay thế cho `Set` có thể là một mảng người dùng, và mã để kiểm tra trùng lặp trên mỗi lần chèn bằng cách sử dụng [arr.find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find). Nhưng hiệu suất sẽ tồi tệ hơn nhiều, bởi vì phương pháp này đi qua toàn bộ mảng kiểm tra mọi phần tử. `Set` được tối ưu hóa tốt hơn nhiều trong nội bộ để kiểm tra tính duy nhất.
 
-## Iteration over Set
+## Lặp lại trên Set (Iteration over Set)
 
-We can loop over a set either with `for..of` or using `forEach`:
+Chúng ta có thể lặp qua một set với `for..of` hoặc sử dụng `forEach`:
 
 ```js
       let set = new Set(["oranges", "apples", "bananas"]);
@@ -241,23 +241,23 @@ We can loop over a set either with `for..of` or using `forEach`:
       });
 ```
 
-Note the funny thing. The `forEach` function in the `Set` has 3 arguments: a value, then *again a value*, and then the target object. Indeed, the same value appears in the arguments twice.
+Lưu ý những điều buồn cười. Hàm `forEach` trong `Set` có 3 đối số: một giá trị, sau đó *lại một giá trị*, và sau đó là đối tượng đích. Thật vậy, cùng một giá trị xuất hiện trong các đối số hai lần.
 
-That's for compatibility with `Map` where `forEach` has three arguments. Looks a bit strange, for sure. But may help to replace `Map` with `Set` in certain cases with ease, and vice versa.
+Đó là khả năng tương thích với `Map` trong đó `forEach` có ba đối số. Có vẻ hơi lạ, chắc chắn. Nhưng có thể giúp thay thế `Map` bằng `Set` trong một số trường hợp nhất định và ngược lại.
 
-The same methods `Map` has for iterators are also supported:
+Các phương thức tương tự `Map` có cho các trình vòng lặp (iterators) cũng được hỗ trợ:
 
-- `set.keys()` -- returns an iterable object for values,
-- `set.values()` -- same as `set.keys`, for compatibility with `Map`,
-- `set.entries()` -- returns an iterable object for entries `[value, value]`, exists for compatibility with `Map`.
+- `set.keys()` -- trả về một iterable object cho các giá trị,
+- `set.values()` -- giống như `set.keys`, để tương thích với `Map`,
+- `set.entries()` -- trả về một iterable object cho các mục `[value, value]`, tồn tại để tương thích với `Map`.
 
-## WeakMap and WeakSet
+## WeakMap và Weakset
 
-`WeakSet` is a special kind of `Set` that does not prevent JavaScript from removing its items from memory. `WeakMap` is the same thing for `Map`.
+`Weakset` là một loại `Set` đặc biệt không ngăn JavaScript xóa các mục của nó khỏi bộ nhớ. `WeakMap` là điều tương tự với `Map`.
 
-As we know from the chapter **garbage-collection**, JavaScript engine stores a value in memory while it is reachable (and can potentially be used).
+Như chúng ta đã biết từ chương **garbage-collection**, JavaScript engine lưu trữ một giá trị trong bộ nhớ trong khi có thể truy cập (và có khả năng có thể được sử dụng).
 
-For instance:
+Ví dụ:
 
 ```js
       let john = { name: "John" };
@@ -270,11 +270,11 @@ For instance:
       // the object will be removed from memory
 ```
 
-Usually, properties of an object or elements of an array or another data structure are considered reachable and kept in memory while that data structure is in memory.
+Thông thường, các thuộc tính của một đối tượng hoặc các thành phần của một mảng hoặc cấu trúc dữ liệu khác được coi là có thể truy cập và được giữ trong bộ nhớ trong khi cấu trúc dữ liệu đó nằm trong bộ nhớ.
 
-For instance, if we put an object into an array, then while the array is alive, the object will be alive as well, even if there are no other references to it.
+Chẳng hạn, nếu chúng ta đặt một đối tượng vào một mảng, thì trong khi mảng còn sống, đối tượng cũng sẽ sống, ngay cả khi không có tham chiếu nào khác đến nó.
 
-Like this:
+Như thế này:
 
 ```js
       let john = { name: "John" };
@@ -287,9 +287,9 @@ Like this:
       // we can get it as array[0]
 ```
 
-Or, if we use an object as the key in a regular `Map`, then while the `Map` exists, that object exists as well. It occupies memory and may not be garbage collected.
+Hoặc, nếu chúng ta sử dụng một đối tượng làm khóa trong một `Map` thông thường, thì trong khi `Map` tồn tại, thì đối tượng đó cũng tồn tại. Nó chiếm bộ nhớ và có thể không được garbage collected.
 
-For instance:
+Ví dụ:
 
 ```js
       let john = { name: "John" };
@@ -303,11 +303,11 @@ For instance:
       // we can get it by using map.keys()
 ```
 
-`WeakMap/WeakSet` are fundamentally different in this aspect. They do not prevent garbage-collection of key objects.
+`WeakMap/WeakSet` về cơ bản là khác nhau về khía cạnh này. Chúng không ngăn chặn garbage-collection của các đối tượng chính.
 
-Let's explain it starting with `WeakMap`.
+Hãy giải thích nó bắt đầu bằng `WeakMap`.
 
-The first difference from `Map` is that `WeakMap` keys must be objects, not primitive values:
+Sự khác biệt đầu tiên so với `Map` là các khóa `WeakMap` phải là các đối tượng, không phải là các giá trị nguyên thủy:
 
 ```js
       let weakMap = new WeakMap();
@@ -320,7 +320,7 @@ The first difference from `Map` is that `WeakMap` keys must be objects, not prim
       weakMap.set("test", "Whoops"); // Error, because "test" is not an object
 ```
 
-Now, if we use an object as the key in it, and there are no other references to that object -- it will be removed from memory (and from the map) automatically.
+Bây giờ, nếu chúng ta sử dụng một đối tượng làm khóa trong nó và không có tham chiếu nào khác đến đối tượng đó -- nó sẽ tự động bị xóa khỏi bộ nhớ (và khỏi map).
 
 ```js
       let john = { name: "John" };
@@ -333,37 +333,37 @@ Now, if we use an object as the key in it, and there are no other references to 
       // john is removed from memory!
 ```
 
-Compare it with the regular `Map` example above. Now if `john` only exists as the key of `WeakMap` -- it is to be automatically deleted.
+So sánh nó với ví dụ `Map` thông thường ở trên. Bây giờ nếu `john` chỉ tồn tại như là khóa của `WeakMap` -- thì nó sẽ tự động bị xóa.
 
-`WeakMap` does not support iteration and methods `keys()`, `values()`, `entries()`, so there's no way to get all keys or values from it.
+`WeakMap` không hỗ trợ phép lặp (iteration) và phương thức `keys()`, `values()`, `entries()`, vì vậy không có cách nào để lấy tất cả các khóa hoặc giá trị từ nó.
 
-`WeakMap` has only the following methods:
+`WeakMap` chỉ có các phương thức sau:
 
 - `weakMap.get(key)`
 - `weakMap.set(key, value)`
 - `weakMap.delete(key, value)`
 - `weakMap.has(key)`
 
-Why such a limitation? That's for technical reasons. If an object has lost all other references (like `john` in the code above), then it is to be garbage-collected automatically. But technically it's not exactly specified *when the cleanup happens*.
+Tại sao lại hạn chế như vậy? Đó là vì lý do kỹ thuật. Nếu một đối tượng đã mất tất cả các tham chiếu khác (như `john` trong đoạn mã trên), thì nó sẽ được garbage-collected tự động. Nhưng về mặt kỹ thuật, nó không được chỉ định chính xác *khi việc dọn dẹp xảy ra*.
 
-The JavaScript engine decides that. It may choose to perform the memory cleanup immediately or to wait and do the cleaning later when more deletions happen. So, technically the current element count of a `WeakMap` is not known. The engine may have cleaned it up or not, or did it partially. For that reason, methods that access `WeakMap` as a whole are not supported.
+The JavaScript engine quyết định điều đó. Nó có thể chọn thực hiện dọn dẹp bộ nhớ ngay lập tức hoặc chờ và thực hiện việc dọn dẹp sau khi có nhiều thao tác xóa. Vì vậy, về mặt kỹ thuật, số lượng phần tử hiện tại của `WeakMap` không được biết đến. The engine có thể đã làm sạch nó hoặc không, hoặc đã làm một phần. Vì lý do đó, các phương thức truy cập toàn bộ `WeakMap` không được hỗ trợ.
 
-Now where do we need such thing?
+Bây giờ chúng ta cần những thứ như vậy ở đâu?
 
-The idea of `WeakMap` is that we can store something for an object that should exist only while the object exists. But we do not force the object to live by the mere fact that we store something for it.
+Ý tưởng của `WeakMap` là chúng ta có thể lưu trữ thứ gì đó cho một đối tượng chỉ tồn tại trong khi đối tượng tồn tại. Nhưng chúng ta không ép đối tượng sống bằng thực tế là chúng ta lưu trữ một cái gì đó cho nó.
 
 ```js
       weakMap.set(john, "secret documents");
       // if john dies, secret documents will be destroyed automatically
 ```
 
-That's useful for situations when we have a main storage for the objects somewhere and need to keep additional information, that is only relevant while the object lives.
+Điều đó hữu ích cho các tình huống khi chúng ta có một bộ lưu trữ chính cho các đối tượng ở đâu đó và cần giữ thông tin bổ sung, điều đó chỉ có liên quan trong khi đối tượng sống.
 
-Let's look at an example.
+Hãy xem xét một ví dụ.
 
-For instance, we have code that keeps a visit count for each user. The information is stored in a map: a user is the key and the visit count is the value. When a user leaves, we don't want to store their visit count anymore.
+Chẳng hạn, chúng ta có mã giữ số lượt truy cập cho mỗi người dùng. Thông tin được lưu trữ trong map: người dùng là chìa khóa và số lượt truy cập là giá trị. Khi người dùng rời đi, chúng ta không muốn lưu trữ số lượt truy cập của họ nữa.
 
-One way would be to keep track of users, and when they leave -- clean up the map manually:
+Một cách sẽ là theo dõi người dùng và khi họ rời đi -- làm sạch the map theo cách thủ công:
 
 ```js
       let john = { name: "John" };
@@ -382,7 +382,7 @@ One way would be to keep track of users, and when they leave -- clean up the map
       // and john is also in the memory, because Map uses it as the key
       ```
 
-      Another way would be to use `WeakMap`:
+      Một cách khác là sử dụng `WeakMap`:
 
       ```js
       let john = { name: "John" };
@@ -398,7 +398,7 @@ One way would be to keep track of users, and when they leave -- clean up the map
       // so the object is removed both from the memory and from visitsCountMap automatically
 ```
 
-With a regular `Map`, cleaning up after a user has left becomes a tedious task: we not only need to remove the user from its main storage (be it a variable or an array), but also need to clean up the additional stores like `visitsCountMap`. And it can become cumbersome in more complex cases when users are managed in one place of the code and the additional structure is in another place and is getting no information about removals.
+Với một 'Map` thông thường, việc dọn dẹp sau khi người dùng rời đi trở thành một công việc tẻ nhạt: chúng ta không chỉ cần xóa người dùng khỏi bộ lưu trữ chính của nó (có thể là một biến hoặc một mảng), mà còn cần dọn sạch các stores bổ sung như `visitCountMap`. Và nó có thể trở nên cồng kềnh trong các trường hợp phức tạp hơn khi người dùng được quản lý ở một nơi của mã và cấu trúc bổ sung ở một nơi khác và không nhận được thông tin nào về việc xóa.
 
 <br>
 
@@ -406,19 +406,19 @@ With a regular `Map`, cleaning up after a user has left becomes a tedious task: 
 
 **📌 summary**
 
-`WeakMap` can make things simpler, because it is cleaned up automatically. The information in it like visits count in the example above lives only while the key object exists.
+`WeakMap` có thể làm mọi thứ đơn giản hơn, vì nó được dọn sạch tự động. Thông tin trong đó giống như lượt truy cập được tính trong ví dụ trên chỉ tồn tại trong khi đối tượng chính tồn tại.
 
 > ---
 
 <br>
 
-`WeakSet` behaves similarly:
+`Weakset` hành xử tương tự:
 
-- It is analogous to `Set`, but we may only add objects to `WeakSet` (not primitives).
-- An object exists in the set while it is reachable from somewhere else.
-- Like `Set`, it supports `add`, `has` and `delete`, but not `size`, `keys()` and no iterations.
+- Nó tương tự với `Set`, nhưng chúng ta chỉ có thể thêm các đối tượng vào `Weakset` (không phải là nguyên thủy).
+- Một đối tượng tồn tại trong set trong khi nó có thể truy cập từ một nơi khác.
+- Giống như `Set`, nó hỗ trợ `add`, `has` và `delete`, nhưng không phải là  `size`, `keys()` và không lặp lại (no iterations).
 
-For instance, we can use it to keep track of whether a message is read:
+Chẳng hạn, chúng ta có thể sử dụng nó để theo dõi xem tin nhắn có được đọc hay không:
 
 ```js
       let messages = [
@@ -443,28 +443,28 @@ For instance, we can use it to keep track of whether a message is read:
       // (though technically we don't know for sure when the JS engine clears it)
 ```
 
-The most notable limitation of `WeakMap` and `WeakSet` is the absence of iterations, and inability to get all current content. That may appear inconvenient, but does not prevent `WeakMap/WeakSet` from doing their main job -- be an "additional" storage of data for objects which are stored/managed at another place.
+Hạn chế đáng chú ý nhất của `WeakMap` và `Weakset` là sự vắng mặt của các lần lặp (iterations), và không có khả năng nhận được tất cả nội dung hiện tại. Điều đó có vẻ bất tiện, nhưng không ngăn cản `WeakMap/WeakSet` thực hiện công việc chính của họ -- là một kho lưu trữ dữ liệu "bổ sung" cho các đối tượng được lưu trữ/quản lý ở nơi khác.
 
-## Summary
+## Tóm lược
 
-Regular collections:
+Bộ sưu tập thông thường:
 
-- `Map` -- is a collection of keyed values.
-    The differences from a regular `Object`:
-    - Any keys, objects can be keys.
-    - Iterates in the insertion order.
-    - Additional convenient methods, the `size` property.
+- `Map` -- là tập hợp các giá trị có khóa.
+    Sự khác biệt so với một `Object` thông thường:
+    - Bất kỳ keys, objects đều có thể là keys.
+    - Lặp lại theo thứ tự chèn (Iterates in the insertion order).
+    - Các phương thức thuận tiện bổ sung, thuộc tính `size`.
 
-- `Set` -- is a collection of unique values.
-    - Unlike an array, does not allow to reorder elements.
-    - Keeps the insertion order.
+- `Set` -- là tập hợp các giá trị duy nhất.
+    - Không giống như một mảng, không cho phép sắp xếp lại các phần tử.
+    - Giữ thứ tự chèn.
 
-Collections that allow garbage-collection:
+Bộ sưu tập cho phép garbage-collection:
 
-- `WeakMap` -- a variant of `Map` that allows only objects as keys and removes them once they become inaccessible by other means.
-    - It does not support operations on the structure as a whole: no `size`, no `clear()`, no iterations.
+- `WeakMap` -- một biến thể của `Map` chỉ cho phép các đối tượng làm khóa và loại bỏ chúng một khi chúng không thể truy cập được bằng các cách thức khác.
+    - Nó không hỗ trợ các hoạt động trên toàn bộ cấu trúc: không `size`, không `clear()`, không lặp lại (iterations).
 
-- `WeakSet` -- is a variant of `Set` that only stores objects and removes them once they become inaccessible by other means.
-    - Also does not support `size/clear()` and iterations.
+- `WeakSet` -- là một biến thể của `Set` chỉ lưu trữ các đối tượng và loại bỏ chúng một khi chúng không thể truy cập được bằng các cách thức khác.
+    - Cũng không hỗ trợ `size/clear()` và iterations.
 
-`WeakMap` and `WeakSet` are used as "secondary" data structures in addition to the "main" object storage. Once the object is removed from the main storage, if it is only found in the `WeakMap/WeakSet`, it will be cleaned up automatically.
+`WeakMap` và `WeakSet` được sử dụng làm cấu trúc dữ liệu "phụ" bên cạnh bộ lưu trữ đối tượng "chính". Khi đối tượng được xóa khỏi bộ lưu trữ chính, nếu nó chỉ được tìm thấy trong `WeakMap/WeakSet`, nó sẽ tự động được dọn sạch.
