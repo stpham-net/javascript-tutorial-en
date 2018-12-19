@@ -344,7 +344,7 @@ Do đó, benchmark đầu tiên sẽ có ít tài nguyên CPU hơn lần thứ h
       }
 
       let time1 = 0;
-      để thời gian2 = 0;
+      let time2 = 0;
 
       // run bench(upperSlice) and bench(upperLoop) each 10 times alternating
       for (let i = 0; i < 10; i++) {
@@ -421,7 +421,7 @@ Chúng ta có thể ngay lập tức tạo một đối tượng `new Date` từ
 - Tháng được tính từ zero (vâng, tháng 1 là tháng zero).
 - Các ngày trong tuần trong `getDay()` cũng được tính từ 0 (đó là Chủ nhật).
 - `Date` auto-corrects khi các thành phần ngoài phạm vi (out-of-range) được đặt. Tốt cho việc thêm/trừ ngày/tháng/giờ.
-- Ngày có thể được trừ, sự khác biệt của chúng tính bằng mili giây. Đó là bởi vì một `Date` trở thành timestamp khi được chuyển đổi thành một số.
+- Date có thể được trừ, và sự khác biệt của chúng tính bằng mili giây. Đó là bởi vì một `Date` trở thành timestamp khi được chuyển đổi thành một số.
 - Sử dụng `Date.now()` để lấy dấu thời gian hiện tại nhanh.
 
 Lưu ý rằng không giống như nhiều hệ thống khác, dấu thời gian trong JavaScript là tính bằng mili giây chứ không phải tính bằng giây.
@@ -435,4 +435,4 @@ alert(`Loading started ${performance.now()}ms ago`);
 // more than 3 digits after the decimal point are precision errors, but only the first 3 are correct
 ```
 
-Node.JS có mô đun `microtime` và các cách khác. Về mặt kỹ thuật, bất kỳ thiết bị và environment nào cũng cho phép có độ chính xác cao hơn, đó chỉ là không có trong `Date`.
+Node.JS có mô đun `microtime` và các cách khác. Về mặt kỹ thuật, bất kỳ thiết bị và environment nào cũng cho phép lấy độ chính xác cao hơn, đó chỉ là không có trong `Date`.
