@@ -1,7 +1,7 @@
 
 # Lặp lại (Iterables)
 
-Các đối tượng *iterable* là một tổng quát của các mảng. Đó là một khái niệm cho phép làm cho bất kỳ đối tượng nào có thể sử dụng được trong một vòng lặp `for..of`.
+Các đối tượng *iterable* là một tổng quát hóa (hoặc cũng gọi là sự suy rộng (generalization)) của các mảng. Đó là một khái niệm cho phép làm cho bất kỳ đối tượng nào có thể sử dụng được trong một vòng lặp `for..of`.
 
 Tất nhiên, Mảng là lặp đi lặp lại. Nhưng có nhiều built-in objects khác, cũng có thể lặp lại. Chẳng hạn, Strings cũng có thể lặp lại. Như chúng ta sẽ thấy, nhiều built-in toán tử và phương thức dựa vào chúng.
 
