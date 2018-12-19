@@ -16,7 +16,7 @@ Các phương thức chính là:
 
 - `new Map()` -- tạo map.
 - `map.set(key, value)` -- lưu trữ giá trị theo khóa.
-- `map.get(key)` -- trả về giá trị theo khóa, `undefined` nếu` key` không tồn tại trong map.
+- `map.get(key)` -- trả về giá trị theo khóa, `undefined` nếu `key` không tồn tại trong map.
 - `map.has(key)` -- trả về `true` nếu `key` tồn tại, `false` nếu không.
 - `map.delete(key)` -- xóa giá trị bằng khóa.
 - `map.clear()` -- xóa map.
@@ -73,7 +73,7 @@ Vào thời xa xưa, trước khi `Map` tồn tại, mọi người đã thêm c
       alert( visitsCounts[john.id] ); // 123
 ```
 
-...Nhưng 'Map` thanh lịch hơn nhiều.
+...Nhưng `Map` thanh lịch hơn nhiều.
 
 <br>
 
@@ -380,11 +380,11 @@ Một cách sẽ là theo dõi người dùng và khi họ rời đi -- làm s�
       // but it's still in the map, we need to clean it!
       alert( visitsCountMap.size ); // 1
       // and john is also in the memory, because Map uses it as the key
-      ```
+```
 
-      Một cách khác là sử dụng `WeakMap`:
+Một cách khác là sử dụng `WeakMap`:
 
-      ```js
+```js
       let john = { name: "John" };
 
       let visitsCountMap = new WeakMap();
@@ -398,7 +398,7 @@ Một cách sẽ là theo dõi người dùng và khi họ rời đi -- làm s�
       // so the object is removed both from the memory and from visitsCountMap automatically
 ```
 
-Với một 'Map` thông thường, việc dọn dẹp sau khi người dùng rời đi trở thành một công việc tẻ nhạt: chúng ta không chỉ cần xóa người dùng khỏi bộ lưu trữ chính của nó (có thể là một biến hoặc một mảng), mà còn cần dọn sạch các stores bổ sung như `visitCountMap`. Và nó có thể trở nên cồng kềnh trong các trường hợp phức tạp hơn khi người dùng được quản lý ở một nơi của mã và cấu trúc bổ sung ở một nơi khác và không nhận được thông tin nào về việc xóa.
+Với một `Map` thông thường, việc dọn dẹp sau khi người dùng rời đi trở thành một công việc tẻ nhạt: chúng ta không chỉ cần xóa người dùng khỏi bộ lưu trữ chính của nó (có thể là một biến hoặc một mảng), mà còn cần dọn sạch các stores bổ sung như `visitCountMap`. Và nó có thể trở nên cồng kềnh trong các trường hợp phức tạp hơn khi người dùng được quản lý ở một nơi của mã và cấu trúc bổ sung ở một nơi khác và không nhận được thông tin nào về việc xóa.
 
 <br>
 
@@ -443,7 +443,7 @@ Chẳng hạn, chúng ta có thể sử dụng nó để theo dõi xem tin nhắ
       // (though technically we don't know for sure when the JS engine clears it)
 ```
 
-Hạn chế đáng chú ý nhất của `WeakMap` và `Weakset` là sự vắng mặt của các lần lặp (iterations), và không có khả năng nhận được tất cả nội dung hiện tại. Điều đó có vẻ bất tiện, nhưng không ngăn cản `WeakMap/WeakSet` thực hiện công việc chính của họ -- là một kho lưu trữ dữ liệu "bổ sung" cho các đối tượng được lưu trữ/quản lý ở nơi khác.
+Hạn chế đáng chú ý nhất của `WeakMap` và `Weakset` là sự vắng mặt của các lần lặp (iterations), và không có khả năng nhận được tất cả nội dung hiện tại. Điều đó có vẻ bất tiện, nhưng không ngăn cản `WeakMap/WeakSet` thực hiện công việc chính của chúng -- là một kho lưu trữ dữ liệu "bổ sung" cho các đối tượng được lưu trữ/quản lý ở nơi khác.
 
 ## Tóm lược
 
@@ -452,7 +452,7 @@ Bộ sưu tập thông thường:
 - `Map` -- là tập hợp các giá trị có khóa.
     Sự khác biệt so với một `Object` thông thường:
     - Bất kỳ keys, objects đều có thể là keys.
-    - Lặp lại theo thứ tự chèn (Iterates in the insertion order).
+    - Lặp lại theo thứ tự được chèn (Iterates in the insertion order).
     - Các phương thức thuận tiện bổ sung, thuộc tính `size`.
 
 - `Set` -- là tập hợp các giá trị duy nhất.
