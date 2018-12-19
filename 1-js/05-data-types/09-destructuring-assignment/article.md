@@ -1,14 +1,14 @@
 # Destructuring assignment
 
-The two most used data structures in JavaScript are `Object` and `Array`.
+Hai cấu trúc dữ liệu được sử dụng nhiều nhất trong JavaScript là `Object` và `Array`.
 
-Objects allow us to pack many pieces of information into a single entity and arrays allow us to store ordered collections. So we can make an object or an array and handle it as a single entity, or maybe pass it to a function call.
+Các đối tượng cho phép chúng ta đóng gói nhiều mẩu thông tin vào một thực thể duy nhất và các mảng cho phép chúng ta lưu trữ các bộ sưu tập theo thứ tự. Vì vậy, chúng ta có thể tạo một đối tượng hoặc một mảng và xử lý nó như một thực thể duy nhất hoặc có thể chuyển nó tới một lệnh gọi hàm.
 
-*Destructuring assignment* is a special syntax that allows us to "unpack" arrays or objects into a bunch of variables, as sometimes they are more convenient. Destructuring also works great with complex functions that have a lot of parameters, default values, and soon we'll see how these are handled too.
+*Destructuring assignment* là một cú pháp đặc biệt cho phép chúng ta "giải nén" các mảng hoặc đối tượng thành một loạt các biến, vì đôi khi chúng thuận tiện hơn. Phá hủy cấu trúc (destructuring) cũng hoạt động rất tốt với các hàm phức tạp có nhiều tham số, giá trị mặc định và chúng ta sẽ sớm thấy chúng được xử lý như thế nào.
 
 ## Array destructuring
 
-An example of how the array is destructured into variables:
+Một ví dụ về cách mảng bị phá hủy (destructured) thành các biến:
 
 ```js
       // we have an array with the name and surname
@@ -21,9 +21,9 @@ An example of how the array is destructured into variables:
       alert(surname);  // Kantor
 ```
 
-Now we can work with variables instead of array members.
+Bây giờ chúng ta có thể làm việc với các biến thay vì các thành viên mảng.
 
-It looks great when combined with `split` or other array-returning methods:
+Nó trông tuyệt vời khi được kết hợp với `split` hoặc các phương thức trả về mảng khác:
 
 ```js
       let [firstName, surname] = "Ilya Kantor".split(' ');
@@ -33,11 +33,11 @@ It looks great when combined with `split` or other array-returning methods:
 
 > ---
 
-**📌 "Destructuring" does not mean "destructive".**
+**📌 "Phá hủy (Destructuring)" không có nghĩa là "phá hoại (destructive)".**
 
-It's called "destructuring assignment," because it "destructurizes" by copying items into variables. But the array itself is not modified.
+Nó được gọi là "destructuring assignment", bởi vì nó "phá hủy" bằng cách sao chép các items vào các biến. Nhưng bản thân mảng không bị sửa đổi.
 
-It's just a shorter way to write:
+Đó chỉ là một cách viết ngắn hơn:
 
 ```js
       // let [firstName, surname] = arr;
@@ -52,9 +52,9 @@ It's just a shorter way to write:
 
 > ---
 
-**📌 Ignore first elements**
+**📌 Bỏ qua các phần tử đầu tiên**
 
-Unwanted elements of the array can also be thrown away via an extra comma:
+Các phần tử không mong muốn của mảng cũng có thể được loại bỏ thông qua dấu phẩy thừa:
 
 ```js
       // first and second elements are not needed
@@ -63,7 +63,7 @@ Unwanted elements of the array can also be thrown away via an extra comma:
       alert( title ); // Consul
 ```
 
-In the code above, although the first and second elements of the array are skipped, the third one is assigned to `title`, and the rest are also skipped.
+Trong đoạn mã trên, mặc dù các phần tử thứ nhất và thứ hai của mảng bị bỏ qua, phần tử thứ ba được gán cho `title` và phần còn lại cũng bị bỏ qua.
 
 > ---
 
@@ -72,9 +72,9 @@ In the code above, although the first and second elements of the array are skipp
 
 > ---
 
-**📌 Works with any iterable on the right-side**
+**📌 Hoạt động với bất kỳ iterable nào ở phía bên phải**
 
-...Actually, we can use it with any iterable, not only arrays:
+...Trên thực tế, chúng ta có thể sử dụng nó với bất kỳ iterable, không chỉ các mảng:
 
 ```js
       let [a, b, c] = "abc"; // ["a", "b", "c"]
@@ -88,11 +88,11 @@ In the code above, although the first and second elements of the array are skipp
 
 > ---
 
-**📌 Assign to anything at the left-side**
+**📌 Gán vào bất cứ thứ gì ở phía bên trái**
 
-We can use any "assignables" at the left side.
+Chúng ta có thể sử dụng bất kỳ "chuyển nhượng (assignables)" ở bên trái.
 
-For instance, an object property:
+Ví dụ, một thuộc tính đối tượng:
 
 ```js
       let user = {};
@@ -110,9 +110,9 @@ For instance, an object property:
 
 **📌 Looping with .entries()**
 
-In the previous chapter we saw the [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) method.
+Trong chương trước, chúng ta đã thấy phương thức [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries).
 
-We can use it with destructuring to loop over keys-and-values of an object:
+Chúng ta có thể sử dụng nó với việc destructuring để lặp qua keys-and-values của một object:
 
 ```js
       let user = {
@@ -126,7 +126,7 @@ We can use it with destructuring to loop over keys-and-values of an object:
       }
 ```
 
-...And the same for a map:
+...Và tương tự cho một map:
 
 ```js
       let user = new Map();
@@ -142,9 +142,9 @@ We can use it with destructuring to loop over keys-and-values of an object:
 
 <br>
 
-### The rest '...'
+### Phần còn lại (the rest) '...'
 
-If we want not just to get first values, but also to gather all that follows -- we can add one more parameter that gets "the rest" using three dots `"..."`:
+Nếu chúng ta muốn không chỉ nhận được các giá trị đầu tiên, mà còn thu thập tất cả các giá trị tiếp theo -- chúng ta có thể thêm một tham số nữa là "phần còn lại (the rest)" bằng ba dấu chấm `"..."`:
 
 ```js
       let [name1, name2, ...rest] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
@@ -157,11 +157,11 @@ If we want not just to get first values, but also to gather all that follows -- 
       alert(rest.length); // 2
 ```
 
-The value of `rest` is the array of the remaining array elements. We can use any other variable name in place of `rest`, just make sure it has three dots before it and goes last in the destructuring assignment.
+Giá trị của `rest` là mảng của các phần tử mảng còn lại. Chúng ta có thể sử dụng bất kỳ tên biến nào khác thay cho `rest`, chỉ cần đảm bảo rằng nó có ba dấu chấm trước nó và nằm cuối cùng trong destructuring assignment.
 
 ### Default values
 
-If there are fewer values in the array than variables in the assignment, there will be no error. Absent values are considered undefined:
+Nếu có ít giá trị trong mảng hơn các biến trong phép gán, sẽ không có lỗi. Giá trị vắng mặt được coi là undefined:
 
 ```js
       let [firstName, surname] = [];
@@ -169,7 +169,7 @@ If there are fewer values in the array than variables in the assignment, there w
       alert(firstName); // undefined
 ```
 
-If we want a "default" value to replace the missing one, we can provide it using `=`:
+Nếu chúng ta muốn một giá trị "mặc định" để thay thế giá trị còn thiếu, chúng ta có thể cung cấp nó bằng cách sử dụng `=`:
 
 ```js
       // default values
@@ -179,9 +179,9 @@ If we want a "default" value to replace the missing one, we can provide it using
       alert(surname); // Anonymous (default used)
 ```
 
-Default values can be more complex expressions or even function calls. They are evaluated only if the value is not provided.
+Giá trị mặc định có thể là các biểu thức phức tạp hơn hoặc thậm chí các lệnh gọi hàm. Chúng chỉ được đánh giá nếu giá trị không được cung cấp.
 
-For instance, here we use the `prompt` function for two defaults. But it will run only for the missing one:
+Chẳng hạn, ở đây chúng ta sử dụng hàm `prompt` cho hai giá trị mặc định. Nhưng nó sẽ chỉ chạy cho giá trị còn thiếu:
 
 ```js
       // runs only prompt for surname
@@ -195,17 +195,17 @@ For instance, here we use the `prompt` function for two defaults. But it will ru
 
 ## Object destructuring
 
-The destructuring assignment also works with objects.
+The destructuring assignment cũng hoạt động với các đối tượng.
 
-The basic syntax is:
+Cú pháp cơ bản là:
 
 ```js
       let {var1, var2} = {var1:…, var2…}
 ```
 
-We have an existing object at the right side, that we want to split into variables. The left side contains a "pattern" for corresponding properties. In the simple case, that's a list of variable names in `{...}`.
+Chúng ta có một đối tượng hiện có ở phía bên phải, mà chúng ta muốn chia thành các biến. Phía bên trái chứa một "mẫu (pattern)" cho các thuộc tính tương ứng. Trong trường hợp đơn giản, đó là danh sách các tên biến trong `{...}`.
 
-For instance:
+Ví dụ:
 
 ```js
       let options = {
@@ -221,16 +221,16 @@ For instance:
       alert(height); // 200
 ```
 
-Properties `options.title`, `options.width` and `options.height` are assigned to the corresponding variables. The order does not matter. This works too:
+Các thuộc tính `options.title`, `options.width` và `options.height` được gán cho các biến tương ứng. Thứ tự không quan trọng. Điều này cũng hoạt động:
 
 ```js
       // changed the order of properties in let {...}
       let {height, width, title} = { title: "Menu", height: 200, width: 100 }
 ```
 
-The pattern on the left side may be more complex and specify the mapping between properties and variables.
+Mẫu ở phía bên trái có thể phức tạp hơn và chỉ định ánh xạ giữa các thuộc tính và biến.
 
-If we want to assign a property to a variable with another name, for instance, `options.width` to go into the variable named `w`, then we can set it using a colon:
+Ví dụ, nếu chúng ta muốn gán một thuộc tính cho một biến bằng một tên khác, `options.width` để truyền vào biến có tên `w`, thì chúng ta có thể đặt nó bằng dấu hai chấm:
 
 ```js
       let options = {
@@ -251,9 +251,9 @@ If we want to assign a property to a variable with another name, for instance, `
       alert(h);      // 200
 ```
 
-The colon shows "what : goes where". In the example above the property `width` goes to `w`, property `height` goes to `h`, and `title` is assigned to the same name.
+Dấu hai chấm hiển thị "what : goes where". Trong ví dụ trên thuộc tính `width` truyền tới `w`, thuộc tính `height` truyền tới `h` và `title` được gán cho cùng tên.
 
-For potentially missing properties we can set default values using `"="`, like this:
+Đối với các thuộc tính có khả năng bị thiếu, chúng ta có thể đặt các giá trị mặc định bằng cách sử dụng `"="`, như thế này:
 
 ```js
       let options = {
@@ -267,9 +267,9 @@ For potentially missing properties we can set default values using `"="`, like t
       alert(height); // 200
 ```
 
-Just like with arrays or function parameters, default values can be any expressions or even function calls. They will be evaluated if the value is not provided.
+Giống như với các mảng hoặc tham số hàm, các giá trị mặc định có thể là bất kỳ biểu thức hoặc thậm chí các lệnh gọi hàm. Họ sẽ được đánh giá nếu giá trị không được cung cấp.
 
-The code below asks for width, but not the title.
+Mã dưới đây yêu cầu chiều rộng, nhưng không phải tiêu đề.
 
 ```js
       let options = {
@@ -282,7 +282,7 @@ The code below asks for width, but not the title.
       alert(width);  // (whatever you the result of prompt is)
 ```
 
-We also can combine both the colon and equality:
+Chúng ta cũng có thể kết hợp cả dấu hai chấm và đẳng thức:
 
 ```js
       let options = {
@@ -296,13 +296,13 @@ We also can combine both the colon and equality:
       alert(h);      // 200
 ```
 
-### The rest operator
+### Toán tử còn lại (The rest operator)
 
-What if the object has more properties than we have variables? Can we take some and then assign the "rest" somewhere?
+Điều gì xảy ra nếu đối tượng có nhiều thuộc tính hơn chúng ta có các biến? Chúng ta có thể lấy một số và sau đó chỉ định "phần còn lại" ở đâu đó không?
 
-The specification for using the rest operator (three dots) here is almost in the standard, but most browsers do not support it yet.
+Thông số kỹ thuật cho việc sử dụng toán tử còn lại (ba dấu chấm) ở đây gần như nằm trong tiêu chuẩn, nhưng hầu hết các trình duyệt chưa hỗ trợ.
 
-It looks like this:
+Nó trông như thế này:
 
 ```js
       let options = {
@@ -324,9 +324,9 @@ It looks like this:
 
 **📌 Gotcha without `let`**
 
-In the examples above variables were declared right before the assignment: `let {…} = {…}`. Of course, we could use existing variables too. But there's a catch.
+Trong các ví dụ trên, các biến đã được khai báo ngay trước khi gán: `let {…} = {…}`. Tất nhiên, chúng ta cũng có thể sử dụng các biến hiện có. Nhưng có một nhược điểm.
 
-This won't work:
+Điều này sẽ không hoạt động:
 
 ```js
       let title, width, height;
@@ -335,7 +335,7 @@ This won't work:
       {title, width, height} = {title: "Menu", width: 200, height: 100};
 ```
 
-The problem is that JavaScript treats `{...}` in the main code flow (not inside another expression) as a code block. Such code blocks can be used to group statements, like this:
+Vấn đề là JavaScript xử lý `{...}` trong luồng mã chính (không phải bên trong một biểu thức khác) dưới dạng một khối mã. Các khối mã như vậy có thể được sử dụng để nhóm các câu lệnh, như thế này:
 
 ```js
       {
@@ -346,7 +346,7 @@ The problem is that JavaScript treats `{...}` in the main code flow (not inside 
       }
 ```
 
-To show JavaScript that it's not a code block, we can wrap the whole assignment in brackets `(...)`:
+Để hiển thị cho JavaScript biết rằng đó không phải là một khối mã, chúng ta có thể gói toàn bộ phép gán trong ngoặc `(...)`:
 
 ```js
       let title, width, height;
@@ -363,9 +363,9 @@ To show JavaScript that it's not a code block, we can wrap the whole assignment 
 
 ## Nested destructuring
 
-If an object or an array contain other objects and arrays, we can use more complex left-side patterns to extract deeper portions.
+Nếu một đối tượng hoặc một mảng chứa các đối tượng và mảng khác, chúng ta có thể sử dụng các mẫu bên trái phức tạp hơn để trích xuất các phần sâu hơn.
 
-In the code below `options` has another object in the property `size` and an array in the property `items`. The pattern at the left side of the assignment has the same structure:
+Trong đoạn mã dưới đây `options` có một đối tượng khác trong thuộc tính `size` và một mảng trong thuộc tính `items`. Mẫu ở bên trái của phép gán có cùng cấu trúc:
 
 ```js
       let options = {
@@ -394,15 +394,15 @@ In the code below `options` has another object in the property `size` and an arr
       alert(item2);  // Donut
 ```
 
-The whole `options` object except `extra` that was not mentioned, is assigned to corresponding variables.
+Toàn bộ đối tượng `options` ngoại trừ `extra` không được đề cập, được gán cho các biến tương ứng.
 
 ![](destructuring-complex.png)
 
-Finally, we have `width`, `height`, `item1`, `item2` and `title` from the default value.
+Cuối cùng, chúng ta có `width`, `height`, `item1`, `item2` và `title` từ giá trị mặc định.
 
-That often happens with destructuring assignments. We have a complex object with many properties and want to extract only what we need.
+Điều đó thường xảy ra với các destructuring assignments. Chúng ta có một đối tượng phức tạp với nhiều thuộc tính và chỉ muốn trích xuất những gì chúng ta cần.
 
-Even here it happens:
+Ngay cả ở đây nó xảy ra:
 
 ```js
       // take size as a whole into a variable, ignore the rest
@@ -411,9 +411,9 @@ Even here it happens:
 
 ## Smart function parameters
 
-There are times when a function may have many parameters, most of which are optional. That's especially true for user interfaces. Imagine a function that creates a menu. It may have a width, a height, a title, items list and so on.
+Đôi khi một hàm có thể có nhiều tham số, hầu hết trong số đó là tùy chọn. Điều đó đặc biệt đúng với giao diện người dùng. Hãy tưởng tượng một function tạo ra một menu. Nó có thể có chiều rộng, chiều cao, tiêu đề, items list, v.v.
 
-Here's a bad way to write such function:
+Đây là một cách tồi để viết function như vậy:
 
 ```js
       function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
@@ -421,19 +421,19 @@ Here's a bad way to write such function:
       }
 ```
 
-In real-life, the problem is how to remember the order of arguments. Usually IDEs try to help us, especially if the code is well-documented, but still... Another problem is how to call a function when most parameters are ok by default.
+Trong cuộc sống thực, vấn đề là làm thế nào để nhớ thứ tự lập luận. Thông thường các IDE cố gắng giúp chúng ta, đặc biệt nếu mã được ghi chép tốt, nhưng vẫn ... Một vấn đề khác là làm thế nào để gọi một hàm khi hầu hết các tham số đều được mặc định.
 
-Like this?
+Như thế này?
 
 ```js
       showMenu("My Menu", undefined, undefined, ["Item1", "Item2"])
 ```
 
-That's ugly. And becomes unreadable when we deal with more parameters.
+Thật là xấu xí. Và trở nên không thể đọc được khi chúng ta xử lý nhiều tham số hơn.
 
-Destructuring comes to the rescue!
+Destructuring đến để giải cứu!
 
-We can pass parameters as an object, and the function immediately destructurizes them into variables:
+Chúng ta có thể truyền tham số dưới dạng một đối tượng và hàm ngay lập tức phá hủy chúng thành các biến:
 
 ```js
       // we pass object to function
@@ -453,7 +453,7 @@ We can pass parameters as an object, and the function immediately destructurizes
       showMenu(options);
 ```
 
-We can also use more complex destructuring with nested objects and colon mappings:
+Chúng ta cũng có thể sử dụng destructuring phức tạp hơn với các đối tượng lồng nhau (nested objects) và dấu hai chấm ánh xạ (colon mappings):
 
 ```js
       let options = {
@@ -475,7 +475,7 @@ We can also use more complex destructuring with nested objects and colon mapping
       showMenu(options);
 ```
 
-The syntax is the same as for a destructuring assignment:
+Cú pháp tương tự như đối với một destructuring assignment:
 
 ```js
       function({
@@ -484,7 +484,7 @@ The syntax is the same as for a destructuring assignment:
       })
 ```
 
-Please note that such destructuring assumes that `showMenu()` does have an argument. If we want all values by default, then we should specify an empty object:
+Xin lưu ý rằng việc destructuring như vậy giả sử rằng `showMenu()` không có đối số. Nếu chúng ta muốn tất cả các giá trị theo mặc định, thì chúng ta nên chỉ định một đối tượng trống:
 
 ```js
       showMenu({});
@@ -492,7 +492,7 @@ Please note that such destructuring assumes that `showMenu()` does have an argum
       showMenu(); // this would give an error
 ```
 
-We can fix this by making `{}` the default value for the whole destructuring thing:
+Chúng ta có thể khắc phục điều này bằng cách tạo `{}` giá trị mặc định cho toàn bộ destructuring:
 
 
 ```js
@@ -504,25 +504,25 @@ We can fix this by making `{}` the default value for the whole destructuring thi
       showMenu(); // Menu 100 200
 ```
 
-In the code above, the whole arguments object is `{}` by default, so there's always something to destructurize.
+Trong đoạn mã trên, toàn bộ đối tượng là `{}` theo mặc định, do đó luôn có thứ gì đó để destructurize.
 
-## Summary
+## Tóm lược
 
-- Destructuring assignment allows for instantly mapping an object or array onto many variables.
-- The object syntax:
+- Destructuring assignment cho phép ánh xạ ngay lập tức một đối tượng hoặc mảng lên nhiều biến.
+- Cú pháp đối tượng:
 
     ```js
     let {prop : varName = default, ...} = object
     ```
 
-    This means that property `prop` should go into the variable `varName` and, if no such property exists, then the `default` value should be used.
+    Điều này có nghĩa là thuộc tính `prop` nên truyền vào biến `varName` và, nếu không có thuộc tính đó tồn tại, thì nên sử dụng giá trị `default`.
 
-- The array syntax:
+- Cú pháp mảng:
 
     ```js
     let [item1 = default, item2, ...rest] = array
     ```
 
-    The first item goes to `item1`; the second goes into `item2`, all the rest makes the array `rest`.
+    Mục đầu tiên truyền đến `item1`; cái thứ hai truyền vào `item2`, tất cả phần còn lại tạo thành mảng `rest`.
 
-- For more complex cases, the left side must have the same structure as the right one.
+- Đối với các trường hợp phức tạp hơn, bên trái phải có cấu trúc tương tự như bên phải.
