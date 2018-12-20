@@ -168,7 +168,7 @@ Các biến giống nhau, nhưng dòng thay đổi, vì vậy bối cảnh bây 
 
 Đây là ngăn xếp bối cảnh khi chúng ta vào trong subcall `pow(2, 2)`:
 
-- **Context: { x: 2, n: 2, at line 5 }** | call: pow(2, 2)
+- **Context: { x: 2, n: 2, at line 1 }** | call: pow(2, 2)
 - Context: { x: 2, n: 3, at line 5 }     | call: pow(2, 3)
 
 Bối cảnh thực thi hiện tại mới ở trên cùng và bối cảnh đã ghi nhớ trước đó ở bên dưới.
