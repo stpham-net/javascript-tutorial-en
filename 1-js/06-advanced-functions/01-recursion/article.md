@@ -133,7 +133,7 @@ Khi bắt đầu cuộc gọi `pow(2, 3)` bối cảnh thực thi sẽ lưu tr�
 
 Chúng ta có thể phác họa nó như sau:
 
-- **Context: { x: 2, n: 3, at line 1 }** | pow(2, 3)
+- **Context: { x: 2, n: 3, at line 1 }** | call: pow(2, 3)
 
 Đó là khi function bắt đầu thực thi. Điều kiện `n == 1` là sai, vì vậy luồng tiếp tục vào nhánh thứ hai của `if`:
 
@@ -152,7 +152,7 @@ alert( pow(2, 3) );
 
 Các biến giống nhau, nhưng dòng thay đổi, vì vậy bối cảnh bây giờ là:
 
-- **Context: { x: 2, n: 3, at line 5 }** | pow(2, 3)
+- **Context: { x: 2, n: 3, at line 5 }** | call: pow(2, 3)
 
 Để tính toán `x * pow(x, n - 1)`, chúng ta cần tạo một cuộc gọi con (subcall) của `pow` với các đối số mới `pow(2, 2)`.
 
@@ -168,8 +168,8 @@ Các biến giống nhau, nhưng dòng thay đổi, vì vậy bối cảnh bây 
 
 Đây là ngăn xếp bối cảnh khi chúng ta vào trong subcall `pow(2, 2)`:
 
-- **Context: { x: 2, n: 2, at line 1 }** | pow(2, 2)
-- Context: { x: 2, n: 3, at line 5 } | pow(2, 3)
+- **Context: { x: 2, n: 2, at line 1 }** | call: pow(2, 2)
+- Context: { x: 2, n: 3, at line 5 }     | call: pow(2, 3)
 
 Bối cảnh thực thi hiện tại mới ở trên cùng và bối cảnh đã ghi nhớ trước đó ở bên dưới.
 
@@ -181,9 +181,9 @@ Quá trình lặp lại: một subcall mới được tạo ở dòng `5`, bây 
 
 Một bối cảnh thực thi mới được tạo ra, bối cảnh trước đó được đẩy lên đầu của ngăn xếp:
 
-- **Context: { x: 2, n: 1, at line 1 }** | pow(2, 1)
-- Context: { x: 2, n: 2, at line 5 } | pow(2, 2)
-- Context: { x: 2, n: 3, at line 5 } | pow(2, 3)
+- **Context: { x: 2, n: 1, at line 1 }** | call: pow(2, 1)
+- Context: { x: 2, n: 2, at line 5 }     | call: pow(2, 2)
+- Context: { x: 2, n: 3, at line 5 }     | call: pow(2, 3)
 
 Hiện tại có 2 bối cảnh cũ và 1 bối cảnh hiện đang chạy cho `pow(2, 1)`.
 
@@ -205,14 +205,14 @@ Không có các cuộc gọi lồng nhau nữa, vì vậy hàm kết thúc, tr�
 
 Khi function kết thúc, bối cảnh thực thi của nó không còn cần thiết nữa, vì vậy nó bị xóa khỏi bộ nhớ. Cái trước được khôi phục khỏi đầu ngăn xếp:
 
-- **Context: { x: 2, n: 2, at line 5 }** | pow(2, 2)
-- Context: { x: 2, n: 3, at line 5 } | pow(2, 3)
+- **Context: { x: 2, n: 2, at line 5 }** | call: pow(2, 2)
+- Context: { x: 2, n: 3, at line 5 }     | call: pow(2, 3)
 
 Việc thực thi `pow(2, 2)` được nối lại. Nó có kết quả của subcall `pow(2, 1)`, do đó, nó cũng có thể hoàn thành việc đánh giá `x * pow(x, n - 1)`, trả về `4`.
 
 Sau đó, bối cảnh trước đó được khôi phục:
 
-- **Context: { x: 2, n: 3, at line 5 }** | pow(2, 3)
+- **Context: { x: 2, n: 3, at line 5 }** | call: pow(2, 3)
 
 Khi nó kết thúc, chúng ta có kết quả `pow(2, 3) = 8`.
 
