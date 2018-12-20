@@ -220,7 +220,7 @@ Khi nó kết thúc, chúng ta có kết quả `pow(2, 3) = 8`.
 
 Như chúng ta có thể thấy từ các minh họa ở trên, độ sâu đệ quy bằng với số lượng bối cảnh tối đa trong ngăn xếp.
 
-Lưu ý các yêu cầu bộ nhớ. Bối cảnh mất trí nhớ. Trong trường hợp của chúng ta, việc tăng số mũ của `n` thực sự đòi hỏi bộ nhớ cho các bối cảnh `n`, cho tất cả các giá trị thấp hơn của `n`.
+Lưu ý các yêu cầu bộ nhớ. Bối cảnh cần bộ nhớ. Trong trường hợp của chúng ta, việc tăng số mũ của `n` thực sự đòi hỏi bộ nhớ cho các bối cảnh `n`, cho tất cả các giá trị thấp hơn của `n`.
 
 Một thuật toán dựa trên vòng lặp sẽ tiết kiệm bộ nhớ hơn:
 
