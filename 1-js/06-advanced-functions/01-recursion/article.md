@@ -280,7 +280,7 @@ let company = {
 Nói cách khác, một công ty có các phòng ban.
 
 - Một bộ phận có thể có một loạt các nhân viên. Chẳng hạn, bộ phận `sales` có 2 nhân viên: John và Alice.
-- Hoặc một bộ phận có thể tách thành các bộ phận, như `development` có hai nhánh: `site` và `internals`. Mỗi trong số chúng có nhân viên riêng.
+- Hoặc một bộ phận có thể tách thành các bộ phận, như `development` có hai nhánh: `site` và `internals`. Mỗi trong số họ có nhân viên riêng.
 - Cũng có thể khi một phân khu phát triển, nó sẽ chia thành các phân khu (hoặc các nhóm).
 
     Chẳng hạn, bộ phận `site` trong tương lai có thể được chia thành các nhóm cho `siteA` và `siteB`. Và họ, có khả năng, có thể chia nhiều hơn nữa. Đó không phải là trên hình ảnh, chỉ là một cái gì đó để có trong trí tưởng tượng.
@@ -291,7 +291,7 @@ Một cách tiếp cận lặp đi lặp lại (iterative) là không dễ dàng
 
 Hãy thử đệ quy.
 
-Như chúng ta có thể thấy, khi function của chúng ta có một bộ phận để tổng hợp, có hai trường hợp có thể xảy ra:
+Như chúng ta có thể thấy, khi function của chúng ta lấy một bộ phận để tính tổng lương, có hai trường hợp có thể xảy ra:
 
 1. Đó là một bộ phận "đơn giản" với một *array of people* -- sau đó chúng ta có thể tính tổng lương theo một vòng lặp đơn giản.
 2. Hoặc đó là *an object with `N` subdepartments* -- sau đó chúng ta có thể thực hiện các cuộc gọi đệ quy `N` để lấy tổng cho mỗi subdeps và kết hợp các kết quả.
@@ -350,7 +350,7 @@ Một *bộ phận* công ty là:
 - Hoặc là một mảng của mọi người.
 - Hoặc một đối tượng có các *bộ phận*.
 
-Đối với các nhà phát triển web, có nhiều ví dụ nổi tiếng hơn: tài liệu HTML và XML.
+Đối với các nhà phát triển web, có nhiều ví dụ phổ biến hơn: tài liệu HTML và XML.
 
 Trong tài liệu HTML, một *HTML-tag* có thể chứa danh sách:
 - Text pieces.
@@ -471,7 +471,7 @@ Hạn chế chính là chúng ta không thể dễ dàng truy cập một phần
 
 - *Đệ quy* là thuật ngữ lập trình có nghĩa là "self-calling" function. Các functions như vậy có thể được sử dụng để giải quyết các nhiệm vụ nhất định theo những cách thanh lịch.
 
-    Khi một function tự gọi, đó gọi là *bước đệ quy*. The *basis* của đệ quy là các đối số hàm làm cho tác vụ đơn giản đến mức hàm không thực hiện các cuộc gọi xa hơn nữa.
+    Khi một function tự gọi, đó gọi là *bước đệ quy*. *Điều cơ bản* của đệ quy là các đối số hàm làm cho tác vụ thật đơn giản để hàm không cần thực hiện nhiều cuộc gọi xa hơn nữa.
 
 - Cấu trúc dữ liệu [được định nghĩa đệ quy](https://en.wikipedia.org/wiki/Recursive_data_type) là cấu trúc dữ liệu có thể được xác định bằng chính nó.
 
@@ -486,4 +486,4 @@ Hạn chế chính là chúng ta không thể dễ dàng truy cập một phần
     Các hàm đệ quy có thể được sử dụng để đi qua chúng như chúng ta đã thấy trong ví dụ `sumSalary`.
 
 Bất kỳ hàm đệ quy nào cũng có thể được viết lại thành một hàm lặp. Và điều đó đôi khi được yêu cầu để tối ưu hóa. Nhưng đối với nhiều tác vụ, một giải pháp đệ quy là đủ nhanh và dễ dàng hơn để viết và hỗ trợ.
-No search results.
+
