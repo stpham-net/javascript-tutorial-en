@@ -18,7 +18,7 @@ Một đối tượng trống ("tủ trống") có thể được tạo bằng m
       let user = {};  // "object literal" syntax
 ```
 
-![](object-user-blank.png)
+![](object-user-empty.png)
 
 Thông thường, các dấu ngoặc `{...}` được sử dụng. Tuyên bố đó được gọi là *object literal*.
 
