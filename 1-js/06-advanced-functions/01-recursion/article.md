@@ -24,7 +24,7 @@ There are two ways to implement it.
 
 1. Iterative thinking: the `for` loop:
 
-    ```js run
+    ```js
     function pow(x, n) {
       let result = 1;
 
@@ -41,7 +41,7 @@ There are two ways to implement it.
 
 2. Recursive thinking: simplify the task and call self:
 
-    ```js run
+    ```js
     function pow(x, n) {
       if (n == 1) {
         return x;
@@ -82,17 +82,25 @@ For example, to calculate `pow(2, 4)` the recursive variant does these steps:
 
 So, the recursion reduces a function call to a simpler one, and then -- to even more simpler, and so on, until the result becomes obvious.
 
-````smart header="Recursion is usually shorter"
+<br>
+
+> ---
+
+**📌 Recursion is usually shorter**
+
 A recursive solution is usually shorter than an iterative one.
 
 Here we can rewrite the same using the ternary `?` operator instead of `if` to make `pow(x, n)` more terse and still very readable:
 
-```js run
+```js
 function pow(x, n) {
   return (n == 1) ? x : (x * pow(x, n - 1));
 }
 ```
-````
+
+> ---
+
+<br>
 
 The maximal number of nested calls (including the first one) is called *recursion depth*. In our case, it will be exactly `n`.
 
@@ -125,23 +133,16 @@ In the beginning of the call `pow(2, 3)` the execution context will store variab
 
 We can sketch it as:
 
-<ul class="function-execution-context-list">
-  <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 1 }</span>
-    <span class="function-execution-context-call">pow(2, 3)</span>
-  </li>
-</ul>
+- **Context: { x: 2, n: 3, at line 1 }** | pow(2, 3)
 
 That's when the function starts to execute. The condition `n == 1` is false, so the flow continues into the second branch of `if`:
 
-```js run
+```js
 function pow(x, n) {
   if (n == 1) {
     return x;
   } else {
-*!*
     return x * pow(x, n - 1);
-*/!*
   }
 }
 
@@ -151,12 +152,7 @@ alert( pow(2, 3) );
 
 The variables are same, but the line changes, so the context is now:
 
-<ul class="function-execution-context-list">
-  <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
-    <span class="function-execution-context-call">pow(2, 3)</span>
-  </li>
-</ul>
+- **Context: { x: 2, n: 3, at line 5 }** | pow(2, 3)
 
 To calculate `x * pow(x, n - 1)`, we need to make a subcall of `pow` with new arguments `pow(2, 2)`.
 
@@ -172,16 +168,8 @@ Here we call the same function `pow`, but it absolutely doesn't matter. The proc
 
 Here's the context stack when we entered the subcall `pow(2, 2)`:
 
-<ul class="function-execution-context-list">
-  <li>
-    <span class="function-execution-context">Context: { x: 2, n: 2, at line 1 }</span>
-    <span class="function-execution-context-call">pow(2, 2)</span>
-  </li>
-  <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
-    <span class="function-execution-context-call">pow(2, 3)</span>
-  </li>
-</ul>
+- **Context: { x: 2, n: 2, at line 1 }** | pow(2, 2)
+- **Context: { x: 2, n: 3, at line 5 }** | pow(2, 3)
 
 The new current execution context is on top (and bold), and previous remembered contexts are below.
 
@@ -193,20 +181,9 @@ The process repeats: a new subcall is made at line `5`, now with arguments `x=2`
 
 A new execution context is created, the previous one is pushed on top of the stack:
 
-<ul class="function-execution-context-list">
-  <li>
-    <span class="function-execution-context">Context: { x: 2, n: 1, at line 1 }</span>
-    <span class="function-execution-context-call">pow(2, 1)</span>
-  </li>
-  <li>
-    <span class="function-execution-context">Context: { x: 2, n: 2, at line 5 }</span>
-    <span class="function-execution-context-call">pow(2, 2)</span>
-  </li>
-  <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
-    <span class="function-execution-context-call">pow(2, 3)</span>
-  </li>
-</ul>
+- **Context: { x: 2, n: 1, at line 1 }** | pow(2, 1)
+- **Context: { x: 2, n: 2, at line 5 }** | pow(2, 2)
+- **Context: { x: 2, n: 3, at line 5 }** | pow(2, 3)
 
 There are 2 old contexts now and 1 currently running for `pow(2, 1)`.
 
@@ -217,9 +194,7 @@ During the execution of `pow(2, 1)`, unlike before, the condition `n == 1` is tr
 ```js
 function pow(x, n) {
   if (n == 1) {
-*!*
     return x;
-*/!*
   } else {
     return x * pow(x, n - 1);
   }
@@ -230,28 +205,14 @@ There are no more nested calls, so the function finishes, returning `2`.
 
 As the function finishes, its execution context is not needed anymore, so it's removed from the memory. The previous one is restored off the top of the stack:
 
-
-<ul class="function-execution-context-list">
-  <li>
-    <span class="function-execution-context">Context: { x: 2, n: 2, at line 5 }</span>
-    <span class="function-execution-context-call">pow(2, 2)</span>
-  </li>
-  <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
-    <span class="function-execution-context-call">pow(2, 3)</span>
-  </li>
-</ul>
+- **Context: { x: 2, n: 2, at line 5 }** | pow(2, 2)
+- **Context: { x: 2, n: 3, at line 5 }** | pow(2, 3)
 
 The execution of `pow(2, 2)` is resumed. It has the result of the subcall `pow(2, 1)`, so it also can finish the evaluation of `x * pow(x, n - 1)`, returning `4`.
 
 Then the previous context is restored:
 
-<ul class="function-execution-context-list">
-  <li>
-    <span class="function-execution-context">Context: { x: 2, n: 3, at line 5 }</span>
-    <span class="function-execution-context-call">pow(2, 3)</span>
-  </li>
-</ul>
+- **Context: { x: 2, n: 3, at line 5 }** | pow(2, 3)
 
 When it finishes, we have a result of `pow(2, 3) = 8`.
 
@@ -352,7 +313,6 @@ let company = { // the same object, compressed for brevity
 };
 
 // The function to do the job
-*!*
 function sumSalaries(department) {
   if (Array.isArray(department)) { // case (1)
     return department.reduce((prev, current) => prev + current.salary, 0); // sum the array
@@ -364,7 +324,6 @@ function sumSalaries(department) {
     return sum;
   }
 }
-*/!*
 
 alert(sumSalaries(company)); // 6700
 ```
@@ -379,7 +338,7 @@ We can easily see the principle: for an object `{...}` subcalls are made, while 
 
 Note that the code uses smart features that we've covered before:
 
-- Method `arr.reduce` explained in the chapter <info:array-methods> to get the sum of the array.
+- Method `arr.reduce` explained in the chapter **array-methods** to get the sum of the array.
 - Loop `for(val of Object.values(obj))` to iterate over object values: `Object.values` returns an array of them.
 
 
@@ -448,7 +407,7 @@ Graphical representation of the list:
 
 An alternative code for creation:
 
-```js no-beautify
+```js
 let list = { value: 1 };
 list.next = { value: 2 };
 list.next.next = { value: 3 };
@@ -482,10 +441,8 @@ list.next = { value: 2 };
 list.next.next = { value: 3 };
 list.next.next.next = { value: 4 };
 
-*!*
 // prepend the new value to the list
 list = { value: "new item", next: list };
-*/!*
 ```
 
 ![linked list](linked-list-0.png)
@@ -513,6 +470,7 @@ Sometimes it's worth to add another variable named `tail` to track the last elem
 ## Summary
 
 Terms:
+
 - *Recursion*  is a programming term that means a "self-calling" function. Such functions can be used to solve certain tasks in elegant ways.
 
     When a function calls itself, that's called a *recursion step*. The *basis* of recursion is function arguments that make the task so simple that the function does not make further calls.
