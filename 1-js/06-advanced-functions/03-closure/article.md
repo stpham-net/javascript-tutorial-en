@@ -53,7 +53,7 @@ Chúng ta hãy xem xét hai tình huống để bắt đầu, và sau đó nghi�
     work(); // what will it show? "Pete" (name where created) or "John" (name where called)?
     ```
 
-## Môi trường từ vựng (Lexical Environment)
+## Môi trường từ điển (Lexical Environment)
 
 Để hiểu những gì đang xảy ra, trước tiên chúng ta hãy thảo luận về "biến" thực sự là gì.
 
@@ -102,12 +102,11 @@ Mã dưới đây chứng minh rằng Lexical Environment không trống ngay t�
 
 ![lexical environment](lexical-environment-global-3.png)
 
-
 ### Inner and outer Lexical Environment
 
 Trong cuộc gọi, `say()` sử dụng một outer variable, vì vậy hãy xem chi tiết những gì đang diễn ra.
 
-Đầu tiên, khi một function chạy, một function mới Lexical Environment được tạo tự động. Đó là một quy tắc chung cho tất cả các functions. That Lexical Environment được sử dụng để lưu trữ các biến và tham số cục bộ của cuộc gọi.
+Đầu tiên, khi một function chạy, một new function Lexical Environment được tạo tự động. Đó là một quy tắc chung cho tất cả các functions. That Lexical Environment được sử dụng để lưu trữ các local variables và parameters của cuộc gọi.
 
 Đây là hình ảnh của Lexical Environments khi thực thi bên trong `say("John")`, tại dòng được dán nhãn bằng một mũi tên:
 
@@ -127,7 +126,7 @@ Nếu không tìm thấy biến ở bất cứ đâu, đó là lỗi trong stric
 Hãy xem cách tìm kiếm thực hiện trong ví dụ của chúng ta:
 
 - Khi `alert` bên trong `say` muốn truy cập `name`, nó sẽ tìm thấy nó ngay lập tức trong function Lexical Environment.
-- Khi nó muốn truy cập `phrase`, thì không có `phrase` cục bộ, vì vậy nó đi theo tham chiếu `outer` và tìm thấy nó trên toàn cầu (globally).
+- Khi nó muốn truy cập `phrase`, thì không có `phrase` cục bộ, vì vậy nó đi theo tham chiếu `outer` và tìm thấy nó ở globally.
 
 ![lexical environment lookup](lexical-environment-simple-lookup.png)
 
@@ -206,7 +205,7 @@ function sayHiBye(firstName, lastName) {
 
 Ở đây, *nested* function `getFullName()` được tạo ra để thuận tiện. Nó có thể truy cập các biến bên ngoài và do đó có thể trả lại tên đầy đủ.
 
-Điều thú vị hơn, một hàm lồng nhau có thể được trả về: như là một thuộc tính của một đối tượng mới (nếu hàm bên ngoài tạo một đối tượng bằng các phương thức) hoặc là kết quả của chính nó. Sau đó nó có thể được sử dụng ở một nơi khác. Bất kể ở đâu, nó vẫn có quyền truy cập vào các biến bên ngoài tương tự.
+Điều thú vị hơn, một hàm lồng nhau có thể được returned: như là một property của một new object (nếu outer function tạo một object với các methods) hoặc như là kết quả của chính nó. Sau đó nó có thể được sử dụng ở một nơi khác. Bất kể ở đâu, nó vẫn có quyền truy cập vào các outer variables tương tự.
 
 Một ví dụ với constructor function (xem chương **constructor-new**):
 
