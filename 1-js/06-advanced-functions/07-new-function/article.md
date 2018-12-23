@@ -15,7 +15,7 @@ In other words, function parameters (or, more precisely, names for them) go firs
 
 It's easier to understand by looking at an example. Here's a function with two arguments:
 
-```js run
+```js
 let sum = new Function('a', 'b', 'return a + b'); 
 
 alert( sum(1, 2) ); // 3
@@ -23,7 +23,7 @@ alert( sum(1, 2) ); // 3
 
 If there are no arguments, then there's only a single argument, the function body:
 
-```js run
+```js
 let sayHi = new Function('alert("Hello")');
 
 sayHi(); // Hello
@@ -50,14 +50,12 @@ Usually, a function remembers where it was born in the special property `[[Envir
 
 But when a function is created using `new Function`, its `[[Environment]]` references not the current Lexical Environment, but instead the global one.
 
-```js run
+```js
 
 function getFunc() {
   let value = "test";
 
-*!*
   let func = new Function('alert(value)');
-*/!*
 
   return func;
 }
@@ -67,18 +65,16 @@ getFunc()(); // error: value is not defined
 
 Compare it with the regular behavior:
 
-```js run 
+```js
 function getFunc() {
   let value = "test";
 
-*!*
   let func = function() { alert(value); };
-*/!*
 
   return func;
 }
 
-getFunc()(); // *!*"test"*/!*, from the Lexical Environment of getFunc
+getFunc()(); // "test", from the Lexical Environment of getFunc
 ```
 
 This special feature of `new Function` looks strange, but appears very useful in practice.
@@ -103,17 +99,13 @@ And it enforces better code. If we need to pass something to a function created 
 
 Our "sum" function actually does that right:
 
-```js run 
-*!*
+```js
 let sum = new Function('a', 'b', 'return a + b');
-*/!*
 
 let a = 1, b = 2;
 
-*!*
 // outer values are passed as arguments
 alert( sum(a, b) ); // 3
-*/!*
 ```
 
 ## Summary
