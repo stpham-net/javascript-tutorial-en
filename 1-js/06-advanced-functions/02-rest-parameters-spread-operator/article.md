@@ -109,7 +109,7 @@ Vào thời xưa, rest parameters không tồn tại trong ngôn ngữ và sử 
 
 Và nó vẫn hoạt động, chúng ta có thể sử dụng nó ngày hôm nay.
 
-Nhưng nhược điểm là mặc dù `arguments` vừa array-like vừa có thể iterable, nhưng nó không phải là một mảng. Nó không hỗ trợ các phương thức mảng, vì vậy chúng ta không thể gọi `arguments.map(...)` chẳng hạn.
+Nhưng nhược điểm là mặc dù `arguments` vừa là array-like vừa có thể iterable, nhưng nó không phải là một mảng. Nó không hỗ trợ các phương thức mảng, vì vậy chúng ta không thể gọi `arguments.map(...)` chẳng hạn.
 
 Ngoài ra, nó luôn chứa tất cả các đối số. Chúng ta không thể lấy chúng một phần, giống như chúng ta đã làm với các rest parameters.
 
@@ -154,7 +154,7 @@ alert( Math.max(3, 5, 1) ); // 5
 
 Bây giờ hãy nói rằng chúng ta có một mảng `[3, 5, 1]`. Làm thế nào để chúng ta gọi `Math.max` với nó?
 
-Truyền nó "như là" sẽ không hoạt động, bởi vì `Math.max` mong đợi một danh sách các đối số số, không phải là một mảng duy nhất:
+Truyền nó "as is" sẽ không hoạt động, bởi vì `Math.max` mong đợi một danh sách các đối số numeric, không phải là một mảng duy nhất:
 
 ```js
 let arr = [3, 5, 1];
