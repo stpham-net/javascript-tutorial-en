@@ -241,7 +241,7 @@ alert( counter() ); // 1
 alert( counter() ); // 2
 ```
 
-Hãy tiếp tục với ví dụ `makeCorer`. Nó tạo ra "counter" function trả về số tiếp theo trên mỗi lệnh gọi. Mặc dù đơn giản, các biến thể được sửa đổi một chút của mã đó có thể sử dụng thực tế, ví dụ như [pseudorandom number generator](https://en.wikipedia.org/wiki/Pseudorandom_number_generator), v.v. Vì vậy, ví dụ không phải là giả như nó có thể thể hiện.
+Hãy tiếp tục với ví dụ `makeCounter`. Nó tạo ra "counter" function trả về số tiếp theo trên mỗi lệnh gọi. Mặc dù đơn giản, các biến thể được sửa đổi một chút của mã đó có thể sử dụng thực tế, ví dụ như [pseudorandom number generator](https://en.wikipedia.org/wiki/Pseudorandom_number_generator), v.v. Vì vậy, ví dụ không phải là giả như nó thể hiện.
 
 Làm thế nào để các counter làm việc nội bộ?
 
@@ -320,13 +320,13 @@ Bây giờ bạn đã hiểu cách closures hoạt động nói chung, chúng ta
     1. Một Environment Record với các biến cục bộ. Trong trường hợp của chúng ta, `count` là biến cục bộ duy nhất (xuất hiện khi dòng `let count` được thực thi).
     2. Tham chiếu outer lexical, được đặt thành `[[Environment]]` của hàm. Ở đây `[[Environment]]` của `makeCounter` tham chiếu đến the global Lexical Environment.
 
-    Vì vậy, bây giờ chúng ta có hai Lexical Environments: cái đầu tiên là toàn cầu, cái thứ hai là cho cuộc gọi `makeCounter` hiện tại, với tham chiếu outer là global.
+    Vì vậy, bây giờ chúng ta có hai Lexical Environments: cái đầu tiên là global, cái thứ hai là cho cuộc gọi `makeCounter` hiện tại, với tham chiếu outer là global.
 
 3. Trong quá trình thực thi `makeCounter()`, một hàm lồng nhỏ được tạo ra.
 
-    Không quan trọng là function được tạo bằng Function Declaration hay Function Expression. Tất cả các hàm đều có thuộc tính `[[Environment]]` tham chiếu đến Lexical Environment mà chúng được tạo. Vì vậy, hàm lồng nhỏ mới của chúng ta cũng có được nó.
+    Không quan trọng là function được tạo bằng Function Declaration hay Function Expression. Tất cả các hàm đều có thuộc tính `[[Environment]]` tham chiếu đến Lexical Environment mà chúng được tạo. Vì vậy, hàm lồng nhỏ mới của chúng ta cũng có nó.
 
-    Đối với hàm lồng nhau mới của chúng ta, giá trị của `[[Environment]]` là Lexical Environment hiện tại của `makeCounter()` (nơi nó được sinh ra):
+    Đối với nested function mới của chúng ta, giá trị của `[[Environment]]` là Lexical Environment hiện tại của `makeCounter()` (nơi nó được sinh ra):
 
     ![](lexenv-nested-makecounter-3.png)
 
@@ -376,11 +376,11 @@ Nhưng nếu không có `let name` trong `makeWorker()`, thì tìm kiếm sẽ �
 
 Có một thuật ngữ lập trình chung "closure", mà các nhà phát triển thường nên biết.
 
-Một [closure](https://en.wikipedia.org/wiki/Closure_(computer_programming)) là một hàm ghi nhớ các biến ngoài của nó và có thể truy cập chúng. Trong một số ngôn ngữ, điều đó là không thể, hoặc một function nên được viết theo một cách đặc biệt để làm cho nó xảy ra. Nhưng như đã giải thích ở trên, trong JavaScript, tất cả các hàm đều được đóng kín một cách tự nhiên (naturally closures) (chỉ có một loại trừ, được đề cập trong **new-function**).
+Một [closure](https://en.wikipedia.org/wiki/Closure_(computer_programming)) là một hàm ghi nhớ các outer variables của nó và có thể truy cập chúng. Trong một số ngôn ngữ, điều đó là không thể, hoặc một function nên được viết theo một cách đặc biệt để làm cho nó xảy ra. Nhưng như đã giải thích ở trên, trong JavaScript, tất cả các hàm đều được đóng kín một cách tự nhiên (naturally closures) (chỉ có một loại trừ, được đề cập trong **new-function**).
 
 Đó là: chúng tự động nhớ nơi chúng được tạo bằng thuộc tính `[[Environment]]` và tất cả chúng có thể truy cập các biến ngoài.
 
-Khi phỏng vấn, một nhà phát triển frontend nhận được câu hỏi về "what's a closure?.
+Khi phỏng vấn, một nhà phát triển frontend nhận được câu hỏi về "what's a closure?". một câu trả lời hợp lệ sẽ là một định nghĩa về closure và một lời giải thích rằng tất cả các hàm trong JavaScript là các closure và có thể có thêm vài từ về chi tiết kỹ thuật: the `[[Environment]]` property and how Lexical Environments work.
 
 > ---
 
@@ -511,7 +511,7 @@ Trong tất cả các trường hợp trên, chúng ta khai báo Function Expres
 
 ## Thu gom dữ liệu rác (Garbage collection)
 
-Lexical Environment objects mà chúng ta đã nói đến phải tuân theo các quy tắc memory management giống như các giá trị thông thường.
+Lexical Environment objects mà chúng ta đã nói đến cũng tuân theo các quy tắc memory management giống như các giá trị thông thường.
 
 - Thông thường, Lexical Environment được dọn sạch sau khi function chạy. Ví dụ:
 
@@ -540,7 +540,7 @@ Lexical Environment objects mà chúng ta đã nói đến phải tuân theo cá
     let g = f(); // g is reachable, and keeps the outer lexical environment in memory
     ```
 
-- Xin lưu ý rằng nếu `f()` được gọi nhiều lần và các resulting functions được lưu, thì các đối tượng Lexical Environment tương ứng cũng sẽ được giữ lại trong bộ nhớ. Tất cả 3 trong số chúng trong mã dưới đây:
+- Xin lưu ý rằng nếu `f()` được gọi nhiều lần và các resulting functions được lưu, thì các đối tượng Lexical Environment tương ứng cũng sẽ được giữ lại trong bộ nhớ. Có tất cả có 3 cái trong mã dưới đây:
 
     ```js
     function f() {
@@ -628,7 +628,7 @@ g();
 
 Tính năng này của V8 là tốt để biết. Nếu bạn đang gỡ lỗi với Chrome/Opera, sớm muộn bạn cũng sẽ gặp nó.
 
-Đó không phải là một lỗi trong trình gỡ lỗi, mà là một tính năng đặc biệt của V8. Có lẽ nó sẽ được thay đổi một lúc nào đó.
+Đó không phải là một lỗi trong trình gỡ lỗi, mà là một tính năng đặc biệt của V8. Có lẽ nó sẽ được thay đổi đôi khi.
 Bạn luôn có thể kiểm tra nó bằng cách chạy các ví dụ trên trang này.
 
 > ---
