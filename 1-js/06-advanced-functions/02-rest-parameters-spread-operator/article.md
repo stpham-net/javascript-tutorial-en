@@ -1,20 +1,20 @@
-# Rest parameters and spread operator
+# Các tham số rest và toán tử spread
 
-Many JavaScript built-in functions support an arbitrary number of arguments.
+Nhiều built-in functions của JavaScript hỗ trợ số lượng đối số tùy ý.
 
-For instance:
+Ví dụ:
 
-- `Math.max(arg1, arg2, ..., argN)` -- returns the greatest of the arguments.
-- `Object.assign(dest, src1, ..., srcN)` -- copies properties from `src1..N` into `dest`.
+- `Math.max(arg1, arg2, ..., argN)` -- trả về giá trị lớn nhất trong các đối số.
+- `Object.assign(dest, src1, ..., srcN)` -- sao chép các thuộc tính từ `src1..N` chuyển vào `dest`.
 - ...and so on.
 
-In this chapter we'll learn how to do the same. And, more importantly, how to feel comfortable working with such functions and arrays.
+Trong chương này chúng ta sẽ học cách làm tương tự. Và, quan trọng hơn, làm thế nào để cảm thấy thoải mái khi làm việc với các functions và arrays như vậy.
 
 ## Rest parameters `...`
 
-A function can be called with any number of arguments, no matter how it is defined.
+Một hàm có thể được gọi với bất kỳ số lượng đối số nào, bất kể nó được định nghĩa như thế nào.
 
-Like here:
+Giống như ở đây:
 
 ```js
 function sum(a, b) {
@@ -24,11 +24,11 @@ function sum(a, b) {
 alert( sum(1, 2, 3, 4, 5) );
 ```
 
-There will be no error because of "excessive" arguments. But of course in the result only the first two will be counted.
+Sẽ không có lỗi vì các đối số "thừa". Nhưng tất nhiên trong kết quả chỉ có cái đầu tiên sẽ được tính.
 
-The rest parameters can be mentioned in a function definition with three dots `...`. They literally mean "gather the remaining parameters into an array".
+Các tham số còn lại có thể được đề cập trong định nghĩa hàm với ba dấu chấm `...`. Chúng có nghĩa đen là "tập hợp các tham số còn lại thành một mảng".
 
-For instance, to gather all arguments into array `args`:
+Chẳng hạn, để tập hợp tất cả các đối số thành mảng `args`:
 
 ```js
 function sumAll(...args) { // args is the name for the array
@@ -44,9 +44,9 @@ alert( sumAll(1, 2) ); // 3
 alert( sumAll(1, 2, 3) ); // 6
 ```
 
-We can choose to get the first parameters as variables, and gather only the rest.
+Chúng ta có thể chọn lấy các tham số đầu tiên dưới dạng các biến và chỉ thu thập phần còn lại.
 
-Here the first two arguments go into variables and the rest go into `titles` array:
+Ở đây, hai đối số đầu tiên đi vào các biến và phần còn lại đi vào mảng `titles`:
 
 ```js
 function showName(firstName, lastName, ...titles) {
@@ -66,9 +66,9 @@ showName("Julius", "Caesar", "Consul", "Imperator");
 
 > ---
 
-**📌 The rest parameters must be at the end**
+**📌 Các tham số rest phải ở cuối**
 
-The rest parameters gather all remaining arguments, so the following does not make sense and causes an error:
+Các tham số còn lại (rest parameters) thu thập tất cả các đối số còn lại, do đó, vd sau đây không có ý nghĩa và gây ra lỗi:
 
 ```js
 function f(arg1, ...rest, arg2) { // arg2 after ...rest ?!
@@ -76,17 +76,17 @@ function f(arg1, ...rest, arg2) { // arg2 after ...rest ?!
 }
 ```
 
-The `...rest` must always be last.
+The `...rest` phải luôn luôn là cuối cùng.
 
 > ---
 
 <br>
 
-## The "arguments" variable
+## Biến "đối số" (The "arguments" variable)
 
-There is also a special array-like object named `arguments` that contains all arguments by their index.
+Ngoài ra còn có một array-like object đặc biệt có tên là `arguments` chứa tất cả các đối số theo chỉ mục của chúng.
 
-For instance:
+Ví dụ:
 
 ```js
 function showName() {
@@ -105,25 +105,25 @@ showName("Julius", "Caesar");
 showName("Ilya");
 ```
 
-In old times, rest parameters did not exist in the language, and using `arguments` was the only way to get all arguments of the function, no matter their total number.
+Vào thời xưa, rest parameters không tồn tại trong ngôn ngữ và sử dụng `arguments` là cách duy nhất để có được tất cả các đối số của hàm, bất kể tổng số của chúng.
 
-And it still works, we can use it today.
+Và nó vẫn hoạt động, chúng ta có thể sử dụng nó ngày hôm nay.
 
-But the downside is that although `arguments` is both array-like and iterable, it's not an array. It does not support array methods, so we can't call `arguments.map(...)` for example.
+Nhưng nhược điểm là mặc dù `arguments` vừa array-like vừa có thể iterable, nhưng nó không phải là một mảng. Nó không hỗ trợ các phương thức mảng, vì vậy chúng ta không thể gọi `arguments.map(...)` chẳng hạn.
 
-Also, it always contains all arguments. We can't capture them partially, like we did with rest parameters.
+Ngoài ra, nó luôn chứa tất cả các đối số. Chúng ta không thể lấy chúng một phần, giống như chúng ta đã làm với các rest parameters.
 
-So when we need these features, then rest parameters are preferred.
+Vì vậy, khi chúng ta cần các tính năng này, thì các rest parameters được ưa thích.
 
 <br>
 
 > ---
 
-**📌 Arrow functions do not have `"arguments"`**
+**📌 Các arrow functions không có `"arguments"`**
 
-If we access the `arguments` object from an arrow function, it takes them from the outer "normal" function.
+Nếu chúng ta truy cập đối tượng `arguments` từ một arrow function, nó sẽ lấy chúng từ "normal" function bên ngoài.
 
-Here's an example:
+Đây là một ví dụ:
 
 ```js
 function f() {
@@ -138,23 +138,23 @@ f(1); // 1
 
 <br>
 
-As we remember, arrow functions don't have their own `this`. Now we know they don't have the special `arguments` object either.
+Như chúng ta nhớ, các arrow functions không có `this` riêng. Bây giờ chúng ta biết chúng cũng không có đối tượng đặc biệt `arguments`.
 
-## Spread operator
+## Toán tử trải rộng (Spread operator)
 
-We've just seen how to get an array from the list of parameters.
+Chúng ta vừa thấy làm thế nào để có được một mảng từ danh sách các tham số.
 
-But sometimes we need to do exactly the reverse.
+Nhưng đôi khi chúng ta cần làm chính xác điều ngược lại.
 
-For instance, there's a built-in function [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) that returns the greatest number from a list:
+Chẳng hạn, có một hàm tích hợp [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) trả về số lớn nhất từ một danh sách:
 
 ```js
 alert( Math.max(3, 5, 1) ); // 5
 ```
 
-Now let's say we have an array `[3, 5, 1]`. How do we call `Math.max` with it?
+Bây giờ hãy nói rằng chúng ta có một mảng `[3, 5, 1]`. Làm thế nào để chúng ta gọi `Math.max` với nó?
 
-Passing it "as is" won't work, because `Math.max` expects a list of numeric arguments, not a single array:
+Truyền nó "như là" sẽ không hoạt động, bởi vì `Math.max` mong đợi một danh sách các đối số số, không phải là một mảng duy nhất:
 
 ```js
 let arr = [3, 5, 1];
@@ -162,13 +162,13 @@ let arr = [3, 5, 1];
 alert( Math.max(arr) ); // NaN
 ```
 
-And surely we can't manually list items in the code `Math.max(arr[0], arr[1], arr[2])`, because we may be unsure how many there are. As our script executes, there could be a lot, or there could be none. And that would get ugly.
+Và chắc chắn chúng ta không thể liệt kê các mục theo cách thủ công trong mã `Math.max(arr[0], arr[1], arr[2])`, bởi vì chúng ta có thể không chắc chắn có bao nhiêu. Khi kịch bản của chúng ta thực thi, có thể có rất nhiều, hoặc có thể không có. Và điều đó sẽ trở nên xấu xí.
 
-*Spread operator* to the rescue! It looks similar to rest parameters, also using `...`, but does quite the opposite.
+*Spread operator* để giải cứu! Nó trông tương tự như các rest parameters, cũng sử dụng `...`, nhưng hoàn toàn ngược lại.
 
-When `...arr` is used in the function call, it "expands" an iterable object `arr` into the list of arguments.
+Khi `...arr` được sử dụng trong lệnh gọi hàm, nó "mở rộng" một iterable object `arr` vào danh sách các đối số.
 
-For `Math.max`:
+Đối với `Math.max`:
 
 ```js
 let arr = [3, 5, 1];
@@ -176,7 +176,7 @@ let arr = [3, 5, 1];
 alert( Math.max(...arr) ); // 5 (spread turns array into a list of arguments)
 ```
 
-We also can pass multiple iterables this way:
+Chúng ta cũng có thể vượt qua nhiều iterables theo cách này:
 
 ```js
 let arr1 = [1, -2, 3, 4];
@@ -185,7 +185,7 @@ let arr2 = [8, 3, -8, 1];
 alert( Math.max(...arr1, ...arr2) ); // 8
 ```
 
-We can even combine the spread operator with normal values:
+Chúng ta thậm chí có thể kết hợp spread operator với các giá trị bình thường:
 
 
 ```js
@@ -195,7 +195,7 @@ let arr2 = [8, 3, -8, 1];
 alert( Math.max(1, ...arr1, 2, ...arr2, 25) ); // 25
 ```
 
-Also, the spread operator can be used to merge arrays:
+Ngoài ra, the spread operator có thể được sử dụng để hợp nhất các mảng:
 
 ```js
 let arr = [3, 5, 1];
@@ -206,9 +206,9 @@ let merged = [0, ...arr, 2, ...arr2];
 alert(merged); // 0,3,5,1,2,8,9,15 (0, then arr, then 2, then arr2)
 ```
 
-In the examples above we used an array to demonstrate the spread operator, but any iterable will do.
+Trong các ví dụ ở trên, chúng ta đã sử dụng một mảng để chứng minh the spread operator, nhưng bất kỳ iterable nào cũng sẽ làm được.
 
-For instance, here we use the spread operator to turn the string into array of characters:
+Chẳng hạn, ở đây chúng ta sử dụng spread operator để biến chuỗi thành mảng các ký tự:
 
 ```js
 let str = "Hello";
@@ -216,11 +216,11 @@ let str = "Hello";
 alert( [...str] ); // H,e,l,l,o
 ```
 
-The spread operator internally uses iterators to gather elements, the same way as `for..of` does.
+The spread operator trong nội bộ sử dụng các trình vòng lặp (iterators) để thu thập các phần tử, giống như cách `for..of` thực hiện.
 
-So, for a string, `for..of` returns characters and `...str` becomes `"H","e","l","l","o"`. The list of characters is passed to array initializer `[...str]`.
+Vì vậy, đối với một chuỗi, `for..of` trả về các ký tự và `...str` trở thành `"H","e","l","l","o"`. Danh sách các ký tự được truyền cho bộ khởi tạo mảng (array initializer) `[...str]`.
 
-For this particular task we could also use `Array.from`, because it converts an iterable (like a string) into an array:
+Đối với tác vụ cụ thể này, chúng ta cũng có thể sử dụng `Array.from`, vì nó chuyển đổi một iterable (như một chuỗi) thành một mảng:
 
 ```js
 let str = "Hello";
@@ -229,30 +229,31 @@ let str = "Hello";
 alert( Array.from(str) ); // H,e,l,l,o
 ```
 
-The result is the same as `[...str]`.
+Kết quả giống như `[...str]`.
 
-But there's a subtle difference between `Array.from(obj)` and `[...obj]`:
+Nhưng có một sự khác biệt tinh tế giữa `Array.from(obj)` và `[...obj]`:
 
-- `Array.from` operates on both array-likes and iterables.
-- The spread operator operates only on iterables.
+- `Array.from` hoạt động trên cả hai array-likes và iterables.
+- The spread operator chỉ hoạt động trên các iterables.
 
-So, for the task of turning something into an array, `Array.from` tends to be more universal.
+Vì vậy, đối với nhiệm vụ biến một cái gì đó thành một mảng, `Array.from` có xu hướng phổ quát hơn.
 
 
-## Summary
+## Tóm lược
 
-When we see `"..."` in the code, it is either rest parameters or the spread operator.
+Khi chúng ta thấy `"..."` trong mã, đó là rest parameters hoặc spread operator.
 
-There's an easy way to distinguish between them:
+Có một cách dễ dàng để phân biệt giữa chúng:
 
-- When `...` is at the end of function parameters, it's "rest parameters" and gathers the rest of the list of arguments into an array.
-- When `...` occurs in a function call or alike, it's called a "spread operator" and expands an array into a list.
+- Khi `...` ở cuối các tham số hàm, đó là "rest parameters" và tập hợp phần còn lại của danh sách các đối số thành một mảng.
+- Khi `...` xảy ra trong một cuộc gọi hàm hoặc tương tự, nó được gọi là "spread operator" và mở rộng một mảng thành một danh sách.
 
-Use patterns:
+Sử dụng các mẫu:
 
-- Rest parameters are used to create functions that accept any number of arguments.
-- The spread operator is used to pass an array to functions that normally require a list of many arguments.
+- Các rest parameters được sử dụng để tạo các hàm chấp nhận bất kỳ số lượng đối số.
+- The spread operator được sử dụng để truyền một mảng cho các hàm thường yêu cầu một danh sách gồm nhiều đối số.
 
-Together they help to travel between a list and an array of parameters with ease.
+Chúng cùng nhau giúp đi lại giữa một danh sách (a list) và một loạt các tham số (an array of parameters) một cách dễ dàng.
 
-All arguments of a function call are also available in "old-style" `arguments`: array-like iterable object.
+Tất cả các đối số của một lệnh gọi hàm cũng có sẵn trong "old-style" `arguments`: array-like iterable object.
+No search results.
