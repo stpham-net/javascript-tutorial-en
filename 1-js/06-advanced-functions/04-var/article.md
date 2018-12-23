@@ -1,7 +1,7 @@
 
 # The old "var"
 
-In the very first chapter about [variables](info:variables), we mentioned three ways of variable declaration:
+In the very first chapter about **variables**, we mentioned three ways of variable declaration:
 
 1. `let`
 2. `const`
@@ -15,7 +15,7 @@ If you don't plan meeting such scripts you may even skip this chapter or postpon
 
 From the first sight, `var` behaves similar to `let`. That is, declares a variable:
 
-```js run
+```js
 function sayHi() {
   var phrase = "Hello"; // local variable, "var" instead of "let"
 
@@ -40,9 +40,7 @@ if (true) {
   var test = true; // use "var" instead of "let"
 }
 
-*!*
 alert(test); // true, the variable lives after if
-*/!*
 ```
 
 If we used `let test` on the 2nd line, then it wouldn't be visible to `alert`. But `var` ignores code blocks, so we've got a global `test`.
@@ -54,9 +52,7 @@ for (var i = 0; i < 10; i++) {
   // ...
 }
 
-*!*
 alert(i); // 10, "i" is visible after loop, it's a global variable
-*/!*
 ```
 
 If a code block is inside a function, then `var` becomes a function-level variable:
@@ -90,9 +86,7 @@ function sayHi() {
 
   alert(phrase);
 
-*!*
   var phrase;
-*/!*
 }
 ```
 
@@ -100,9 +94,7 @@ function sayHi() {
 
 ```js
 function sayHi() {
-*!*
   var phrase;
-*/!*
 
   phrase = "Hello";
 
@@ -116,11 +108,9 @@ function sayHi() {
 function sayHi() {
   phrase = "Hello"; // (*)
 
-  *!*
   if (false) {
     var phrase;
   }
-  */!*
 
   alert(phrase);
 }
@@ -134,13 +124,11 @@ So in the example above, `if (false)` branch never executes, but that doesn't ma
 
 That's better to demonstrate with an example, like this:
 
-```js run
+```js
 function sayHi() {
   alert(phrase);  
 
-*!*
   var phrase = "Hello";
-*/!*
 }
 
 sayHi();
@@ -153,17 +141,13 @@ The line `var phrase = "Hello"` has two actions in it:
 
 The declaration is processed at the start of function execution ("hoisted"), but the assignment always works at the place where it appears. So the code works essentially like this:
 
-```js run
+```js
 function sayHi() {
-*!*
   var phrase; // declaration works at the start...
-*/!*
 
   alert(phrase); // undefined
 
-*!*
   phrase = "Hello"; // ...assignment - when the execution reaches it.
-*/!*
 }
 
 sayHi();
