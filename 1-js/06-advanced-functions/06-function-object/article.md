@@ -223,7 +223,7 @@ let sayHi = function(who) {
 And add a name to it:
 
 ```js
-let sayHi = function *!*func*/!*(who) {
+let sayHi = function func(who) {
   alert(`Hello, ${who}`);
 };
 ```
@@ -237,7 +237,7 @@ Adding such a name also did not break anything.
 The function is still available as `sayHi()`:
 
 ```js
-let sayHi = function *!*func*/!*(who) {
+let sayHi = function func(who) {
   alert(`Hello, ${who}`);
 };
 
@@ -252,7 +252,7 @@ There are two special things about the name `func`:
 For instance, the function `sayHi` below calls itself again with `"Guest"` if no `who` is provided:
 
 ```js
-let sayHi = function *!*func*/!*(who) {
+let sayHi = function func(who) {
   if (who) {
     alert(`Hello, ${who}`);
   } else {
