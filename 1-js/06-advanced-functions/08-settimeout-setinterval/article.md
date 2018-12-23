@@ -107,7 +107,7 @@ clearTimeout(timerId);
 alert(timerId); // same identifier (doesn't become null after canceling)
 ```
 
-Như chúng ta có thể thấy từ đầu ra `alert`, trong trình duyệt, định danh bộ đếm thời gian (timer identifier) là một số. Trong các môi trường khác, đây có thể là một cái gì đó khác. Chẳng hạn, [Node.JS trả về một đối tượng hẹn giờ (timer object) với các phương thức bổ sung.
+Như chúng ta có thể thấy từ đầu ra `alert`, trong trình duyệt, định danh bộ đếm thời gian (timer identifier) là một số. Trong các môi trường khác, đây có thể là một cái gì đó khác. Chẳng hạn, Node.JS trả về một đối tượng hẹn giờ (timer object) với các phương thức bổ sung.
 
 Một lần nữa, không có đặc điểm kỹ thuật chung cho các phương thức này, vì vậy điều đó tốt.
 
@@ -170,7 +170,7 @@ let timerId = setTimeout(function tick() {
 
 `SetTimeout` đệ quy là một phương thức linh hoạt hơn `setInterval`. Bằng cách này, cuộc gọi tiếp theo có thể được lên lịch khác nhau, tùy thuộc vào kết quả của cuộc gọi hiện tại.
 
-Chẳng hạn, chúng ta cần viết một dịch vụ gửi yêu cầu đến máy chủ cứ sau 5 giây yêu cầu dữ liệu, nhưng trong trường hợp máy chủ bị quá tải, cần tăng khoảng thời gian lên 10, 20, 40 giây ...
+Chẳng hạn, chúng ta cần viết một dịch vụ gửi yêu cầu đến máy chủ cứ sau 5 giây yêu cầu dữ liệu, nhưng trong trường hợp máy chủ bị quá tải, cần tăng khoảng thời gian lên 10, 20, 40 giây...
 
 Đây là mã giả:
 
