@@ -2,18 +2,18 @@
 
 # Global object
 
-When JavaScript was created, there was an idea of a "global object" that provides all global variables and functions. It was planned that multiple in-browser scripts would use that single global object and share variables through it.
+Khi JavaScript được tạo ra, có một ý tưởng về một "global object" cung cấp tất cả các global variables và functions. Nó đã được lên kế hoạch rằng nhiều in-browser scripts sẽ sử dụng single global object đó và chia sẻ các biến thông qua nó.
 
-Since then, JavaScript greatly evolved, and that idea of linking code through global variables became much less appealing. In modern JavaScript, the concept of modules took its place.
+Kể từ đó, JavaScript đã phát triển rất nhiều và ý tưởng liên kết mã thông qua các global variables trở nên ít hấp dẫn hơn nhiều. Trong JavaScript hiện đại, khái niệm mô-đun đã diễn ra.
 
-But the global object still remains in the specification.
+Nhưng global object vẫn còn trong đặc điểm kỹ thuật (specification).
 
-In a browser it is named "window", for Node.JS it is "global", for other environments it may have another name.
+Trong một trình duyệt, nó được đặt tên là "window", cho Node.JS nó là "global", đối với các môi trường khác, nó có thể có một tên khác.
 
-It does two things:
+Nó làm hai việc:
 
-1. Provides access to built-in functions and values, defined by the specification and the environment.
-    For instance, we can call `alert` directly or as a method of `window`:
+1. Cung cấp quyền truy cập vào các built-in functions và values, được xác định bởi đặc tả (specification) và environment.
+    Chẳng hạn, chúng ta có thể gọi `alert` trực tiếp hoặc như một phương thức của `window`:
 
     ```js
     alert("Hello");
@@ -22,9 +22,9 @@ It does two things:
     window.alert("Hello");
     ```
 
-    The same applies to other built-ins. E.g. we can use `window.Array` instead of `Array`.
+    Điều tương tự áp dụng cho các built-ins khác. Ví dụ, chúng ta có thể sử dụng `window.Array` thay vì `Array`.
 
-2. Provides access to global Function Declarations and `var` variables. We can read and write them using its properties, for instance:
+2. Cung cấp quyền truy cập vào global Function Declarations và `var` variables. Chúng ta có thể đọc và viết chúng bằng các thuộc tính của chúng, ví dụ:
 
     ```js
     var phrase = "Hello";
@@ -43,7 +43,7 @@ It does two things:
     alert(test); // 5
     ```
 
-...But the global object does not have variables declared with `let/const`!
+...Nhưng global object không có các biến được khai báo bằng `let/const`!
 
 ```js
 letuser = "John";
@@ -57,29 +57,29 @@ alert("user" in window); // false
 
 > ---
 
-**📌 The global object is not a global Environment Record**
+**📌 The global object không phải là global Environment Record**
 
-In versions of ECMAScript prior to ES-2015, there were no `let/const` variables, only `var`. And global object was used as a global Environment Record (wordings were a bit different, but that's the gist).
+Trong các phiên bản của ECMAScript trước ES-2015, không có biến `let/const`, chỉ có `var`. Và global object đã được sử dụng như một global Environment Record (các từ có một chút khác biệt, nhưng đó là ý chính).
 
-But starting from ES-2015, these entities are split apart. There's a global Lexical Environment with its Environment Record. And there's a global object that provides *some* of the global variables.
+Nhưng bắt đầu từ ES-2015, các thực thể này bị tách ra. Có một global Lexical Environment với Environment Record của nó. Và có một global object cung cấp *một số* các global variables.
 
-As a practical difference, global `let/const` variables are definitively properties of the global Environment Record, but they do not exist in the global object.
+Như một sự khác biệt thực tế, các biến `let/const` global là các thuộc tính rõ ràng của global Environment Record, nhưng chúng không tồn tại trong global object.
 
-Naturally, that's because the idea of a global object as a way to access "all global things" comes from ancient times. Nowadays is not considered to be a good thing. Modern language features like `let/const` do not make friends with it, but old ones are still compatible.
+Đương nhiên, đó là vì ý tưởng về một global object như một cách để truy cập "tất cả mọi thứ toàn cầu" xuất phát từ thời cổ đại. Ngày nay không được coi là một điều tốt. Các tính năng ngôn ngữ hiện đại như `let/const` không kết bạn với nó, nhưng các tính năng cũ vẫn tương thích.
 
 > ---
 
 <br>
 
-## Uses of "window"
+## Công dụng của "window"
 
-In server-side environments like Node.JS, the `global` object is used exceptionally rarely. Probably it would be fair to say "never".
+Trong môi trường server-side như Node.JS, đối tượng `global` hiếm khi được sử dụng. Có lẽ sẽ công bằng khi nói "không bao giờ".
 
-In-browser `window` is sometimes used though.
+Mặc dù, trong trình duyệt `window` đôi khi được sử dụng.
 
-Usually, it's not a good idea to use it, but here are some examples you can meet.
+Thông thường, nó không phải là một ý tưởng tốt để sử dụng nó, nhưng đây là một số ví dụ bạn có thể gặp.
 
-1. To access exactly the global variable if the function has the local one with the same name.
+1. Để truy cập chính xác global variable nếu hàm có local variable có cùng tên.
 
     ```js
     var user = "Global";
@@ -93,15 +93,15 @@ Usually, it's not a good idea to use it, but here are some examples you can meet
     sayHi();
     ```
 
-    Such use is a workaround. Would be better to name variables differently, that won't require use to write the code it this way. And please note `"var"` before `user`. The trick doesn't work with `let` variables.
+    Sử dụng như vậy là một cách giải quyết. Sẽ tốt hơn nếu đặt tên biến khác nhau, điều đó sẽ không yêu cầu viết mã theo cách này. Và xin lưu ý `"var"` trước `user`. Thủ thuật không hoạt động với các biến `let`.
 
-2. To check if a certain global variable or a builtin exists.
+2. Để kiểm tra xem một biến global nhất định hoặc một builtin có tồn tại không.
 
-    For instance, we want to check whether a global function `XMLHttpRequest` exists.
+    Chẳng hạn, chúng ta muốn kiểm tra xem một global function `XMLHttpRequest` có tồn tại không.
 
-    We can't write `if (XMLHttpRequest)`, because if there's no `XMLHttpRequest`, there will be an error (variable not defined).
+    Chúng ta không thể viết `if (XMLHttpRequest)`, bởi vì nếu không có `XMLHttpRequest`, sẽ có một lỗi (biến không được xác định).
 
-    But we can read it from `window.XMLHttpRequest`:
+    Nhưng chúng ta có thể đọc nó từ `window.XMLHttpRequest`:
 
     ```js
     if (window.XMLHttpRequest) {
@@ -109,9 +109,9 @@ Usually, it's not a good idea to use it, but here are some examples you can meet
     }
     ```
 
-    If there is no such global function then `window.XMLHttpRequest` is just a non-existing object property. That's `undefined`, no error, so it works.
+    Nếu không có global function như vậy thì `window.XMLHttpRequest` chỉ là một non-existing object property. Đó là `undefined`, không có lỗi, vì vậy nó hoạt động.
 
-    We can also write the test without `window`:
+    Chúng ta cũng có thể viết bài kiểm tra mà không có `window`:
 
     ```js
     if (typeof XMLHttpRequest == 'function') {
@@ -119,13 +119,13 @@ Usually, it's not a good idea to use it, but here are some examples you can meet
     }
     ```
 
-    This doesn't use `window`, but is (theoretically) less reliable, because `typeof` may use a local XMLHttpRequest, and we want the global one.
+    Điều này không sử dụng `window`, nhưng (về mặt lý thuyết) ít đáng tin cậy hơn, bởi vì `typeof` có thể sử dụng XMLHttpRequest cục bộ và chúng ta muốn cái toàn cầu.
 
-3. To take the variable from the right window. That's probably the most valid use case.
+3. Để lấy biến từ cửa sổ bên phải. Đó có lẽ là trường hợp sử dụng hợp lệ nhất.
 
-    A browser may open multiple windows and tabs. A window may also embed another one in `<iframe>`. Every browser window has its own `window` object and global variables. JavaScript allows windows that come from the same site (same protocol, host, port) to access variables from each other.
+    Một trình duyệt có thể mở nhiều cửa sổ và tab. Một cửa sổ cũng có thể nhúng một cửa sổ khác vào `<iframe>`. Mỗi cửa sổ trình duyệt có `window` object và các global variables riêng. JavaScript cho phép các cửa sổ đến từ cùng một trang web (cùng giao thức, máy chủ, cổng) để truy cập các biến từ nhau.
 
-    That use is a little bit beyond our scope for now, but it looks like:
+    Việc sử dụng đó hơi vượt quá phạm vi của chúng ta bây giờ, nhưng nó sẽ giống như này:
     
     ```html
     <iframe src="/" id="iframe"></iframe>
@@ -144,22 +144,22 @@ Usually, it's not a good idea to use it, but here are some examples you can meet
     </script>
     ```
 
-    Here, first two alerts use the current window, and the latter two take variables from `iframe` window. Can be any variables if `iframe` originates from the same protocol/host/port.
+    Ở đây, hai alerts đầu tiên sử dụng cửa sổ hiện tại và hai alerts sau lấy các biến từ cửa sổ `iframe`. Có thể là bất kỳ biến nào nếu `iframe` xuất phát từ cùng một protocol/host/port.
 
-## "this" and global object
+## "this" và global object
 
-Sometimes, the value of `this` is exactly the global object. That's rarely used, but some scripts rely on that.
+Đôi khi, giá trị của `this` chính xác là global object. Điều đó hiếm khi được sử dụng, nhưng một số kịch bản dựa trên điều đó.
 
-1. In the browser, the value of `this` in the global area is `window`:
+1. Trong trình duyệt, giá trị của `this` trong khu vực toàn cầu là `window`:
 
     ```js
     // outside of functions
     alert( this === window ); // true
     ```
 
-    Other, non-browser environments, may use another value for `this` in such cases.
+    Các môi trường khác, không phải trình duyệt, có thể sử dụng giá trị khác cho `this` trong những trường hợp như vậy.
 
-2. When a function with `this` is called in non-strict mode, it gets the global object as `this`:
+2. Khi một hàm với `this` được gọi trong non-strict mode, nó sẽ nhận được global object là `this`:
 
     ```js
     // not in strict mode (!)
@@ -170,4 +170,4 @@ Sometimes, the value of `this` is exactly the global object. That's rarely used,
     f(); // called without an object
     ```
 
-    By specification, `this` in this case must be the global object, even in non-browser environments like Node.JS. That's for compatibility with old scripts, in strict mode `this` would be `undefined`.
+    Theo đặc tả, `this` trong trường hợp này phải là global object, ngay cả trong các môi trường không có trình duyệt như Node.JS. Đó là khả năng tương thích với các tập lệnh cũ, trong chế độ nghiêm ngặt `this` sẽ là `undefined`.
