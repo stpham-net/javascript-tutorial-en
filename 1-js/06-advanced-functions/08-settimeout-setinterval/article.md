@@ -1,18 +1,18 @@
 # Scheduling: setTimeout and setInterval
 
-We may decide to execute a function not right now, but at a certain time later. That's called "scheduling a call".
+Chúng ta có thể quyết định thực hiện một function không ngay bây giờ, nhưng tại một thời điểm nhất định sau đó. Đó gọi là "lên lịch một cuộc gọi".
 
-There are two methods for it:
+Có hai phương thức cho nó:
 
-- `setTimeout` allows to run a function once after the interval of time.
-- `setInterval` allows to run a function regularly with the interval between the runs.
+- `setTimeout` cho phép chạy một hàm sau khoảng thời gian.
+- `setInterval` cho phép chạy một hàm thường xuyên với khoảng thời gian giữa các lần chạy.
 
-These methods are not a part of JavaScript specification. But most environments have the internal scheduler and provide these methods. In particular, they are supported in all browsers and Node.JS.
+Các phương thức này không phải là một phần của đặc tả JavaScript. Nhưng hầu hết các môi trường đều có bộ lập lịch nội bộ và cung cấp các phương thức này. Đặc biệt, chúng được hỗ trợ trong tất cả các trình duyệt và Node.js
 
 
 ## setTimeout
 
-The syntax:
+Cú pháp:
 
 ```js
 let timerId = setTimeout(func|code, delay[, arg1, arg2...])
@@ -22,18 +22,18 @@ Parameters:
 
 **`func|code`**
 
-Function or a string of code to execute.
-Usually, that's a function. For historical reasons, a string of code can be passed, but that's not recommended.
+Hàm hoặc một chuỗi mã để thực thi.
+Thông thường, đó là một function. Vì lý do lịch sử, một chuỗi mã có thể được thông qua, nhưng điều đó không được khuyến khích.
 
 **`delay`**
 
-The delay before run, in milliseconds (1000 ms = 1 second).
+Độ trễ trước khi chạy, tính bằng mili giây (1000 ms = 1 giây).
 
 **`arg1`, `arg2`...**
 
-Arguments for the function (not supported in IE9-)
+Đối số cho function (không được hỗ trợ trong IE9-)
 
-For instance, this code calls `sayHi()` after one second:
+Chẳng hạn, mã này gọi `sayHi()` sau một giây:
 
 ```js
 function sayHi() {
@@ -43,7 +43,7 @@ function sayHi() {
 setTimeout(sayHi, 1000);
 ```
 
-With arguments:
+Với các đối số:
 
 ```js
 function sayHi(phrase, who) {
@@ -53,15 +53,15 @@ function sayHi(phrase, who) {
 setTimeout(sayHi, 1000, "Hello", "John"); // Hello, John
 ```
 
-If the first argument is a string, then JavaScript creates a function from it.
+Nếu đối số đầu tiên là một chuỗi, thì JavaScript tạo một hàm từ nó.
 
-So, this will also work:
+Vì vậy, điều này cũng sẽ làm việc:
 
 ```js
 setTimeout("alert('Hello')", 1000);
 ```
 
-But using strings is not recommended, use functions instead of them, like this:
+Nhưng không nên sử dụng các chuỗi, sử dụng các hàm thay vì chúng, như thế này:
 
 ```js
 setTimeout(() => alert('Hello'), 1000);
@@ -71,33 +71,33 @@ setTimeout(() => alert('Hello'), 1000);
 
 > ---
 
-**📌 Pass a function, but don't run it**
+**📌 Truyền một hàm, nhưng không chạy nó**
 
-Novice developers sometimes make a mistake by adding brackets `()` after the function:
+Các nhà phát triển tập sự đôi khi mắc lỗi bằng cách thêm dấu ngoặc `()` sau hàm:
 
 ```js
 // wrong!
 setTimeout(sayHi(), 1000);
 ```
 
-That doesn't work, because `setTimeout` expects a reference to function. And here `sayHi()` runs the function, and the *result of its execution* is passed to `setTimeout`. In our case the result of `sayHi()` is `undefined` (the function returns nothing), so nothing is scheduled.
+Điều đó không làm việc, vì `setTimeout` mong đợi một tham chiếu đến function. Và ở đây `sayHi()` chạy hàm và kết quả *của việc thực thi* được truyền cho `setTimeout`. Trong trường hợp của chúng ta, kết quả của `sayHi()` là `undefined` (hàm trả về không có gì), vì vậy không có gì được lên lịch.
 
 > ---
 
 <br>
 
-### Canceling with clearTimeout
+### Hủy bỏ với clearTimeout
 
-A call to `setTimeout` returns a "timer identifier" `timerId` that we can use to cancel the execution.
+Một cuộc gọi đến `setTimeout` trả về "định danh bộ định thời gian (timer identifier)" `timerId` mà chúng ta có thể sử dụng để hủy thực thi.
 
-The syntax to cancel:
+Cú pháp để hủy bỏ:
 
 ```js
 let timerId = setTimeout(...);
 clearTimeout(timerId);
 ```
 
-In the code below, we schedule the function and then cancel it (changed our mind). As a result, nothing happens:
+Trong mã dưới đây, chúng ta lên lịch cho function và sau đó hủy bỏ nó (chúng ta đã đổi ý). Kết quả là, không có gì xảy ra:
 
 ```js
 let timerId = setTimeout(() => alert("never happens"), 1000);
@@ -107,25 +107,25 @@ clearTimeout(timerId);
 alert(timerId); // same identifier (doesn't become null after canceling)
 ```
 
-As we can see from `alert` output, in a browser the timer identifier is a number. In other environments, this can be something else. For instance, Node.JS returns a timer object with additional methods.
+Như chúng ta có thể thấy từ đầu ra `alert`, trong trình duyệt, định danh bộ đếm thời gian (timer identifier) là một số. Trong các môi trường khác, đây có thể là một cái gì đó khác. Chẳng hạn, [Node.JS trả về một đối tượng hẹn giờ (timer object) với các phương thức bổ sung.
 
-Again, there is no universal specification for these methods, so that's fine.
+Một lần nữa, không có đặc điểm kỹ thuật chung cho các phương thức này, vì vậy điều đó tốt.
 
-For browsers, timers are described in the [timers section](https://www.w3.org/TR/html5/webappapis.html#timers) of HTML5 standard.
+Đối với trình duyệt, bộ tính giờ được mô tả trong [phần tính giờ](https://www.w3.org/TR/html5/webappapis.html#timers) của tiêu chuẩn HTML5.
 
 ## setInterval
 
-The `setInterval` method has the same syntax as `setTimeout`:
+Phương thức `setInterval` có cùng cú pháp với `setTimeout`:
 
 ```js
 let timerId = setInterval(func|code, delay[, arg1, arg2...])
 ```
 
-All arguments have the same meaning. But unlike `setTimeout` it runs the function not only once, but regularly after the given interval of time.
+Tất cả các đối số có cùng một ý nghĩa. Nhưng không giống như `setTimeout`, nó chạy hàm không chỉ một lần, mà thường xuyên sau khoảng thời gian nhất định.
 
-To stop further calls, we should call `clearInterval(timerId)`.
+Để dừng các cuộc gọi tiếp theo, chúng ta nên gọi `clearInterval(timerId)`.
 
-The following example will show the message every 2 seconds. After 5 seconds, the output is stopped:
+Ví dụ sau sẽ hiển thị thông báo cứ sau 2 giây. Sau 5 giây, đầu ra bị dừng:
 
 ```js
 // repeat with the interval of 2 seconds
@@ -139,21 +139,21 @@ setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
 
 > ---
 
-**📌 Modal windows freeze time in Chrome/Opera/Safari**
+**📌 Modal windows đóng băng thời gian trong Chrome/Opera/Safari**
 
-In browsers IE and Firefox the internal timer continues "ticking" while showing `alert/confirm/prompt`, but in Chrome, Opera and Safari the internal timer becomes "frozen".
+Trong trình duyệt IE và Firefox, bộ hẹn giờ bên trong tiếp tục "tích tắc" trong khi hiển thị `alert/confirm/prompt`, nhưng trong Chrome, Opera và Safari, bộ hẹn giờ bên trong sẽ bị "đóng băng".
 
-So if you run the code above and don't dismiss the `alert` window for some time, then in Firefox/IE next `alert` will be shown immediately as you do it (2 seconds passed from the previous invocation), and in Chrome/Opera/Safari -- after 2 more seconds (timer did not tick during the `alert`).
+Vì vậy, nếu bạn chạy mã ở trên và không bỏ qua cửa sổ `alert` trong một thời gian, thì trong Firefox/IE next `alert` sẽ được hiển thị ngay khi bạn thực hiện (2 giây được chuyển từ lệnh gọi trước) và trong Chrome/Opera/Safari -- sau 2 giây nữa (bộ đếm thời gian không tick trong khi `alert`).
 
 > ---
 
 <br>
 
-## Recursive setTimeout
+## SetTimeout đệ quy (Recursive setTimeout)
 
-There are two ways of running something regularly.
+Có hai cách để chạy một cái gì đó thường xuyên.
 
-One is `setInterval`. The other one is a recursive `setTimeout`, like this:
+Một là `setInterval`. Một cái khác là một `setTimeout` đệ quy, như thế này:
 
 ```js
 /** instead of:
@@ -166,13 +166,13 @@ let timerId = setTimeout(function tick() {
 }, 2000);
 ```
 
-The `setTimeout` above schedules the next call right at the end of the current one `(*)`.
+`SetTimeout` ở trên lên lịch cuộc gọi tiếp theo ngay khi kết thúc cuộc gọi hiện tại `(*)`.
 
-The recursive `setTimeout` is a more flexible method than `setInterval`. This way the next call may be scheduled differently, depending on the results of the current one.
+`SetTimeout` đệ quy là một phương thức linh hoạt hơn `setInterval`. Bằng cách này, cuộc gọi tiếp theo có thể được lên lịch khác nhau, tùy thuộc vào kết quả của cuộc gọi hiện tại.
 
-For instance, we need to write a service that sends a request to the server every 5 seconds asking for data, but in case the server is overloaded, it should increase the interval to 10, 20, 40 seconds...
+Chẳng hạn, chúng ta cần viết một dịch vụ gửi yêu cầu đến máy chủ cứ sau 5 giây yêu cầu dữ liệu, nhưng trong trường hợp máy chủ bị quá tải, cần tăng khoảng thời gian lên 10, 20, 40 giây ...
 
-Here's the pseudocode:
+Đây là mã giả:
 
 ```js
 let delay = 5000;
@@ -190,11 +190,11 @@ let timerId = setTimeout(function request() {
 }, delay);
 ```
 
-And if we regularly have CPU-hungry tasks, then we can measure the time taken by the execution and plan the next call sooner or later.
+Và nếu chúng ta thường xuyên có các tác vụ ngốn CPU, thì chúng ta có thể đo thời gian thực hiện và lên kế hoạch cho cuộc gọi tiếp theo sớm hay muộn.
 
-**Recursive `setTimeout` guarantees a delay between the executions, `setInterval` -- does not.**
+**Đệ quy `setTimeout` đảm bảo độ trễ giữa các lần thực thi, `setInterval` -- thì không.**
 
-Let's compare two code fragments. The first one uses `setInterval`:
+Hãy so sánh hai đoạn mã. Cái đầu tiên sử dụng `setInterval`:
 
 ```js
 let i = 1;
@@ -203,7 +203,7 @@ setInterval(function() {
 }, 100);
 ```
 
-The second one uses recursive `setTimeout`:
+Cái thứ hai sử dụng đệ quy `setTimeout`:
 
 ```js
 let i = 1;
@@ -213,29 +213,29 @@ setTimeout(function run() {
 }, 100);
 ```
 
-For `setInterval` the internal scheduler will run `func(i)` every 100ms:
+Đối với `setInterval`, bộ lập lịch nội bộ sẽ chạy `func(i)` cứ sau 100ms:
 
 ![](setinterval-interval.png)
 
-Did you notice?
+Bạn có để ý không?
 
-**The real delay between `func` calls for `setInterval` is less than in the code!**
+**Độ trễ thực sự giữa các lệnh gọi `func` cho `setInterval` nhỏ hơn trong mã!**
 
-That's normal, because the time taken by `func`'s execution "consumes" a part of the interval.
+Điều đó là bình thường, bởi vì thời gian thực hiện của `func`'s "tiêu tốn" một phần của khoảng thời gian (interval).
 
-It is possible that `func`'s execution turns out to be longer than we expected and takes more than 100ms.
+Có thể việc thực thi của func`'s hóa ra dài hơn chúng ta mong đợi và mất hơn 100ms.
 
-In this case the engine waits for `func` to complete, then checks the scheduler and if the time is up, runs it again *immediately*.
+Trong trường hợp này, engine chờ `func` hoàn thành, sau đó kiểm tra bộ lập lịch và nếu hết thời gian, chạy lại *ngay lập tức*.
 
-In the edge case, if the function always executes longer than `delay` ms, then the calls will happen without a pause at all.
+Trong trường hợp góc cạnh, nếu hàm luôn thực thi lâu hơn `delay` ms, thì các cuộc gọi sẽ diễn ra mà không cần tạm dừng.
 
-And here is the picture for the recursive `setTimeout`:
+Và đây là hình ảnh cho đệ quy `setTimeout`:
 
 ![](settimeout-interval.png)
 
-**The recursive `setTimeout` guarantees the fixed delay (here 100ms).**
+**`setTimeout` đệ quy đảm bảo độ trễ cố định (ở đây 100ms).**
 
-That's because a new call is planned at the end of the previous one.
+Đó là bởi vì một cuộc gọi mới được lên kế hoạch vào cuối cuộc gọi trước.
 
 <br>
 
@@ -243,16 +243,16 @@ That's because a new call is planned at the end of the previous one.
 
 **📌 Garbage collection**
 
-When a function is passed in `setInterval/setTimeout`, an internal reference is created to it and saved in the scheduler. It prevents the function from being garbage collected, even if there are no other references to it.
+Khi một hàm được truyền vào `setInterval/setTimeout`, một tham chiếu bên trong (internal reference) được tạo cho nó và được lưu trong bộ lập lịch. Nó ngăn function bị garbage collected, ngay cả khi không có tham chiếu nào khác.
 
 ```js
 // the function stays in memory until the scheduler calls it
 setTimeout(function() {...}, 100);
 ```
 
-For `setInterval` the function stays in memory until `clearInterval` is called.
+Đối với `setInterval`, hàm sẽ nằm trong bộ nhớ cho đến khi `clearInterval` được gọi.
 
-There's a side-effect. A function references the outer lexical environment, so, while it lives, outer variables live too. They may take much more memory than the function itself. So when we don't need the scheduled function anymore, it's better to cancel it, even if it's very small.
+Có tác dụng phụ. Một hàm tham chiếu outer lexical environment, vì vậy, trong khi nó sống, các outer variables cũng sống. Chúng có thể chiếm nhiều bộ nhớ hơn chính bản thân function. Vì vậy, khi chúng ta không cần function theo lịch trình nữa, tốt hơn hết là hủy bỏ nó, ngay cả khi nó rất nhỏ.
 
 > ---
 
@@ -260,13 +260,13 @@ There's a side-effect. A function references the outer lexical environment, so, 
 
 ## setTimeout(...,0)
 
-There's a special use case: `setTimeout(func, 0)`.
+Có một trường hợp sử dụng đặc biệt: `setTimeout(func, 0)`.
 
-This schedules the execution of `func` as soon as possible. But scheduler will invoke it only after the current code is complete.
+Điều này lên lịch thực hiện `func` càng sớm càng tốt. Nhưng trình lập lịch biểu sẽ gọi nó chỉ sau khi mã hiện tại hoàn tất.
 
-So the function is scheduled to run "right after" the current code. In other words, *asynchronously*.
+Vì vậy, chức năng được lên lịch để chạy "ngay sau" mã hiện tại. Nói cách khác, *không đồng bộ*.
 
-For instance, this outputs "Hello", then immediately "World":
+Chẳng hạn, kết quả này xuất ra "Hello", sau đó ngay lập tức "World":
 
 ```js
 setTimeout(() => alert("World"), 0);
@@ -274,19 +274,19 @@ setTimeout(() => alert("World"), 0);
 alert("Hello");
 ```
 
-The first line "puts the call into calendar after 0ms". But the scheduler will only "check the calendar" after the current code is complete, so `"Hello"` is first, and `"World"` -- after it.
+Dòng đầu tiên "đặt cuộc gọi vào lịch sau 0ms". Nhưng bộ lập lịch sẽ chỉ "kiểm tra lịch" sau khi mã hiện tại hoàn tất, vì vậy `"Hello"` là đầu tiên và `"World"` -- sau nó.
 
-### Splitting CPU-hungry tasks
+### Phân chia các tác vụ ngốn CPU
 
-There's a trick to split CPU-hungry tasks using `setTimeout`.
+Có một mẹo để phân chia các tác vụ ngốn CPU bằng cách sử dụng `setTimeout`.
 
-For instance, a syntax-highlighting script (used to colorize code examples on this page) is quite CPU-heavy. To highlight the code, it performs the analysis, creates many colored elements, adds them to the document -- for a big text that takes a lot. It may even cause the browser to "hang", which is unacceptable.
+Ví dụ, tập lệnh tô sáng cú pháp (được sử dụng để tô màu các ví dụ mã trên trang này) khá nặng về CPU. Để làm nổi bật mã, nó thực hiện phân tích, tạo ra nhiều yếu tố màu, thêm chúng vào tài liệu - cho một văn bản lớn cần nhiều. Nó thậm chí có thể khiến trình duyệt bị "treo", điều này không thể chấp nhận được.
 
-So we can split the long text into pieces. First 100 lines, then plan another 100 lines using `setTimeout(...,0)`, and so on.
+Vì vậy, chúng ta có thể chia văn bản dài thành từng mảnh. 100 dòng đầu tiên, sau đó lên kế hoạch cho 100 dòng khác bằng cách sử dụng `setTimeout (..., 0)`, v.v.
 
-For clarity, let's take a simpler example for consideration. We have a function to count from `1` to `1000000000`.
+Để rõ ràng, hãy lấy một ví dụ đơn giản hơn để xem xét. Chúng ta có một hàm để đếm từ `1` đến `1000000000`.
 
-If you run it, the CPU will hang. For server-side JS that's clearly noticeable, and if you are running it in-browser, then try to click other buttons on the page -- you'll see that whole JavaScript actually is paused, no other actions work until it finishes.
+Nếu bạn chạy nó, CPU sẽ bị treo. Đối với JS phía máy chủ rõ ràng đáng chú ý và nếu bạn đang chạy nó trên trình duyệt, thì hãy thử nhấp vào các nút khác trên trang -- bạn sẽ thấy toàn bộ JavaScript thực sự bị tạm dừng, không có hành động nào khác hoạt động cho đến khi kết thúc.
 
 ```js
 let i = 0;
@@ -306,9 +306,9 @@ function count() {
 count();
 ```
 
-The browser may even show "the script takes too long" warning (but hopefully it won't, because the number is not very big).
+Trình duyệt thậm chí có thể hiển thị cảnh báo "tập lệnh mất quá nhiều thời gian" (nhưng hy vọng nó sẽ không xảy ra, vì số lượng không quá lớn).
 
-Let's split the job using the nested `setTimeout`:
+Hãy phân chia công việc bằng cách sử dụng `setTimeout` lồng nhau:
 
 ```js
 let i = 0;
@@ -333,23 +333,23 @@ function count() {
 count();
 ```
 
-Now the browser UI is fully functional during the "counting" process.
+Bây giờ browser UI đã hoạt động đầy đủ trong quá trình "đếm".
 
-We do a part of the job `(*)`:
+Chúng ta thực hiện một phần công việc `(*)`:
 
-1. First run: `i=1...1000000`.
-2. Second run: `i=1000001..2000000`.
-3. ...and so on, the `while` checks if `i` is evenly divided by `1000000`.
+1. Lần chạy đầu tiên: `i=1...1000000`.
+2. Lần chạy thứ hai: `i=1000001..2000000`.
+3. ...và cứ thế, `while` kiểm tra xem `i` có chia đều cho `1000000` không.
 
-Then the next call is scheduled in `(**)` if we're not done yet.
+Sau đó, cuộc gọi tiếp theo được lên lịch trong `(**)` nếu chúng ta chưa hoàn thành.
 
-Pauses between `count` executions provide just enough "breath" for the JavaScript engine to do something else, to react to other user actions.
+Tạm dừng giữa các lần thực thi `Count` cung cấp vừa đủ "hơi thở" cho JavaScript engine để làm việc khác, để phản ứng với các hành động khác của người dùng.
 
-The notable thing is that both variants -- with and without splitting the job by `setTimeout` -- are comparable in speed. There's no much difference in the overall counting time.
+Điều đáng chú ý là cả hai biến thể -- có và không chia công việc theo `setTimeout` -- đều có thể so sánh về tốc độ. Không có nhiều sự khác biệt trong thời gian đếm tổng thể.
 
-To make them closer, let's make an improvement.
+Để làm cho chúng gần hơn, hãy cải thiện.
 
-We'll move the scheduling in the beginning of the `count()`:
+Chúng ta sẽ di chuyển lịch trình vào đầu `count()`:
 
 ```js
 let i = 0;
@@ -376,21 +376,21 @@ function count() {
 count();
 ```
 
-Now when we start to `count()` and know that we'll need to `count()` more, we schedule that immediately, before doing the job.
+Bây giờ khi chúng ta bắt đầu `count()` và biết rằng chúng ta sẽ cần `count()` nhiều hơn, chúng ta lên lịch ngay lập tức, trước khi thực hiện công việc.
 
-If you run it, it's easy to notice that it takes significantly less time.
+Nếu bạn chạy nó, thật dễ dàng để nhận thấy rằng nó mất ít thời gian hơn đáng kể.
 
 <br>
 
 > ---
 
-**📌 Minimal delay of nested timers in-browser**
+**📌 Độ trễ tối thiểu của bộ định thời gian lồng nhau trong trình duyệt**
 
-In the browser, there's a limitation of how often nested timers can run. The [HTML5 standard](https://www.w3.org/TR/html5/webappapis.html#timers) says: "after five nested timers, the interval is forced to be at least four milliseconds.".
+Trong trình duyệt, có một giới hạn về tần suất các bộ định thời gian lồng nhau có thể chạy. [Tiêu chuẩn HTML5](https://www.w3.org/TR/html5/webappapis.html#timers) nói: "sau năm bộ định thời gian lồng nhau, khoảng thời gian buộc phải có ít nhất bốn mili giây.".
 
-Let's demonstrate what it means with the example below. The `setTimeout` call in it re-schedules itself after `0ms`. Each call remembers the real time from the previous one in the `times` array. What do the real delays look like? Let's see:
+Hãy chứng minh ý nghĩa của nó với ví dụ dưới đây. Cuộc gọi `setTimeout` trong đó tự lập lại lịch trình sau `0ms`. Mỗi cuộc gọi ghi nhớ thời gian thực từ cuộc gọi trước trong mảng `times`. Sự chậm trễ thực sự trông như thế nào? Hãy xem:
 
-```js run
+```js
 let start = Date.now();
 let times = [];
 
@@ -405,23 +405,23 @@ setTimeout(function run() {
 // 1,1,1,1,9,15,20,24,30,35,40,45,50,55,59,64,70,75,80,85,90,95,100
 ```
 
-First timers run immediately (just as written in the spec), and then the delay comes into play and we see `9, 15, 20, 24...`.
+Bộ hẹn giờ đầu tiên chạy ngay lập tức (giống như được ghi trong thông số kỹ thuật), và sau đó độ trễ xuất hiện và chúng ta thấy `9, 15, 20, 24...`.
 
-That limitation comes from ancient times and many scripts rely on it, so it exists for historical reasons.
+Hạn chế đó xuất phát từ thời cổ đại và nhiều kịch bản dựa vào nó, vì vậy nó tồn tại vì lý do lịch sử.
 
-For server-side JavaScript, that limitation does not exist, and there exist other ways to schedule an immediate asynchronous job, like [process.nextTick](https://nodejs.org/api/process.html) and [setImmediate](https://nodejs.org/api/timers.html) for Node.JS. So the notion is browser-specific only.
+Đối với JavaScript phía máy chủ, giới hạn đó không tồn tại và tồn tại các cách khác để lên lịch cho một công việc không đồng bộ ngay lập tức, như [process.nextTick](https://nodejs.org/api/process.html) và [setImmediate](https://nodejs.org/api/timers.html) cho Node.JS. Vì vậy, khái niệm này chỉ dành riêng cho trình duyệt.
 
 > ---
 
 <br>
 
-### Allowing the browser to render
+### Cho phép trình duyệt hiển thị
 
-Another benefit for in-browser scripts is that they can show a progress bar or something to the user. That's because the browser usually does all "repainting" after the script is complete.
+Một lợi ích khác cho các tập lệnh trong trình duyệt là chúng có thể hiển thị progress bar hoặc thứ gì đó cho người dùng. Đó là bởi vì trình duyệt thường thực hiện tất cả "sơn lại" sau khi tập lệnh hoàn tất.
 
-So if we do a single huge function then even if it changes something, the changes are not reflected in the document till it finishes.
+Vì vậy, nếu chúng ta thực hiện một function lớn duy nhất thì ngay cả khi nó thay đổi điều gì đó, những thay đổi sẽ không được phản ánh trong tài liệu cho đến khi hoàn thành.
 
-Here's the demo:
+Đây là bản demo:
 
 ```html
 <div id="progress"></div>
@@ -442,9 +442,9 @@ Here's the demo:
 </script>
 ```
 
-If you run it, the changes to `i` will show up after the whole count finishes.
+Nếu bạn chạy nó, các thay đổi thành `i` sẽ hiển thị sau khi toàn bộ số đếm kết thúc.
 
-And if we use `setTimeout` to split it into pieces then changes are applied in-between the runs, so this looks better:
+Và nếu chúng ta sử dụng `setTimeout` để chia nó thành nhiều phần thì các thay đổi sẽ được áp dụng ở giữa các lần chạy, vì vậy điều này có vẻ tốt hơn:
 
 ```html
 <div id="progress"></div>
@@ -470,24 +470,24 @@ And if we use `setTimeout` to split it into pieces then changes are applied in-b
 </script>
 ```
 
-Now the `<div>` shows increasing values of `i`.
+Bây giờ `<div>` hiển thị các giá trị tăng dần của `i`.
 
-## Summary
+## Tóm lược
 
-- Methods `setInterval(func, delay, ...args)` and `setTimeout(func, delay, ...args)` allow to run the `func` regularly/once after `delay` milliseconds.
-- To cancel the execution, we should call `clearInterval/clearTimeout` with the value returned by `setInterval/setTimeout`.
-- Nested `setTimeout` calls is a more flexible alternative to `setInterval`. Also they can guarantee the minimal time *between* the executions.
-- Zero-timeout scheduling `setTimeout(...,0)` is used to schedule the call "as soon as possible, but after the current code is complete".
+- Các phương thức `setInterval(func, delay, ...args)` và `setTimeout(func, delay, ...args)` cho phép chạy `func` thường xuyên/một lần sau `delay` mili giây.
+- Để hủy thực thi, chúng ta nên gọi `clearInterval/clearTimeout` với giá trị được trả về bởi `setInterval/setTimeout`.
+- Các lệnh gọi `setTimeout` lồng nhau là một sự thay thế linh hoạt hơn cho `setInterval`. Ngoài ra chúng có thể đảm bảo thời gian tối thiểu *giữa* các lần thực hiện.
+- Zero-timeout scheduling `setTimeout(...,0)` được sử dụng để lên lịch cuộc gọi "càng sớm càng tốt, nhưng sau khi mã hiện tại hoàn tất".
 
-Some use cases of `setTimeout(...,0)`:
-- To split CPU-hungry tasks into pieces, so that the script doesn't "hang"
-- To let the browser do something else while the process is going on (paint the progress bar).
+Một số trường hợp sử dụng `setTimeout(...,0)`:
+- Để phân chia các tác vụ ngốn CPU thành nhiều phần, để tập lệnh không bị "treo"
+- Để cho trình duyệt làm một cái gì đó khác trong khi quá trình đang diễn ra (vẽ progress bar).
 
-Please note that all scheduling methods do not *guarantee* the exact delay. We should not rely on that in the scheduled code.
+Xin lưu ý rằng tất cả các phương pháp lập lịch không *đảm bảo* độ trễ chính xác. Chúng ta không nên dựa vào điều đó trong mã theo lịch trình.
 
-For example, the in-browser timer may slow down for a lot of reasons:
-- The CPU is overloaded.
-- The browser tab is in the background mode.
-- The laptop is on battery.
+Ví dụ: bộ hẹn giờ trong trình duyệt có thể chậm lại vì nhiều lý do:
+- CPU bị quá tải.
+- Tab trình duyệt ở chế độ nền.
+- Máy tính xách tay đang dùng pin.
 
-All that may increase the minimal timer resolution (the minimal delay) to 300ms or even 1000ms depending on the browser and settings.
+Tất cả có thể tăng độ phân giải hẹn giờ tối thiểu (độ trễ tối thiểu) lên 300ms hoặc thậm chí 1000ms tùy thuộc vào trình duyệt và cài đặt.
