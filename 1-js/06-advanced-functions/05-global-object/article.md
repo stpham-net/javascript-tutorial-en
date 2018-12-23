@@ -15,7 +15,7 @@ It does two things:
 1. Provides access to built-in functions and values, defined by the specification and the environment.
     For instance, we can call `alert` directly or as a method of `window`:
 
-    ```js run
+    ```js
     alert("Hello");
 
     // the same as
@@ -26,8 +26,7 @@ It does two things:
 
 2. Provides access to global Function Declarations and `var` variables. We can read and write them using its properties, for instance:
 
-    <!-- no-strict to move variables out of eval -->
-    ```js untrusted run no-strict refresh
+    ```js
     var phrase = "Hello";
 
     function sayHi() {
@@ -46,15 +45,20 @@ It does two things:
 
 ...But the global object does not have variables declared with `let/const`!
 
-```js untrusted run no-strict refresh
-*!*let*/!* user = "John";
+```js
+letuser = "John";
 alert(user); // John
 
 alert(window.user); // undefined, don't have let
 alert("user" in window); // false
 ```
 
-```smart header="The global object is not a global Environment Record"
+<br>
+
+> ---
+
+**📌 The global object is not a global Environment Record**
+
 In versions of ECMAScript prior to ES-2015, there were no `let/const` variables, only `var`. And global object was used as a global Environment Record (wordings were a bit different, but that's the gist).
 
 But starting from ES-2015, these entities are split apart. There's a global Lexical Environment with its Environment Record. And there's a global object that provides *some* of the global variables.
@@ -62,7 +66,10 @@ But starting from ES-2015, these entities are split apart. There's a global Lexi
 As a practical difference, global `let/const` variables are definitively properties of the global Environment Record, but they do not exist in the global object.
 
 Naturally, that's because the idea of a global object as a way to access "all global things" comes from ancient times. Nowadays is not considered to be a good thing. Modern language features like `let/const` do not make friends with it, but old ones are still compatible.
-```
+
+> ---
+
+<br>
 
 ## Uses of "window"
 
@@ -74,15 +81,13 @@ Usually, it's not a good idea to use it, but here are some examples you can meet
 
 1. To access exactly the global variable if the function has the local one with the same name.
 
-    ```js untrusted run no-strict refresh
+    ```js
     var user = "Global";
 
     function sayHi() {
       var user = "Local";
 
-    *!*
       alert(window.user); // Global
-    */!*
     }
 
     sayHi();
@@ -98,7 +103,7 @@ Usually, it's not a good idea to use it, but here are some examples you can meet
 
     But we can read it from `window.XMLHttpRequest`:
 
-    ```js run
+    ```js
     if (window.XMLHttpRequest) {
       alert('XMLHttpRequest exists!')
     }
@@ -116,13 +121,13 @@ Usually, it's not a good idea to use it, but here are some examples you can meet
 
     This doesn't use `window`, but is (theoretically) less reliable, because `typeof` may use a local XMLHttpRequest, and we want the global one.
 
-
 3. To take the variable from the right window. That's probably the most valid use case.
 
     A browser may open multiple windows and tabs. A window may also embed another one in `<iframe>`. Every browser window has its own `window` object and global variables. JavaScript allows windows that come from the same site (same protocol, host, port) to access variables from each other.
 
     That use is a little bit beyond our scope for now, but it looks like:
-    ```html run
+    
+    ```html
     <iframe src="/" id="iframe"></iframe>
 
     <script>
@@ -132,13 +137,9 @@ Usually, it's not a good idea to use it, but here are some examples you can meet
       // when the iframe loads...
       iframe.onload = function() {
         // get width of the iframe window
-      *!*
         alert( iframe.contentWindow.innerWidth );
-      */!*
         // get the builtin Array from the iframe window
-      *!*
         alert( iframe.contentWindow.Array );
-      */!*
       };
     </script>
     ```
@@ -151,7 +152,7 @@ Sometimes, the value of `this` is exactly the global object. That's rarely used,
 
 1. In the browser, the value of `this` in the global area is `window`:
 
-    ```js run
+    ```js
     // outside of functions
     alert( this === window ); // true
     ```
@@ -159,7 +160,8 @@ Sometimes, the value of `this` is exactly the global object. That's rarely used,
     Other, non-browser environments, may use another value for `this` in such cases.
 
 2. When a function with `this` is called in non-strict mode, it gets the global object as `this`:
-    ```js run no-strict
+
+    ```js
     // not in strict mode (!)
     function f() {
       alert(this); // [object Window]
