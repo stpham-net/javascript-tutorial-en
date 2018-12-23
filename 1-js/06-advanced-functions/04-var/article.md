@@ -167,4 +167,3 @@ Có hai điểm khác biệt chính của `var`:
 Có thêm một sự khác biệt nhỏ liên quan đến global object, chúng ta sẽ đề cập đến điều đó trong chương tiếp theo.
 
 Những sự khác biệt này thực sự là một điều xấu hầu hết thời gian. Đầu tiên, chúng ta không thể tạo các block-local variables. Và hoisting chỉ tạo thêm không gian cho lỗi. Vì vậy, đối với các scripts mới, đặc biệt hiếm khi `var` được sử dụng.
-No search results.
