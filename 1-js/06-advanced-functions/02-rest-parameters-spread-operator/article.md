@@ -24,7 +24,7 @@ function sum(a, b) {
 alert( sum(1, 2, 3, 4, 5) );
 ```
 
-Sẽ không có lỗi vì các đối số "thừa". Nhưng tất nhiên trong kết quả chỉ có cái đầu tiên sẽ được tính.
+Sẽ không có lỗi vì các đối số "thừa". Nhưng tất nhiên trong kết quả chỉ có hai cái đầu tiên sẽ được tính.
 
 Các tham số còn lại có thể được đề cập trong định nghĩa hàm với ba dấu chấm `...`. Chúng có nghĩa đen là "tập hợp các tham số còn lại thành một mảng".
 
@@ -248,12 +248,12 @@ Có một cách dễ dàng để phân biệt giữa chúng:
 - Khi `...` ở cuối các tham số hàm, đó là "rest parameters" và tập hợp phần còn lại của danh sách các đối số thành một mảng.
 - Khi `...` xảy ra trong một cuộc gọi hàm hoặc tương tự, nó được gọi là "spread operator" và mở rộng một mảng thành một danh sách.
 
-Sử dụng các mẫu:
+Use patterns:
 
 - Các rest parameters được sử dụng để tạo các hàm chấp nhận bất kỳ số lượng đối số.
 - The spread operator được sử dụng để truyền một mảng cho các hàm thường yêu cầu một danh sách gồm nhiều đối số.
 
-Chúng cùng nhau giúp đi lại giữa một danh sách (a list) và một loạt các tham số (an array of parameters) một cách dễ dàng.
+Chúng cùng nhau giúp di chuyển giữa một danh sách (a list) và một loạt các tham số (an array of parameters) một cách dễ dàng.
 
 Tất cả các đối số của một lệnh gọi hàm cũng có sẵn trong "old-style" `arguments`: array-like iterable object.
-No search results.
+
