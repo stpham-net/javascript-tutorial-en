@@ -31,7 +31,7 @@ alert(phrase); // Error, phrase is not defined
 
 ## "var" không có block scope
 
-Các biến `var` là function-wide hoặc global, chúng được hiển thị thông qua các blocks.
+Các biến `var` là function-wide hoặc global, chúng được hiển thị xuyên qua các blocks.
 
 Ví dụ:
 
