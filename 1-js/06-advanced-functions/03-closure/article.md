@@ -26,15 +26,12 @@ Let's consider two situations to begin with, and then study the internal mechani
 
     name = "Pete";
 
-    *!*
     sayHi(); // what will it show: "John" or "Pete"?
-    */!*
     ```
 
     Such situations are common both in browser and server-side development. A function may be scheduled to execute later than it is created, for instance after a user action or a network request.
 
     So, the question is: does it pick up the latest changes?
-
 
 2. The function `makeWorker` makes another function and returns it. That new function can be called from somewhere else. Will it have access to the outer variables from its creation place, or the invocation place, or both?
 
@@ -53,11 +50,8 @@ Let's consider two situations to begin with, and then study the internal mechani
     let work = makeWorker();
 
     // call it
-    *!*
     work(); // what will it show? "Pete" (name where created) or "John" (name where called)?
-    */!*
     ```
-
 
 ## Lexical Environment
 
@@ -115,17 +109,6 @@ During the call, `say()` uses an outer variable, so let's look at the details of
 
 First, when a function runs, a new function Lexical Environment is created automatically. That's a general rule for all functions. That Lexical Environment is used to store local variables and parameters of the call.
 
-<!--
-    ```js
-    let phrase = "Hello";
-
-    function say(name) {
-     alert( `${phrase}, ${name}` );
-    }
-
-    say("John"); // Hello, John
-    ```-->
-
 Here's the picture of Lexical Environments when the execution is inside `say("John")`, at the line labelled with an arrow:
 
 ![lexical environment](lexical-environment-simple.png)
@@ -156,7 +139,7 @@ That's because of the described mechanism. Old variable values are not saved any
 
 So the answer to the first question is `Pete`:
 
-```js run
+```js
 let name = "John";
 
 function sayHi() {
@@ -165,11 +148,8 @@ function sayHi() {
 
 name = "Pete"; // (*)
 
-*!*
 sayHi(); // Pete
-*/!*
 ```
-
 
 The execution flow of the code above:
 
@@ -177,17 +157,30 @@ The execution flow of the code above:
 2. At the line `(*)` the global variable is changed, now it has `name: "Pete"`.
 3. When the function `sayHi()`, is executed and takes `name` from outside. Here that's from the global Lexical Environment where it's already `"Pete"`.
 
+<br>
 
-```smart header="One call -- one Lexical Environment"
+> ---
+
+**📌 One call -- one Lexical Environment**
+
 Please note that a new function Lexical Environment is created each time a function runs.
 
 And if a function is called multiple times, then each invocation will have its own Lexical Environment, with local variables and parameters specific for that very run.
-```
 
-```smart header="Lexical Environment is a specification object"
+> ---
+
+<br>
+<br>
+
+> ---
+
+**📌 Lexical Environment is a specification object**
+
 "Lexical Environment" is a specification object. We can't get this object in our code and manipulate it directly. JavaScript engines also may optimize it, discard variables that are unused to save memory and perform other internal tricks, but the visible behavior should be as described.
-```
 
+> ---
+
+<br>
 
 ## Nested functions
 
@@ -215,9 +208,9 @@ Here the *nested* function `getFullName()` is made for convenience. It can acces
 
 What's more interesting, a nested function can be returned: either as a property of a new object (if the outer function creates an object with methods) or as a result by itself. It can then be used somewhere else. No matter where, it still has access to the same outer variables.
 
-An example with the constructor function (see the chapter <info:constructor-new>):
+An example with the constructor function (see the chapter **constructor-new**):
 
-```js run
+```js
 // constructor function returns a new object
 function User(name) {
 
@@ -233,7 +226,7 @@ user.sayHi(); // the method code has access to the outer "name"
 
 An example with returning a function:
 
-```js run
+```js
 function makeCounter() {
   let count = 0;
 
@@ -281,7 +274,7 @@ Okay, let's go over the answers.
 
 Here's the demo:
 
-```js run
+```js
 function makeCounter() {
   let count = 0;
   return function() {
@@ -297,7 +290,6 @@ alert( counter1() ); // 1
 
 alert( counter2() ); // 0 (independent)
 ```
-
 
 Hopefully, the situation with outer variables is quite clear for you now. But in more complex situations a deeper understanding of internals may be required. So let's dive deeper.
 
@@ -377,15 +369,23 @@ So, the result is `"Pete"` here.
 
 But if there were no `let name` in `makeWorker()`, then the search would go outside and take the global variable as we can see from the chain above. In that case it would be `"John"`.
 
-```smart header="Closures"
+<br>
+
+> ---
+
+**📌 Closures**
+
 There is a general programming term "closure", that developers generally should know.
 
-A [closure](https://en.wikipedia.org/wiki/Closure_(computer_programming)) is a function that remembers its outer variables and can access them. In some languages, that's not possible, or a function should be written in a special way to make it happen. But as explained above, in JavaScript, all functions are naturally closures (there is only one exclusion, to be covered in <info:new-function>).
+A [closure](https://en.wikipedia.org/wiki/Closure_(computer_programming)) is a function that remembers its outer variables and can access them. In some languages, that's not possible, or a function should be written in a special way to make it happen. But as explained above, in JavaScript, all functions are naturally closures (there is only one exclusion, to be covered in **new-function**).
 
 That is: they automatically remember where they were created using a hidden `[[Environment]]` property, and all of them can access outer variables.
 
 When on an interview, a frontend developer gets a question about "what's a closure?", a valid answer would be a definition of the closure and an explanation that all functions in JavaScript are closures, and maybe few more words about technical details: the `[[Environment]]` property and how Lexical Environments work.
-```
+
+> ---
+
+<br>
 
 ## Code blocks and loops, IIFE
 
@@ -397,19 +397,6 @@ They are created when a code block runs and contain block-local variables. Here 
 
 In the example below, when the execution goes into `if` block, the new "if-only" Lexical Environment is created for it:
 
-<!--
-    ```js run
-    let phrase = "Hello";
-
-    if (true) {
-        let user = "John";
-
-        alert(`${phrase}, ${user}`); // Hello, John
-    }
-
-    alert(user); // Error, can't see such variable!
-    ```-->
-
 ![](lexenv-if.png)
 
 The new Lexical Environment gets the enclosing one as the outer reference, so `phrase` can be found. But all variables and Function Expressions declared inside `if` reside in that Lexical Environment and can't be seen from the outside.
@@ -420,7 +407,7 @@ For instance, after `if` finishes, the `alert` below won't see the `user`, hence
 
 For a loop, every iteration has a separate Lexical Environment. If a variable is declared in `for`, then it's also local to that Lexical Environment:
 
-```js run
+```js
 for (let i = 0; i < 10; i++) {
   // Each loop has its own Lexical Environment
   // {i: value}
@@ -443,7 +430,7 @@ That may happen if the variable name is a widespread word, and script authors ar
 
 If we'd like to avoid that, we can use a code block to isolate the whole script or a part of it:
 
-```js run
+```js
 {
   // do some job with local variables that should not be seen outside
 
@@ -463,7 +450,7 @@ In old scripts, one can find so-called "immediately-invoked function expressions
 
 They look like this:
 
-```js run
+```js
 (function() {
 
   let message = "Hello";
@@ -477,7 +464,7 @@ Here a Function Expression is created and immediately called. So the code execut
 
 The Function Expression is wrapped with brackets `(function {...})`, because when JavaScript meets `"function"` in the main code flow, it understands it as the start of a Function Declaration. But a Function Declaration must have a name, so there will be an error:
 
-```js run
+```js
 // Error: Unexpected token (
 function() { // <-- JavaScript cannot find function name, meets ( and gives error
 
@@ -490,7 +477,7 @@ function() { // <-- JavaScript cannot find function name, meets ( and gives erro
 
 We can say "okay, let it be so Function Declaration, let's add a name", but it won't work. JavaScript does not allow Function Declarations to be called immediately:
 
-```js run
+```js
 // syntax error because of brackets below
 function go() {
 
@@ -501,22 +488,22 @@ So, round brackets are needed to show JavaScript that the function is created in
 
 There are other ways to tell JavaScript that we mean Function Expression:
 
-```js run
+```js
 // Ways to create IIFE
 
 (function() {
   alert("Brackets around the function");
-}*!*)*/!*();
+})();
 
 (function() {
   alert("Brackets around the whole thing");
-}()*!*)*/!*;
+}());
 
-*!*!*/!*function() {
+!function() {
   alert("Bitwise NOT operator starts the expression");
 }();
 
-*!*+*/!*function() {
++function() {
   alert("Unary plus starts the expression");
 }();
 ```
@@ -548,9 +535,7 @@ Lexical Environment objects that we've been talking about are subject to the sam
 
       function g() { alert(value); }
 
-    *!*
       return g;
-    */!*
     }
 
     let g = f(); // g is reachable, and keeps the outer lexical environment in memory
@@ -600,7 +585,7 @@ Try running the example below in Chrome with the Developer Tools open.
 
 When it pauses, in the console type `alert(value)`.
 
-```js run
+```js
 function f() {
   let value = Math.random();
 
@@ -619,7 +604,7 @@ As you could see -- there is no such variable! In theory, it should be accessibl
 
 That may lead to funny (if not such time-consuming) debugging issues. One of them -- we can see a same-named outer variable instead of the expected one:
 
-```js run global
+```js
 let value = "Surprise!";
 
 function f() {
@@ -636,9 +621,15 @@ let g = f();
 g();
 ```
 
-```warn header="See ya!"
+<br>
+
+> ---
+
+**📌 See ya!**
+
 This feature of V8 is good to know. If you are debugging with Chrome/Opera, sooner or later you will meet it.
 
 That is not a bug in the debugger, but rather a special feature of V8. Perhaps it will be changed sometime.
 You always can check for it by running the examples on this page.
-```
+
+> ---
