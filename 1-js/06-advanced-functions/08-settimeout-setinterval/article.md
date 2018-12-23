@@ -20,63 +20,71 @@ let timerId = setTimeout(func|code, delay[, arg1, arg2...])
 
 Parameters:
 
-`func|code`
-: Function or a string of code to execute.
+**`func|code`**
+
+Function or a string of code to execute.
 Usually, that's a function. For historical reasons, a string of code can be passed, but that's not recommended.
 
-`delay`
-: The delay before run, in milliseconds (1000 ms = 1 second).
+**`delay`**
 
-`arg1`, `arg2`...
-: Arguments for the function (not supported in IE9-)
+The delay before run, in milliseconds (1000 ms = 1 second).
+
+**`arg1`, `arg2`...**
+
+Arguments for the function (not supported in IE9-)
 
 For instance, this code calls `sayHi()` after one second:
 
-```js run
+```js
 function sayHi() {
   alert('Hello');
 }
 
-*!*
 setTimeout(sayHi, 1000);
-*/!*
 ```
 
 With arguments:
 
-```js run
+```js
 function sayHi(phrase, who) {
   alert( phrase + ', ' + who );
 }
 
-*!*
 setTimeout(sayHi, 1000, "Hello", "John"); // Hello, John
-*/!*
 ```
 
 If the first argument is a string, then JavaScript creates a function from it.
 
 So, this will also work:
 
-```js run no-beautify
+```js
 setTimeout("alert('Hello')", 1000);
 ```
 
 But using strings is not recommended, use functions instead of them, like this:
 
-```js run no-beautify
+```js
 setTimeout(() => alert('Hello'), 1000);
 ```
 
-````smart header="Pass a function, but don't run it"
+<br>
+
+> ---
+
+**📌 Pass a function, but don't run it**
+
 Novice developers sometimes make a mistake by adding brackets `()` after the function:
 
 ```js
 // wrong!
 setTimeout(sayHi(), 1000);
 ```
+
 That doesn't work, because `setTimeout` expects a reference to function. And here `sayHi()` runs the function, and the *result of its execution* is passed to `setTimeout`. In our case the result of `sayHi()` is `undefined` (the function returns nothing), so nothing is scheduled.
-````
+
+> ---
+
+<br>
 
 ### Canceling with clearTimeout
 
@@ -91,7 +99,7 @@ clearTimeout(timerId);
 
 In the code below, we schedule the function and then cancel it (changed our mind). As a result, nothing happens:
 
-```js run no-beautify
+```js
 let timerId = setTimeout(() => alert("never happens"), 1000);
 alert(timerId); // timer identifier
 
@@ -119,7 +127,7 @@ To stop further calls, we should call `clearInterval(timerId)`.
 
 The following example will show the message every 2 seconds. After 5 seconds, the output is stopped:
 
-```js run
+```js
 // repeat with the interval of 2 seconds
 let timerId = setInterval(() => alert('tick'), 2000);
 
@@ -127,11 +135,19 @@ let timerId = setInterval(() => alert('tick'), 2000);
 setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
 ```
 
-```smart header="Modal windows freeze time in Chrome/Opera/Safari"
+<br>
+
+> ---
+
+**📌 Modal windows freeze time in Chrome/Opera/Safari**
+
 In browsers IE and Firefox the internal timer continues "ticking" while showing `alert/confirm/prompt`, but in Chrome, Opera and Safari the internal timer becomes "frozen".
 
 So if you run the code above and don't dismiss the `alert` window for some time, then in Firefox/IE next `alert` will be shown immediately as you do it (2 seconds passed from the previous invocation), and in Chrome/Opera/Safari -- after 2 more seconds (timer did not tick during the `alert`).
-```
+
+> ---
+
+<br>
 
 ## Recursive setTimeout
 
@@ -146,9 +162,7 @@ let timerId = setInterval(() => alert('tick'), 2000);
 
 let timerId = setTimeout(function tick() {
   alert('tick');
-*!*
   timerId = setTimeout(tick, 2000); // (*)
-*/!*
 }, 2000);
 ```
 
@@ -159,6 +173,7 @@ The recursive `setTimeout` is a more flexible method than `setInterval`. This wa
 For instance, we need to write a service that sends a request to the server every 5 seconds asking for data, but in case the server is overloaded, it should increase the interval to 10, 20, 40 seconds...
 
 Here's the pseudocode:
+
 ```js
 let delay = 5000;
 
@@ -174,7 +189,6 @@ let timerId = setTimeout(function request() {
 
 }, delay);
 ```
-
 
 And if we regularly have CPU-hungry tasks, then we can measure the time taken by the execution and plan the next call sooner or later.
 
@@ -223,7 +237,12 @@ And here is the picture for the recursive `setTimeout`:
 
 That's because a new call is planned at the end of the previous one.
 
-````smart header="Garbage collection"
+<br>
+
+> ---
+
+**📌 Garbage collection**
+
 When a function is passed in `setInterval/setTimeout`, an internal reference is created to it and saved in the scheduler. It prevents the function from being garbage collected, even if there are no other references to it.
 
 ```js
@@ -234,7 +253,10 @@ setTimeout(function() {...}, 100);
 For `setInterval` the function stays in memory until `clearInterval` is called.
 
 There's a side-effect. A function references the outer lexical environment, so, while it lives, outer variables live too. They may take much more memory than the function itself. So when we don't need the scheduled function anymore, it's better to cancel it, even if it's very small.
-````
+
+> ---
+
+<br>
 
 ## setTimeout(...,0)
 
@@ -246,7 +268,7 @@ So the function is scheduled to run "right after" the current code. In other wor
 
 For instance, this outputs "Hello", then immediately "World":
 
-```js run
+```js
 setTimeout(() => alert("World"), 0);
 
 alert("Hello");
@@ -266,7 +288,7 @@ For clarity, let's take a simpler example for consideration. We have a function 
 
 If you run it, the CPU will hang. For server-side JS that's clearly noticeable, and if you are running it in-browser, then try to click other buttons on the page -- you'll see that whole JavaScript actually is paused, no other actions work until it finishes.
 
-```js run
+```js
 let i = 0;
 
 let start = Date.now();
@@ -288,7 +310,7 @@ The browser may even show "the script takes too long" warning (but hopefully it 
 
 Let's split the job using the nested `setTimeout`:
 
-```js run
+```js
 let i = 0;
 
 let start = Date.now();
@@ -329,7 +351,7 @@ To make them closer, let's make an improvement.
 
 We'll move the scheduling in the beginning of the `count()`:
 
-```js run
+```js
 let i = 0;
 
 let start = Date.now();
@@ -358,7 +380,12 @@ Now when we start to `count()` and know that we'll need to `count()` more, we sc
 
 If you run it, it's easy to notice that it takes significantly less time.
 
-````smart header="Minimal delay of nested timers in-browser"
+<br>
+
+> ---
+
+**📌 Minimal delay of nested timers in-browser**
+
 In the browser, there's a limitation of how often nested timers can run. The [HTML5 standard](https://www.w3.org/TR/html5/webappapis.html#timers) says: "after five nested timers, the interval is forced to be at least four milliseconds.".
 
 Let's demonstrate what it means with the example below. The `setTimeout` call in it re-schedules itself after `0ms`. Each call remembers the real time from the previous one in the `times` array. What do the real delays look like? Let's see:
@@ -383,7 +410,10 @@ First timers run immediately (just as written in the spec), and then the delay c
 That limitation comes from ancient times and many scripts rely on it, so it exists for historical reasons.
 
 For server-side JavaScript, that limitation does not exist, and there exist other ways to schedule an immediate asynchronous job, like [process.nextTick](https://nodejs.org/api/process.html) and [setImmediate](https://nodejs.org/api/timers.html) for Node.JS. So the notion is browser-specific only.
-````
+
+> ---
+
+<br>
 
 ### Allowing the browser to render
 
@@ -392,7 +422,8 @@ Another benefit for in-browser scripts is that they can show a progress bar or s
 So if we do a single huge function then even if it changes something, the changes are not reflected in the document till it finishes.
 
 Here's the demo:
-```html run
+
+```html
 <div id="progress"></div>
 
 <script>
@@ -415,7 +446,7 @@ If you run it, the changes to `i` will show up after the whole count finishes.
 
 And if we use `setTimeout` to split it into pieces then changes are applied in-between the runs, so this looks better:
 
-```html run
+```html
 <div id="progress"></div>
 
 <script>
