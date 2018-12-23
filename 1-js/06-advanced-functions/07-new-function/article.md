@@ -1,19 +1,19 @@
 
 # The "new Function" syntax
 
-There's one more way to create a function. It's rarely used, but sometimes there's no alternative.
+Có thêm một cách để tạo function. Nó hiếm khi được sử dụng, nhưng đôi khi không có sự thay thế.
 
 ## Syntax
 
-The syntax for creating a function:
+Cú pháp tạo hàm:
 
 ```js
 let func = new Function ([arg1[, arg2[, ...argN]],] functionBody)
 ```
 
-In other words, function parameters (or, more precisely, names for them) go first, and the body is last. All arguments are strings.
+Nói cách khác, các tham số function (hay chính xác hơn là tên của chúng) đi trước và phần thân là cuối cùng. Tất cả các đối số là chuỗi.
 
-It's easier to understand by looking at an example. Here's a function with two arguments:
+Nó dễ hiểu hơn bằng cách nhìn vào một ví dụ. Đây là một hàm có hai đối số:
 
 ```js
 let sum = new Function('a', 'b', 'return a + b'); 
@@ -21,7 +21,7 @@ let sum = new Function('a', 'b', 'return a + b');
 alert( sum(1, 2) ); // 3
 ```
 
-If there are no arguments, then there's only a single argument, the function body:
+Nếu không có đối số, thì chỉ có một đối số duy nhất, thân hàm:
 
 ```js
 let sayHi = new Function('alert("Hello")');
@@ -29,11 +29,11 @@ let sayHi = new Function('alert("Hello")');
 sayHi(); // Hello
 ```
 
-The major difference from other ways we've seen is that the function is created literally from a string, that is passed at run time. 
+Sự khác biệt chính so với các cách khác mà chúng ta đã thấy là hàm được tạo theo nghĩa đen (literally) từ một chuỗi, được truyền (passed) vào run time. 
 
-All previous declarations required us, programmers, to write the function code in the script.
+Tất cả các khai báo trước đó yêu cầu chúng ta, các lập trình viên, viết function code trong script.
 
-But `new Function` allows to turn any string into a function. For example, we can receive a new function from a server and then execute it:
+Nhưng `new Function` cho phép biến bất kỳ chuỗi nào thành hàm. Ví dụ: chúng ta có thể nhận một function mới từ một máy chủ và sau đó thực thi nó:
 
 ```js
 let str = ... receive the code from a server dynamically ...
@@ -42,13 +42,13 @@ let func = new Function(str);
 func();
 ```
 
-It is used in very specific cases, like when we receive code from a server, or to dynamically compile a function from a template. The need for that usually arises at advanced stages of development.
+Nó được sử dụng trong các trường hợp rất cụ thể, như khi chúng ta nhận được mã từ máy chủ hoặc để tự động biên dịch (dynamically compile) một hàm từ một template. Nhu cầu đó thường phát sinh ở các giai đoạn phát triển tiên tiến.
 
 ## Closure
 
-Usually, a function remembers where it was born in the special property `[[Environment]]`. It references the Lexical Environment from where it's created.
+Thông thường, một hàm ghi nhớ nơi nó được sinh ra trong thuộc tính đặc biệt `[[Environment]]`. Nó tham chiếu Lexical Environment từ nơi nó được tạo ra.
 
-But when a function is created using `new Function`, its `[[Environment]]` references not the current Lexical Environment, but instead the global one.
+Nhưng khi một hàm được tạo bằng cách sử dụng `new Function`, thì các `[[Environment]]` của nó không phải là Lexical Environment hiện tại, mà thay vào đó là global.
 
 ```js
 
@@ -63,7 +63,7 @@ function getFunc() {
 getFunc()(); // error: value is not defined
 ```
 
-Compare it with the regular behavior:
+So sánh nó với hành vi thông thường:
 
 ```js
 function getFunc() {
@@ -77,27 +77,27 @@ function getFunc() {
 getFunc()(); // "test", from the Lexical Environment of getFunc
 ```
 
-This special feature of `new Function` looks strange, but appears very useful in practice.
+Tính năng đặc biệt này của `new Function` trông lạ, nhưng có vẻ rất hữu ích trong thực tế.
 
-Imagine that we must create a function from a string. The code of that function is not known at the time of writing the script (that's why we don't use regular functions), but will be known in the process of execution. We may receive it from the server or from another source.
+Hãy tưởng tượng rằng chúng ta phải tạo một hàm từ một chuỗi. Mã của hàm đó không được biết tại thời điểm viết script (đó là lý do tại sao chúng ta không sử dụng các hàm thông thường), nhưng sẽ được biết đến trong quá trình thực thi. Chúng ta có thể nhận nó từ máy chủ hoặc từ một nguồn khác.
 
-Our new function needs to interact with the main script.
+Function mới của chúng ta cần tương tác với main script.
 
-Perhaps we want it to be able to access outer local variables?
+Có lẽ chúng ta muốn nó có thể truy cập các outer local variables?
 
-The problem is that before JavaScript is published to production, it's compressed using a *minifier* -- a special program that shrinks code by removing extra comments, spaces and -- what's important, renames local variables into shorter ones.
+Vấn đề là trước khi JavaScript được xuất bản để sản xuất, nó đã được nén bằng cách sử dụng một *minifier* -- một chương trình đặc biệt thu nhỏ mã bằng cách xóa extra comments, spaces và -- điều quan trọng, đổi tên local variables thành biến ngắn hơn.
 
-For instance, if a function has `let userName`, minifier replaces it `let a` (or another letter if this one is occupied), and does it everywhere. That's usually a safe thing to do, because the variable is local, nothing outside the function can access it. And inside the function, minifier replaces every mention of it. Minifiers are smart, they analyze the code structure, so they don't break anything. They're not just a dumb find-and-replace.
+Chẳng hạn, nếu một hàm có `let userName`, minifier sẽ thay thế nó thành `let a` (hoặc một chữ cái khác nếu chữ này đã được dùng) và thực hiện nó ở mọi nơi. Đó thường là một điều an toàn để làm, bởi vì biến là local, không có gì outside the function có thể truy cập nó. Và bên trong function, minifier thay thế mỗi đề cập đến nó. Minifiers rất thông minh, chúng phân tích cấu trúc mã, vì vậy chúng không phá vỡ bất cứ thứ gì. Chúng không chỉ là một công cụ tìm và thay thế ngu ngốc.
 
-But, if `new Function` could access outer variables, then it would be unable to find `userName`, since this is passed in as a string *after* the code is minified.
+Nhưng, nếu `new Function` có thể truy cập các outer variables, thì nó sẽ không thể tìm thấy `userName`, vì điều này được truyền vào dưới dạng một chuỗi *sau khi* mã được rút gọn.
 
-**Even if we could access outer lexical environment in `new Function`, we would have problems with minifiers.**
+**Ngay cả khi chúng ta có thể truy cập outer lexical environment trong `new Function`, chúng ta sẽ gặp vấn đề với các minifiers.**
 
-The "special feature" of `new Function` saves us from mistakes.
+"Tính năng đặc biệt" của `new Function` giúp chúng ta tránh khỏi những sai lầm.
 
-And it enforces better code. If we need to pass something to a function created by `new Function`, we should pass it explicitly as an argument.
+Và nó thực thi mã tốt hơn. Nếu chúng ta cần truyền một cái gì đó cho một hàm được tạo bởi `new Function`, chúng ta nên chuyển nó một cách rõ ràng như là một đối số.
 
-Our "sum" function actually does that right:
+Hàm "sum" của chúng ta thực sự làm đúng:
 
 ```js
 let sum = new Function('a', 'b', 'return a + b');
@@ -108,17 +108,17 @@ let a = 1, b = 2;
 alert( sum(a, b) ); // 3
 ```
 
-## Summary
+## Tóm lược
 
-The syntax:
+Cú pháp:
 
 ```js
 let func = new Function(arg1, arg2, ..., body);
 ```
 
-For historical reasons, arguments can also be given as a comma-separated list. 
+Vì lý do lịch sử, các đối số cũng có thể được đưa dưới dạng danh sách được phân tách bằng dấu phẩy. 
 
-These three mean the same:
+Ba nghĩa này giống nhau:
 
 ```js 
 new Function('a', 'b', 'return a + b'); // basic syntax
@@ -126,4 +126,4 @@ new Function('a,b', 'return a + b'); // comma-separated
 new Function('a , b', 'return a + b'); // comma-separated with spaces
 ```
 
-Functions created with `new Function`, have `[[Environment]]` referencing the global Lexical Environment, not the outer one. Hence, they cannot use outer variables. But that's actually good, because it saves us from errors. Passing parameters explicitly is a much better method architecturally and causes no problems with minifiers.
+Các hàm được tạo bằng `new Function`, có `[[Environment]]` tham chiếu global Lexical Environment, không phải outer Lexical Environment. Do đó, chúng không thể sử dụng các outer variables. Nhưng điều đó thực sự tốt, bởi vì nó cứu chúng ta khỏi lỗi. Truyền các tham số rõ ràng là một phương pháp tốt hơn về mặt kiến trúc và không gây ra vấn đề gì với các minifiers.
