@@ -7,7 +7,7 @@ Mỗi giá trị trong JavaScript có một kiểu. Kiểu nào là một functi
 
 Trong JavaScript, các hàm là các objects.
 
-Một cách tốt để tưởng tượng các functions là "action objects" có thể gọi được. Chúng ta không chỉ có thể gọi chúng mà còn coi chúng là các đối tượng: thêm/xóa thuộc tính, chuyển qua tham chiếu, v.v.
+Một cách tốt để tưởng tượng là các functions là "action objects" có thể gọi được. Chúng ta không chỉ có thể gọi chúng mà còn coi chúng là các đối tượng: thêm/xóa thuộc tính, chuyển qua tham chiếu, v.v.
 
 ## Thuộc tính "name"
 
@@ -124,7 +124,7 @@ function ask(question, ...handlers) {
 ask("Question?", () => alert('You said yes'), result => alert(result));
 ```
 
-Đây là trường hợp cụ thể của cái gọi là [đa hình] (https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) -- xử lý các đối số khác nhau tùy thuộc vào kiểu của chúng hoặc, trong trường hợp của chúng ta tùy thuộc vào độ dài. Ý tưởng này có sử dụng trong các thư viện JavaScript.
+Đây là trường hợp cụ thể của cái gọi là [đa hình](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) -- xử lý các đối số khác nhau tùy thuộc vào kiểu của chúng hoặc, trong trường hợp của chúng ta tùy thuộc vào độ dài. Ý tưởng này được sử dụng trong các thư viện JavaScript.
 
 ## Thuộc tính tùy chỉnh (Custom properties)
 
@@ -161,7 +161,7 @@ Chúng ta có thể coi một hàm là một đối tượng, lưu trữ các th
 
 <br>
 
-Các function properties có thể thay thế closures đôi khi. Chẳng hạn, chúng ta có thể viết lại ví dụ counter function từ chương **closure** để sử dụng một function property:
+Các function properties đôi khi có thể thay thế closures. Chẳng hạn, chúng ta có thể viết lại ví dụ counter function từ chương **closure** để sử dụng một function property:
 
 ```js
 function makeCounter() {
@@ -230,7 +230,7 @@ let sayHi = function func(who) {
 
 Chúng ta đã đạt được bất cứ điều gì ở đây? Mục đích của tên `"func"` bổ sung đó là gì?
 
-Trước tiên hãy lưu ý rằng chúng ta vẫn có Function Expression. Việc thêm tên `"func"` sau `function` không làm cho nó trở thành một Function Declaration, bởi vì nó vẫn được tạo như là một phần của biểu thức gán.
+Trước tiên hãy lưu ý rằng chúng ta vẫn có Function Expression. Việc thêm tên `"func"` sau `function` không làm cho nó trở thành một Function Declaration, bởi vì nó vẫn được tạo như là một phần của biểu thức gán (assignment expression).
 
 Thêm một cái tên như vậy cũng không phá vỡ bất cứ điều gì.
 
@@ -321,7 +321,7 @@ welcome(); // Hello, Guest (nested call works)
 
 Bây giờ nó hoạt động, vì tên `"func"` là function-local. Nó không được lấy từ bên ngoài (và không nhìn thấy ở đó). Các đặc tả đảm bảo rằng nó sẽ luôn luôn tham chiếu các function hiện tại.
 
-Mã bên ngoài vẫn có biến `sayHi` hoặc `welcome`. Và `func` là một "internal function name", làm thế nào hàm có thể tự gọi bên trong.
+Mã bên ngoài vẫn có biến `sayHi` hoặc `welcome`. Và `func` là một "internal function name", là cách để làm thế nào hàm có thể tự gọi bên trong.
 
 <br>
 
@@ -352,4 +352,4 @@ Ngoài ra, các functions có thể mang thuộc tính bổ sung. Nhiều thư v
 
 Họ tạo ra một "main" function và gắn nhiều "helper" functions khác vào nó. Chẳng hạn, thư viện [jquery](https://jquery.com) tạo ra một hàm có tên `$`. Thư viện [lodash](https://lodash.com) tạo ra một hàm `_`. Và sau đó thêm `_.clone`, `_.keyBy` và các thuộc tính khác vào (xem [docs](https://lodash.com/docs) khi bạn muốn tìm hiểu thêm về chúng). Trên thực tế, họ làm điều đó để giảm bớt ô nhiễm không gian toàn cầu (global space), do đó một thư viện chỉ cung cấp một global variable. Điều đó làm giảm khả năng đặt tên xung đột (naming conflicts).
 
-Vì vậy, một chức năng có thể tự thực hiện một công việc hữu ích và cũng mang một loạt các chức năng khác trong các thuộc tính.
+Vì vậy, một function có thể tự thực hiện một công việc hữu ích và cũng mang một loạt các function khác trong các thuộc tính.
