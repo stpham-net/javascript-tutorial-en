@@ -61,7 +61,7 @@ Tóm lại, có một số lợi ích của việc sử dụng một `cachingDec
 
 - `cachingDecorator` có thể tái sử dụng. Chúng ta có thể áp dụng nó cho một function khác.
 - The caching logic là riêng biệt, nó không làm tăng độ phức tạp của chính `slow` (nếu có).
-- Chúng ta có thể kết hợp nhiều decorators nếu cần (các decorators khác sẽ làm theo).
+- Chúng ta có thể kết hợp nhiều decorators nếu cần (các decorators khác sẽ theo sau).
 
 
 ## Sử dụng "func.call" cho ngữ cảnh
@@ -104,7 +104,7 @@ worker.slow = cachingDecorator(worker.slow); // now make it caching
 alert( worker.slow(2) ); // Whoops! Error: Cannot read property 'someMethod' of undefined
 ```
 
-Lỗi xảy ra trong dòng `(*)` cố truy cập `this.someMethod` và không thành công. Bạn có thể thấy tại sao không?
+Lỗi xảy ra trong dòng `(*)` cố truy cập `this.someMethod` và không thành công. Bạn có thấy tại sao không?
 
 Lý do là wrapper gọi original function là `func(x)` trong dòng `(**)`. Và, khi được gọi như vậy, hàm sẽ nhận `this = undefined`.
 
@@ -285,7 +285,7 @@ func.call(context, ...args); // pass an array as list with spread operator
 func.apply(context, args);   // is same as using apply
 ```
 
-Nếu chúng ta xem xét kỹ hơn, có một sự khác biệt nhỏ giữa việc sử dụng `call` và `apply` như vậy.
+Nếu chúng ta xem xét kỹ hơn, có một sự khác biệt nhỏ giữa việc sử dụng `call` và `apply`.
 
 - Toán tử trải rộng `...` cho phép chuyển *iterable* `args` làm danh sách cho `call`.
 - `apply` chỉ chấp nhận *array-like* `args`.
@@ -304,7 +304,7 @@ let wrapper = function() {
 
 Đó gọi là *chuyển tiếp cuộc gọi (call forwarding)*. The `wrapper` chuyển mọi thứ nó nhận được: bối cảnh `this` và các đối số cho `anotherFunction` và trả về kết quả của nó.
 
-Khi một external code gọi như là `wrapper`, nó không thể phân biệt được cuộc gọi là từ original function.
+Khi một external code gọi như là `wrapper`, nó không thể phân biệt được cuộc gọi từ original function.
 
 Bây giờ, Bây giờ hãy nướng tất cả thành `cachingDecorator` mạnh mẽ hơn:
 
@@ -393,7 +393,7 @@ hash(1, 2);
 
 Thủ thuật được gọi là *method borrowing*.
 
-Chúng tôi lấy (mượn) một phương thức nối từ một mảng thông thường `[].join`. Và sử dụng `[].join.call` để chạy nó trong ngữ cảnh của `arguments`.
+Chúng ta lấy (mượn) một phương thức nối từ một mảng thông thường `[].join`. Và sử dụng `[].join.call` để chạy nó trong ngữ cảnh của `arguments`.
 
 Tại sao nó hoạt động?
 
@@ -432,6 +432,6 @@ let wrapper = function() {
 }
 ```
 
-Chúng ta cũng đã thấy một ví dụ về *mượn phương thức (method borrowing)* khi chúng ta lấy một phương thức từ một đối tượng và `call` nó trong ngữ cảnh của một đối tượng khác. Nó là khá phổ biến để thực hiện các phương thức mảng và áp dụng chúng cho các đối số. Thay thế là sử dụng rest parameters object là một mảng thực.
+Chúng ta cũng đã thấy một ví dụ về *mượn phương thức (method borrowing)* khi chúng ta lấy một phương thức từ một đối tượng và `call` nó trong ngữ cảnh của một đối tượng khác. Nó là khá phổ biến để thực hiện các phương thức mảng và áp dụng chúng cho các đối số. Sự thay thế là sử dụng rest parameters object đó là một mảng thực.
 
-Có rất nhiều decorators có trong tự nhiên. Kiểm tra xem bạn hiểu chúng tốt như thế nào bằng cách giải quyết các nhiệm vụ của chương này.
+Có rất nhiều decorators có trong tự nhiên. Kiểm tra xem bạn nhận biết chúng tốt như thế nào bằng cách giải quyết các nhiệm vụ của chương này.
