@@ -432,6 +432,6 @@ let wrapper = function() {
 }
 ```
 
-Chúng ta cũng đã thấy một ví dụ về *mượn phương thức (method borrowing)* khi chúng ta lấy một phương thức từ một đối tượng và `call` nó trong ngữ cảnh của một đối tượng khác. Nó là khá phổ biến để thực hiện các phương thức mảng và áp dụng chúng cho các đối số. Cách thay thế là sử dụng rest parameters object để là một mảng thực.
+Chúng ta cũng đã thấy một ví dụ về *mượn phương thức (method borrowing)* khi chúng ta lấy một phương thức từ một đối tượng và `call` nó trong ngữ cảnh của một đối tượng khác. Nó là khá phổ biến để thực hiện các phương thức mảng và áp dụng chúng cho các đối số. Lựa chọn thay thế là sử dụng rest parameters object để có một mảng thực.
 
 Có rất nhiều decorators có trong tự nhiên. Kiểm tra xem bạn nhận biết chúng tốt như thế nào bằng cách giải quyết các nhiệm vụ của chương này.
