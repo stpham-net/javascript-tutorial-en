@@ -248,8 +248,8 @@ function curried(...args) {
 
 Khi chúng ta chạy nó, có hai nhánh:
 
-1. Gọi ngay: nếu đã qua `args` thì giống như original function có trong định nghĩa của nó (`func.length`) hoặc dài hơn, sau đó chỉ cần chuyển cuộc gọi đến nó.
-2. Nhận một phần: nếu không, `func` chưa được gọi. Thay vào đó, một wrapper khác `pass` được trả về, nó sẽ áp dụng lại re-apply `curried` cung cấp các đối số trước đó cùng với các đối số mới. Sau đó, trong một cuộc gọi mới, một lần nữa, chúng ta sẽ nhận được một phần mới (nếu không đủ đối số) hoặc cuối cùng là kết quả.
+1. Gọi ngay: nếu đếm `args` được truyền giống như original function có trong định nghĩa của nó (`func.length`) hoặc dài hơn, thì sau đó chỉ cần chuyển cuộc gọi đến nó.
+2. Nhận một phần: nếu không, `func` chưa được gọi. Thay vào đó, một wrapper khác `pass` được trả về, nó sẽ re-apply `curried` cung cấp các đối số trước đó cùng với các đối số mới. Sau đó, trong một cuộc gọi mới, một lần nữa, chúng ta sẽ nhận được một phần mới (nếu không đủ đối số) hoặc, cuối cùng, là kết quả.
 
 Chẳng hạn, hãy xem điều gì xảy ra trong trường hợp `sum(a, b, c)`. Ba đối số, vì vậy `sum.length = 3`.
 
@@ -258,9 +258,9 @@ Chẳng hạn, hãy xem điều gì xảy ra trong trường hợp `sum(a, b, c)
 1. Cuộc gọi đầu tiên `curried(1)` nhớ `1` trong Lexical Environment của nó và trả về một wrapper `pass`.
 2. The wrapper `pass` được gọi với `(2)`: nó cần các đối số trước đó (`1`), nối chúng với những gì nó nhận được `(2)` và gọi `curried(1, 2)` với chúng.
 
-    Khi số lượng đối số vẫn còn ít hơn 3, `curry` trả về `pass`.
+    Khi số lượng đối số vẫn còn ít hơn 3, `curry` tiếp tục trả về `pass`.
     
-3. Trình bao bọc `pass` được gọi lại với `(3)`, cho cuộc gọi tiếp theo `pass(3)` lấy các đối số trước đó (`1`, `2`) và thêm `3` cho chúng, làm cho cuộc gọi `curried(1, 2, 3)` -- cuối cùng có các đối số `3`, chúng được trao cho original function.
+3. The wrapper `pass` được gọi lại với `(3)`, cho cuộc gọi tiếp theo `pass(3)` lấy các đối số trước đó (`1`, `2`) và thêm `3` cho chúng, tạo ra cuộc gọi `curried(1, 2, 3)` -- cuối cùng sau khi có `3` đối số, chúng được trao cho original function.
 
 Nếu điều đó vẫn chưa rõ ràng, chỉ cần theo dõi chuỗi cuộc gọi trong tâm trí của bạn hoặc trên giấy.
 
