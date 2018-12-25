@@ -1,7 +1,3 @@
-libs:
-  - lodash
-
----
 
 # Currying and partials
 
@@ -27,10 +23,8 @@ function mul(a, b) {
 
 Let's use `bind` to create a function `double` on its base:
 
-```js run
-*!*
+```js
 let double = mul.bind(null, 2);
-*/!*
 
 alert( double(3) ); // = mul(2, 3) = 6
 alert( double(4) ); // = mul(2, 4) = 8
@@ -45,10 +39,8 @@ Please note that here we actually don't use `this` here. But `bind` requires it,
 
 The function `triple` in the code below triples the value:
 
-```js run
-*!*
+```js
 let triple = mul.bind(null, 3);
-*/!*
 
 alert( triple(3) ); // = mul(3, 3) = 9
 alert( triple(4) ); // = mul(3, 4) = 12
@@ -73,14 +65,12 @@ Fortunately, a `partial` function for binding only arguments can be easily imple
 
 Like this:
 
-```js run
-*!*
+```js
 function partial(func, ...argsBound) {
   return function(...args) { // (*)
     return func.call(this, ...argsBound, ...args);
   }
 }
-*/!*
 
 // Usage:
 let user = {
@@ -105,7 +95,7 @@ The result of `partial(func[, arg1, arg2...])` call is a wrapper `(*)` that call
 
 So easy to do it with the spread operator, right?
 
-Also there's a ready [_.partial](https://lodash.com/docs#partial) implementation from lodash library.
+Also there's a ready [\_.partial](https://lodash.com/docs#partial) implementation from lodash library.
 
 ## Currying
 
@@ -115,8 +105,7 @@ Sometimes people mix up partial function application mentioned above with anothe
 
 Let's make `curry` function that performs currying for binary functions. In other words, it translates `f(a, b)` into `f(a)(b)`:
 
-```js run
-*!*
+```js
 function curry(func) {
   return function(a) {
     return function(b) {
@@ -124,7 +113,6 @@ function curry(func) {
     };
   };
 }
-*/!*
 
 // usage
 function sum(a, b) {
@@ -142,7 +130,7 @@ As you can see, the implementation is a series of wrappers.
 - When it is called like `sum(1)`, the argument is saved in the Lexical Environment, and a new wrapper is returned `function(b)`.
 - Then `sum(1)(2)` finally calls `function(b)` providing `2`, and it passes the call to the original multi-argument `sum`.
 
-More advanced implementations of currying like [_.curry](https://lodash.com/docs#curry) from lodash library do something more sophisticated. They return a wrapper that allows a function to be called normally when all arguments are supplied *or* returns a partial otherwise.
+More advanced implementations of currying like [\_.curry](https://lodash.com/docs#curry) from lodash library do something more sophisticated. They return a wrapper that allows a function to be called normally when all arguments are supplied *or* returns a partial otherwise.
 
 ```js
 function curry(f) {
@@ -271,19 +259,35 @@ For the call `curried(1)(2)(3)`:
 2. The wrapper `pass` is called with `(2)`: it takes previous args (`1`), concatenates them with what it got `(2)` and calls `curried(1, 2)` with them together.
 
     As the argument count is still less than 3, `curry` returns `pass`.
+    
 3. The wrapper `pass` is called again with `(3)`,  for the next call `pass(3)` takes previous args (`1`, `2`) and adds `3` to them, making the call `curried(1, 2, 3)` -- there are `3` arguments at last, they are given to the original function.
 
 If that's still not obvious, just trace the calls sequence in your mind or on the paper.
 
-```smart header="Fixed-length functions only"
-The currying requires the function to have a known fixed number of arguments.
-```
+<br>
 
-```smart header="A little more than currying"
+> ---
+
+**📌 Fixed-length functions only**
+
+The currying requires the function to have a known fixed number of arguments.
+
+> ---
+
+<br>
+<br>
+
+> ---
+
+**📌 A little more than currying**
+
 By definition, currying should convert `sum(a, b, c)` into `sum(a)(b)(c)`.
 
 But most implementations of currying in JavaScript are advanced, as described: they also keep the function callable in the multi-argument variant.
-```
+
+> ---
+
+<br>
 
 ## Summary
 
