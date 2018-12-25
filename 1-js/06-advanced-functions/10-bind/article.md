@@ -1,8 +1,3 @@
-libs:
-  - lodash
-
----
-
 # Function binding
 
 When using `setTimeout` with object methods or passing object methods along, there's a known problem: "losing `this`".
@@ -15,7 +10,7 @@ We already know that in JavaScript it's easy to lose `this`. Once a method is pa
 
 Here's how it may happen with `setTimeout`:
 
-```js run
+```js
 let user = {
   firstName: "John",
   sayHi() {
@@ -23,9 +18,7 @@ let user = {
   }
 };
 
-*!*
 setTimeout(user.sayHi, 1000); // Hello, undefined!
-*/!*
 ```
 
 As we can see, the output shows not "John" as `this.firstName`, but `undefined`!
@@ -45,7 +38,7 @@ The task is quite typical -- we want to pass an object method somewhere else (he
 
 The simplest solution is to use a wrapping function:
 
-```js run
+```js
 let user = {
   firstName: "John",
   sayHi() {
@@ -53,11 +46,9 @@ let user = {
   }
 };
 
-*!*
 setTimeout(function() {
   user.sayHi(); // Hello, John!
 }, 1000);
-*/!*
 ```
 
 Now it works, because it receives `user` from the outer lexical environment, and then calls the method normally.
@@ -72,8 +63,7 @@ Looks fine, but a slight vulnerability appears in our code structure.
 
 What if before `setTimeout` triggers (there's one second delay!) `user` changes value? Then, suddenly, it will call the wrong object!
 
-
-```js run
+```js
 let user = {
   firstName: "John",
   sayHi() {
@@ -93,7 +83,7 @@ The next solution guarantees that such thing won't happen.
 
 ## Solution 2: bind
 
-Functions provide a built-in method [bind](mdn:js/Function/bind) that allows to fix `this`.
+Functions provide a built-in method [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) that allows to fix `this`.
 
 The basic syntax is:
 
@@ -108,7 +98,7 @@ In other words, calling `boundFunc` is like `func` with fixed `this`.
 
 For instance, here `funcUser` passes a call to `func` with `this=user`:
 
-```js run  
+```js
 let user = {
   firstName: "John"
 };
@@ -117,17 +107,15 @@ function func() {
   alert(this.firstName);
 }
 
-*!*
 let funcUser = func.bind(user);
 funcUser(); // John  
-*/!*
 ```
 
 Here `func.bind(user)` as a "bound variant" of `func`, with fixed `this=user`.
 
 All arguments are passed to the original `func` "as is", for instance:
 
-```js run  
+```js
 let user = {
   firstName: "John"
 };
@@ -139,15 +127,12 @@ function func(phrase) {
 // bind this to user
 let funcUser = func.bind(user);
 
-*!*
 funcUser("Hello"); // Hello, John (argument "Hello" is passed, and this=user)
-*/!*
 ```
 
 Now let's try with an object method:
 
-
-```js run
+```js
 let user = {
   firstName: "John",
   sayHi() {
@@ -155,9 +140,7 @@ let user = {
   }
 };
 
-*!*
 let sayHi = user.sayHi.bind(user); // (*)
-*/!*
 
 sayHi(); // Hello, John!
 
@@ -168,7 +151,7 @@ In the line `(*)` we take the method `user.sayHi` and bind it to `user`. The `sa
 
 Here we can see that arguments are passed "as is", only `this` is fixed by `bind`:
 
-```js run
+```js
 let user = {
   firstName: "John",
   say(phrase) {
@@ -182,7 +165,12 @@ say("Hello"); // Hello, John ("Hello" argument is passed to say)
 say("Bye"); // Bye, John ("Bye" is passed to say)
 ```
 
-````smart header="Convenience method: `bindAll`"
+<br>
+
+> ---
+
+**📌 Convenience method: `bindAll`**
+
 If an object has many methods and we plan to actively pass it around, then we could bind them all in a loop:
 
 ```js
@@ -194,7 +182,10 @@ for (let key in user) {
 ```
 
 JavaScript libraries also provide functions for convenient mass binding , e.g. [_.bindAll(obj)](http://lodash.com/docs#bindAll) in lodash.
-````
+
+> ---
+
+<br>
 
 ## Summary
 
