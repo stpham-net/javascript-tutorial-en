@@ -17,24 +17,25 @@ We didn't see them yet, because generally they do not show up. When we create a 
 
 First, let's see how to get those flags.
 
-The method [Object.getOwnPropertyDescriptor](mdn:js/Object/getOwnPropertyDescriptor) allows to query the *full* information about a property.
+The method [Object.getOwnPropertyDescriptor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor) allows to query the *full* information about a property.
 
 The syntax is:
+
 ```js
 let descriptor = Object.getOwnPropertyDescriptor(obj, propertyName);
 ```
 
-`obj`
-: The object to get information from.
+**`obj`**
+The object to get information from.
 
-`propertyName`
-: The name of the property.
+**`propertyName`**
+The name of the property.
 
 The returned value is a so-called "property descriptor" object: it contains the value and all the flags.
 
 For instance:
 
-```js run
+```js
 let user = {
   name: "John"
 };
@@ -52,7 +53,7 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 */
 ```
 
-To change the flags, we can use [Object.defineProperty](mdn:js/Object/defineProperty).
+To change the flags, we can use [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty).
 
 The syntax is:
 
@@ -60,24 +61,22 @@ The syntax is:
 Object.defineProperty(obj, propertyName, descriptor)
 ```
 
-`obj`, `propertyName`
-: The object and property to work on.
+**`obj`, `propertyName`**
+The object and property to work on.
 
-`descriptor`
-: Property descriptor to apply.
+**`descriptor`**
+Property descriptor to apply.
 
 If the property exists, `defineProperty` updates its flags. Otherwise, it creates the property with the given value and flags; in that case, if a flag is not supplied, it is assumed `false`.
 
 For instance, here a property `name` is created with all falsy flags:
 
-```js run
+```js
 let user = {};
 
-*!*
 Object.defineProperty(user, "name", {
   value: "John"
 });
-*/!*
 
 let descriptor = Object.getOwnPropertyDescriptor(user, 'name');
 
@@ -85,13 +84,11 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 /*
 {
   "value": "John",
-*!*
   "writable": false,
   "enumerable": false,
   "configurable": false
-*/!*
 }
- */
+*/
 ```
 
 Compare it with "normally created" `user.name` above: now all flags are falsy. If that's not what we want then we'd better set them to `true` in `descriptor`.
@@ -102,42 +99,35 @@ Now let's see effects of the flags by example.
 
 Let's make `user.name` read-only by changing `writable` flag:
 
-```js run
+```js
 let user = {
   name: "John"
 };
 
 Object.defineProperty(user, "name", {
-*!*
   writable: false
-*/!*
 });
 
-*!*
 user.name = "Pete"; // Error: Cannot assign to read only property 'name'...
-*/!*
 ```
 
 Now no one can change the name of our user, unless they apply their own `defineProperty` to override ours.
 
 Here's the same operation, but for the case when a property doesn't exist:
 
-```js run
+```js
 let user = { };
 
 Object.defineProperty(user, "name", {
-*!*
   value: "Pete",
   // for new properties need to explicitly list what's true
   enumerable: true,
   configurable: true
-*/!*
 });
 
 alert(user.name); // Pete
 user.name = "Alice"; // Error
 ```
-
 
 ## Non-enumerable
 
@@ -145,7 +135,7 @@ Now let's add a custom `toString` to `user`.
 
 Normally, a built-in `toString` for objects is non-enumerable, it does not show up in `for..in`. But if we add `toString` of our own, then by default it shows up in `for..in`, like this:
 
-```js run
+```js
 let user = {
   name: "John",
   toString() {
@@ -159,7 +149,7 @@ for (let key in user) alert(key); // name, toString
 
 If we don't like it, then we can set `enumerable:false`. Then it won't appear in `for..in` loop, just like the built-in one:
 
-```js run
+```js
 let user = {
   name: "John",
   toString() {
@@ -168,14 +158,10 @@ let user = {
 };
 
 Object.defineProperty(user, "toString", {
-*!*
   enumerable: false
-*/!*
 });
 
-*!*
 // Now our toString disappears:
-*/!*
 for (let key in user) alert(key); // name
 ```
 
@@ -193,7 +179,7 @@ A non-configurable property can not be deleted or altered with `defineProperty`.
 
 For instance, `Math.PI` is read-only, non-enumerable and non-configurable:
 
-```js run
+```js
 let descriptor = Object.getOwnPropertyDescriptor(Math, 'PI');
 
 alert( JSON.stringify(descriptor, null, 2 ) );
@@ -206,9 +192,10 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 }
 */
 ```
+
 So, a programmer is unable to change the value of `Math.PI` or overwrite it.
 
-```js run
+```js
 Math.PI = 3; // Error
 
 // delete Math.PI won't work either
@@ -218,7 +205,7 @@ Making a property non-configurable is a one-way road. We cannot change it back, 
 
 Here we are making `user.name` a "forever sealed" constant:
 
-```js run
+```js
 let user = { };
 
 Object.defineProperty(user, "name", {
@@ -227,23 +214,29 @@ Object.defineProperty(user, "name", {
   configurable: false
 });
 
-*!*
 // won't be able to change user.name or its flags
 // all this won't work:
 //   user.name = "Pete"
 //   delete user.name
 //   defineProperty(user, "name", ...)
 Object.defineProperty(user, "name", {writable: true}); // Error
-*/!*
 ```
 
-```smart header="Errors appear only in use strict"
+<br>
+
+> ---
+
+**📌 Errors appear only in use strict**
+
 In the non-strict mode, no errors occur when writing to read-only properties and such. But the operation still won't succeed. Flag-violating actions are just silently ignored in non-strict.
-```
+
+> ---
+
+<br>
 
 ## Object.defineProperties
 
-There's a method [Object.defineProperties(obj, descriptors)](mdn:js/Object/defineProperties) that allows to define many properties at once.
+There's a method [Object.defineProperties(obj, descriptors)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) that allows to define many properties at once.
 
 The syntax is:
 
@@ -269,7 +262,7 @@ So, we can set many properties at once.
 
 ## Object.getOwnPropertyDescriptors
 
-To get all property descriptors at once, we can use the method [Object.getOwnPropertyDescriptors(obj)](mdn:js/Object/getOwnPropertyDescriptors).
+To get all property descriptors at once, we can use the method [Object.getOwnPropertyDescriptors(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors).
 
 Together with `Object.defineProperties` it can be used as a "flags-aware" way of cloning an object:
 
@@ -295,24 +288,24 @@ Property descriptors work at the level of individual properties.
 
 There are also methods that limit access to the *whole* object:
 
-[Object.preventExtensions(obj)](mdn:js/Object/preventExtensions)
-: Forbids to add properties to the object.
+**[Object.preventExtensions(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)**
+Forbids to add properties to the object.
 
-[Object.seal(obj)](mdn:js/Object/seal)
-: Forbids to add/remove properties, sets for all existing properties `configurable: false`.
+**[Object.seal(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal)**
+Forbids to add/remove properties, sets for all existing properties `configurable: false`.
 
-[Object.freeze(obj)](mdn:js/Object/freeze)
-: Forbids to add/remove/change properties, sets for all existing properties `configurable: false, writable: false`.
+**[Object.freeze(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)**
+Forbids to add/remove/change properties, sets for all existing properties `configurable: false, writable: false`.
 
 And also there are tests for them:
 
-[Object.isExtensible(obj)](mdn:js/Object/isExtensible)
-: Returns `false` if adding properties is forbidden, otherwise `true`.
+**[Object.isExtensible(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible)**
+Returns `false` if adding properties is forbidden, otherwise `true`.
 
-[Object.isSealed(obj)](mdn:js/Object/isSealed)
-: Returns `true` if adding/removing properties is forbidden, and all existing properties have `configurable: false`.
+**[Object.isSealed(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isSealed)**
+Returns `true` if adding/removing properties is forbidden, and all existing properties have `configurable: false`.
 
-[Object.isFrozen(obj)](mdn:js/Object/isFrozen)
-: Returns `true` if adding/removing/changing properties is forbidden, and all current properties are `configurable: false, writable: false`.
+**[Object.isFrozen(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen)**
+Returns `true` if adding/removing/changing properties is forbidden, and all current properties are `configurable: false, writable: false`.
 
 These methods are rarely used in practice.
