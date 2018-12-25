@@ -1,16 +1,16 @@
-# Decorators and forwarding, call/apply
+# Decorators (người trang trí) and forwarding, call/apply
 
-JavaScript gives exceptional flexibility when dealing with functions. They can be passed around, used as objects, and now we'll see how to *forward* calls between them and *decorate* them.
+JavaScript mang lại sự linh hoạt đặc biệt khi xử lý các functions. Chúng có thể được truyền (passed) xung quanh, được sử dụng làm đối tượng và bây giờ chúng ta sẽ xem cách *forward* cuộc gọi giữa chúng và *decorate (trang trí)* chúng.
 
-## Transparent caching
+## Bộ nhớ đệm trong suốt (Transparent caching)
 
-Let's say we have a function `slow(x)` which is CPU-heavy, but its results are stable. In other words, for the same `x` it always returns the same result.
+Giả sử chúng ta có một hàm `slow(x)` ngốn CPU, nhưng kết quả của nó là ổn định. Nói cách khác, với cùng một `x`, nó luôn trả về cùng một kết quả.
 
-If the function is called often, we may want to cache (remember) the results for different `x` to avoid spending extra-time on recalculations.
+Nếu hàm được gọi thường xuyên, chúng ta có thể muốn lưu trữ (ghi nhớ) các kết quả cho các `x` khác nhau để tránh mất thêm thời gian cho việc tính toán lại.
 
-But instead of adding that functionality into `slow()` we'll create a wrapper. As we'll see, there are many benefits of doing so.
+Nhưng thay vì thêm chức năng đó vào `slow()`, chúng ta sẽ tạo một trình bao bọc (wrapper). Như chúng ta sẽ thấy, có rất nhiều lợi ích của việc đó.
 
-Here's the code, and explanations follow:
+Đây là mã và giải thích theo sau:
 
 ```js
 function slow(x) {
@@ -43,32 +43,32 @@ alert( slow(2) ); // slow(2) is cached
 alert( "Again: " + slow(2) ); // the same as the previous line
 ```
 
-In the code above `cachingDecorator` is a *decorator*: a special function that takes another function and alters its behavior.
+Trong đoạn mã trên `cachingDecorator` là một *decorator*: một hàm đặc biệt có function khác và thay đổi hành vi của nó.
 
-The idea is that we can call `cachingDecorator` for any function, and it will return the caching wrapper. That's great, because we can have many functions that could use such a feature, and all we need to do is to apply `cachingDecorator` to them.
+Ý tưởng là chúng ta có thể gọi `cachingDecorator` cho bất kỳ function nào và nó sẽ trả về caching wrapper. Điều đó thật tuyệt vời, bởi vì chúng ta có thể có nhiều functions có thể sử dụng một tính năng như vậy và tất cả những gì chúng ta cần làm là áp dụng `cachingDecorator` cho chúng.
 
-By separating caching from the main function code we also keep the main code simpler.
+Bằng cách tách bộ đệm khỏi mã function chính, chúng ta cũng giữ mã chính đơn giản hơn.
 
-Now let's get into details of how it works.
+Bây giờ hãy đi vào chi tiết về cách thức hoạt động của nó.
 
-The result of `cachingDecorator(func)` is a "wrapper": `function(x)` that "wraps" the call of `func(x)` into caching logic:
+Kết quả của `cachingDecorator(func)` là một "wrapper": `function(x)` để "wraps" cuộc gọi của `func(x)` thành caching logic:
 
 ![](decorator-makecaching-wrapper.png)
 
-As we can see, the wrapper returns the result of `func(x)` "as is". From an outside code, the wrapped `slow` function still does the same. It just got a caching aspect added to its behavior.
+Như chúng ta có thể thấy, the wrapper trả về kết quả của `func(x)` "as is". Từ một outside code, the wrapped `slow` function vẫn làm như vậy. Nó chỉ có một khía cạnh bộ nhớ đệm được thêm vào hành vi của nó.
 
-To summarize, there are several benefits of using a separate `cachingDecorator` instead of altering the code of `slow` itself:
+Tóm lại, có một số lợi ích của việc sử dụng một `cachingDecorator` riêng biệt thay vì thay đổi mã của chính `slow`:
 
-- The `cachingDecorator` is reusable. We can apply it to another function.
-- The caching logic is separate, it did not increase the complexity of `slow` itself (if there were any).
-- We can combine multiple decorators if needed (other decorators will follow).
+- `cachingDecorator` có thể tái sử dụng. Chúng ta có thể áp dụng nó cho một function khác.
+- The caching logic là riêng biệt, nó không làm tăng độ phức tạp của chính `slow` (nếu có).
+- Chúng ta có thể kết hợp nhiều decorators nếu cần (các decorators khác sẽ làm theo).
 
 
-## Using "func.call" for the context
+## Sử dụng "func.call" cho ngữ cảnh
 
-The caching decorator mentioned above is not suited to work with object methods.
+The caching decorator được đề cập ở trên không phù hợp để làm việc với các phương thức đối tượng.
 
-For instance, in the code below `worker.slow()` stops working after the decoration:
+Chẳng hạn, trong đoạn mã dưới đây `worker.slow()` dừng hoạt động sau khi trang trí (decoration):
 
 ```js
 // we'll make worker.slow caching
@@ -104,41 +104,41 @@ worker.slow = cachingDecorator(worker.slow); // now make it caching
 alert( worker.slow(2) ); // Whoops! Error: Cannot read property 'someMethod' of undefined
 ```
 
-The error occurs in the line `(*)` that tries to access `this.someMethod` and fails. Can you see why?
+Lỗi xảy ra trong dòng `(*)` cố truy cập `this.someMethod` và không thành công. Bạn có thể thấy tại sao không?
 
-The reason is that the wrapper calls the original function as `func(x)` in the line `(**)`. And, when called like that, the function gets `this = undefined`.
+Lý do là wrapper gọi original function là `func(x)` trong dòng `(**)`. Và, khi được gọi như vậy, hàm sẽ nhận `this = undefined`.
 
-We would observe a similar symptom if we tried to run:
+Chúng ta sẽ quan sát một triệu chứng tương tự nếu chúng ta cố gắng chạy:
 
 ```js
 let func = worker.slow;
 func(2);
 ```
 
-So, the wrapper passes the call to the original method, but without the context `this`. Hence the error.
+Vì vậy, wrapper chuyển cuộc gọi đến original method, nhưng không có ngữ cảnh `this`. Do đó có lỗi.
 
-Let's fix it.
+Hãy sửa nó.
 
-There's a special built-in function method [func.call(context, ...args)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) that allows to call a function explicitly setting `this`.
+Có một phương thức hàm tích hợp đặc biệt [func.call(context, ...args)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) cho phép gọi một hàm rõ ràng là có thiết lập `this`.
 
-The syntax is:
+Cú pháp là:
 
 ```js
 func.call(context, arg1, arg2, ...)
 ```
 
-It runs `func` providing the first argument as `this`, and the next as the arguments.
+Nó chạy `func` cung cấp đối số đầu tiên là `this`, và tiếp theo là các đối số.
 
-To put it simply, these two calls do almost the same:
+Nói một cách đơn giản, hai cuộc gọi này thực hiện gần như giống nhau:
 
 ```js
 func(1, 2, 3);
 func.call(obj, 1, 2, 3)
 ```
 
-They both call `func` with arguments `1`, `2` and `3`. The only difference is that `func.call` also sets `this` to `obj`.
+Cả hai đều gọi `func` với các đối số `1`, `2` và `3`. Sự khác biệt duy nhất là `func.call` cũng đặt `this` thành `obj`.
 
-As an example, in the code below we call `sayHi` in the context of different objects: `sayHi.call(user)` runs `sayHi` providing `this=user`, and the next line sets `this=admin`:
+Ví dụ, trong đoạn mã dưới đây, chúng ta gọi `sayHi` trong ngữ cảnh của các đối tượng khác nhau: `sayHi.call(user)` chạy `sayHi` cung cấp `this=user`, và dòng tiếp theo đặt `this=admin`:
 
 ```js
 function sayHi() {
@@ -153,7 +153,7 @@ sayHi.call( user ); // this = John
 sayHi.call( admin ); // this = Admin
 ```
 
-And here we use `call` to call `say` with the given context and phrase:
+Và ở đây, chúng ta sử dụng `call` để gọi `say` với ngữ cảnh và cụm từ đã cho:
 
 ```js
 function say(phrase) {
@@ -166,7 +166,7 @@ let user = { name: "John" };
 say.call( user, "Hello" ); // John: Hello
 ```
 
-In our case, we can use `call` in the wrapper to pass the context to the original function:
+Trong trường hợp của chúng ta, chúng ta có thể sử dụng `call` trong wrapper để truyền ngữ cảnh cho hàm ban đầu:
 
 ```js
 let worker = {
@@ -198,19 +198,19 @@ alert( worker.slow(2) ); // works
 alert( worker.slow(2) ); // works, doesn't call the original (cached)
 ```
 
-Now everything is fine.
+Bây giờ mọi thứ đều ổn.
 
-To make it all clear, let's see more deeply how `this` is passed along:
+Để làm cho tất cả rõ ràng, chúng ta hãy xem sâu hơn cách thức `this` được truyền qua:
 
-1. After the decoration `worker.slow` is now the wrapper `function (x) { ... }`.
-2. So when `worker.slow(2)` is executed, the wrapper gets `2` as an argument and `this=worker` (it's the object before dot).
-3. Inside the wrapper, assuming the result is not yet cached, `func.call(this, x)` passes the current `this` (`=worker`) and the current argument (`=2`) to the original method.
+1. Sau phần trang trí (decoration) `worker.slow` bây giờ là wrapper `function (x) { ... }`.
+2. Vì vậy, khi `worker.slow(2)` được thực thi, wrapper lấy `2` làm đối số và `this=worker` (nó là đối tượng trước dấu chấm).
+3. Bên trong wrapper, giả sử kết quả chưa được lưu vào bộ đệm, `func.call(this, x)` truyền `this` (`=worker`) hiện tại và đối số hiện tại (`=2`) cho original method.
 
 ## Going multi-argument with "func.apply"
 
-Now let's make `cachingDecorator` even more universal. Till now it was working only with single-argument functions.
+Bây giờ chúng ta hãy làm cho `cachingDecorator` thậm chí còn phổ quát hơn. Cho đến bây giờ nó chỉ hoạt động với các hàm đối số đơn.
 
-Now how to cache the multi-argument `worker.slow` method?
+Bây giờ làm thế nào để lưu trữ phương thức `worker.slow` đa đối số?
 
 ```js
 let worker = {
@@ -223,41 +223,41 @@ let worker = {
 worker.slow = cachingDecorator(worker.slow);
 ```
 
-We have two tasks to solve here.
+Chúng ta có hai nhiệm vụ để giải quyết ở đây.
 
-First is how to use both arguments `min` and `max` for the key in `cache` map. Previously, for a single argument `x` we could just `cache.set(x, result)` to save the result and `cache.get(x)` to retrieve it. But now we need to remember the result for a *combination of arguments* `(min,max)`. The native `Map` takes single value only as the key.
+Đầu tiên là cách sử dụng cả hai đối số `min` và `max` cho khóa trong `cache` map. Trước đây, đối với một đối số `x`, chúng ta chỉ có thể `cache.set(x, result)` để lưu kết quả và `cache.get(x)` để truy xuất nó. Nhưng bây giờ chúng ta cần nhớ kết quả cho một *kết hợp các đối số* `(min,max)`. `Map` bản địa chỉ lấy một giá trị duy nhất làm khóa.
 
-There are many solutions possible:
+Có nhiều giải pháp khả thi:
 
-1. Implement a new (or use a third-party) map-like data structure that is more versatile and allows multi-keys.
-2. Use nested maps: `cache.set(min)` will be a `Map` that stores the pair `(max, result)`. So we can get `result` as `cache.get(min).get(max)`.
-3. Join two values into one. In our particular case we can just use a string `"min,max"` as the `Map` key. For flexibility, we can allow to provide a *hashing function* for the decorator, that knows how to make one value from many.
+1. Triển khai một cấu trúc dữ liệu map-like (hoặc sử dụng của bên thứ ba) mới linh hoạt hơn và cho phép multi-keys.
+2. Sử dụng các nested maps: `cache.set(min)` sẽ là một `Map` lưu trữ cặp `(max, result)`. Vì vậy, chúng ta có thể nhận được `result` là `cache.get(min).get(max)`.
+3. Kết hợp hai giá trị thành một. Trong trường hợp cụ thể của chúng ta, chúng ta chỉ có thể sử dụng một chuỗi `"min,max"` làm khóa `Map`. Để linh hoạt, chúng ta có thể cho phép cung cấp *hashing function* cho decorator, biết cách tạo một giá trị từ nhiều giá trị.
 
-For many practical applications, the 3rd variant is good enough, so we'll stick to it.
+Đối với nhiều ứng dụng thực tế, biến thể thứ 3 là đủ tốt, vì vậy chúng ta sẽ sử dụng nó.
 
-The second task to solve is how to pass many arguments to `func`. Currently, the wrapper `function(x)` assumes a single argument, and `func.call(this, x)` passes it.
+Nhiệm vụ thứ hai cần giải quyết là làm thế nào để truyền nhiều đối số cho `func`. Hiện tại, the wrapper `function(x)` đang có một đối số duy nhất và `func.call(this, x)` truyền nó.
 
-Here we can use another built-in method [func.apply](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply).
+Ở đây, chúng ta có thể sử dụng một phương thức tích hợp khác [func.apply](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply).
 
-The syntax is:
+Cú pháp là:
 
 ```js
 func.apply(context, args)
 ```
 
-It runs the `func` setting `this=context` and using an array-like object `args` as the list of arguments.
+Nó chạy `func` cài đặt `this=context` và sử dụng một array-like object `args` làm danh sách các đối số.
 
 
-For instance, these two calls are almost the same:
+Chẳng hạn, hai cuộc gọi này gần như giống nhau:
 
 ```js
 func(1, 2, 3);
 func.apply(context, [1, 2, 3])
 ```
 
-Both run `func` giving it arguments `1,2,3`. But `apply` also sets `this=context`.
+Cả hai đều chạy `func` cho nó các đối số `1,2,3`. Nhưng `apply` cũng đặt `this=context`.
 
-For instance, here `say` is called with `this=user` and `messageData` as a list of arguments:
+Chẳng hạn, ở đây `say` được gọi với `this=user` và `messageData` như một danh sách các đối số:
 
 ```js
 function say(time, phrase) {
@@ -272,11 +272,11 @@ let messageData = ['10:00', 'Hello']; // become time and phrase
 say.apply(user, messageData); // [10:00] John: Hello (this=user)
 ```
 
-The only syntax difference between `call` and `apply` is that `call` expects a list of arguments, while `apply` takes an array-like object with them.
+Sự khác biệt cú pháp duy nhất giữa `call` và `apply` là `call` mong đợi một danh sách các đối số, trong khi `apply` có một array-like object với chúng.
 
-We already know the spread operator `...` from the chapter **rest-parameters-spread-operator** that can pass an array (or any iterable) as a list of arguments. So if we use it with `call`, we can achieve almost the same as `apply`.
+Chúng ta đã biết toán tử trải rộng (spread operator) `...` từ chương **rest-parameters-spread-operator** có thể truyền một mảng (hoặc bất kỳ iterable) dưới dạng danh sách các đối số. Vì vậy, nếu chúng ta sử dụng nó với `call`, chúng ta có thể đạt được gần giống như `apply`.
 
-These two calls are almost equivalent:
+Hai cuộc gọi này gần như tương đương nhau:
 
 ```js
 let args = [1, 2, 3];
@@ -285,16 +285,16 @@ func.call(context, ...args); // pass an array as list with spread operator
 func.apply(context, args);   // is same as using apply
 ```
 
-If we look more closely, there's a minor difference between such uses of `call` and `apply`.
+Nếu chúng ta xem xét kỹ hơn, có một sự khác biệt nhỏ giữa việc sử dụng `call` và `apply` như vậy.
 
-- The spread operator `...` allows to pass *iterable* `args` as the list to `call`.
-- The `apply` accepts only *array-like* `args`.
+- Toán tử trải rộng `...` cho phép chuyển *iterable* `args` làm danh sách cho `call`.
+- `apply` chỉ chấp nhận *array-like* `args`.
 
-So, these calls complement each other. Where we expect an iterable, `call` works, where we expect an array-like, `apply` works.
+Vì vậy, những cuộc gọi này bổ sung cho nhau. Nơi chúng ta mong đợi một iterable, `call` hoạt động, nơi chúng ta mong đợi một array-like, `apply` hoạt động.
 
-And if `args` is both iterable and array-like, like a real array, then we technically could use any of them, but `apply` will probably be faster, because it's a single operation. Most JavaScript engines internally optimize is better than a pair `call + spread`.
+Và nếu `args` vừa có thể iterable vừa array-like, giống như một mảng thực, thì về mặt kỹ thuật chúng ta có thể sử dụng bất kỳ trong số chúng, nhưng `apply` có thể sẽ nhanh hơn, bởi vì đó là một thao tác duy nhất. Hầu hết các JavaScript engines tối ưu hóa nội bộ tốt hơn một cặp `call + spread`.
 
-One of the most important uses of `apply` is passing the call to another function, like this:
+Một trong những cách sử dụng quan trọng nhất của `apply` là chuyển cuộc gọi đến một function khác, như thế này:
 
 ```js
 let wrapper = function() {
@@ -302,11 +302,11 @@ let wrapper = function() {
 };
 ```
 
-That's called *call forwarding*. The `wrapper` passes everything it gets: the context `this` and arguments to `anotherFunction` and returns back its result.
+Đó gọi là *chuyển tiếp cuộc gọi (call forwarding)*. The `wrapper` chuyển mọi thứ nó nhận được: bối cảnh `this` và các đối số cho `anotherFunction` và trả về kết quả của nó.
 
-When an external code calls such `wrapper`, it is indistinguishable from the call of the original function.
+Khi một external code gọi như là `wrapper`, nó không thể phân biệt được cuộc gọi là từ original function.
 
-Now let's bake it all into the more powerful `cachingDecorator`:
+Bây giờ, Bây giờ hãy nướng tất cả thành `cachingDecorator` mạnh mẽ hơn:
 
 ```js
 let worker = {
@@ -341,17 +341,17 @@ alert( worker.slow(3, 5) ); // works
 alert( "Again " + worker.slow(3, 5) ); // same (cached)
 ```
 
-Now the wrapper operates with any number of arguments.
+Bây giờ wrapper hoạt động với bất kỳ số lượng đối số.
 
-There are two changes:
+Có hai thay đổi:
 
-- In the line `(*)` it calls `hash` to create a single key from `arguments`. Here we use a simple "joining" function that turns arguments `(3, 5)` into the key `"3,5"`. More complex cases may require other hashing functions.
-- Then `(**)` uses `func.apply` to pass both the context and all arguments the wrapper got (no matter how many) to the original function.
+- Trong dòng `(*)`, nó gọi `hash` để tạo một khóa duy nhất từ `arguments`. Ở đây chúng ta sử dụng một hàm "nối" đơn giản để biến các đối số `(3, 5)` thành khóa `"3,5"`. Các trường hợp phức tạp hơn có thể yêu cầu các hàm băm khác.
+- Sau đó `(**)` sử dụng `func.apply` để truyền cả bối cảnh và tất cả các đối số mà wrapper nhận được (bất kể có bao nhiêu) cho hàm ban đầu.
 
 
-## Borrowing a method
+## Mượn một phương thức (Borrowing a method)
 
-Now let's make one more minor improvement in the hashing function:
+Bây giờ, hãy thực hiện thêm một cải tiến nhỏ trong hashing function:
 
 ```js
 function hash(args) {
@@ -359,9 +359,9 @@ function hash(args) {
 }
 ```
 
-As of now, it works only on two arguments. It would be better if it could glue any number of `args`.
+Đến bây giờ, nó chỉ hoạt động trên hai đối số. Sẽ tốt hơn nếu nó có thể dán bất kỳ số lượng `args` nào.
 
-The natural solution would be to use [arr.join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method:
+Giải pháp tự nhiên sẽ là sử dụng phương thức [arr.join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join):
 
 ```js
 function hash(args) {
@@ -369,9 +369,9 @@ function hash(args) {
 }
 ```
 
-...Unfortunately, that won't work. Because we are calling `hash(arguments)` and `arguments` object is both iterable and array-like, but not a real array.
+...Thật không may, điều đó sẽ không làm việc. Bởi vì chúng ta đang gọi đối tượng `hash(arguments)` và `arguments` object vừa có thể iterable vừa array-like, nhưng không phải là một mảng thực sự.
 
-So calling `join` on it would fail, as we can see below:
+Vì vậy, việc gọi `join` vào nó sẽ thất bại, như chúng ta có thể thấy dưới đây:
 
 ```js
 function hash() {
@@ -381,7 +381,7 @@ function hash() {
 hash(1, 2);
 ```
 
-Still, there's an easy way to use array join:
+Tuy nhiên, có một cách dễ dàng để sử dụng array join:
 
 ```js
 function hash() {
@@ -391,40 +391,40 @@ function hash() {
 hash(1, 2);
 ```
 
-The trick is called *method borrowing*.
+Thủ thuật được gọi là *method borrowing*.
 
-We take (borrow) a join method from a regular array `[].join`. And use `[].join.call` to run it in the context of `arguments`.
+Chúng tôi lấy (mượn) một phương thức nối từ một mảng thông thường `[].join`. Và sử dụng `[].join.call` để chạy nó trong ngữ cảnh của `arguments`.
 
-Why does it work?
+Tại sao nó hoạt động?
 
-That's because the internal algorithm of the native method `arr.join(glue)` is very simple.
+Đó là bởi vì thuật toán bên trong của phương thức gốc `arr.join(glue)` rất đơn giản.
 
-Taken from the specification almost "as-is":
+Lấy từ đặc tả gần như "nguyên trạng":
 
-1. Let `glue` be the first argument or, if no arguments, then a comma `","`.
-2. Let `result` be an empty string.
-3. Append `this[0]` to `result`.
-4. Append `glue` and `this[1]`.
-5. Append `glue` and `this[2]`.
-6. ...Do so until `this.length` items are glued.
+1. Đặt `glue` là đối số đầu tiên hoặc, nếu không có đối số, thì dấu phẩy `","`.
+2. Đặt `result` là một chuỗi rỗng.
+3. Nối `this[0]` vào `result`.
+4. Nối `glue` và `this[1]`.
+5. Nối `glue` và `this[2]`.
+6. ...Làm như vậy cho đến khi các items `this.length` đều được dán.
 7. Return `result`.
 
-So, technically it takes `this` and joins `this[0]`, `this[1]` ...etc together. It's intentionally written in a way that allows any array-like `this` (not a coincidence, many methods follow this practice). That's why it also works with `this=arguments`.
+Vì vậy, về mặt kỹ thuật, nó cần `this` và joins `this[0]`, `this[1]` ...etc vào với nhau. Nó được viết một cách có chủ ý theo cách cho phép bất kỳ array-like `this` (không phải là trùng hợp ngẫu nhiên, nhiều phương thức tuân theo thực tiễn này). Đó là lý do tại sao nó cũng hoạt động với `this=arguments`.
 
-## Summary
+## Tóm lược
 
-*Decorator* is a wrapper around a function that alters its behavior. The main job is still carried out by the function.
+*Decorator* là một wrapper xung quanh một function làm thay đổi hành vi của nó. Công việc chính vẫn được thực hiện bởi function.
 
-It is generally safe to replace a function or a method with a decorated one, except for one little thing. If the original function had properties on it, like `func.calledCount` or whatever, then the decorated one will not provide them. Because that is a wrapper. So one needs to be careful if one uses them. Some decorators provide their own properties.
+Nói chung là an toàn để thay thế một function hoặc một phương thức bằng một decorated, ngoại trừ một điều nhỏ. Nếu original function có các thuộc tính trên nó, như `func.calledCount` hoặc bất cứ thứ gì, thì decorated sẽ không cung cấp chúng. Bởi vì đó là một wrapper. Vì vậy, người ta cần phải cẩn thận nếu sử dụng chúng. Một số decorators cung cấp thuộc tính (properties) riêng của chúng.
 
-Decorators can be seen as "features" or "aspects" that can be added to a function. We can add one or add many. And all this without changing its code!
+Decorators có thể được xem là "tính năng" hoặc "khía cạnh" có thể được thêm vào một function. Chúng ta có thể thêm một hoặc thêm nhiều. Và tất cả điều này không thay đổi mã của nó!
 
-To implement `cachingDecorator`, we studied methods:
+Để thực hiện `cachingDecorator`, chúng ta đã nghiên cứu các phương thức:
 
-- [func.call(context, arg1, arg2...)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) -- calls `func` with given context and arguments.
-- [func.apply(context, args)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) -- calls `func` passing `context` as `this` and array-like `args` into a list of arguments.
+- [func.call(context, arg1, arg2...)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) -- gọi `func` với bối cảnh và đối số đã cho.
+- [func.apply(context, args)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) -- gọi `func` chuyển tiếp `context` như `this` và array-like `args` thành một danh sách các đối số.
 
-The generic *call forwarding* is usually done with `apply`:
+*Chuyển tiếp cuộc gọi (call forwarding)* chung thường được thực hiện với `apply`:
 
 ```js
 let wrapper = function() {
@@ -432,6 +432,6 @@ let wrapper = function() {
 }
 ```
 
-We also saw an example of *method borrowing* when we take a method from an object and `call` it in the context of another object. It is quite common to take array methods and apply them to arguments. The alternative is to use rest parameters object that is a real array.
+Chúng ta cũng đã thấy một ví dụ về *mượn phương thức (method borrowing)* khi chúng ta lấy một phương thức từ một đối tượng và `call` nó trong ngữ cảnh của một đối tượng khác. Nó là khá phổ biến để thực hiện các phương thức mảng và áp dụng chúng cho các đối số. Thay thế là sử dụng rest parameters object là một mảng thực.
 
-There are many decorators there in the wild. Check how well you got them by solving the tasks of this chapter.
+Có rất nhiều decorators có trong tự nhiên. Kiểm tra xem bạn hiểu chúng tốt như thế nào bằng cách giải quyết các nhiệm vụ của chương này.
