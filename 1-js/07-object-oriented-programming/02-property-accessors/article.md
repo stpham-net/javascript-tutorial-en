@@ -1,15 +1,15 @@
 
 # Property getters and setters
 
-There are two kinds of properties.
+Có hai kiểu thuộc tính.
 
-The first kind is *data properties*. We already know how to work with them. Actually, all properties that we've been using till now were data properties.
+Kiểu đầu tiên là *thuộc tính dữ liệu*. Chúng ta đã biết làm thế nào để làm việc với họ. Trên thực tế, tất cả các thuộc tính mà chúng ta đang sử dụng cho đến nay là các thuộc tính dữ liệu.
 
-The second type of properties is something new. It's *accessor properties*. They are essentially functions that work on getting and setting a value, but look like regular properties to an external code.
+Kiểu thuộc tính thứ hai là một cái gì đó mới. Đó là *accessor properties*. Chúng cơ bản là các hàm hoạt động trên việc getting và setting một giá trị, nhưng trông giống như các thuộc tính thông thường đối với một external code.
 
 ## Getters and setters
 
-Accessor properties are represented by "getter" and "setter" methods. In an object literal they are denoted by `get` and `set`:
+Accessor properties được biểu diễn bằng các phương thức "getter" và "setter". Trong một object literal, chúng được ký hiệu là `get` và `set`:
 
 ```js
 let obj = {
@@ -23,9 +23,9 @@ let obj = {
 };
 ```
 
-The getter works when `obj.propName` is read, the setter -- when it is assigned.
+The getter hoạt động khi `obj.propName` được đọc, the setter -- khi nó được gán.
 
-For instance, we have a `user` object with `name` and `surname`:
+Chẳng hạn, chúng ta có một đối tượng `user` với `name` và `surname`:
 
 ```js
 let user = {
@@ -34,7 +34,7 @@ let user = {
 };
 ```
 
-Now we want to add a "fullName" property, that should be "John Smith". Of course, we don't want to copy-paste existing information, so we can implement it as an accessor:
+Bây giờ chúng ta muốn thêm một thuộc tính "fullName", đó phải là "John Smith". Tất nhiên, chúng ta  không muốn sao copy-paste thông tin hiện có, vì vậy chúng ta có thể triển khai nó như một accessor (người truy cập):
 
 ```js
 let user = {
@@ -49,11 +49,11 @@ let user = {
 alert(user.fullName); // John Smith
 ```
 
-From outside, an accessor property looks like a regular one. That's the idea of accessor properties. We don't *call* `user.fullName` as a function, we *read* it normally: the getter runs behind the scenes.
+Từ bên ngoài, một accessor property trông giống như một thuộc tính thông thường. Đó là ý tưởng của các accessor properties. Chúng ta không *gọi* `user.fullName` là một hàm, chúng ta *đọc* nó bình thường là: the getter chạy phía sau hậu trường.
 
-As of now, `fullName` has only a getter. If we attempt to assign `user.fullName=`, there will be an error.
+Cho đến bây giờ, `fullName` chỉ có một getter. Nếu chúng ta cố gắng gán `user.fullName=`, sẽ có một lỗi.
 
-Let's fix it by adding a setter for `user.fullName`:
+Hãy sửa nó bằng cách thêm một setter cho `user.fullName`:
 
 ```js
 let user = {
@@ -76,19 +76,19 @@ alert(user.name); // Alice
 alert(user.surname); // Cooper
 ```
 
-Now we have a "virtual" property. It is readable and writable, but in fact does not exist.
+Bây giờ chúng ta có một "virtual" property. Nó có thể đọc và ghi được, nhưng thực tế không tồn tại.
 
 <br>
 
 > ---
 
-**📌 Accessor properties are only accessible with get/set**
+**📌 Accessor properties chỉ có thể truy cập được với get/set**
 
-A property can either be a "data property" or an "accessor property", but not both.
+Một thuộc tính có thể là một "data property" hoặc một "accessor property", nhưng không phải cả hai.
 
-Once a property is defined with `get prop()` or `set prop()`, it's an accessor property. So there must be a getter to read it, and must be a setter if we want to assign it.
+Khi một thuộc tính được định nghĩa bằng `get prop()` hoặc `set prop()`, đó là một accessor property. Vì vậy, phải có một getter để đọc nó, và phải là một setter nếu chúng ta muốn gán nó.
 
-Sometimes it's normal that there's only a setter or only a getter. But the property won't be readable or writable in that case.
+Đôi khi, bình thường chỉ có một setter hoặc chỉ một getter. Nhưng thuộc tính sẽ không thể đọc được hoặc ghi được trong trường hợp đó.
 
 > ---
 
@@ -96,18 +96,18 @@ Sometimes it's normal that there's only a setter or only a getter. But the prope
 
 ## Accessor descriptors
 
-Descriptors for accessor properties are different -- as compared with data properties.
+Các mô tả (descriptors) cho các accessor properties là khác nhau -- so với các thuộc tính dữ liệu.
 
-For accessor properties, there is no `value` and `writable`, but instead there are `get` and `set` functions.
+Đối với các accessor properties, không có `value` và `writable`, mà thay vào đó là các hàm `get` và `set`.
 
-So an accessor descriptor may have:
+Vì vậy, một accessor descriptor có thể có:
 
-- **`get`** -- a function without arguments, that works when a property is read,
-- **`set`** -- a function with one argument, that is called when the property is set,
-- **`enumerable`** -- same as for data properties,
-- **`configurable`** -- same as for data properties.
+- **`get`** -- một hàm không có đối số, hoạt động khi một thuộc tính được đọc,
+- **`set`** -- một hàm có một đối số, được gọi khi thuộc tính được đặt,
+- **`enumerable`** -- giống như đối với các thuộc tính dữ liệu,
+- **`configurable`** -- giống như đối với các thuộc tính dữ liệu.
 
-For instance, to create an accessor `fullName` with `defineProperty`, we can pass a descriptor with `get` and `set`:
+Chẳng hạn, để tạo một accessor `fullName` với `defineProperty`, chúng ta có thể truyền một descriptor với `get` và `set`:
 
 ```js
 let user = {
@@ -130,9 +130,9 @@ alert(user.fullName); // John Smith
 for(let key in user) alert(key); // name, surname
 ```
 
-Please note once again that a property can be either an accessor or a data property, not both.
+Xin lưu ý một lần nữa rằng một thuộc tính có thể là một accessor hoặc một thuộc tính dữ liệu, không phải cả hai.
 
-If we try to supply both `get` and `value` in the same descriptor, there will be an error:
+Nếu chúng ta cố gắng cung cấp cả `get` và `value` trong cùng một descriptor, sẽ có một lỗi:
 
 ```js
 // Error: Invalid property descriptor.
@@ -147,9 +147,9 @@ Object.defineProperty({}, 'prop', {
 
 ## Smarter getters/setters
 
-Getters/setters can be used as wrappers over "real" property values to gain more control over them.
+Getters/setters có thể được sử dụng như các wrappers trên các giá trị thuộc tính "thực" để có thêm quyền kiểm soát chúng.
 
-For instance, if we want to forbid too short names for `user`, we can store `name` in a special property `_name`. And filter assignments in the setter:
+Chẳng hạn, nếu chúng ta muốn cấm các tên quá ngắn cho `user`, chúng ta có thể lưu trữ `name` trong một thuộc tính đặc biệt `_name`. Và lọc các phép gán trong setter:
 
 ```js
 let user = {
@@ -172,14 +172,14 @@ alert(user.name); // Pete
 user.name = ""; // Name is too short...
 ```
 
-Technically, the external code may still access the name directly by using `user._name`. But there is a widely known agreement that properties starting with an underscore `"_"` are internal and should not be touched from outside the object.
+Về mặt kỹ thuật, mã bên ngoài vẫn có thể truy cập trực tiếp vào tên bằng cách sử dụng `user._name`. Nhưng có một thỏa thuận được biết đến rộng rãi rằng các thuộc tính bắt đầu bằng dấu gạch dưới `"_"` là nội bộ và không nên chạm vào từ bên ngoài đối tượng.
 
 
-## Using for compatibility
+## Sử dụng để tương thích (Using for compatibility)
 
-One of the great ideas behind getters and setters -- they allow to take control over a "normal" data property and tweak it at any moment.
+Một trong những ý tưởng tuyệt vời đằng sau getters và setters -- chúng cho phép kiểm soát một thuộc tính dữ liệu "bình thường" và điều chỉnh nó bất cứ lúc nào.
 
-For instance, we started implementing user objects using data properties `name` and `age`:
+Chẳng hạn, chúng ta đã bắt đầu triển khai các user objects bằng cách sử dụng các thuộc tính dữ liệu `name` và `age`:
 
 ```js
 function User(name, age) {
@@ -192,7 +192,7 @@ let john = new User("John", 25);
 alert( john.age ); // 25
 ```
 
-...But sooner or later, things may change. Instead of `age` we may decide to store `birthday`, because it's more precise and convenient:
+...Nhưng sớm hay muộn, mọi thứ có thể thay đổi. Thay vì `age`, chúng ta có thể quyết định lưu trữ `birthday`, vì nó chính xác và tiện lợi hơn:
 
 ```js
 function User(name, birthday) {
@@ -203,11 +203,11 @@ function User(name, birthday) {
 let john = new User("John", new Date(1992, 6, 1));
 ```
 
-Now what to do with the old code that still uses `age` property?
+Bây giờ phải làm gì với mã cũ vẫn sử dụng thuộc tính `age`?
 
-We can try to find all such places and fix them, but that takes time and can be hard to do if that code is written by other people. And besides, `age` is a nice thing to have in `user`, right? In some places it's just what we want.
+Chúng ta có thể cố gắng tìm tất cả các địa điểm như vậy và sửa chúng, nhưng điều đó sẽ mất thời gian và khó thực hiện nếu mã đó được viết bởi người khác. Và bên cạnh đó, `age` là một điều tốt đẹp để có trong `user`, phải không? Ở một số nơi, đó chỉ là những gì chúng ta muốn.
 
-Adding a getter for `age` mitigates the problem:
+Thêm một getter cho `age` giảm thiểu vấn đề:
 
 ```js
 function User(name, birthday) {
@@ -229,4 +229,4 @@ alert( john.birthday ); // birthday is available
 alert( john.age );      // ...as well as the age
 ```
 
-Now the old code works too and we've got a nice additional property.
+Bây giờ mã cũ cũng hoạt động và chúng ta đã có một thuộc tính bổ sung tốt đẹp.
