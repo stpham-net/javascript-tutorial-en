@@ -18,7 +18,7 @@ Please note that `F.prototype` here means a regular property named `"prototype"`
 
 Here's the example:
 
-```js run
+```js
 let animal = {
   eats: true
 };
@@ -27,9 +27,7 @@ function Rabbit(name) {
   this.name = name;
 }
 
-*!*
 Rabbit.prototype = animal;
-*/!*
 
 let rabbit = new Rabbit("White Rabbit"); //  rabbit.__proto__ == animal
 
@@ -43,7 +41,6 @@ That's the resulting picture:
 ![](proto-constructor-animal-rabbit.png)
 
 On the picture, `"prototype"` is a horizontal arrow, it's a regular property, and `[[Prototype]]` is vertical, meaning the inheritance of `rabbit` from `animal`.
-
 
 ## Default F.prototype, constructor property
 
@@ -65,7 +62,7 @@ Rabbit.prototype = { constructor: Rabbit };
 
 We can check it:
 
-```js run
+```js
 function Rabbit() {}
 // by default:
 // Rabbit.prototype = { constructor: Rabbit }
@@ -75,7 +72,7 @@ alert( Rabbit.prototype.constructor == Rabbit ); // true
 
 Naturally, if we do nothing, the `constructor` property is available to all rabbits through  `[[Prototype]]`:
 
-```js run
+```js
 function Rabbit() {}
 // by default:
 // Rabbit.prototype = { constructor: Rabbit }
@@ -91,7 +88,7 @@ We can use `constructor` property to create a new object using the same construc
 
 Like here:
 
-```js run
+```js
 function Rabbit(name) {
   this.name = name;
   alert(name);
@@ -99,9 +96,7 @@ function Rabbit(name) {
 
 let rabbit = new Rabbit("White Rabbit");
 
-*!*
 let rabbit2 = new rabbit.constructor("Black Rabbit");
-*/!*
 ```
 
 That's handy when we have an object, don't know which constructor was used for it (e.g. it comes from a 3rd party library), and we need to create another one of the same kind.
@@ -116,16 +111,14 @@ In particular, if we replace the default prototype as a whole, then there will b
 
 For instance:
 
-```js run
+```js
 function Rabbit() {}
 Rabbit.prototype = {
   jumps: true
 };
 
 let rabbit = new Rabbit();
-*!*
 alert(rabbit.constructor === Rabbit); // false
-*/!*
 ```
 
 So, to keep the right `"constructor"` we can choose to add/remove properties to the default `"prototype"` instead of overwriting it as a whole:
@@ -144,14 +137,11 @@ Or, alternatively, recreate the `constructor` property it manually:
 ```js
 Rabbit.prototype = {
   jumps: true,
-*!*
   constructor: Rabbit
-*/!*
 };
 
 // now constructor is also correct, because we added it
 ```
-
 
 ## Summary
 
@@ -164,6 +154,7 @@ Everything is quite simple, just few notes to make things clear:
 -  The `"prototype"` property only has such a special effect when is set to a constructor function, and invoked with `new`.
 
 On regular objects the `prototype` is nothing special:
+
 ```js
 let user = {
   name: "John",
