@@ -18,7 +18,7 @@ The property `[[Prototype]]` is internal and hidden, but there are many ways to 
 
 One of them is to use `__proto__`, like this:
 
-```js run
+```js
 let animal = {
   eats: true
 };
@@ -26,9 +26,7 @@ let rabbit = {
   jumps: true
 };
 
-*!*
 rabbit.__proto__ = animal;
-*/!*
 ```
 
 Please note that `__proto__` is *not the same* as `[[Prototype]]`. That's a getter/setter for it. We'll talk about other ways of setting it later, but for now `__proto__` will do just fine.
@@ -37,7 +35,7 @@ If we look for a property in `rabbit`, and it's missing, JavaScript automaticall
 
 For instance:
 
-```js run
+```js
 let animal = {
   eats: true
 };
@@ -45,14 +43,10 @@ let rabbit = {
   jumps: true
 };
 
-*!*
 rabbit.__proto__ = animal; // (*)
-*/!*
 
 // we can find both properties in rabbit now:
-*!*
 alert( rabbit.eats ); // true (**)
-*/!*
 alert( rabbit.jumps ); // true
 ```
 
@@ -68,14 +62,12 @@ So if `animal` has a lot of useful properties and methods, then they become auto
 
 If we have a method in `animal`, it can be called on `rabbit`:
 
-```js run
+```js
 let animal = {
   eats: true,
-*!*
   walk() {
     alert("Animal walk");
   }
-*/!*
 };
 
 let rabbit = {
@@ -84,9 +76,7 @@ let rabbit = {
 };
 
 // walk is taken from the prototype
-*!*
 rabbit.walk(); // Animal walk
-*/!*
 ```
 
 The method is automatically taken from the prototype, like this:
@@ -95,8 +85,7 @@ The method is automatically taken from the prototype, like this:
 
 The prototype chain can be longer:
 
-
-```js run
+```js
 let animal = {
   eats: true,
   walk() {
@@ -136,7 +125,7 @@ For data properties (not getters/setters) write/delete operations work directly 
 
 In the example below, we assign its own `walk` method to `rabbit`:
 
-```js run
+```js
 let animal = {
   eats: true,
   walk() {
@@ -148,11 +137,9 @@ let rabbit = {
   __proto__: animal
 }
 
-*!*
 rabbit.walk = function() {
   alert("Rabbit! Bounce-bounce!");
 };
-*/!*
 
 rabbit.walk(); // Rabbit! Bounce-bounce!
 ```
@@ -165,7 +152,7 @@ For getters/setters -- if we read/write a property, they are looked up in the pr
 
 For instance, check out `admin.fullName` property in the code below:
 
-```js run
+```js
 let user = {
   name: "John",
   surname: "Smith",
@@ -208,7 +195,7 @@ For instance, here `animal` represents a "method storage", and `rabbit` makes us
 
 The call `rabbit.sleep()` sets `this.isSleeping` on the `rabbit` object:
 
-```js run
+```js
 // animal has methods
 let animal = {
   walk() {
