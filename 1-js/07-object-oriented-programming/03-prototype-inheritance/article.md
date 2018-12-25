@@ -1,22 +1,22 @@
-# Prototypal inheritance
+# Kế thừa nguyên mẫu (Prototypal inheritance)
 
-In programming, we often want to take something and extend it.
+Trong lập trình, chúng ta thường muốn lấy một cái gì đó và mở rộng nó.
 
-For instance, we have a `user` object with its properties and methods, and want to make `admin` and `guest` as slightly modified variants of it. We'd like to reuse what we have in `user`, not copy/reimplement its methods, just build a new object on top of it.
+Chẳng hạn, chúng ta có một đối tượng `user` với các thuộc tính và phương thức của nó và muốn tạo `admin` và `guest` như các biến thể được sửa đổi một chút của nó. Chúng ta muốn sử dụng lại những gì chúng ta có trong `user`, không sao chép/thực hiện lại các phương thức của nó, chỉ cần xây dựng một đối tượng mới trên đầu (on top) của nó.
 
-*Prototypal inheritance* is a language feature that helps in that.
+*Kế thừa nguyên mẫu (Prototypal inheritance)* là một tính năng ngôn ngữ giúp trong đó.
 
 ## [[Prototype]]
 
-In JavaScript, objects have a special hidden property `[[Prototype]]` (as named in the specification), that is either `null` or references another object. That object is called "a prototype":
+Trong JavaScript, các đối tượng có một thuộc tính ẩn đặc biệt `[[Prototype]]` (như được đặt tên trong đặc tả), đó là `null` hoặc tham chiếu một đối tượng khác. Đối tượng đó được gọi là "nguyên mẫu":
 
 ![prototype](object-prototype-empty.png)
 
-That `[[Prototype]]` has a "magical" meaning. When we want to read a property from `object`, and it's missing, JavaScript automatically takes it from the prototype. In programming, such thing is called "prototypal inheritance". Many cool language features and programming techniques are based on it.
+Điều đó `[[Prototype]]` có nghĩa là "ma thuật". Khi chúng ta muốn đọc một thuộc tính từ `object` và nó bị thiếu, JavaScript sẽ tự động lấy nó từ prototype. Trong lập trình, điều đó được gọi là "prototypal inheritance". Nhiều tính năng ngôn ngữ thú vị và kỹ thuật lập trình được dựa trên nó.
 
-The property `[[Prototype]]` is internal and hidden, but there are many ways to set it.
+Thuộc tính `[[Prototype]]` là nội bộ và ẩn, nhưng có nhiều cách để đặt nó.
 
-One of them is to use `__proto__`, like this:
+Một trong số đó là sử dụng `__proto__`, như thế này:
 
 ```js
 let animal = {
@@ -29,11 +29,11 @@ let rabbit = {
 rabbit.__proto__ = animal;
 ```
 
-Please note that `__proto__` is *not the same* as `[[Prototype]]`. That's a getter/setter for it. We'll talk about other ways of setting it later, but for now `__proto__` will do just fine.
+Xin lưu ý rằng `__proto__` là *không giống* như `[[Prototype]]`. Đó là một getter/setter cho nó. Chúng ta sẽ nói về những cách khác để thiết lập nó sau, nhưng bây giờ `__proto__` sẽ làm tốt thôi.
 
-If we look for a property in `rabbit`, and it's missing, JavaScript automatically takes it from `animal`.
+Nếu chúng ta tìm kiếm một thuộc tính trong `rabbit` và nó bị thiếu, JavaScript sẽ tự động lấy nó từ `animal`.
 
-For instance:
+Ví dụ:
 
 ```js
 let animal = {
@@ -50,17 +50,17 @@ alert( rabbit.eats ); // true (**)
 alert( rabbit.jumps ); // true
 ```
 
-Here the line `(*)` sets `animal` to be a prototype of `rabbit`.
+Ở đây, dòng `(*)` đặt `animal` là nguyên mẫu (prototype) của `rabbit`.
 
-Then, when `alert` tries to read property `rabbit.eats` `(**)`, it's not in `rabbit`, so JavaScript follows the `[[Prototype]]` reference and finds it in `animal` (look from the bottom up):
+Sau đó, khi `alert` cố đọc thuộc tính `rabbit.eats` `(**)`, nó không ở `rabbit`, vì vậy JavaScript theo tham chiếu `[[Prototype]]` và tìm thấy nó trong `animal` (tìm từ dưới lên):
 
 ![](proto-animal-rabbit.png)
 
-Here we can say that "`animal` is the prototype of `rabbit`" or "`rabbit` prototypally inherits from `animal`".
+Ở đây chúng ta có thể nói rằng "`animal` là prototype của `rabbit`" hoặc "`rabbit` được thừa hưởng nguyên mẫu từ `animal`".
 
-So if `animal` has a lot of useful properties and methods, then they become automatically available in `rabbit`. Such properties are called "inherited".
+Vì vậy, nếu `animal` có nhiều đặc tính và phương thức hữu ích, thì chúng sẽ tự động có sẵn trong `rabbit`. Các tính chất như vậy được gọi là "thừa kế (inherited)".
 
-If we have a method in `animal`, it can be called on `rabbit`:
+Nếu chúng ta có một phương thức trong `animal`, nó có thể được gọi trên `rabbit`:
 
 ```js
 let animal = {
@@ -79,11 +79,11 @@ let rabbit = {
 rabbit.walk(); // Animal walk
 ```
 
-The method is automatically taken from the prototype, like this:
+Phương thức này được tự động lấy từ nguyên mẫu, như thế này:
 
 ![](proto-animal-rabbit-walk.png)
 
-The prototype chain can be longer:
+Chuỗi nguyên mẫu (prototype chain) có thể dài hơn:
 
 ```js
 let animal = {
@@ -110,20 +110,20 @@ alert(longEar.jumps); // true (from rabbit)
 
 ![](proto-animal-rabbit-chain.png)
 
-There are actually only two limitations:
+Thực tế chỉ có hai hạn chế:
 
-1. The references can't go in circles. JavaScript will throw an error if we try to assign `__proto__` in a circle.
-2. The value of `__proto__` can be either an object or `null`. All other values (like primitives) are ignored.
+1. Các tham chiếu không thể đi theo vòng tròn. JavaScript sẽ đưa ra lỗi nếu chúng ta cố gắng gán `__proto__` trong một vòng tròn.
+2. Giá trị của `__proto__` có thể là một đối tượng hoặc `null`. Tất cả các giá trị khác (như nguyên thủy) được bỏ qua.
 
-Also it may be obvious, but still: there can be only one `[[Prototype]]`. An object may not inherit from two others.
+Ngoài ra nó có thể rõ ràng, nhưng vẫn: chỉ có thể có một `[[Prototype]]`. Một đối tượng có thể không được thừa kế từ hai đối tượng khác.
 
 ## Read/write rules
 
-The prototype is only used for reading properties.
+Các prototype chỉ được sử dụng để đọc thuộc tính.
 
-For data properties (not getters/setters) write/delete operations work directly with the object.
+Đối với các data properties (không phải getters/setters) các thao tác ghi/xóa làm việc trực tiếp với đối tượng.
 
-In the example below, we assign its own `walk` method to `rabbit`:
+Trong ví dụ dưới đây, chúng ta gán phương thức `walk` của riêng nó cho `rabbit`:
 
 ```js
 let animal = {
@@ -144,13 +144,13 @@ rabbit.walk = function() {
 rabbit.walk(); // Rabbit! Bounce-bounce!
 ```
 
-From now on, `rabbit.walk()` call finds the method immediately in the object and executes it, without using the prototype:
+Từ giờ trở đi, `rabbit.walk()` gọi tìm phương thức ngay lập tức trong đối tượng và thực thi nó, mà không cần sử dụng prototype:
 
 ![](proto-animal-rabbit-walk-2.png)
 
-For getters/setters -- if we read/write a property, they are looked up in the prototype and invoked.
+Đối với getters/setters -- nếu chúng ta đọc/viết một thuộc tính, chúng được tra cứu trong prototype và được gọi.
 
-For instance, check out `admin.fullName` property in the code below:
+Chẳng hạn, hãy xem thuộc tính `admin.fullName` trong mã dưới đây:
 
 ```js
 let user = {
@@ -177,23 +177,23 @@ alert(admin.fullName); // John Smith (*)
 admin.fullName = "Alice Cooper"; // (**)
 ```
 
-Here in the line `(*)` the property `admin.fullName` has a getter in the prototype `user`, so it is called. And in the line `(**)` the property has a setter in the prototype, so it is called.
+Ở đây trong dòng `(*)` thuộc tính `admin.fullName` có một getter trong nguyên mẫu `user`, vì vậy nó được gọi. Và trong dòng `(**)`, thuộc tính có một setter trong nguyên mẫu, vì vậy nó được gọi.
 
-## The value of "this"
+## Giá trị của "this"
 
-An interesting question may arise in the example above: what's the value of `this` inside `set fullName(value)`? Where the properties `this.name` and `this.surname` are written: `user` or `admin`?
+Một câu hỏi thú vị có thể xuất hiện trong ví dụ trên: giá trị của `this` bên trong `set fullName(value)` là gì? Các thuộc tính `this.name` và `this.surname` được viết ở đâu: `user` hay `admin`?
 
-The answer is simple: `this` is not affected by prototypes at all.
+Câu trả lời rất đơn giản: `this` hoàn toàn không bị ảnh hưởng bởi các nguyên mẫu.
 
-**No matter where the method is found: in an object or its prototype. In a method call, `this` is always the object before the dot.**
+**Bất kể phương thức được tìm thấy ở đâu: trong một đối tượng hoặc nguyên mẫu của nó. Trong một cuộc gọi phương thức, `this` luôn là đối tượng trước dấu chấm.**
 
-So, the setter actually uses `admin` as `this`, not `user`.
+Vì vậy, setter thực sự sử dụng `admin` là `this`, không phải `user`.
 
-That is actually a super-important thing, because we may have a big object with many methods and inherit from it. Then we can run its methods on inherited objects and they will modify the state of these objects, not the big one.
+Đó thực sự là một điều cực kỳ quan trọng, bởi vì chúng ta có thể có một đối tượng lớn với nhiều phương thức và kế thừa từ nó. Sau đó, chúng ta có thể chạy các phương thức của nó trên các đối tượng được kế thừa và chúng sẽ sửa đổi trạng thái của các đối tượng này, chứ không phải đối tượng lớn.
 
-For instance, here `animal` represents a "method storage", and `rabbit` makes use of it.
+Chẳng hạn, ở đây `animal` đại diện cho một "method storage" và `rabbit` sử dụng nó.
 
-The call `rabbit.sleep()` sets `this.isSleeping` on the `rabbit` object:
+Cuộc gọi `rabbit.sleep()` đặt `this.isSleeping` trên đối tượng `rabbit`:
 
 ```js
 // animal has methods
@@ -220,18 +220,18 @@ alert(rabbit.isSleeping); // true
 alert(animal.isSleeping); // undefined (no such property in the prototype)
 ```
 
-The resulting picture:
+Hình ảnh kết quả:
 
 ![](proto-animal-rabbit-walk-3.png)
 
-If we had other objects like `bird`, `snake` etc inheriting from `animal`, they would also gain access to methods of `animal`. But `this` in each method would be the corresponding object, evaluated at the call-time (before dot), not `animal`. So when we write data into `this`, it is stored into these objects.
+Nếu chúng ta có các đối tượng khác như `bird`, `snake` v.v ... kế thừa từ `animal`, thì chúng cũng sẽ có quyền truy cập vào các phương thức của `animal`. Nhưng `this` trong mỗi phương thức sẽ là đối tượng tương ứng, được đánh giá tại thời điểm gọi (trước dấu chấm), chứ không phải `animal`. Vì vậy, khi chúng ta ghi dữ liệu vào `this`, nó được lưu trữ vào các đối tượng này.
 
-As a result, methods are shared, but the object state is not.
+Kết quả là các phương thức được chia sẻ, nhưng trạng thái đối tượng thì không.
 
-## Summary
+## Tóm lược
 
-- In JavaScript, all objects have a hidden `[[Prototype]]` property that's either another object or `null`.
-- We can use `obj.__proto__` to access it (there are other ways too, to be covered soon).
-- The object referenced by `[[Prototype]]` is called a "prototype".
-- If we want to read a property of `obj` or call a method, and it doesn't exist, then JavaScript tries to find it in the prototype. Write/delete operations work directly on the object, they don't use the prototype (unless the property is actually a setter).
-- If we call `obj.method()`, and the `method` is taken from the prototype, `this` still references `obj`. So methods always work with the current object even if they are inherited.
+- Trong JavaScript, tất cả các đối tượng đều có thuộc tính `[[Prototype]]` ẩn đó là một đối tượng khác hoặc `null`.
+- Chúng ta có thể sử dụng `obj.__proto__` để truy cập nó (cũng có những cách khác sẽ sớm được đề cập tới).
+- Đối tượng được tham chiếu bởi `[[Prototype]]` được gọi là "prototype".
+- Nếu chúng ta muốn đọc một thuộc tính của `obj` hoặc gọi một phương thức và nó không tồn tại, thì JavaScript sẽ cố gắng tìm nó trong nguyên mẫu. Các thao tác ghi/xóa hoạt động trực tiếp trên đối tượng, chúng không sử dụng nguyên mẫu (trừ khi thuộc tính thực sự là một setter).
+- Vì vậy, các phương thức luôn làm việc với đối tượng hiện tại ngay cả khi chúng được kế thừa.
