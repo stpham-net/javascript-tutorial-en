@@ -13,11 +13,11 @@ Accessor properties are represented by "getter" and "setter" methods. In an obje
 
 ```js
 let obj = {
-  *!*get propName()*/!* {
+  get propName() {
     // getter, the code executed on getting obj.propName
   },
 
-  *!*set propName(value)*/!* {
+  set propName(value) {
     // setter, the code executed on setting obj.propName = value
   }
 };
@@ -27,7 +27,7 @@ The getter works when `obj.propName` is read, the setter -- when it is assigned.
 
 For instance, we have a `user` object with `name` and `surname`:
 
-```js run
+```js
 let user = {
   name: "John",
   surname: "Smith"
@@ -36,21 +36,17 @@ let user = {
 
 Now we want to add a "fullName" property, that should be "John Smith". Of course, we don't want to copy-paste existing information, so we can implement it as an accessor:
 
-```js run
+```js
 let user = {
   name: "John",
   surname: "Smith",
 
-*!*
   get fullName() {
     return `${this.name} ${this.surname}`;
   }
-*/!*
 };
 
-*!*
 alert(user.fullName); // John Smith
-*/!*
 ```
 
 From outside, an accessor property looks like a regular one. That's the idea of accessor properties. We don't *call* `user.fullName` as a function, we *read* it normally: the getter runs behind the scenes.
@@ -59,7 +55,7 @@ As of now, `fullName` has only a getter. If we attempt to assign `user.fullName=
 
 Let's fix it by adding a setter for `user.fullName`:
 
-```js run
+```js
 let user = {
   name: "John",
   surname: "Smith",
@@ -68,11 +64,9 @@ let user = {
     return `${this.name} ${this.surname}`;
   },
 
-*!*
   set fullName(value) {
     [this.name, this.surname] = value.split(" ");
   }
-*/!*
 };
 
 // set fullName is executed with the given value.
@@ -84,14 +78,21 @@ alert(user.surname); // Cooper
 
 Now we have a "virtual" property. It is readable and writable, but in fact does not exist.
 
-```smart header="Accessor properties are only accessible with get/set"
+<br>
+
+> ---
+
+**📌 Accessor properties are only accessible with get/set**
+
 A property can either be a "data property" or an "accessor property", but not both.
 
 Once a property is defined with `get prop()` or `set prop()`, it's an accessor property. So there must be a getter to read it, and must be a setter if we want to assign it.
 
 Sometimes it's normal that there's only a setter or only a getter. But the property won't be readable or writable in that case.
-```
 
+> ---
+
+<br>
 
 ## Accessor descriptors
 
@@ -108,13 +109,12 @@ So an accessor descriptor may have:
 
 For instance, to create an accessor `fullName` with `defineProperty`, we can pass a descriptor with `get` and `set`:
 
-```js run
+```js
 let user = {
   name: "John",
   surname: "Smith"
 };
 
-*!*
 Object.defineProperty(user, 'fullName', {
   get() {
     return `${this.name} ${this.surname}`;
@@ -123,7 +123,6 @@ Object.defineProperty(user, 'fullName', {
   set(value) {
     [this.name, this.surname] = value.split(" ");
   }
-*/!*
 });
 
 alert(user.fullName); // John Smith
@@ -135,10 +134,8 @@ Please note once again that a property can be either an accessor or a data prope
 
 If we try to supply both `get` and `value` in the same descriptor, there will be an error:
 
-```js run
-*!*
+```js
 // Error: Invalid property descriptor.
-*/!*
 Object.defineProperty({}, 'prop', {
   get() {
     return 1
@@ -154,7 +151,7 @@ Getters/setters can be used as wrappers over "real" property values to gain more
 
 For instance, if we want to forbid too short names for `user`, we can store `name` in a special property `_name`. And filter assignments in the setter:
 
-```js run
+```js
 let user = {
   get name() {
     return this._name;
@@ -212,12 +209,11 @@ We can try to find all such places and fix them, but that takes time and can be 
 
 Adding a getter for `age` mitigates the problem:
 
-```js run no-beautify
+```js
 function User(name, birthday) {
   this.name = name;
   this.birthday = birthday;
 
-*!*
   // age is calculated from the current date and birthday
   Object.defineProperty(this, "age", {
     get() {
@@ -225,7 +221,6 @@ function User(name, birthday) {
       return todayYear - this.birthday.getFullYear();
     }
   });
-*/!*
 }
 
 let john = new User("John", new Date(1992, 6, 1));
