@@ -1,26 +1,26 @@
-# Arrow functions revisited
+# Arrow functions được xem lại
 
-Let's revisit arrow functions.
+Hãy xem lại các arrow functions.
 
-Arrow functions are not just a "shorthand" for writing small stuff.
+Các arrow functions không chỉ là "tốc ký" để viết các small stuff.
 
-JavaScript is full of situations where we need to write a small function, that's executed somewhere else.
+JavaScript chứa đầy các tình huống mà chúng ta cần viết một hàm nhỏ, được thực thi ở một nơi khác.
 
-For instance:
+Ví dụ:
 
-- `arr.forEach(func)` -- `func` is executed by `forEach` for every array item.
-- `setTimeout(func)` -- `func` is executed by the built-in scheduler.
+- `arr.forEach(func)` -- `func` được thực thi bởi `forEach` cho mọi array item.
+- `setTimeout(func)` -- `func` được thực thi bởi built-in scheduler.
 - ...there are more.
 
-It's in the very spirit of JavaScript to create a function and pass it somewhere.
+Đó là tinh thần của JavaScript để tạo ra một hàm và chuyển nó đi đâu đó.
 
-And in such functions we usually don't want to leave the current context.
+Và trong các functions như vậy, chúng ta thường không muốn rời khỏi bối cảnh hiện tại.
 
-## Arrow functions have no "this"
+## Arrow functions không có "this"
 
-As we remember from the chapter **object-methods**, arrow functions do not have `this`. If `this` is accessed, it is taken from the outside.
+Như chúng ta nhớ từ chương **object-methods**, các arrow functions không có `this`. Nếu `this` được truy cập, nó được lấy từ bên ngoài.
 
-For instance, we can use it to iterate inside an object method:
+Chẳng hạn, chúng ta có thể sử dụng nó để lặp lại (iterate) bên trong một phương thức đối tượng:
 
 ```js
 let group = {
@@ -37,9 +37,9 @@ let group = {
 group.showList();
 ```
 
-Here in `forEach`, the arrow function is used, so `this.title` in it is exactly the same as in the outer method `showList`. That is: `group.title`.
+Ở đây trong `forEach`, the arrow function được sử dụng, vì vậy `this.title` trong nó hoàn toàn giống như trong phương thức bên ngoài `showList`. Đó là: `group.title`.
 
-If we used a "regular" function, there would be an error:
+Nếu chúng ta sử dụng function "thông thường", sẽ có lỗi:
 
 ```js
 let group = {
@@ -57,17 +57,17 @@ let group = {
 group.showList();
 ```
 
-The error occurs because `forEach` runs functions with `this=undefined` by default, so the attempt to access `undefined.title` is made.
+Lỗi xảy ra do `forEach` chạy các hàm với `this=undefined` theo mặc định, do đó, nỗ lực truy cập `undefined.title` được thực hiện.
 
-That doesn't affect arrow functions, because they just don't have `this`.
+Điều đó không ảnh hưởng đến các arrow functions, vì chúng không có `this`.
 
 <br>
 
 > ---
 
-**📌 Arrow functions can't run with `new`**
+**📌 Các arrow functions không thể chạy với `new`**
 
-Not having `this` naturally means another limitation: arrow functions can't be used as constructors. They can't be called with `new`.
+Không có `this` tự nhiên có nghĩa là một giới hạn khác: các arrow functions không thể được sử dụng như các constructors. Chúng không thể được gọi với `new`.
 
 > ---
 
@@ -78,10 +78,10 @@ Not having `this` naturally means another limitation: arrow functions can't be u
 
 **📌 Arrow functions VS bind**
 
-There's a subtle difference between an arrow function `=>` and a regular function called with `.bind(this)`:
+Có một sự khác biệt tinh tế giữa một arrow function `=>` và một hàm thông thường được gọi với `.bind(this)`:
 
-- `.bind(this)` creates a "bound version" of the function.
-- The arrow `=>` doesn't create any binding. The function simply doesn't have `this`. The lookup of `this` is made exactly the same way as a regular variable search: in the outer lexical environment.
+- `.bind(this)` tạo ra "phiên bản ràng buộc" của hàm.
+- The arrow `=>` không tạo ra bất kỳ ràng buộc nào. Hàm đơn giản là không có `this`. Việc tra cứu `this` được thực hiện chính xác giống như tìm kiếm biến thông thường: trong outer lexical environment.
 
 > ---
 
@@ -89,11 +89,11 @@ There's a subtle difference between an arrow function `=>` and a regular functio
 
 ## Arrows have no "arguments"
 
-Arrow functions also have no `arguments` variable.
+Các arrow functions cũng không có biến `arguments`.
 
-That's great for decorators, when we need to forward a call with the current `this` and `arguments`.
+Điều đó thật tuyệt vời cho các decorators, khi chúng ta cần chuyển tiếp một cuộc gọi với các đối số `this` và `arguments`.
 
-For instance, `defer(f, ms)` gets a function and returns a wrapper around it that delays the call by `ms` milliseconds:
+Chẳng hạn, `defer(f, ms)` nhận một hàm và trả về một wrapper xung quanh nó làm trì hoãn cuộc gọi bằng `ms` mili giây:
 
 ```js
 function defer(f, ms) {
@@ -110,7 +110,7 @@ let sayHiDeferred = defer(sayHi, 2000);
 sayHiDeferred("John"); // Hello, John after 2 seconds
 ```
 
-The same without an arrow function would look like:
+Điều tương tự mà không dùng arrow function sẽ giống như:
 
 ```js
 function defer(f, ms) {
@@ -123,15 +123,15 @@ function defer(f, ms) {
 }
 ```
 
-Here we had to create additional variables `args` and `ctx` so that the function inside `setTimeout` could take them.
+Ở đây chúng ta phải tạo thêm các biến `args` và `ctx` để hàm bên trong `setTimeout` có thể lấy chúng.
 
-## Summary
+## Tóm lược
 
-Arrow functions:
+Các hàm mũi tên (arrow functions):
 
 - Do not have `this`.
 - Do not have `arguments`.
-- Can't be called with `new`.
-- (They also don't have `super`, but we didn't study it. Will be in the chapter **class-inheritance**).
+- Không thể được gọi với `new`.
+- (Chúng cũng không có `super`, nhưng chúng ta chưa nghiên cứu về nó. Sẽ có trong chương **class-inheritance**).
 
-That's because they are meant for short pieces of code that do not have their own "context", but rather works in the current one. And they really shine in that use case.
+Đó là bởi vì chúng có nghĩa là cho các đoạn mã ngắn không có "bối cảnh" riêng, mà hoạt động trong mã hiện tại. Và chúng thực sự tỏa sáng trong trường hợp sử dụng đó.
