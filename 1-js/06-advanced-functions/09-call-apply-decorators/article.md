@@ -422,7 +422,7 @@ Decorators có thể được xem là "tính năng" hoặc "khía cạnh" có th
 Để thực hiện `cachingDecorator`, chúng ta đã nghiên cứu các phương thức:
 
 - [func.call(context, arg1, arg2...)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) -- gọi `func` với bối cảnh và đối số đã cho.
-- [func.apply(context, args)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) -- gọi `func` chuyển tiếp `context` như `this` và array-like `args` thành một danh sách các đối số.
+- [func.apply(context, args)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) -- gọi `func` truyền `context` như `this` và array-like `args` vào một danh sách các đối số.
 
 *Chuyển tiếp cuộc gọi (call forwarding)* chung thường được thực hiện với `apply`:
 
