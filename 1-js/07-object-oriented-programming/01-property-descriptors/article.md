@@ -26,9 +26,11 @@ let descriptor = Object.getOwnPropertyDescriptor(obj, propertyName);
 ```
 
 **`obj`**
+
 The object to get information from.
 
 **`propertyName`**
+
 The name of the property.
 
 The returned value is a so-called "property descriptor" object: it contains the value and all the flags.
@@ -62,9 +64,11 @@ Object.defineProperty(obj, propertyName, descriptor)
 ```
 
 **`obj`, `propertyName`**
+
 The object and property to work on.
 
 **`descriptor`**
+
 Property descriptor to apply.
 
 If the property exists, `defineProperty` updates its flags. Otherwise, it creates the property with the given value and flags; in that case, if a flag is not supplied, it is assumed `false`.
@@ -289,23 +293,29 @@ Property descriptors work at the level of individual properties.
 There are also methods that limit access to the *whole* object:
 
 **[Object.preventExtensions(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)**
+
 Forbids to add properties to the object.
 
 **[Object.seal(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal)**
+
 Forbids to add/remove properties, sets for all existing properties `configurable: false`.
 
 **[Object.freeze(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)**
+
 Forbids to add/remove/change properties, sets for all existing properties `configurable: false, writable: false`.
 
 And also there are tests for them:
 
 **[Object.isExtensible(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible)**
+
 Returns `false` if adding properties is forbidden, otherwise `true`.
 
 **[Object.isSealed(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isSealed)**
+
 Returns `true` if adding/removing properties is forbidden, and all existing properties have `configurable: false`.
 
 **[Object.isFrozen(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen)**
+
 Returns `true` if adding/removing/changing properties is forbidden, and all current properties are `configurable: false, writable: false`.
 
 These methods are rarely used in practice.
