@@ -1,22 +1,22 @@
 # F.prototype
 
-In modern JavaScript we can set a prototype using `__proto__`, as described in the previous article. But it wasn't like that all the time.
+Trong JavaScript hiện đại, chúng ta có thể thiết lập một nguyên mẫu bằng cách sử dụng `__proto__`, như được mô tả trong bài viết trước. Nhưng nó không như thế mọi lúc.
 
-JavaScript has had prototypal inheritance from the beginning. It was one of the core features of the language.
+JavaScript đã có sự kế thừa nguyên mẫu ngay từ đầu. Đó là một trong những tính năng cốt lõi của ngôn ngữ.
 
-But in the old times, there was another (and the only) way to set it: to use a `"prototype"` property of the constructor function. And there are still many scripts that use it.
+Nhưng trong thời xưa, có một cách khác (và duy nhất) để đặt nó: sử dụng thuộc tính `"prototype"` của constructor function. Và vẫn còn nhiều kịch bản sử dụng nó.
 
 ## The "prototype" property
 
-As we know already, `new F()` creates a new object.
+Như chúng ta đã biết, `new F()` tạo ra một đối tượng mới.
 
-When a new object is created with `new F()`, the object's `[[Prototype]]` is set to `F.prototype`.
+Khi một đối tượng mới được tạo bằng `new F()`, `[[Prototype]]` của đối tượng được đặt thành `F.prototype`.
 
-In other words, if `F` has a `prototype` property with a value of the object type, then `new` operator uses it to set `[[Prototype]]` for the new object.
+Nói cách khác, nếu `F` có thuộc tính `prototype` với giá trị của kiểu đối tượng, thì toán tử `new` sử dụng nó để đặt `[[Prototype]]` cho đối tượng mới.
 
-Please note that `F.prototype` here means a regular property named `"prototype"` on `F`. It sounds something similar to the term "prototype", but here we really mean a regular property with this name.
+Xin lưu ý rằng `F.prototype` ở đây có nghĩa là một thuộc tính thông thường có tên `"prototype"` trên `F`. Nghe có vẻ giống với thuật ngữ "prototype", nhưng ở đây chúng ta thực sự có ý là một thuộc tính thông thường với tên này.
 
-Here's the example:
+Đây là ví dụ:
 
 ```js
 let animal = {
@@ -34,21 +34,21 @@ let rabbit = new Rabbit("White Rabbit"); //  rabbit.__proto__ == animal
 alert( rabbit.eats ); // true
 ```
 
-Setting `Rabbit.prototype = animal` literally states the following: "When a `new Rabbit` is created, assign its `[[Prototype]]` to `animal`".
+Đặt `Rabbit.prototype = animal` theo nghĩa đen là: "Khi một `new Rabbit` được tạo, gán `[[Prototype]]` cho `animal`".
 
-That's the resulting picture:
+Đây là hình ảnh kết quả:
 
 ![](proto-constructor-animal-rabbit.png)
 
-On the picture, `"prototype"` is a horizontal arrow, it's a regular property, and `[[Prototype]]` is vertical, meaning the inheritance of `rabbit` from `animal`.
+Trên hình, `"prototype"` là một mũi tên nằm ngang, nó là một thuộc tính thông thường và `[[Prototype]]` là dọc, có nghĩa là sự kế thừa của `rabbit` từ `animal`.
 
 ## Default F.prototype, constructor property
 
-Every function has the `"prototype"` property even if we don't supply it.
+Mọi hàm đều có thuộc tính `"prototype"` ngay cả khi chúng ta không cung cấp nó.
 
-The default `"prototype"` is an object with the only property `constructor` that points back to the function itself.
+The default `"prototype"` là một đối tượng có thuộc tính `constructor` duy nhất quay lại chính hàm đó.
 
-Like this:
+Như thế này:
 
 ```js
 function Rabbit() {}
@@ -60,7 +60,7 @@ Rabbit.prototype = { constructor: Rabbit };
 
 ![](function-prototype-constructor.png)
 
-We can check it:
+Chúng ta có thể kiểm tra nó:
 
 ```js
 function Rabbit() {}
@@ -70,7 +70,7 @@ function Rabbit() {}
 alert( Rabbit.prototype.constructor == Rabbit ); // true
 ```
 
-Naturally, if we do nothing, the `constructor` property is available to all rabbits through  `[[Prototype]]`:
+Một cách tự nhiên, nếu chúng ta không làm gì, thuộc tính `constructor` có sẵn cho tất cả các con thỏ thông qua `[[Prototype]]`:
 
 ```js
 function Rabbit() {}
@@ -84,9 +84,9 @@ alert(rabbit.constructor == Rabbit); // true (from prototype)
 
 ![](rabbit-prototype-constructor.png)
 
-We can use `constructor` property to create a new object using the same constructor as the existing one.
+Chúng ta có thể sử dụng thuộc tính `constructor` để tạo một đối tượng mới sử dụng cùng constructor như đối tượng hiện có.
 
-Like here:
+Giống như ở đây:
 
 ```js
 function Rabbit(name) {
@@ -99,17 +99,17 @@ let rabbit = new Rabbit("White Rabbit");
 let rabbit2 = new rabbit.constructor("Black Rabbit");
 ```
 
-That's handy when we have an object, don't know which constructor was used for it (e.g. it comes from a 3rd party library), and we need to create another one of the same kind.
+Điều đó thật tiện lợi khi chúng ta có một đối tượng, không biết constructor  nào đã được sử dụng cho nó (ví dụ: nó đến từ thư viện của bên thứ 3) và chúng ta cần tạo một đối tượng khác cùng loại.
 
-But probably the most important thing about `"constructor"` is that...
+Nhưng có lẽ điều quan trọng nhất về `"constructor"` là...
 
-**...JavaScript itself does not ensure the right `"constructor"` value.**
+**...Bản thân JavaScript không đảm bảo giá trị `"constructor"` đúng.**
 
-Yes, it exists in the default `"prototype"` for functions, but that's all. What happens with it later -- is totally on us.
+Vâng, nó tồn tại trong `"prototype"` mặc định cho các hàm, nhưng đó là tất cả. Điều gì xảy ra với nó sau này -- hoàn toàn thuộc về chúng ta.
 
-In particular, if we replace the default prototype as a whole, then there will be no `"constructor"` in it.
+Cụ thể, nếu chúng ta thay thế toàn bộ default prototype, thì sẽ không có `"constructor"` trong đó.
 
-For instance:
+Ví dụ:
 
 ```js
 function Rabbit() {}
@@ -121,7 +121,7 @@ let rabbit = new Rabbit();
 alert(rabbit.constructor === Rabbit); // false
 ```
 
-So, to keep the right `"constructor"` we can choose to add/remove properties to the default `"prototype"` instead of overwriting it as a whole:
+Vì vậy, để giữ đúng `"constructor"`, chúng ta có thể chọn thêm/xóa các thuộc tính vào `"prototype"` mặc định thay vì ghi đè lên toàn bộ:
 
 ```js
 function Rabbit() {}
@@ -132,7 +132,7 @@ Rabbit.prototype.jumps = true
 // the default Rabbit.prototype.constructor is preserved
 ```
 
-Or, alternatively, recreate the `constructor` property it manually:
+Hoặc, thay vào đó, tạo lại thuộc tính `constructor` bằng tay:
 
 ```js
 Rabbit.prototype = {
@@ -140,20 +140,20 @@ Rabbit.prototype = {
   constructor: Rabbit
 };
 
-// now constructor is also correct, because we added it
+// bây giờ constructor cũng đúng, bởi vì chúng ta đã thêm nó
 ```
 
-## Summary
+## Tóm lược
 
-In this chapter we briefly described the way of setting a `[[Prototype]]` for objects created via a constructor function. Later we'll see more advanced programming patterns that rely on it.
+Trong chương này, chúng ta đã mô tả ngắn gọn cách thiết lập `[[Prototype]]` cho các đối tượng được tạo thông qua constructor function. Sau này chúng ta sẽ thấy các mẫu lập trình nâng cao hơn (advanced programming patterns) dựa vào nó.
 
-Everything is quite simple, just few notes to make things clear:
+Mọi thứ khá đơn giản, chỉ cần một vài ghi chú để làm cho mọi thứ rõ ràng:
 
-- The `F.prototype` property is not the same as `[[Prototype]]`. The only thing `F.prototype` does: it sets `[[Prototype]]` of new objects when `new F()` is called.
-- The value of `F.prototype` should be either an object or null: other values won't work.
--  The `"prototype"` property only has such a special effect when is set to a constructor function, and invoked with `new`.
+- Thuộc tính `F.prototype` không giống với `[[Prototype]]`. Điều duy nhất `F.prototype` làm: nó thiết lập `[[Prototype]]` của các đối tượng mới khi `new F()` được gọi.
+- Giá trị của `F.prototype` phải là một đối tượng hoặc null: các giá trị khác sẽ không hoạt động.
+- Thuộc tính `"prototype"` chỉ có hiệu ứng đặc biệt như vậy khi được đặt cho một constructor function và được gọi với `new`.
 
-On regular objects the `prototype` is nothing special:
+Trên các đối tượng thông thường, `prototype` không có gì đặc biệt:
 
 ```js
 let user = {
@@ -162,4 +162,4 @@ let user = {
 };
 ```
 
-By default all functions have `F.prototype = { constructor: F }`, so we can get the constructor of an object by accessing its `"constructor"` property.
+Theo mặc định, tất cả các hàm đều có `F.prototype = { constructor: F }`, vì vậy chúng ta có thể lấy constructor của một đối tượng bằng cách truy cập thuộc tính `"constructor"` của nó.
