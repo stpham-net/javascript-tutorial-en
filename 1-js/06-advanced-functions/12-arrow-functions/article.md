@@ -18,21 +18,19 @@ And in such functions we usually don't want to leave the current context.
 
 ## Arrow functions have no "this"
 
-As we remember from the chapter <info:object-methods>, arrow functions do not have `this`. If `this` is accessed, it is taken from the outside.
+As we remember from the chapter **object-methods**, arrow functions do not have `this`. If `this` is accessed, it is taken from the outside.
 
 For instance, we can use it to iterate inside an object method:
 
-```js run
+```js
 let group = {
   title: "Our Group",
   students: ["John", "Pete", "Alice"],
 
   showList() {
-*!*
     this.students.forEach(
       student => alert(this.title + ': ' + student)
     );
-*/!*
   }
 };
 
@@ -43,18 +41,16 @@ Here in `forEach`, the arrow function is used, so `this.title` in it is exactly 
 
 If we used a "regular" function, there would be an error:
 
-```js run
+```js
 let group = {
   title: "Our Group",
   students: ["John", "Pete", "Alice"],
 
   showList() {
-*!*
     this.students.forEach(function(student) {
       // Error: Cannot read property 'title' of undefined
       alert(this.title + ': ' + student)
     });
-*/!*
   }
 };
 
@@ -65,16 +61,31 @@ The error occurs because `forEach` runs functions with `this=undefined` by defau
 
 That doesn't affect arrow functions, because they just don't have `this`.
 
-```warn header="Arrow functions can't run with `new`"
-Not having `this` naturally means another limitation: arrow functions can't be used as constructors. They can't be called with `new`.
-```
+<br>
 
-```smart header="Arrow functions VS bind"
+> ---
+
+**📌 Arrow functions can't run with `new`**
+
+Not having `this` naturally means another limitation: arrow functions can't be used as constructors. They can't be called with `new`.
+
+> ---
+
+<br>
+<br>
+
+> ---
+
+**📌 Arrow functions VS bind**
+
 There's a subtle difference between an arrow function `=>` and a regular function called with `.bind(this)`:
 
 - `.bind(this)` creates a "bound version" of the function.
 - The arrow `=>` doesn't create any binding. The function simply doesn't have `this`. The lookup of `this` is made exactly the same way as a regular variable search: in the outer lexical environment.
-```
+
+> ---
+
+<br>
 
 ## Arrows have no "arguments"
 
@@ -84,7 +95,7 @@ That's great for decorators, when we need to forward a call with the current `th
 
 For instance, `defer(f, ms)` gets a function and returns a wrapper around it that delays the call by `ms` milliseconds:
 
-```js run
+```js
 function defer(f, ms) {
   return function() {
     setTimeout(() => f.apply(this, arguments), ms)
@@ -121,6 +132,6 @@ Arrow functions:
 - Do not have `this`.
 - Do not have `arguments`.
 - Can't be called with `new`.
-- (They also don't have `super`, but we didn't study it. Will be in the chapter <info:class-inheritance>).
+- (They also don't have `super`, but we didn't study it. Will be in the chapter **class-inheritance**).
 
 That's because they are meant for short pieces of code that do not have their own "context", but rather works in the current one. And they really shine in that use case.
