@@ -3,7 +3,7 @@
 
 Có hai kiểu thuộc tính.
 
-Kiểu đầu tiên là *thuộc tính dữ liệu*. Chúng ta đã biết làm thế nào để làm việc với họ. Trên thực tế, tất cả các thuộc tính mà chúng ta đang sử dụng cho đến nay là các thuộc tính dữ liệu.
+Kiểu đầu tiên là *thuộc tính dữ liệu*. Chúng ta đã biết làm thế nào để làm việc với chúng. Trên thực tế, tất cả các thuộc tính mà chúng ta đang sử dụng cho đến nay là các thuộc tính dữ liệu.
 
 Kiểu thuộc tính thứ hai là một cái gì đó mới. Đó là *accessor properties*. Chúng cơ bản là các hàm hoạt động trên việc getting và setting một giá trị, nhưng trông giống như các thuộc tính thông thường đối với một external code.
 
