@@ -133,11 +133,11 @@ alert(user.name); // Pete
 user.name = "Alice"; // Error
 ```
 
-## Không đếm được (Non-enumerable)
+## Không liệt kê (Non-enumerable)
 
 Bây giờ, hãy thêm một `toString` tùy chỉnh vào `user`.
 
-Thông thường, một built-in `toString` cho các đối tượng là không thể đếm được, nó không hiển thị trong `for..in`. Nhưng nếu chúng ta thêm `toString` của riêng mình, thì theo mặc định, nó sẽ hiển thị trong `for..in`, như thế này:
+Thông thường, một built-in `toString` cho các đối tượng là không thể liệt kê được, nó không hiển thị trong `for..in`. Nhưng nếu chúng ta thêm `toString` của riêng mình, thì theo mặc định, nó sẽ hiển thị trong `for..in`, như thế này:
 
 ```js
 let user = {
@@ -169,7 +169,7 @@ Object.defineProperty(user, "toString", {
 for (let key in user) alert(key); // name
 ```
 
-Các thuộc tính không thể đếm được cũng được loại trừ khỏi `Object.keys`:
+Các thuộc tính không thể liệt kê được cũng được loại trừ khỏi `Object.keys`:
 
 ```js
 alert(Object.keys(user)); // name
