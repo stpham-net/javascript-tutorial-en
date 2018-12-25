@@ -169,7 +169,7 @@ say("Bye"); // Bye, John ("Bye" is passed to say)
 
 > ---
 
-**📌 Phương thức tiện lợi: bindAll`**
+**📌 Phương thức tiện lợi: `bindAll`**
 
 Nếu một đối tượng có nhiều phương thức và chúng ta dự định chủ động vượt qua nó, thì chúng ta có thể liên kết tất cả chúng trong một vòng lặp:
 
@@ -181,7 +181,7 @@ for (let key in user) {
 }
 ```
 
-Thư viện JavaScript cũng cung cấp các hàm để liên kết hàng loạt thuận tiện, ví dụ [_.bindAll(obj)](http://lodash.com/docs#bindAll) trong lodash.
+Thư viện JavaScript cũng cung cấp các hàm để liên kết hàng loạt thuận tiện, ví dụ [\_.bindAll(obj)](http://lodash.com/docs#bindAll) trong lodash.
 
 > ---
 
