@@ -12,7 +12,7 @@ But instead of adding that functionality into `slow()` we'll create a wrapper. A
 
 Here's the code, and explanations follow:
 
-```js run
+```js
 function slow(x) {
   // there can be a heavy CPU-intensive job here
   alert(`Called with ${x}`);
@@ -70,7 +70,7 @@ The caching decorator mentioned above is not suited to work with object methods.
 
 For instance, in the code below `worker.slow()` stops working after the decoration:
 
-```js run
+```js
 // we'll make worker.slow caching
 let worker = {
   someMethod() {
@@ -91,9 +91,7 @@ function cachingDecorator(func) {
     if (cache.has(x)) {
       return cache.get(x);
     }
-*!*
     let result = func(x); // (**)
-*/!*
     cache.set(x, result);
     return result;
   };
@@ -103,9 +101,7 @@ alert( worker.slow(1) ); // the original method works
 
 worker.slow = cachingDecorator(worker.slow); // now make it caching
 
-*!*
 alert( worker.slow(2) ); // Whoops! Error: Cannot read property 'someMethod' of undefined
-*/!*
 ```
 
 The error occurs in the line `(*)` that tries to access `this.someMethod` and fails. Can you see why?
@@ -123,7 +119,7 @@ So, the wrapper passes the call to the original method, but without the context 
 
 Let's fix it.
 
-There's a special built-in function method [func.call(context, ...args)](mdn:js/Function/call) that allows to call a function explicitly setting `this`.
+There's a special built-in function method [func.call(context, ...args)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) that allows to call a function explicitly setting `this`.
 
 The syntax is:
 
@@ -134,6 +130,7 @@ func.call(context, arg1, arg2, ...)
 It runs `func` providing the first argument as `this`, and the next as the arguments.
 
 To put it simply, these two calls do almost the same:
+
 ```js
 func(1, 2, 3);
 func.call(obj, 1, 2, 3)
@@ -143,7 +140,7 @@ They both call `func` with arguments `1`, `2` and `3`. The only difference is th
 
 As an example, in the code below we call `sayHi` in the context of different objects: `sayHi.call(user)` runs `sayHi` providing `this=user`, and the next line sets `this=admin`:
 
-```js run
+```js
 function sayHi() {
   alert(this.name);
 }
@@ -158,8 +155,7 @@ sayHi.call( admin ); // this = Admin
 
 And here we use `call` to call `say` with the given context and phrase:
 
-
-```js run
+```js
 function say(phrase) {
   alert(this.name + ': ' + phrase);
 }
@@ -170,11 +166,9 @@ let user = { name: "John" };
 say.call( user, "Hello" ); // John: Hello
 ```
 
-
 In our case, we can use `call` in the wrapper to pass the context to the original function:
 
-
-```js run
+```js
 let worker = {
   someMethod() {
     return 1;
@@ -192,9 +186,7 @@ function cachingDecorator(func) {
     if (cache.has(x)) {
       return cache.get(x);
     }
-*!*
     let result = func.call(this, x); // "this" is passed correctly now
-*/!*
     cache.set(x, result);
     return result;
   };
@@ -241,12 +233,11 @@ There are many solutions possible:
 2. Use nested maps: `cache.set(min)` will be a `Map` that stores the pair `(max, result)`. So we can get `result` as `cache.get(min).get(max)`.
 3. Join two values into one. In our particular case we can just use a string `"min,max"` as the `Map` key. For flexibility, we can allow to provide a *hashing function* for the decorator, that knows how to make one value from many.
 
-
 For many practical applications, the 3rd variant is good enough, so we'll stick to it.
 
 The second task to solve is how to pass many arguments to `func`. Currently, the wrapper `function(x)` assumes a single argument, and `func.call(this, x)` passes it.
 
-Here we can use another built-in method [func.apply](mdn:js/Function/apply).
+Here we can use another built-in method [func.apply](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply).
 
 The syntax is:
 
@@ -268,7 +259,7 @@ Both run `func` giving it arguments `1,2,3`. But `apply` also sets `this=context
 
 For instance, here `say` is called with `this=user` and `messageData` as a list of arguments:
 
-```js run
+```js
 function say(time, phrase) {
   alert(`[${time}] ${this.name}: ${phrase}`);
 }
@@ -277,25 +268,21 @@ let user = { name: "John" };
 
 let messageData = ['10:00', 'Hello']; // become time and phrase
 
-*!*
 // user becomes this, messageData is passed as a list of arguments (time, phrase)
 say.apply(user, messageData); // [10:00] John: Hello (this=user)
-*/!*
 ```
 
 The only syntax difference between `call` and `apply` is that `call` expects a list of arguments, while `apply` takes an array-like object with them.
 
-We already know the spread operator `...` from the chapter <info:rest-parameters-spread-operator> that can pass an array (or any iterable) as a list of arguments. So if we use it with `call`, we can achieve almost the same as `apply`.
+We already know the spread operator `...` from the chapter **rest-parameters-spread-operator** that can pass an array (or any iterable) as a list of arguments. So if we use it with `call`, we can achieve almost the same as `apply`.
 
 These two calls are almost equivalent:
 
 ```js
 let args = [1, 2, 3];
 
-*!*
 func.call(context, ...args); // pass an array as list with spread operator
 func.apply(context, args);   // is same as using apply
-*/!*
 ```
 
 If we look more closely, there's a minor difference between such uses of `call` and `apply`.
@@ -321,7 +308,7 @@ When an external code calls such `wrapper`, it is indistinguishable from the cal
 
 Now let's bake it all into the more powerful `cachingDecorator`:
 
-```js run
+```js
 let worker = {
   slow(min, max) {
     alert(`Called with ${min},${max}`);
@@ -332,16 +319,12 @@ let worker = {
 function cachingDecorator(func, hash) {
   let cache = new Map();
   return function() {
-*!*
     let key = hash(arguments); // (*)
-*/!*
     if (cache.has(key)) {
       return cache.get(key);
     }
 
-*!*
     let result = func.apply(this, arguments); // (**)
-*/!*
 
     cache.set(key, result);
     return result;
@@ -366,7 +349,7 @@ There are two changes:
 - Then `(**)` uses `func.apply` to pass both the context and all arguments the wrapper got (no matter how many) to the original function.
 
 
-## Borrowing a method [#method-borrowing]
+## Borrowing a method
 
 Now let's make one more minor improvement in the hashing function:
 
@@ -378,7 +361,7 @@ function hash(args) {
 
 As of now, it works only on two arguments. It would be better if it could glue any number of `args`.
 
-The natural solution would be to use [arr.join](mdn:js/Array/join) method:
+The natural solution would be to use [arr.join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method:
 
 ```js
 function hash(args) {
@@ -390,11 +373,9 @@ function hash(args) {
 
 So calling `join` on it would fail, as we can see below:
 
-```js run
+```js
 function hash() {
-*!*
   alert( arguments.join() ); // Error: arguments.join is not a function
-*/!*
 }
 
 hash(1, 2);
@@ -402,11 +383,9 @@ hash(1, 2);
 
 Still, there's an easy way to use array join:
 
-```js run
+```js
 function hash() {
-*!*
   alert( [].join.call(arguments) ); // 1,2
-*/!*
 }
 
 hash(1, 2);
@@ -442,8 +421,8 @@ Decorators can be seen as "features" or "aspects" that can be added to a functio
 
 To implement `cachingDecorator`, we studied methods:
 
-- [func.call(context, arg1, arg2...)](mdn:js/Function/call) -- calls `func` with given context and arguments.
-- [func.apply(context, args)](mdn:js/Function/apply) -- calls `func` passing `context` as `this` and array-like `args` into a list of arguments.
+- [func.call(context, arg1, arg2...)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) -- calls `func` with given context and arguments.
+- [func.apply(context, args)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) -- calls `func` passing `context` as `this` and array-like `args` into a list of arguments.
 
 The generic *call forwarding* is usually done with `apply`:
 
@@ -454,6 +433,5 @@ let wrapper = function() {
 ```
 
 We also saw an example of *method borrowing* when we take a method from an object and `call` it in the context of another object. It is quite common to take array methods and apply them to arguments. The alternative is to use rest parameters object that is a real array.
-
 
 There are many decorators there in the wild. Check how well you got them by solving the tasks of this chapter.
