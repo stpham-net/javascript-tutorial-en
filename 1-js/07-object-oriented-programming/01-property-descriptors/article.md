@@ -1,25 +1,25 @@
 
-# Property flags and descriptors
+# Thuộc tính flags và các mô tả (descriptors)
 
-As we know, objects can store properties.
+Như chúng ta biết, các đối tượng có thể lưu trữ các thuộc tính.
 
-Till now, a property was a simple "key-value" pair to us. But an object property is actually a more complex and tunable thing.
+Cho đến bây giờ, một thuộc tính là một cặp "key-value" đơn giản đối với chúng ta. Nhưng một thuộc tính đối tượng thực sự là một điều phức tạp và điều chỉnh hơn (tunable thing).
 
 ## Property flags
 
-Object properties, besides a **`value`**, have three special attributes (so-called "flags"):
+Các thuộc tính đối tượng, ngoài **`value`**, có ba thuộc tính đặc biệt (còn gọi là "flags"):
 
-- **`writable`** -- if `true`, can be changed, otherwise it's read-only.
-- **`enumerable`** -- if `true`, then listed in loops, otherwise not listed.
-- **`configurable`** -- if `true`, the property can be deleted and these attributes can be modified, otherwise not.
+- **`writable`** -- nếu `true`, có thể thay đổi, nếu không nó chỉ đọc.
+- **`enumerable`** -- nếu `true`, sau đó được liệt kê trong các vòng lặp, nếu không thì không được liệt kê.
+- **`configurable`** -- nếu `true`, thuộc tính có thể bị xóa và các thuộc tính này có thể được sửa đổi, nếu không thì không.
 
-We didn't see them yet, because generally they do not show up. When we create a property "the usual way", all of them are `true`. But we also can change them anytime.
+Chúng ta chưa nhìn thấy chúng, vì nhìn chung chúng không xuất hiện. Khi chúng ta tạo một thuộc tính "theo cách thông thường", tất cả chúng đều là `true`. Nhưng chúng ta cũng có thể thay đổi chúng bất cứ lúc nào.
 
-First, let's see how to get those flags.
+Trước tiên, hãy xem làm thế nào để có được những flags.
 
-The method [Object.getOwnPropertyDescriptor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor) allows to query the *full* information about a property.
+Phương thức [Object.getOwnPropertyDescriptor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor) cho phép truy vấn *đầy đủ* thông tin về một thuộc tính.
 
-The syntax is:
+Cú pháp là:
 
 ```js
 let descriptor = Object.getOwnPropertyDescriptor(obj, propertyName);
@@ -27,15 +27,15 @@ let descriptor = Object.getOwnPropertyDescriptor(obj, propertyName);
 
 **`obj`**
 
-The object to get information from.
+Các đối tượng để có được thông tin từ.
 
 **`propertyName`**
 
-The name of the property.
+Tên của thuộc tính.
 
-The returned value is a so-called "property descriptor" object: it contains the value and all the flags.
+Giá trị được trả về là một đối tượng được gọi là "mô tả thuộc tính (property descriptor)": nó chứa giá trị và tất cả các cờ (flags).
 
-For instance:
+Ví dụ:
 
 ```js
 let user = {
@@ -55,9 +55,9 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 */
 ```
 
-To change the flags, we can use [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty).
+Để thay đổi các cờ, chúng ta có thể sử dụng [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty).
 
-The syntax is:
+Cú pháp là:
 
 ```js
 Object.defineProperty(obj, propertyName, descriptor)
@@ -65,15 +65,15 @@ Object.defineProperty(obj, propertyName, descriptor)
 
 **`obj`, `propertyName`**
 
-The object and property to work on.
+Các đối tượng và thuộc tính để làm việc trên.
 
 **`descriptor`**
 
-Property descriptor to apply.
+Property descriptor để áp dụng.
 
-If the property exists, `defineProperty` updates its flags. Otherwise, it creates the property with the given value and flags; in that case, if a flag is not supplied, it is assumed `false`.
+Nếu thuộc tính tồn tại, `defineProperty` cập nhật các cờ của nó. Còn không, nó tạo ra thuộc tính với các giá trị và cờ đã cho; trong trường hợp đó, nếu một cờ không được cung cấp, nó được giả sử là `false`.
 
-For instance, here a property `name` is created with all falsy flags:
+Chẳng hạn, ở đây một thuộc tính `name` được tạo ra với tất cả các falsy flags:
 
 ```js
 let user = {};
@@ -95,13 +95,13 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 */
 ```
 
-Compare it with "normally created" `user.name` above: now all flags are falsy. If that's not what we want then we'd better set them to `true` in `descriptor`.
+So sánh nó với "normally created" `user.name` ở trên: bây giờ tất cả các cờ đều là falsy. Nếu đó không phải là những gì chúng ta muốn thì tốt hơn chúng ta nên đặt chúng thành `true` trong `descriptor`.
 
-Now let's see effects of the flags by example.
+Bây giờ hãy xem hiệu ứng của các cờ bằng ví dụ.
 
 ## Read-only
 
-Let's make `user.name` read-only by changing `writable` flag:
+Hãy làm cho `user.name` chỉ đọc bằng cách thay đổi cờ `writable`:
 
 ```js
 let user = {
@@ -115,9 +115,9 @@ Object.defineProperty(user, "name", {
 user.name = "Pete"; // Error: Cannot assign to read only property 'name'...
 ```
 
-Now no one can change the name of our user, unless they apply their own `defineProperty` to override ours.
+Bây giờ không ai có thể thay đổi tên người dùng của chúng ta, trừ khi họ áp dụng `defineProperty` của riêng họ để ghi đè tên của chúng ta.
 
-Here's the same operation, but for the case when a property doesn't exist:
+Đây là hoạt động tương tự, nhưng đối với trường hợp khi một thuộc tính không tồn tại:
 
 ```js
 let user = { };
@@ -133,11 +133,11 @@ alert(user.name); // Pete
 user.name = "Alice"; // Error
 ```
 
-## Non-enumerable
+## Không đếm được (Non-enumerable)
 
-Now let's add a custom `toString` to `user`.
+Bây giờ, hãy thêm một `toString` tùy chỉnh vào `user`.
 
-Normally, a built-in `toString` for objects is non-enumerable, it does not show up in `for..in`. But if we add `toString` of our own, then by default it shows up in `for..in`, like this:
+Thông thường, một built-in `toString` cho các đối tượng là không thể đếm được, nó không hiển thị trong `for..in`. Nhưng nếu chúng ta thêm `toString` của riêng mình, thì theo mặc định, nó sẽ hiển thị trong `for..in`, như thế này:
 
 ```js
 let user = {
@@ -151,7 +151,7 @@ let user = {
 for (let key in user) alert(key); // name, toString
 ```
 
-If we don't like it, then we can set `enumerable:false`. Then it won't appear in `for..in` loop, just like the built-in one:
+Nếu chúng ta không thích nó, thì chúng ta có thể đặt `enumerable:false`. Sau đó, nó sẽ không xuất hiện trong vòng lặp `for..in`, giống như built-in one:
 
 ```js
 let user = {
@@ -169,7 +169,7 @@ Object.defineProperty(user, "toString", {
 for (let key in user) alert(key); // name
 ```
 
-Non-enumerable properties are also excluded from `Object.keys`:
+Các thuộc tính không thể đếm được cũng được loại trừ khỏi `Object.keys`:
 
 ```js
 alert(Object.keys(user)); // name
@@ -177,11 +177,11 @@ alert(Object.keys(user)); // name
 
 ## Non-configurable
 
-The non-configurable flag (`configurable:false`) is sometimes preset for built-in objects and properties.
+The non-configurable flag (`configurable:false`) đôi khi được đặt sẵn cho các built-in objects và properties.
 
-A non-configurable property can not be deleted or altered with `defineProperty`.
+Một thuộc tính non-configurable không thể bị xóa hoặc thay đổi với `defineProperty`.
 
-For instance, `Math.PI` is read-only, non-enumerable and non-configurable:
+Chẳng hạn, `Math.PI` là chỉ-đọc (read-only), không-liệt kê (non-enumerable) và không-cấu hình (non-configurable):
 
 ```js
 let descriptor = Object.getOwnPropertyDescriptor(Math, 'PI');
@@ -197,7 +197,7 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 */
 ```
 
-So, a programmer is unable to change the value of `Math.PI` or overwrite it.
+Vì vậy, một lập trình viên không thể thay đổi giá trị của `Math.PI` hoặc ghi đè lên nó.
 
 ```js
 Math.PI = 3; // Error
@@ -205,9 +205,9 @@ Math.PI = 3; // Error
 // delete Math.PI won't work either
 ```
 
-Making a property non-configurable is a one-way road. We cannot change it back, because `defineProperty` doesn't work on non-configurable properties.
+Làm cho một thuộc tính non-configurable là một con đường một chiều. Chúng ta không thể thay đổi nó trở lại, bởi vì `defineProperty` không hoạt động trên các thuộc tính non-configurable.
 
-Here we are making `user.name` a "forever sealed" constant:
+Ở đây chúng ta đang tạo ra `user.name` một hằng số "được niêm phong mãi mãi":
 
 ```js
 let user = { };
@@ -230,9 +230,9 @@ Object.defineProperty(user, "name", {writable: true}); // Error
 
 > ---
 
-**📌 Errors appear only in use strict**
+**📌 Lỗi chỉ xuất hiện trong use strict**
 
-In the non-strict mode, no errors occur when writing to read-only properties and such. But the operation still won't succeed. Flag-violating actions are just silently ignored in non-strict.
+Trong non-strict mode, không có lỗi xảy ra khi ghi vào các thuộc tính read-only và như vậy. Nhưng hoạt động vẫn không thành công. Các hành động vi phạm cờ chỉ âm thầm bị bỏ qua trong non-strict.
 
 > ---
 
@@ -240,9 +240,9 @@ In the non-strict mode, no errors occur when writing to read-only properties and
 
 ## Object.defineProperties
 
-There's a method [Object.defineProperties(obj, descriptors)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) that allows to define many properties at once.
+Có một phương thức [Object.defineProperties(obj, descriptors)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) cho phép xác định nhiều thuộc tính cùng một lúc.
 
-The syntax is:
+Cú pháp là:
 
 ```js
 Object.defineProperties(obj, {
@@ -252,7 +252,7 @@ Object.defineProperties(obj, {
 });
 ```
 
-For instance:
+Ví dụ:
 
 ```js
 Object.defineProperties(user, {
@@ -262,19 +262,19 @@ Object.defineProperties(user, {
 });
 ```
 
-So, we can set many properties at once.
+Vì vậy, chúng ta có thể thiết lập nhiều thuộc tính cùng một lúc.
 
 ## Object.getOwnPropertyDescriptors
 
-To get all property descriptors at once, we can use the method [Object.getOwnPropertyDescriptors(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors).
+Để có được tất cả các mô tả thuộc tính (property descriptors) cùng một lúc, chúng ta có thể sử dụng phương thức [Object.getOwnPropertyDescriptors(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors).
 
-Together with `Object.defineProperties` it can be used as a "flags-aware" way of cloning an object:
+Cùng với `Object.defineProperties`, nó có thể được sử dụng như một cách "nhận biết cờ (flags-aware)" để nhân bản một đối tượng:
 
 ```js
 let clone = Object.defineProperties({}, Object.getOwnPropertyDescriptors(obj));
 ```
 
-Normally when we clone an object, we use an assignment to copy properties, like this:
+Thông thường khi chúng ta clone một đối tượng, chúng ta sử dụng một phép gán để sao chép các thuộc tính, như thế này:
 
 ```js
 for (let key in user) {
@@ -282,40 +282,40 @@ for (let key in user) {
 }
 ```
 
-...But that does not copy flags. So if we want a "better" clone then `Object.defineProperties` is preferred.
+...Nhưng điều đó không sao chép cờ. Vì vậy, nếu chúng ta muốn một bản sao "tốt hơn" thì `Object.defineProperties` được ưu tiên.
 
-Another difference is that `for..in` ignores symbolic properties, but `Object.getOwnPropertyDescriptors` returns *all* property descriptors including symbolic ones.
+Một điểm khác biệt nữa là `for..in` bỏ qua các symbolic properties, nhưng `Object.getOwnPropertyDescriptors` trả về *tất cả* các property descriptors bao gồm cả các symbolic properties.
 
-## Sealing an object globally
+## Sealing (niêm phong) một object globally
 
-Property descriptors work at the level of individual properties.
+Property descriptors làm việc ở cấp độ của các thuộc tính cá nhân.
 
-There are also methods that limit access to the *whole* object:
+Ngoài ra còn có các phương thức giới hạn quyền truy cập vào *toàn bộ* đối tượng:
 
 **[Object.preventExtensions(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)**
 
-Forbids to add properties to the object.
+Cấm thêm thuộc tính cho đối tượng.
 
 **[Object.seal(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal)**
 
-Forbids to add/remove properties, sets for all existing properties `configurable: false`.
+Cấm thêm/xóa các thuộc tính, thiết lập cho tất cả các thuộc tính hiện có `configurable: false`.
 
 **[Object.freeze(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)**
 
-Forbids to add/remove/change properties, sets for all existing properties `configurable: false, writable: false`.
+Cấm thêm/xóa/thay đổi thuộc tính, thiết lập cho tất cả các thuộc tính hiện có `configurable: false, writable: false`.
 
-And also there are tests for them:
+Và cũng có những bài kiểm tra cho chúng:
 
 **[Object.isExtensible(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible)**
 
-Returns `false` if adding properties is forbidden, otherwise `true`.
+Trả về `false` nếu việc thêm thuộc tính bị cấm, nếu không thì `true`.
 
 **[Object.isSealed(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isSealed)**
 
-Returns `true` if adding/removing properties is forbidden, and all existing properties have `configurable: false`.
+Trả về `true` nếu việc thêm/xóa các thuộc tính bị cấm, và tất cả các thuộc tính hiện có đều có `configurable: false`.
 
 **[Object.isFrozen(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen)**
 
-Returns `true` if adding/removing/changing properties is forbidden, and all current properties are `configurable: false, writable: false`.
+Trả về `true` nếu việc thêm/xóa/thay đổi thuộc tính bị cấm và tất cả các thuộc tính hiện tại là `configurable: false, writable: false`.
 
-These methods are rarely used in practice.
+Những phương thức này hiếm khi được sử dụng trong thực tế.
