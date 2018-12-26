@@ -1,6 +1,6 @@
 # Mixins
 
-Trong JavaScript, chúng ta chỉ có thể kế thừa từ một đối tượng. Chỉ có thể có một `[[Prototype]]` cho một đối tượng. Và một lớp chỉ có thể mở rộng một lớp khác.
+Trong JavaScript, chúng ta chỉ có thể kế thừa từ một đối tượng. Chỉ có thể có một `[[Prototype]]` cho một đối tượng. Và một lớp chỉ có thể extend một lớp khác.
 
 Nhưng đôi khi điều đó cảm thấy hạn chế. Chẳng hạn, tôi có một lớp `StreetSweeper` và một lớp `Bicycle`, và muốn tạo ra một `StreetSweepingBicycle`.
 
