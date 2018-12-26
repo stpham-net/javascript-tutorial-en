@@ -7,7 +7,7 @@ To inherit from another class, we should specify `"extends"` and the parent clas
 
 Here `Rabbit` inherits from `Animal`:
 
-```js run
+```js
 class Animal {
 
   constructor(name) {
@@ -27,14 +27,12 @@ class Animal {
 
 }
 
-*!*
 // Inherit from Animal
 class Rabbit extends Animal {
   hide() {
     alert(`${this.name} hides!`);
   }
 }
-*/!*
 
 let rabbit = new Rabbit("White Rabbit");
 
@@ -48,7 +46,12 @@ The `extends` keyword actually adds a `[[Prototype]]` reference from `Rabbit.pro
 
 So now `rabbit` has access both to its own methods and to methods of `Animal`.
 
-````smart header="Any expression is allowed after `extends`"
+<br>
+
+> ---
+
+**📌 Any expression is allowed after `extends`**
+
 Class syntax allows to specify not just a class, but any expression after `extends`.
 
 For instance, a function call that generates the parent class:
@@ -60,16 +63,18 @@ function f(phrase) {
   }
 }
 
-*!*
 class User extends f("Hello") {}
-*/!*
 
 new User().sayHi(); // Hello
 ```
+
 Here `class User` inherits from the result of `f("Hello")`.
 
 That may be useful for advanced programming patterns when we use functions to generate classes depending on many conditions and can inherit from them.
-````
+
+> ---
+
+<br>
 
 ## Overriding a method
 
@@ -85,7 +90,6 @@ class Rabbit extends Animal {
 }
 ```
 
-
 ...But usually we don't want to totally replace a parent method, but rather to build on top of it, tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
 
 Classes provide `"super"` keyword for that.
@@ -95,7 +99,7 @@ Classes provide `"super"` keyword for that.
 
 For instance, let our rabbit autohide when stopped:
 
-```js run
+```js
 class Animal {
 
   constructor(name) {
@@ -120,12 +124,10 @@ class Rabbit extends Animal {
     alert(`${this.name} hides!`);
   }
 
-*!*
   stop() {
     super.stop(); // call parent stop
     this.hide(); // and then hide
   }
-*/!*
 }
 
 let rabbit = new Rabbit("White Rabbit");
@@ -136,10 +138,16 @@ rabbit.stop(); // White Rabbit stopped. White rabbit hides!
 
 Now `Rabbit` has the `stop` method that calls the parent `super.stop()` in the process.
 
-````smart header="Arrow functions have no `super`"
-As was mentioned in the chapter <info:arrow-functions>, arrow functions do not have `super`.
+<br>
+
+> ---
+
+**📌 Arrow functions have no `super`**
+
+As was mentioned in the chapter **arrow-functions**, arrow functions do not have `super`.
 
 If accessed, it's taken from the outer function. For instance:
+
 ```js
 class Rabbit extends Animal {
   stop() {
@@ -154,8 +162,10 @@ The `super` in the arrow function is the same as in `stop()`, so it works as int
 // Unexpected super
 setTimeout(function() { super.stop() }, 1000);
 ```
-````
 
+> ---
+
+<br>
 
 ## Overriding constructor
 
@@ -168,11 +178,9 @@ According to the [specification](https://tc39.github.io/ecma262/#sec-runtime-sem
 ```js
 class Rabbit extends Animal {
   // generated for extending classes without own constructors
-*!*
   constructor(...args) {
     super(...args);
   }
-*/!*
 }
 ```
 
@@ -180,7 +188,7 @@ As we can see, it basically calls the parent `constructor` passing it all the ar
 
 Now let's add a custom constructor to `Rabbit`. It will specify the `earLength` in addition to `name`:
 
-```js run
+```js
 class Animal {
   constructor(name) {
     this.speed = 0;
@@ -191,21 +199,17 @@ class Animal {
 
 class Rabbit extends Animal {
 
-*!*
   constructor(name, earLength) {
     this.speed = 0;
     this.name = name;
     this.earLength = earLength;
   }
-*/!*
 
   // ...
 }
 
-*!*
 // Doesn't work!
 let rabbit = new Rabbit("White Rabbit", 10); // Error: this is not defined.
-*/!*
 ```
 
 Whoops! We've got an error. Now we can't create rabbits. What went wrong?
@@ -227,7 +231,7 @@ So if we're making a constructor of our own, then we must call `super`, because 
 
 For `Rabbit` to work, we need to call `super()` before using `this`, like here:
 
-```js run
+```js
 class Animal {
 
   constructor(name) {
@@ -241,23 +245,18 @@ class Animal {
 class Rabbit extends Animal {
 
   constructor(name, earLength) {
-*!*
     super(name);
-*/!*
     this.earLength = earLength;
   }
 
   // ...
 }
 
-*!*
 // now fine
 let rabbit = new Rabbit("White Rabbit", 10);
 alert(rabbit.name); // White Rabbit
 alert(rabbit.earLength); // 10
-*/!*
 ```
-
 
 ## Super: internals, [[HomeObject]]
 
@@ -273,7 +272,7 @@ Let's try to do it. Without classes, using plain objects for the sake of simplic
 
 Here, `rabbit.eat()` should call `animal.eat()` method of the parent object:
 
-```js run
+```js
 let animal = {
   name: "Animal",
   eat() {
@@ -285,10 +284,8 @@ let rabbit = {
   __proto__: animal,
   name: "Rabbit",
   eat() {
-*!*
     // that's how super.eat() could presumably work
     this.__proto__.eat.call(this); // (*)
-*/!*
   }
 };
 
@@ -301,7 +298,7 @@ And in the code above it actually works as intended: we have the correct `alert`
 
 Now let's add one more object to the chain. We'll see how things break:
 
-```js run
+```js
 let animal = {
   name: "Animal",
   eat() {
@@ -325,9 +322,7 @@ let longEar = {
   }
 };
 
-*!*
 longEar.eat(); // Error: Maximum call stack size exceeded
-*/!*
 ```
 
 The code doesn't work anymore! We can see the error trying to call `longEar.eat()`.
@@ -341,6 +336,7 @@ Here's the picture of what happens:
 ![](this-super-loop.png)
 
 1. Inside `longEar.eat()`, the line `(**)` calls `rabbit.eat` providing it with `this=longEar`.
+
     ```js
     // inside longEar.eat() we have this = longEar
     this.__proto__.eat.call(this) // (**)
@@ -349,6 +345,7 @@ Here's the picture of what happens:
     // that is
     rabbit.eat.call(this);
     ```
+    
 2. Then in the line `(*)` of `rabbit.eat`, we'd like to pass the call even higher in the chain, but `this=longEar`, so `this.__proto__.eat` is again `rabbit.eat`!
 
     ```js
@@ -376,7 +373,7 @@ But this change is safe. `[[HomeObject]]` is used only for calling parent method
 
 Let's see how it works for `super` -- again, using plain objects:
 
-```js run
+```js
 let animal = {
   name: "Animal",
   eat() {         // [[HomeObject]] == animal
@@ -400,9 +397,7 @@ let longEar = {
   }
 };
 
-*!*
 longEar.eat();  // Long Ear eats.
-*/!*
 ```
 
 Every method remembers its object in the internal `[[HomeObject]]` property. Then `super` uses it to resolve the parent prototype.
@@ -411,7 +406,7 @@ Every method remembers its object in the internal `[[HomeObject]]` property. The
 
 In the example below a non-method syntax is used for comparison. `[[HomeObject]]` property is not set and the inheritance doesn't work:
 
-```js run
+```js
 let animal = {
   eat: function() { // should be the short syntax: eat() {...}
     // ...
@@ -425,9 +420,7 @@ let rabbit = {
   }
 };
 
-*!*
 rabbit.eat();  // Error calling super (because there's no [[HomeObject]])
-*/!*
 ```
 
 ## Static methods and inheritance
@@ -436,7 +429,7 @@ The `class` syntax supports inheritance for static properties too.
 
 For instance:
 
-```js run
+```js
 class Animal {
 
   constructor(name, speed) {
@@ -476,14 +469,13 @@ Now we can call `Rabbit.compare` assuming that the inherited `Animal.compare` wi
 
 How does it work? Again, using prototypes. As you might have already guessed, extends also gives `Rabbit` the `[[Prototype]]` reference to `Animal`.
 
-
 ![](animal-rabbit-static.png)
 
 So, `Rabbit` function now inherits from `Animal` function. And `Animal` function normally has `[[Prototype]]` referencing `Function.prototype`, because it doesn't `extend` anything.
 
 Here, let's check that:
 
-```js run
+```js
 class Animal {}
 class Rabbit extends Animal {}
 
@@ -517,7 +509,7 @@ Built-in classes like Array, Map and others are extendable also.
 
 For instance, here `PowerArray` inherits from the native `Array`:
 
-```js run
+```js
 // add one more method to it (can do more)
 class PowerArray extends Array {
   isEmpty() {
@@ -536,6 +528,7 @@ alert(filteredArr.isEmpty()); // false
 Please note one very interesting thing. Built-in methods like `filter`, `map` and others -- return new objects of exactly the inherited type. They rely on the `constructor` property to do so.
 
 In the example above,
+
 ```js
 arr.constructor === PowerArray
 ```
@@ -546,18 +539,16 @@ Even more, we can customize that behavior. The static getter `Symbol.species`, i
 
 For example, here due to `Symbol.species` built-in methods like `map`, `filter` will return "normal" arrays:
 
-```js run
+```js
 class PowerArray extends Array {
   isEmpty() {
     return this.length === 0;
   }
 
-*!*
   // built-in methods will use this as the constructor
   static get [Symbol.species]() {
     return Array;
   }
-*/!*
 }
 
 let arr = new PowerArray(1, 2, 5, 10, 50);
@@ -566,9 +557,7 @@ alert(arr.isEmpty()); // false
 // filter creates new array using arr.constructor[Symbol.species] as constructor
 let filteredArr = arr.filter(item => item >= 10);
 
-*!*
 // filteredArr is not PowerArray, but Array
-*/!*
 alert(filteredArr.isEmpty()); // Error: filteredArr.isEmpty is not a function
 ```
 
