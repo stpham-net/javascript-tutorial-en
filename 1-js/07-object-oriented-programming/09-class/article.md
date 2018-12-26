@@ -1,13 +1,13 @@
 
 # Classes
 
-The "class" construct allows to define prototype-based classes with a clean, nice-looking syntax.
+Cấu trúc "class" cho phép định nghĩa các prototype-based classes với cú pháp rõ ràng, đẹp mắt.
 
 ## The "class" syntax
 
-The `class` syntax is versatile, we'll start with a simple example first.
+Cú pháp `class` rất linh hoạt, trước tiên chúng ta sẽ bắt đầu với một ví dụ đơn giản.
 
-Here's a prototype-based class `User`:
+Đây là một prototype-based class `User`:
 
 ```js
 function User(name) {
@@ -22,7 +22,7 @@ let user = new User("John");
 user.sayHi();
 ```
 
-...And that's the same using `class` syntax:
+...Và điều đó cũng tương tự khi sử dụng cú pháp `class`:
 
 ```js
 class User {
@@ -41,16 +41,16 @@ let user = new User("John");
 user.sayHi();
 ```
 
-It's easy to see that the two examples are alike. Just please note that methods in a class do not have a comma between them. Novice developers sometimes forget it and put a comma between class methods, and things don't work. That's not a literal object, but a class syntax.
+Thật dễ dàng để thấy rằng hai ví dụ giống nhau. Chỉ xin lưu ý rằng các phương thức trong một class không có dấu phẩy giữa chúng. Các nhà phát triển tập sự đôi khi quên nó và đặt dấu phẩy giữa các phương thức lớp và như vậy không hoạt động. Đó không phải là một literal object, mà là một class syntax.
 
-So, what exactly does `class` do? We may think that it defines a new language-level entity, but that would be wrong.
+Vậy, chính xác thì `class` làm gì? Chúng ta có thể nghĩ rằng nó định nghĩa một thực thể cấp ngôn ngữ (language-level) mới, nhưng điều đó là sai.
 
-The `class User {...}` here actually does two things:
+`class User {...}` ở đây thực sự có hai điều:
 
-1. Declares a variable `User` that references the function named `"constructor"`.
-2. Puts methods listed in the definition into `User.prototype`. Here, it includes `sayHi` and the `constructor`.
+1. Khai báo một biến `User` tham chiếu đến hàm có tên `"constructor"`.
+2. Đặt các phương thức được liệt kê trong định nghĩa vào `User.prototype`. Ở đây, nó bao gồm `sayHi` và `constructor`.
 
-Here's the code to dig into the class and see that:
+Đây là mã để đào sâu vào class và thấy rằng:
 
 ```js
 class User {
@@ -65,17 +65,17 @@ alert(User === User.prototype.constructor); // true
 alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 ```
 
-Here's the illustration of what `class User` creates:
+Dưới đây là minh họa về những gì `class User` tạo ra:
 
 ![](class-user.png)
 
-So `class` is a special syntax to define a constructor together with its prototype methods.
+Vì vậy, `class` là một cú pháp đặc biệt để định nghĩa một constructor cùng với các phương thức prototype của nó.
 
-...But not only that. There are minor tweaks here and there:
+...Nhưng không chỉ có thế. Có một số điều chỉnh nhỏ ở đây và đó:
 
 **Constructors require `new`**
 
-Unlike a regular function, a class `constructor` can't be called without `new`:
+Không giống như một hàm thông thường, một class `constructor` không thể được gọi mà không có `new`:
 
 ```js
 class User {
@@ -88,25 +88,25 @@ User(); // Error: Class constructor User cannot be invoked without 'new'
 
 **Different string output**
 
-If we output it like `alert(User)`, some engines show `"class User..."`, while others show `"function User..."`.
+Nếu chúng ta xuất nó như `alert(User)`, một số engines hiển thị `"class User..."`, trong khi những cái khác hiển thị `"function User..."`.
 
-Please don't be confused: the string representation may vary, but that's still a function, there is no separate "class" entity in JavaScript language.
+Xin đừng nhầm lẫn: biểu diễn chuỗi có thể khác nhau, nhưng đó vẫn là một hàm, không có thực thể "class" riêng biệt trong ngôn ngữ JavaScript.
 
 **Class methods are non-enumerable**
 
-A class definition sets `enumerable` flag to `false` for all methods in the `"prototype"`. That's good, because if we `for..in` over an object, we usually don't want its class methods.
+Một định nghĩa class đặt cờ `enumerable` thành `false` cho tất cả các phương thức trong `"prototype"`. Điều đó tốt, bởi vì nếu chúng ta `for..in` qua một đối tượng, chúng ta thường không muốn các phương thức class của nó.
 
 **Classes have a default `constructor() {}`**
 
-If there's no `constructor` in the `class` construct, then an empty function is generated, same as if we had written `constructor() {}`.
+Nếu không có `constructor` trong cấu trúc `class`, thì một hàm rỗng được tạo ra, giống như khi chúng ta đã viết `constructor() {}`.
 
 **Classes always `use strict`**
 
-All code inside the class construct is automatically in strict mode.
+Tất cả các mã bên trong cấu trúc class được tự động ở chế độ nghiêm ngặt.
 
 ### Getters/setters
 
-Classes may also include getters/setters. Here's an example with `user.name` implemented using them:
+Các classes cũng có thể bao gồm getters/setters. Đây là một ví dụ với `user.name` được triển khai bằng cách sử dụng chúng:
 
 ```js
 class User {
@@ -136,7 +136,7 @@ alert(user.name); // John
 user = new User(""); // Name too short.
 ```
 
-Internally, getters and setters are also created on the `User` prototype, like this:
+Trong nội bộ, getters và setters cũng được tạo ra trên `User` prototype, như thế này:
 
 ```js
 Object.defineProperties(User.prototype, {
@@ -153,9 +153,9 @@ Object.defineProperties(User.prototype, {
 
 ### Only methods
 
-Unlike object literals, no `property:value` assignments are allowed inside `class`. There may be only methods and getters/setters. There is some work going on in the specification to lift that limitation, but it's not yet there.
+Không giống như các object literals, không có phép gán `property:value` bên trong `class`. Chỉ có phương thức và getters/setters. Có một số công việc đang diễn ra trong đặc tả để nâng cao giới hạn đó, nhưng nó vẫn chưa có.
 
-If we really need to put a non-function value into the prototype, then we can alter `prototype` manually, like this:
+Nếu chúng ta thực sự cần đặt một giá trị phi hàm (non-function value) vào nguyên mẫu (prototype), thì chúng ta có thể thay đổi `prototype` bằng tay, như thế này:
 
 ```js
 class User { }
@@ -165,9 +165,9 @@ User.prototype.test = 5;
 alert( new User().test ); // 5
 ```
 
-So, technically that's possible, but we should know why we're doing it. Such properties will be shared among all objects of the class.
+Vì vậy, về mặt kỹ thuật là có thể, nhưng chúng ta nên biết tại sao chúng ta làm việc đó. Các thuộc tính như vậy sẽ được chia sẻ giữa tất cả các đối tượng của class.
 
-An "in-class" alternative is to use a getter:
+Một thay thế "trong lớp (in-class)" là sử dụng một getter:
 
 ```js
 class User {
@@ -179,13 +179,13 @@ class User {
 alert( new User().test ); // 5
 ```
 
-From the external code, the usage is the same. But the getter variant is a bit slower.
+Từ mã bên ngoài, việc sử dụng là như nhau. Nhưng biến thể getter chậm hơn một chút.
 
 ## Class Expression
 
-Just like functions, classes can be defined inside another expression, passed around, returned etc.
+Cũng giống như các hàm, các classes có thể được định nghĩa bên trong một biểu thức khác, được truyền xung quanh, trả về, v.v.
 
-Here's a class-returning function ("class factory"):
+Đây là một class-returning function ("class factory"):
 
 ```js
 function makeClass(phrase) {
@@ -202,13 +202,13 @@ let User = makeClass("Hello");
 new User().sayHi(); // Hello
 ```
 
-That's quite normal if we recall that `class` is just a special form of a function-with-prototype definition.
+Điều đó khá bình thường nếu chúng ta nhớ lại rằng `class` chỉ là một dạng đặc biệt của định nghĩa function-with-prototype.
 
-And, like Named Function Expressions, such classes also may have a name, that is visible inside that class only:
+Và, giống như Named Function Expressions, các classes như vậy cũng có thể có một tên, chỉ hiển thị bên trong class đó:
 
 ```js
 // "Named Class Expression" (alas, no such term, but that's what's going on)
-let User = class *!*MyClass*/!* {
+let User = class MyClass {
   sayHi() {
     alert(MyClass); // MyClass is visible only inside the class
   }
@@ -221,7 +221,7 @@ alert(MyClass); // error, MyClass not visible outside of the class
 
 ## Static methods
 
-We can also assign methods to the class function, not to its `"prototype"`. Such methods are called *static*.
+Chúng ta cũng có thể gán các phương thức cho class function, chứ không phải cho `"prototype"`. Các phương thức như vậy được gọi là *static*.
 
 An example:
 
@@ -235,7 +235,7 @@ class User {
 User.staticMethod(); // true
 ```
 
-That actually does the same as assigning it as a function property:
+Điều đó thực sự giống như việc gán nó như một thuộc tính hàm:
 
 ```js
 function User() { }
@@ -245,11 +245,11 @@ User.staticMethod = function() {
 };
 ```
 
-The value of `this` inside `User.staticMethod()` is the class constructor `User` itself (the "object before dot" rule).
+Giá trị của `this` bên trong `User.staticMethod()` là chính class constructor `User` (quy tắc "đối tượng trước dấu chấm (object before dot)").
 
-Usually, static methods are used to implement functions that belong to the class, but not to any particular object of it.
+Thông thường, các phương thức tĩnh (static methods) được sử dụng để thực hiện các hàm thuộc về class, nhưng không thuộc về bất kỳ đối tượng cụ thể nào của nó.
 
-For instance, we have `Article` objects and need a function to compare them. The natural choice would be `Article.compare`, like this:
+Chẳng hạn, chúng ta có các đối tượng `Article` và cần một hàm để so sánh chúng. Sự lựa chọn tự nhiên sẽ là `Article.compare`, như thế này:
 
 ```js
 class Article {
@@ -275,15 +275,15 @@ articles.sort(Article.compare);
 alert( articles[0].title ); // Body
 ```
 
-Here `Article.compare` stands "over" the articles, as a means to compare them. It's not a method of an article, but rather of the whole class.
+Ở đây `Article.compare` đứng "trên" các articles, như một phương tiện để so sánh chúng. Đây không phải là một phương thức của một article, mà là của cả class.
 
-Another example would be a so-called "factory" method. Imagine, we need few ways to create an article:
+Một ví dụ khác là phương pháp "factory". Hãy tưởng tượng, chúng ta cần một vài cách để tạo một article:
 
-1. Create by given parameters (`title`, `date` etc).
-2. Create an empty article with today's date.
+1. Tạo bởi các tham số đã cho (`title`, `date` etc).
+2. Tạo một empty article với today's date.
 3. ...
 
-The first way can be implemented by the constructor. And for the second one we can make a static method of the class.
+Cách đầu tiên có thể được thực hiện bởi constructor. Và đối với cách thứ hai, chúng ta có thể tạo một static method của class.
 
 Like `Article.createTodays()` here:
 
@@ -305,9 +305,9 @@ let article = Article.createTodays();
 alert( article.title ); // Todays digest
 ```
 
-Now every time we need to create a today's digest, we can call `Article.createTodays()`. Once again, that's not a method of an article, but a method of the whole class.
+Bây giờ mỗi khi chúng ta cần tạo một today's digest, chúng ta có thể gọi `Article.createTodays()`. Một lần nữa, đó không phải là một phương thức của một article, mà là một phương thức của cả class.
 
-Static methods are also used in database-related classes to search/save/remove entries from the database, like this:
+Các phương thức tĩnh cũng được sử dụng trong các lớp liên quan đến cơ sở dữ liệu để tìm kiếm/lưu/xóa các entries khỏi cơ sở dữ liệu, như sau:
 
 ```js
 // assuming Article is a special class for managing articles
@@ -315,9 +315,9 @@ Static methods are also used in database-related classes to search/save/remove e
 Article.remove({id: 12345});
 ```
 
-## Summary
+## Tóm lược
 
-The basic class syntax looks like this:
+Cú pháp lớp cơ bản trông như thế này:
 
 ```js
 class MyClass {
@@ -333,8 +333,8 @@ class MyClass {
 }
 ```
 
-The value of `MyClass` is a function provided as `constructor`. If there's no `constructor`, then an empty function.
+The value của `MyClass` là một hàm được cung cấp như là `constructor`. Nếu không có `constructor`, thì một empty function.
 
-In any case, methods listed in the class declaration become members of its `prototype`, with the exception of static methods that are written into the function itself and callable as `MyClass.staticMethod()`. Static methods are used when we need a function bound to a class, but not to any object of that class.
+Trong mọi trường hợp, các phương thức được liệt kê trong class declaration trở thành thành viên của `prototype`, ngoại trừ các static methods được ghi vào chính hàm và có thể gọi là `MyClass.staticMethod()`. Các phương thức tĩnh được sử dụng khi chúng ta cần một hàm ràng buộc với một lớp, nhưng không phải với bất kỳ đối tượng nào của lớp đó.
 
-In the next chapter we'll learn more about classes, including inheritance.
+Trong chương tiếp theo, chúng ta sẽ tìm hiểu thêm về các classes, bao gồm cả kế thừa.
