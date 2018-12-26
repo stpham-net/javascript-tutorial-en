@@ -4,9 +4,10 @@ The `instanceof` operator allows to check whether an object belongs to a certain
 
 Such a check may be necessary in many cases, here we'll use it for building a *polymorphic* function, the one that treats arguments differently depending on their type.
 
-## The instanceof operator [#ref-instanceof]
+## The instanceof operator
 
 The syntax is:
+
 ```js
 obj instanceof Class
 ```
@@ -15,30 +16,26 @@ It returns `true` if `obj` belongs to the `Class` (or a class inheriting from it
 
 For instance:
 
-```js run
+```js
 class Rabbit {}
 let rabbit = new Rabbit();
 
 // is it an object of Rabbit class?
-*!*
 alert( rabbit instanceof Rabbit ); // true
-*/!*
 ```
 
 It also works with constructor functions:
 
-```js run
-*!*
+```js
 // instead of class
 function Rabbit() {}
-*/!*
 
 alert( new Rabbit() instanceof Rabbit ); // true
 ```
 
 ...And with built-in classes like `Array`:
 
-```js run
+```js
 let arr = [1, 2, 3];
 alert( arr instanceof Array ); // true
 alert( arr instanceof Object ); // true
@@ -52,7 +49,7 @@ The algorithm of `obj instanceof Class` works roughly as follows:
 
 1. If there's a static method `Symbol.hasInstance`, then use it. Like this:
 
-    ```js run
+    ```js
     // assume anything that canEat is an animal
     class Animal {
       static [Symbol.hasInstance](obj) {
@@ -67,6 +64,7 @@ The algorithm of `obj instanceof Class` works roughly as follows:
 2. Most classes do not have `Symbol.hasInstance`. In that case, check if `Class.prototype` equals to one of prototypes in the `obj` prototype chain.
 
     In other words, compare:
+    
     ```js
     obj.__proto__ === Class.prototype
     obj.__proto__.__proto__ === Class.prototype
@@ -78,14 +76,12 @@ The algorithm of `obj instanceof Class` works roughly as follows:
 
     In the case of an inheritance, `rabbit` is an instance of the parent class as well:
 
-    ```js run
+    ```js
     class Animal {}
     class Rabbit extends Animal {}
 
     let rabbit = new Rabbit();
-    *!*
     alert(rabbit instanceof Animal); // true
-    */!*
     // rabbit.__proto__ === Rabbit.prototype
     // rabbit.__proto__.__proto__ === Animal.prototype (match!)
     ```
@@ -94,7 +90,7 @@ Here's the illustration of what `rabbit instanceof Animal` compares with `Animal
 
 ![](instanceof.png)
 
-By the way, there's also a method [objA.isPrototypeOf(objB)](mdn:js/object/isPrototypeOf), that returns `true` if `objA` is somewhere in the chain of prototypes for `objB`. So the test of `obj instanceof Class` can be rephrased as `Class.prototype.isPrototypeOf(obj)`.
+By the way, there's also a method [objA.isPrototypeOf(objB)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object/isPrototypeOf), that returns `true` if `objA` is somewhere in the chain of prototypes for `objB`. So the test of `obj instanceof Class` can be rephrased as `Class.prototype.isPrototypeOf(obj)`.
 
 That's funny, but the `Class` constructor itself does not participate in the check! Only the chain of prototypes and `Class.prototype` matters.
 
@@ -102,7 +98,7 @@ That can lead to interesting consequences when `prototype` is changed.
 
 Like here:
 
-```js run
+```js
 function Rabbit() {}
 let rabbit = new Rabbit();
 
@@ -110,9 +106,7 @@ let rabbit = new Rabbit();
 Rabbit.prototype = {};
 
 // ...not a rabbit any more!
-*!*
 alert( rabbit instanceof Rabbit ); // false
-*/!*
 ```
 
 That's one of the reasons to avoid changing `prototype`. Just to keep safe.
@@ -121,7 +115,7 @@ That's one of the reasons to avoid changing `prototype`. Just to keep safe.
 
 We already know that plain objects are converted to string as `[object Object]`:
 
-```js run
+```js
 let obj = {};
 
 alert(obj); // [object Object]
@@ -143,7 +137,7 @@ By [specification](https://tc39.github.io/ecma262/#sec-object.prototype.tostring
 
 Let's demonstrate:
 
-```js run
+```js
 // copy toString method into a variable for convenience
 let objectToString = Object.prototype.toString;
 
@@ -153,7 +147,7 @@ let arr = [];
 alert( objectToString.call(arr) ); // [object Array]
 ```
 
-Here we used [call](mdn:js/function/call) as described in the chapter [](info:call-apply-decorators) to execute the function `objectToString` in the context `this=arr`.
+Here we used [call](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function/call) as described in the chapter **call-apply-decorators** to execute the function `objectToString` in the context `this=arr`.
 
 Internally, the `toString` algorithm examines `this` and returns the corresponding result. More examples:
 
@@ -171,7 +165,7 @@ The behavior of Object `toString` can be customized using a special object prope
 
 For instance:
 
-```js run
+```js
 let user = {
   [Symbol.toStringTag]: "User"
 };
@@ -181,7 +175,7 @@ alert( {}.toString.call(user) ); // [object User]
 
 For most environment-specific objects, there is such a property. Here are few browser specific examples:
 
-```js run
+```js
 // toStringTag for the envinronment-specific object and class:
 alert( window[Symbol.toStringTag]); // window
 alert( XMLHttpRequest.prototype[Symbol.toStringTag] ); // XMLHttpRequest
@@ -200,11 +194,11 @@ It can be used instead of `instanceof` for built-in objects when we want to get 
 
 Let's recap the type-checking methods that we know:
 
-|               | works for   |  returns      |
-|---------------|-------------|---------------|
-| `typeof`      | primitives  |  string       |
-| `{}.toString` | primitives, built-in objects, objects with `Symbol.toStringTag`   |       string |
-| `instanceof`  | objects     |  true/false   |
+|               | works for                                                       |  returns      |
+|---------------|-----------------------------------------------------------------|---------------|
+| `typeof`      | primitives                                                      |  string       |
+| `{}.toString` | primitives, built-in objects, objects with `Symbol.toStringTag` | string        |
+| `instanceof`  | objects                                                         |  true/false   |
 
 As we can see, `{}.toString` is technically a "more advanced" `typeof`.
 
