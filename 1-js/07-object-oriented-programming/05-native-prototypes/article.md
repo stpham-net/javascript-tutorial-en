@@ -84,7 +84,7 @@ Các công cụ trong trình duyệt như Chrome developer console cũng có th�
 
 ![](console_dir_array.png)
 
-Các built-in objects khác cũng hoạt động theo cách tương tự. Ngay cả các functions. Chúng là các đối tượng của built-in `Function` constructor, và các phương thức của chúng: `call/apply` và các đối tượng khác được lấy từ `Function.prototype`. Các hàm cũng có `toString` của riêng chúng.
+Các built-in objects khác cũng hoạt động theo cách tương tự. Ngay cả các functions. Chúng là các đối tượng của built-in `Function` constructor, và các phương thức của chúng: `call/apply` và các phương thức khác được lấy từ `Function.prototype`. Các hàm cũng có `toString` của riêng chúng.
 
 ```js
 function f() {}
