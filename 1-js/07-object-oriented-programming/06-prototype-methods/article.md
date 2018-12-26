@@ -5,35 +5,29 @@ In this chapter we cover additional methods to work with a prototype.
 
 There are also other ways to get/set a prototype, besides those that we already know:
 
-- [Object.create(proto[, descriptors])](mdn:js/Object/create) -- creates an empty object with given `proto` as `[[Prototype]]` and optional property descriptors.
-- [Object.getPrototypeOf(obj)](mdn:js/Object/getPrototypeOf) -- returns the `[[Prototype]]` of `obj`.
-- [Object.setPrototypeOf(obj, proto)](mdn:js/Object/setPrototypeOf) -- sets the `[[Prototype]]` of `obj` to `proto`.
+- [Object.create(proto[, descriptors])](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create) -- creates an empty object with given `proto` as `[[Prototype]]` and optional property descriptors.
+- [Object.getPrototypeOf(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf) -- returns the `[[Prototype]]` of `obj`.
+- [Object.setPrototypeOf(obj, proto)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf) -- sets the `[[Prototype]]` of `obj` to `proto`.
 
 For instance:
 
-```js run
+```js
 let animal = {
   eats: true
 };
 
 // create a new object with animal as a prototype
-*!*
 let rabbit = Object.create(animal);
-*/!*
 
 alert(rabbit.eats); // true
-*!*
 alert(Object.getPrototypeOf(rabbit) === animal); // get the prototype of rabbit
-*/!*
 
-*!*
 Object.setPrototypeOf(rabbit, {}); // change the prototype of rabbit to {}
-*/!*
 ```
 
 `Object.create` has an optional second argument: property descriptors. We can provide additional properties to the new object there, like this:
 
-```js run
+```js
 let animal = {
   eats: true
 };
@@ -47,7 +41,7 @@ let rabbit = Object.create(animal, {
 alert(rabbit.jumps); // true
 ```
 
-The descriptors are in the same format as described in the chapter <info:property-descriptors>.
+The descriptors are in the same format as described in the chapter **property-descriptors**.
 
 We can use `Object.create` to perform an object cloning more powerful than copying properties in `for..in`:
 
@@ -82,7 +76,7 @@ As we know, objects can be used as associative arrays to store key/value pairs.
 
 Check out the example:
 
-```js run
+```js
 let obj = {};
 
 let key = prompt("What's the key?", "__proto__");
@@ -117,10 +111,8 @@ As it was said in the beginning: `__proto__` is a way to access `[[Prototype]]`,
 
 Now, if we want to use an object as an associative array, we can do it with a little trick:
 
-```js run
-*!*
+```js
 let obj = Object.create(null);
-*/!*
 
 let key = prompt("What's the key?", "__proto__");
 obj[key] = "some value";
@@ -138,10 +130,8 @@ We can call such object "very plain" or "pure dictionary objects", because they 
 
 A downside is that such objects lack any built-in object methods, e.g. `toString`:
 
-```js run
-*!*
+```js
 let obj = Object.create(null);
-*/!*
 
 alert(obj); // Error (no toString)
 ```
@@ -150,8 +140,7 @@ alert(obj); // Error (no toString)
 
 Please note that most object-related methods are `Object.something(...)`, like `Object.keys(obj)` -- they are not in the prototype, so they will keep working on such objects:
 
-
-```js run
+```js
 let chineseDictionary = Object.create(null);
 chineseDictionary.hello = "ni hao";
 chineseDictionary.bye = "zai jian";
@@ -165,19 +154,19 @@ There are many ways to get keys/values from an object.
 
 We already know these ones:
 
-- [Object.keys(obj)](mdn:js/Object/keys) / [Object.values(obj)](mdn:js/Object/values) / [Object.entries(obj)](mdn:js/Object/entries) -- returns an array of enumerable own string property names/values/key-value pairs. These methods only list *enumerable* properties, and those that have *strings as keys*.
+- [Object.keys(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) / [Object.values(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values) / [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) -- returns an array of enumerable own string property names/values/key-value pairs. These methods only list *enumerable* properties, and those that have *strings as keys*.
 
 If we want symbolic properties:
 
-- [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) -- returns an array of all own symbolic property names.
+- [Object.getOwnPropertySymbols(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols) -- returns an array of all own symbolic property names.
 
 If we want non-enumerable properties:
 
-- [Object.getOwnPropertyNames(obj)](mdn:js/Object/getOwnPropertyNames) -- returns an array of all own string property names.
+- [Object.getOwnPropertyNames(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames) -- returns an array of all own string property names.
 
 If we want *all* properties:
 
-- [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) -- returns an array of all own property names.
+- [Reflect.ownKeys(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/ownKeys) -- returns an array of all own property names.
 
 These methods are a bit different about which properties they return, but all of them operate on the object itself. Properties from the prototype are not listed.
 
@@ -185,7 +174,7 @@ The `for..in` loop is different: it loops over inherited properties too.
 
 For instance:
 
-```js run
+```js
 let animal = {
   eats: true
 };
@@ -195,22 +184,18 @@ let rabbit = {
   __proto__: animal
 };
 
-*!*
 // only own keys
 alert(Object.keys(rabbit)); // jumps
-*/!*
 
-*!*
 // inherited keys too
 for(let prop in rabbit) alert(prop); // jumps, then eats
-*/!*
 ```
 
-If we want to distinguish inherited properties, there's a built-in method [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
+If we want to distinguish inherited properties, there's a built-in method [obj.hasOwnProperty(key)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
 
 So we can filter out inherited properties (or do something else with them):
 
-```js run
+```js
 let animal = {
   eats: true
 };
@@ -225,6 +210,7 @@ for(let prop in rabbit) {
   alert(`${prop}: ${isOwn}`); // jumps:true, then eats:false
 }
 ```
+
 Here we have the following inheritance chain: `rabbit`, then `animal`, then `Object.prototype` (because `animal` is a literal object `{...}`, so it's by default), and then `null` above it:
 
 ![](rabbit-animal-object.png)
@@ -237,14 +223,14 @@ Note, there's one funny thing. Where is the method `rabbit.hasOwnProperty` comin
 
 Here's a brief list of methods we discussed in this chapter -- as a recap:
 
-- [Object.create(proto[, descriptors])](mdn:js/Object/create) -- creates an empty object with given `proto` as `[[Prototype]]` (can be `null`) and optional property descriptors.
-- [Object.getPrototypeOf(obj)](mdn:js/Object.getPrototypeOf) -- returns the `[[Prototype]]` of `obj` (same as `__proto__` getter).
-- [Object.setPrototypeOf(obj, proto)](mdn:js/Object.setPrototypeOf) -- sets the `[[Prototype]]` of `obj` to `proto` (same as `__proto__` setter).
-- [Object.keys(obj)](mdn:js/Object/keys) / [Object.values(obj)](mdn:js/Object/values) / [Object.entries(obj)](mdn:js/Object/entries) -- returns an array of enumerable own string property names/values/key-value pairs.
-- [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) -- returns an array of all own symbolic property names.
-- [Object.getOwnPropertyNames(obj)](mdn:js/Object/getOwnPropertyNames) -- returns an array of all own string property names.
-- [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) -- returns an array of all own property names.
-- [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
+- [Object.create(proto[, descriptors])](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create) -- creates an empty object with given `proto` as `[[Prototype]]` (can be `null`) and optional property descriptors.
+- [Object.getPrototypeOf(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object.getPrototypeOf) -- returns the `[[Prototype]]` of `obj` (same as `__proto__` getter).
+- [Object.setPrototypeOf(obj, proto)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object.setPrototypeOf) -- sets the `[[Prototype]]` of `obj` to `proto` (same as `__proto__` setter).
+- [Object.keys(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) / [Object.values(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values) / [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) -- returns an array of enumerable own string property names/values/key-value pairs.
+- [Object.getOwnPropertySymbols(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols) -- returns an array of all own symbolic property names.
+- [Object.getOwnPropertyNames(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames) -- returns an array of all own string property names.
+- [Reflect.ownKeys(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/ownKeys) -- returns an array of all own property names.
+- [obj.hasOwnProperty(key)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
 
 We also made it clear that `__proto__` is a getter/setter for `[[Prototype]]` and resides in `Object.prototype`, just as other methods.
 
