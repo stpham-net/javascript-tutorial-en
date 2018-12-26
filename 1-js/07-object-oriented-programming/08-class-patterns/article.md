@@ -1,17 +1,17 @@
 
 # Class patterns
 
-> In object-oriented programming, a *class* is an extensible program-code-template for creating objects, providing initial values for state (member variables) and implementations of behavior (member functions or methods). - Wikipedia
+> Trong lập trình hướng đối tượng, một *class* là program-code-template mở rộng để tạo đối tượng, cung cấp các giá trị ban đầu (initial values) cho trạng thái (state) (biến thành viên (member variables)) và triển khai hành vi (member functions hoặc methods). - Wikipedia
 
-There's a special syntax construct and a keyword `class` in JavaScript. But before studying it, we should consider that the term "class" comes from the theory of object-oriented programming. The definition is cited above, and it's language-independent.
+Có một special syntax construct và một từ khóa `class` trong JavaScript. Nhưng trước khi nghiên cứu nó, chúng ta nên xem xét thuật ngữ "class" xuất phát từ lý thuyết lập trình hướng đối tượng. Định nghĩa được trích dẫn ở trên, và nó độc lập với ngôn ngữ.
 
-In JavaScript there are several well-known programming patterns to make classes even without using the `class` keyword. And here we'll talk about them first.
+Trong JavaScript, có một số mẫu lập trình nổi tiếng để tạo các classes ngay cả khi không sử dụng từ khóa `class`. Và ở đây chúng ta sẽ nói về chúng trước.
 
-The `class` construct will be described in the next chapter, but in JavaScript it's a "syntax sugar" and an extension of one of the patterns that we'll study here.
+Cấu trúc `class` sẽ được mô tả trong chương tiếp theo, nhưng trong JavaScript, đó là "syntax sugar" và là phần mở rộng của một trong các mẫu mà chúng ta sẽ nghiên cứu ở đây.
 
 ## Functional class pattern
 
-The constructor function below can be considered a "class" according to the definition:
+The constructor function bên dưới có thể được coi là một "class" theo định nghĩa:
 
 ```js
 function User(name) {
@@ -24,17 +24,17 @@ let user = new User("John");
 user.sayHi(); // John
 ```
 
-It follows all parts of the definition:
+Nó tuân theo tất cả các phần của định nghĩa:
 
-1. It is a "program-code-template" for creating objects (callable with `new`).
-2. It provides initial values for the state (`name` from parameters).
-3. It provides methods (`sayHi`).
+1. Nó là "program-code-template" để tạo các đối tượng (có thể gọi bằng `new`).
+2. Nó cung cấp các giá trị ban đầu (initial values) cho trạng thái (state) (`name` từ các tham số).
+3. Nó cung cấp các phương thức (`sayHi`).
 
-This is called *functional class pattern*.
+Đây được gọi là *functional class pattern*.
 
-In the functional class pattern, local variables and nested functions inside `User`, that are not assigned to `this`, are visible from inside, but not accessible by the outer code.
+Trong functional class pattern, các biến cục bộ và các hàm lồng nhau bên trong `User`, không được gán cho `this`, có thể nhìn thấy từ bên trong, nhưng mã bên ngoài không thể truy cập được.
 
-So we can easily add internal functions and variables, like `calcAge()` here:
+Vì vậy, chúng ta có thể dễ dàng thêm các hàm và biến nội bộ, như `calcAge()` ở đây:
 
 ```js
 function User(name, birthday) {
@@ -52,17 +52,17 @@ let user = new User("John", new Date(2000, 0, 1));
 user.sayHi(); // John, age:17
 ```
 
-In this code variables `name`, `birthday` and the function `calcAge()` are internal, *private* to the object. They are only visible from inside of it.
+Trong mã này, các biến `name`, `birthday` và hàm `calcAge()` là nội bộ, *private* cho đối tượng. Chúng chỉ có thể nhìn thấy từ bên trong của nó.
 
-On the other hand, `sayHi` is the external, *public* method. The external code that creates `user` can access it.
+Mặt khác, `sayHi` là bên ngoài, phương thức *công khai*. Mã bên ngoài tạo ra `user` có thể truy cập nó.
 
-This way we can hide internal implementation details and helper methods from the outer code. Only what's assigned to `this` becomes visible outside.
+Bằng cách này, chúng ta có thể ẩn chi tiết triển khai nội bộ và các helper methods khỏi mã bên ngoài. Chỉ những gì được gán cho `this` mới được hiển thị bên ngoài.
 
 ## Factory class pattern
 
-We can create a class without using `new` at all.
+Chúng ta có thể tạo một lớp mà không cần sử dụng `new`.
 
-Like this:
+Như thế này:
 
 ```js
 function User(name, birthday) {
@@ -82,15 +82,15 @@ let user = User("John", new Date(2000, 0, 1));
 user.sayHi(); // John, age:17
 ```
 
-As we can see, the function `User` returns an object with public properties and methods. The only benefit of this method is that we can omit `new`: write `let user = User(...)` instead of `let user = new User(...)`. In other aspects it's almost the same as the functional pattern.
+Như chúng ta có thể thấy, hàm `User` trả về một đối tượng có các thuộc tính và phương thức công khai. Lợi ích duy nhất của phương pháp này là chúng ta có thể bỏ qua `new`: viết `let user = User(...)` thay vì `let user = new User(...)`. Trong các khía cạnh khác, nó gần giống như functional pattern.
 
-## Prototype-based classes
+## Các lớp dựa trên nguyên mẫu (Prototype-based classes)
 
-Prototype-based classes are the most important and generally the best. Functional and factory class patterns are rarely used in practice.
+Các lớp dựa trên nguyên mẫu là quan trọng nhất và nói chung là tốt nhất. Các mẫu Functional và factory class hiếm khi được sử dụng trong thực tế.
 
-Soon you'll see why.
+Chẳng mấy chốc bạn sẽ thấy tại sao.
 
-Here's the same class rewritten using prototypes:
+Đây là cùng một lớp được viết lại bằng cách sử dụng các prototypes:
 
 ```js
 function User(name, birthday) {
@@ -110,27 +110,27 @@ let user = new User("John", new Date(2000, 0, 1));
 user.sayHi(); // John, age:17
 ```
 
-The code structure:
+Cấu trúc mã:
 
-- The constructor `User` only initializes the current object state.
-- Methods are added to `User.prototype`.
+- The constructor `User` chỉ khởi tạo trạng thái đối tượng hiện tại.
+- Các phương thức được thêm vào `User.prototype`.
 
-As we can see, methods are lexically not inside `function User`, they do not share a common lexical environment. If we declare variables inside `function User`, then they won't be visible to methods.
+Như chúng ta có thể thấy, các phương thức không phải là lexically bên trong `function User`, chúng không chia sẻ một lexical environment chung. Nếu chúng ta khai báo các biến bên trong `function User`, thì chúng sẽ không hiển thị cho các phương thức.
 
-So, there is a widely known agreement that internal properties and methods are prepended with an underscore `"_"`. Like `_name` or `_calcAge()`. Technically, that's just an agreement, the outer code still can access them. But most developers recognize the meaning of `"_"` and try not to touch prefixed properties and methods in the external code.
+Vì vậy, có một thỏa thuận được biết đến rộng rãi rằng các thuộc tính và phương thức nội bộ được thêm vào một dấu gạch dưới `"_"`. Giống như `_name` hoặc` _calcAge () `. Về mặt kỹ thuật, đó chỉ là một thỏa thuận, mã bên ngoài vẫn có thể truy cập chúng. Nhưng hầu hết các nhà phát triển nhận ra ý nghĩa của `"_"` và cố gắng không chạm vào các thuộc tính và phương thức có tiền tố trong mã bên ngoài.
 
-Here are the advantages over the functional pattern:
+Dưới đây là những ưu điểm so với functional pattern:
 
-- In the functional pattern, each object has its own copy of every method. We assign a separate copy of `this.sayHi = function() {...}` and other methods in the constructor.
-- In the prototypal pattern, all methods are in `User.prototype` that is shared between all user objects. An object itself only stores the data.
+- Trong functional pattern, mỗi đối tượng có bản sao riêng của mọi phương thức. Chúng ta gán một bản sao riêng của `this.sayHi = function() {...}` và các phương thức khác trong constructor.
+- Trong prototypal pattern, tất cả các phương thức đều nằm trong `User.prototype` được chia sẻ giữa tất cả các đối tượng người dùng. Một đối tượng chỉ lưu trữ dữ liệu.
 
-So the prototypal pattern is more memory-efficient.
+Vì vậy, prototypal pattern là bộ nhớ hiệu quả (memory-efficient) hơn.
 
-...But not only that. Prototypes allow us to setup the inheritance in a really efficient way. Built-in JavaScript objects all use prototypes. Also there's a special syntax construct: "class" that provides nice-looking syntax for them. And there's more, so let's go on with them.
+...Nhưng không chỉ có thế. Prototypes cho phép chúng ta thiết lập sự kế thừa một cách thực sự hiệu quả. Tất cả các built-in JavaScript objects đều sử dụng các prototypes. Ngoài ra còn có một cấu trúc cú pháp đặc biệt: "class" cung cấp cú pháp đẹp mắt cho chúng. Và còn nhiều nữa, vì vậy hãy tiếp tục với chúng.
 
-## Prototype-based inheritance for classes
+## Kế thừa dựa trên nguyên mẫu cho các lớp (Prototype-based inheritance for classes)
 
-Let's say we have two prototype-based classes.
+Giả sử chúng ta có hai lớp dựa trên nguyên mẫu (prototype-based classes).
 
 `Rabbit`:
 
@@ -148,7 +148,7 @@ let rabbit = new Rabbit("My rabbit");
 
 ![](rabbit-animal-independent-1.png)
 
-...And `Animal`:
+...Và `Animal`:
 
 ```js
 function Animal(name) {
@@ -164,21 +164,21 @@ let animal = new Animal("My animal");
 
 ![](rabbit-animal-independent-2.png)
 
-Right now they are fully independent.
+Ngay bây giờ chúng hoàn toàn độc lập.
 
-But we'd want `Rabbit` to extend `Animal`. In other words, rabbits should be based on animals, have access to methods of `Animal` and extend them with its own methods.
+Nhưng chúng ta muốn `Rabbit` mở rộng `Animal`. Nói cách khác, thỏ nên dựa vào động vật, có quyền truy cập vào các phương thức của `Animal` và mở rộng chúng bằng các phương thức riêng của nó.
 
-What does it mean in the language of prototypes?
+Nó có nghĩa gì trong ngôn ngữ của các nguyên mẫu?
 
-Right now methods for `rabbit` objects are in `Rabbit.prototype`. We'd like `rabbit` to use `Animal.prototype` as a "fallback", if the method is not found in `Rabbit.prototype`.
+Ngay bây giờ các phương thức cho các đối tượng `rabbit` nằm trong `Rabbit.prototype`. Chúng ta muốn `rabbit` sử dụng `Animal.prototype` làm "dự phòng", nếu phương thức không được tìm thấy trong `Rabbit.prototype`.
 
-So the prototype chain should be `rabbit` -> `Rabbit.prototype` -> `Animal.prototype`.
+Vì vậy, prototype chain phải là `rabbit` -> `Rabbit.prototype` -> `Animal.prototype`.
 
-Like this:
+Như thế này:
 
 ![](class-inheritance-rabbit-animal.png)
 
-The code to implement that:
+Mã để thực hiện điều đó:
 
 ```js
 // Same Animal as before
@@ -208,18 +208,18 @@ rabbit.eat(); // rabbits can eat too
 rabbit.jump();
 ```
 
-The line `(*)` sets up the prototype chain. So that `rabbit` first searches methods in `Rabbit.prototype`, then `Animal.prototype`. And then, just for completeness, let's mention that if the method is not found in `Animal.prototype`, then the search continues in `Object.prototype`, because `Animal.prototype` is a regular plain object, so it inherits from it.
+Dòng `(*)` thiết lập prototype chain. Vì vậy, `rabbit` đầu tiên tìm kiếm các phương thức trong `Rabbit.prototype`, sau đó là `Animal.prototype`. Và sau đó, để hoàn thiện, hãy đề cập rằng nếu phương thức không được tìm thấy trong `Animal.prototype`, thì tìm kiếm tiếp tục trong `Object.prototype`, vì `Animal.prototype` là một đối tượng đơn giản thông thường, do đó, nó thừa kế từ nó.
 
-So here's the full picture:
+Vì vậy, đây là hình ảnh đầy đủ:
 
 ![](class-inheritance-rabbit-animal-2.png)
 
-## Summary
+## Tóm lược
 
-The term "class" comes from the object-oriented programming. In JavaScript it usually means the functional class pattern or the prototypal pattern. The prototypal pattern is more powerful and memory-efficient, so it's recommended to stick to it.
+Thuật ngữ "class" xuất phát từ lập trình hướng đối tượng. Trong JavaScript nó thường có nghĩa là functional class pattern hoặc the prototypal pattern. The prototypal pattern mạnh hơn và tiết kiệm bộ nhớ hơn, do đó, nên sử dụng mẫu này.
 
-According to the prototypal pattern:
-1. Methods are stored in `Class.prototype`.
-2. Prototypes inherit from each other.
+Theo prototypal pattern:
+1. Các phương thức được lưu trữ trong `Class.prototype`.
+2. Prototypes kế thừa từ nhau.
 
-In the next chapter we'll study `class` keyword and construct. It allows to write prototypal classes shorter and provides some additional benefits.
+Trong chương tiếp theo, chúng ta sẽ nghiên cứu từ khóa `class` và construct. Nó cho phép viết các prototypal classes ngắn hơn và cung cấp một số lợi ích bổ sung.
