@@ -12,7 +12,7 @@ Cú pháp là:
 obj instanceof Class
 ```
 
-Nó trả về `true` nếu` obj` thuộc về `Class` (hoặc một class kế thừa từ nó).
+Nó trả về `true` nếu `obj` thuộc về `Class` (hoặc một class kế thừa từ nó).
 
 Ví dụ:
 
@@ -92,7 +92,7 @@ Dưới đây là minh họa về những gì `rabbit instanceof Animal` so sán
 
 Nhân tiện, cũng có một phương thức [objA.isPrototypeOf(objB)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object/isPrototypeOf), trả về `true` nếu `objA` nằm ở đâu đó trong chuỗi các nguyên mẫu (chain of prototypes) của `objB`. Vì vậy, bài kiểm tra `obj instanceof Class` có thể được viết lại thành `Class.prototype.isPrototypeOf(obj)`.
 
-Điều đó thật buồn cười, nhưng bản thân `Class` constructor không tham gia kiểm tra! Chỉ có chuỗi các nguyên mẫu (chain of prototypes) và `Class.prototype`.
+Điều đó thật buồn cười, nhưng bản thân `Class` constructor không tham gia kiểm tra! Chỉ có chuỗi các nguyên mẫu (chain of prototypes) và `Class.prototype` tham gia.
 
 Điều đó có thể dẫn đến những hậu quả thú vị khi `prototype` bị thay đổi.
 
