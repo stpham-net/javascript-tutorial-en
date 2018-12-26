@@ -1,22 +1,22 @@
 # Mixins
 
-In JavaScript we can only inherit from a single object. There can be only one `[[Prototype]]` for an object. And a class may extend only one other class.
+Trong JavaScript, chúng ta chỉ có thể kế thừa từ một đối tượng. Chỉ có thể có một `[[Prototype]]` cho một đối tượng. Và một lớp chỉ có thể mở rộng một lớp khác.
 
-But sometimes that feels limiting. For instance, I have a class `StreetSweeper` and a class `Bicycle`, and want to make a `StreetSweepingBicycle`.
+Nhưng đôi khi điều đó cảm thấy hạn chế. Chẳng hạn, tôi có một lớp `StreetSweeper` và một lớp `Bicycle`, và muốn tạo ra một `StreetSweepingBicycle`.
 
-Or, talking about programming, we have a class `Renderer` that implements templating and a class `EventEmitter` that implements event handling, and want to merge these functionalities together with a class `Page`, to make a page that can use templates and emit events.
+Hoặc, nói về lập trình, chúng ta có một lớp `Renderer` thực hiện việc tạo templating và một lớp `EventEmitter` thực hiện xử lý sự kiện và muốn hợp nhất các chức năng này với một lớp `Page`, để tạo một trang có thể sử dụng các templates và phát ra các sự kiện (emit events).
 
-There's a concept that can help here, called "mixins".
+Có một khái niệm có thể giúp đỡ ở đây, được gọi là "mixins".
 
-As defined in Wikipedia, a [mixin](https://en.wikipedia.org/wiki/Mixin) is a class that contains methods for use by other classes without having to be the parent class of those other classes.
+Như được định nghĩa trong Wikipedia, [mixin](https://en.wikipedia.org/wiki/Mixin) là một lớp chứa các phương thức được sử dụng bởi các lớp khác mà không phải là lớp cha của các lớp khác.
 
-In other words, a *mixin* provides methods that implement a certain behavior, but we do not use it alone, we use it to add the behavior to other classes.
+Nói cách khác, một *mixin* cung cấp các phương thức thực hiện một hành vi nhất định, nhưng chúng ta không sử dụng nó một mình, chúng ta sử dụng nó để thêm hành vi vào các lớp khác.
 
-## A mixin example
+## Một ví dụ mixin
 
-The simplest way to make a mixin in JavaScript is to make an object with useful methods, so that we can easily merge them into a prototype of any class.
+Cách đơn giản nhất để tạo mixin trong JavaScript là tạo một đối tượng với các phương thức hữu ích, để chúng ta có thể dễ dàng hợp nhất chúng thành một nguyên mẫu của bất kỳ lớp nào.
 
-For instance here the mixin `sayHiMixin` is used to add some "speech" for `User`:
+Ví dụ ở đây, mixin `sayHiMixin` được sử dụng để thêm một số "speech" cho `User`:
 
 ```js
 // mixin
@@ -43,7 +43,7 @@ Object.assign(User.prototype, sayHiMixin);
 new User("Dude").sayHi(); // Hello Dude!
 ```
 
-There's no inheritance, but a simple method copying. So `User` may extend some other class and also include the mixin to "mix-in" the additional methods, like this:
+Không có sự kế thừa, nhưng một phương pháp sao chép đơn giản. Vì vậy, `User` có thể mở rộng một số lớp khác và cũng bao gồm mixin để "mix-in" các phương thức bổ sung, như sau:
 
 ```js
 class User extends Person {
@@ -53,9 +53,9 @@ class User extends Person {
 Object.assign(User.prototype, sayHiMixin);
 ```
 
-Mixins can make use of inheritance inside themselves.
+Mixins có thể sử dụng sự kế thừa bên trong bản thân chúng.
 
-For instance, here `sayHiMixin` inherits from `sayMixin`:
+Chẳng hạn, ở đây `sayHiMixin` kế thừa từ `sayMixin`:
 
 ```js
 let sayMixin = {
@@ -89,27 +89,27 @@ Object.assign(User.prototype, sayHiMixin);
 new User("Dude").sayHi(); // Hello Dude!
 ```
 
-Please note that the call to the parent method `super.say()` from `sayHiMixin` looks for the method in the prototype of that mixin, not the class.
+Xin lưu ý rằng lệnh gọi phương thức cha `super.say()` từ `sayHiMixin` tìm phương thức trong nguyên mẫu của mixin đó, không phải class.
 
 ![](mixin-inheritance.png)
 
-That's because methods from `sayHiMixin` have `[[HomeObject]]` set to it. So `super` actually means `sayHiMixin.__proto__`, not `User.__proto__`.
+Đó là bởi vì các phương thức từ `sayHiMixin` có `[[HomeObject]]` được đặt cho nó. Vì vậy, `super` thực sự có nghĩa là `sayHiMixin.__proto__`, không phải `User.__proto__`.
 
 ## EventMixin
 
-Now let's make a mixin for real life.
+Bây giờ hãy tạo một mixin cho cuộc sống thực.
 
-The important feature of many objects is working with events.
+Các tính năng quan trọng của nhiều đối tượng là làm việc với các sự kiện.
 
-That is: an object should have a method to "generate an event" when something important happens to it, and other objects should be able to "listen" to such events.
+Đó là: một đối tượng nên có một phương thức để "tạo ra một sự kiện" khi một điều quan trọng xảy ra với nó, và các đối tượng khác sẽ có thể "lắng nghe" các sự kiện đó.
 
-An event must have a name and, optionally, bundle some additional data.
+Một sự kiện phải có tên và, tùy ý, gói một số dữ liệu bổ sung.
 
-For instance, an object `user` can generate an event `"login"` when the visitor logs in. And another object `calendar` may want to receive such events to load the calendar for the logged-in person.
+Chẳng hạn, một đối tượng `user` có thể tạo ra một sự kiện `"login"` khi khách truy cập đăng nhập. Và một đối tượng khác `calendar` có thể muốn nhận các sự kiện như vậy để tải lịch cho người đã đăng nhập.
 
-Or, a `menu` can generate the event `"select"` when a menu item is selected, and other objects may want to get that information and react on that event.
+Hoặc, một `menu` có thể tạo ra sự kiện `"select"` khi một mục menu được chọn và các đối tượng khác có thể muốn lấy thông tin đó và phản ứng với sự kiện đó.
 
-Events is a way to "share information" with anyone who wants it. They can be useful in any class, so let's make a mixin for them:
+Sự kiện là một cách để "chia sẻ thông tin" với bất kỳ ai muốn nó. Chúng có thể hữu ích trong bất kỳ class nào, vì vậy hãy tạo một mixin cho chúng:
 
 ```js
 let eventMixin = {
@@ -154,13 +154,13 @@ let eventMixin = {
 };
 ```
 
-There are 3 methods here:
+Có 3 phương thức ở đây:
 
-1. `.on(eventName, handler)` -- assigns function `handler` to run when the event with that name happens. The handlers are stored in the `_eventHandlers` property.
-2. `.off(eventName, handler)` -- removes the function from the handlers list.
-3. `.trigger(eventName, ...args)` -- generates the event: all assigned handlers are called and `args` are passed as arguments to them.
+1. `.on(eventName, handler)` -- gán hàm `handler` để chạy khi sự kiện có tên đó xảy ra. Các handlers được lưu trữ trong thuộc tính `_eventHandlers`.
+2. `.off(eventName, handler)` -- xóa hàm khỏi danh sách handlers.
+3. `.trigger(eventName, ...args)` -- tạo sự kiện: tất cả các handlers được gán đều được gọi và `args` được truyền dưới dạng đối số cho chúng.
 
-Usage:
+Sử dụng:
 
 ```js
 // Make a class
@@ -181,16 +181,16 @@ menu.on("select", value => alert(`Value selected: ${value}`));
 menu.choose("123"); // value selected
 ```
 
-Now if we have the code interested to react on user selection, we can bind it with `menu.on(...)`.
+Bây giờ nếu chúng ta có mã thích phản ứng với lựa chọn của người dùng, chúng ta có thể liên kết nó với `menu.on(...)`.
 
-And the `eventMixin` can add such behavior to as many classes as we'd like, without interfering with the inheritance chain.
+Và `eventMixin` có thể thêm hành vi đó vào bao nhiêu classes mà chúng ta muốn, mà không can thiệp vào chuỗi thừa kế (inheritance chain).
 
-## Summary
+## Tóm lược
 
-*Mixin* -- is a generic object-oriented programming term: a class that contains methods for other classes.
+*Mixin* -- là một thuật ngữ lập trình hướng đối tượng chung: một lớp có chứa các phương thức cho các lớp khác.
 
-Some other languages like e.g. python allow to create mixins using multiple inheritance. JavaScript does not support multiple inheritance, but mixins can be implemented by copying them into the prototype.
+Một số ngôn ngữ khác như ví dụ python cho phép tạo mixin bằng cách sử dụng nhiều kế thừa. JavaScript không hỗ trợ nhiều kế thừa, nhưng mixin có thể được thực hiện bằng cách sao chép chúng vào nguyên mẫu.
 
-We can use mixins as a way to augment a class by multiple behaviors, like event-handling as we have seen above.
+Chúng ta có thể sử dụng mixin như một cách để tăng cường một lớp bằng nhiều hành vi, như xử lý sự kiện như chúng ta đã thấy ở trên.
 
-Mixins may become a point of conflict if they occasionally overwrite native class methods. So generally one should think well about the naming for a mixin, to minimize such possibility.
+Mixins có thể trở thành một điểm xung đột nếu đôi khi chúng ghi đè lên các phương thức lớp gốc. Vì vậy, nhìn chung người ta nên suy nghĩ tốt về việc đặt tên cho một mixin, để giảm thiểu khả năng đó.
