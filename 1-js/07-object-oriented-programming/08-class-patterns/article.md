@@ -117,12 +117,12 @@ Cấu trúc mã:
 
 Như chúng ta có thể thấy, các phương thức không phải là lexically bên trong `function User`, chúng không chia sẻ một lexical environment chung. Nếu chúng ta khai báo các biến bên trong `function User`, thì chúng sẽ không hiển thị cho các phương thức.
 
-Vì vậy, có một thỏa thuận được biết đến rộng rãi rằng các thuộc tính và phương thức nội bộ được thêm vào một dấu gạch dưới `"_"`. Giống như `_name` hoặc` _calcAge () `. Về mặt kỹ thuật, đó chỉ là một thỏa thuận, mã bên ngoài vẫn có thể truy cập chúng. Nhưng hầu hết các nhà phát triển nhận ra ý nghĩa của `"_"` và cố gắng không chạm vào các thuộc tính và phương thức có tiền tố trong mã bên ngoài.
+Vì vậy, có một thỏa thuận được biết đến rộng rãi rằng các thuộc tính và phương thức nội bộ được thêm vào một dấu gạch dưới `"_"`. Giống như `_name` hoặc `_calcAge()`. Về mặt kỹ thuật, đó chỉ là một thỏa thuận, mã bên ngoài vẫn có thể truy cập chúng. Nhưng hầu hết các nhà phát triển nhận ra ý nghĩa của `"_"` và cố gắng không chạm vào các thuộc tính và phương thức có tiền tố trong mã bên ngoài.
 
 Dưới đây là những ưu điểm so với functional pattern:
 
 - Trong functional pattern, mỗi đối tượng có bản sao riêng của mọi phương thức. Chúng ta gán một bản sao riêng của `this.sayHi = function() {...}` và các phương thức khác trong constructor.
-- Trong prototypal pattern, tất cả các phương thức đều nằm trong `User.prototype` được chia sẻ giữa tất cả các đối tượng người dùng. Một đối tượng chỉ lưu trữ dữ liệu.
+- Trong prototypal pattern, tất cả các phương thức đều nằm trong `User.prototype` được chia sẻ giữa tất cả các user objects. Một đối tượng chỉ lưu trữ dữ liệu.
 
 Vì vậy, prototypal pattern là bộ nhớ hiệu quả (memory-efficient) hơn.
 
