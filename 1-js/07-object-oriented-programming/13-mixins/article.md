@@ -18,10 +18,8 @@ The simplest way to make a mixin in JavaScript is to make an object with useful 
 
 For instance here the mixin `sayHiMixin` is used to add some "speech" for `User`:
 
-```js run
-*!*
+```js
 // mixin
-*/!*
 let sayHiMixin = {
   sayHi() {
     alert(`Hello ${this.name}`);
@@ -31,9 +29,7 @@ let sayHiMixin = {
   }
 };
 
-*!*
 // usage:
-*/!*
 class User {
   constructor(name) {
     this.name = name;
@@ -61,7 +57,7 @@ Mixins can make use of inheritance inside themselves.
 
 For instance, here `sayHiMixin` inherits from `sayMixin`:
 
-```js run
+```js
 let sayMixin = {
   say(phrase) {
     alert(phrase);
@@ -72,9 +68,7 @@ let sayHiMixin = {
   __proto__: sayMixin, // (or we could use Object.create to set the prototype here)
 
   sayHi() {
-    *!*
     // call parent method
-    */!*
     super.say(`Hello ${this.name}`);
   },
   sayBye() {
@@ -117,7 +111,7 @@ Or, a `menu` can generate the event `"select"` when a menu item is selected, and
 
 Events is a way to "share information" with anyone who wants it. They can be useful in any class, so let's make a mixin for them:
 
-```js run
+```js
 let eventMixin = {
   /**
    * Subscribe to event, usage:
@@ -166,10 +160,9 @@ There are 3 methods here:
 2. `.off(eventName, handler)` -- removes the function from the handlers list.
 3. `.trigger(eventName, ...args)` -- generates the event: all assigned handlers are called and `args` are passed as arguments to them.
 
-
 Usage:
 
-```js run
+```js
 // Make a class
 class Menu {
   choose(value) {
@@ -182,9 +175,7 @@ Object.assign(Menu.prototype, eventMixin);
 let menu = new Menu();
 
 // call the handler on selection:
-*!*
 menu.on("select", value => alert(`Value selected: ${value}`));
-*/!*
 
 // triggers the event => shows Value selected: 123
 menu.choose("123"); // value selected
