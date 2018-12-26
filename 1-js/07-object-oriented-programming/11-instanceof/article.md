@@ -1,20 +1,20 @@
 # Class checking: "instanceof"
 
-The `instanceof` operator allows to check whether an object belongs to a certain class. It also takes inheritance into account.
+Toán tử `instanceof` cho phép kiểm tra xem một đối tượng có thuộc về một lớp nhất định hay không. Nó cũng có tính kế thừa.
 
-Such a check may be necessary in many cases, here we'll use it for building a *polymorphic* function, the one that treats arguments differently depending on their type.
+Việc kiểm tra như vậy có thể cần thiết trong nhiều trường hợp, ở đây chúng ta sẽ sử dụng nó để xây dựng hàm *đa hình (polymorphic)*, một hàm xử lý các đối số khác nhau tùy thuộc vào kiểu của chúng.
 
 ## The instanceof operator
 
-The syntax is:
+Cú pháp là:
 
 ```js
 obj instanceof Class
 ```
 
-It returns `true` if `obj` belongs to the `Class` (or a class inheriting from it).
+Nó trả về `true` nếu` obj` thuộc về `Class` (hoặc một class kế thừa từ nó).
 
-For instance:
+Ví dụ:
 
 ```js
 class Rabbit {}
@@ -24,7 +24,7 @@ let rabbit = new Rabbit();
 alert( rabbit instanceof Rabbit ); // true
 ```
 
-It also works with constructor functions:
+Nó cũng hoạt động với các constructor functions:
 
 ```js
 // instead of class
@@ -33,7 +33,7 @@ function Rabbit() {}
 alert( new Rabbit() instanceof Rabbit ); // true
 ```
 
-...And with built-in classes like `Array`:
+...Và với các built-in classes như `Array`:
 
 ```js
 let arr = [1, 2, 3];
@@ -41,13 +41,13 @@ alert( arr instanceof Array ); // true
 alert( arr instanceof Object ); // true
 ```
 
-Please note that `arr` also belongs to the `Object` class. That's because `Array` prototypally inherits from `Object`.
+Xin lưu ý rằng `Array` cũng thuộc về lớp `Object`. Đó là bởi vì `Array` được kế thừa nguyên mẫu từ `Object`.
 
-The `instanceof` operator examines the prototype chain for the check, and is also fine-tunable using the static method `Symbol.hasInstance`.
+Toán tử `instanceof` xem xét chuỗi nguyên mẫu (prototype chain) để kiểm tra và cũng có thể tinh chỉnh bằng cách sử dụng static method `Symbol.hasInstance`.
 
-The algorithm of `obj instanceof Class` works roughly as follows:
+Thuật toán của `obj instanceof Class` hoạt động đại khái như sau:
 
-1. If there's a static method `Symbol.hasInstance`, then use it. Like this:
+1. Nếu có một phương thức tĩnh `Symbol.hasInstance`, thì hãy sử dụng nó. Như thế này:
 
     ```js
     // assume anything that canEat is an animal
@@ -61,9 +61,9 @@ The algorithm of `obj instanceof Class` works roughly as follows:
     alert(obj instanceof Animal); // true: Animal[Symbol.hasInstance](obj) is called
     ```
 
-2. Most classes do not have `Symbol.hasInstance`. In that case, check if `Class.prototype` equals to one of prototypes in the `obj` prototype chain.
+2. Hầu hết các classes không có `Symbol.hasInstance`. Trong trường hợp đó, kiểm tra nếu `Class.prototype` bằng một trong các prototypes trong `obj` prototype chain.
 
-    In other words, compare:
+    Nói cách khác, so sánh:
     
     ```js
     obj.__proto__ === Class.prototype
@@ -72,9 +72,9 @@ The algorithm of `obj instanceof Class` works roughly as follows:
     ...
     ```
 
-    In the example above `Rabbit.prototype === rabbit.__proto__`, so that gives the answer immediately.
+    Trong ví dụ trên `Rabbit.prototype === rabbit.__proto__`, do đó sẽ đưa ra câu trả lời ngay lập tức.
 
-    In the case of an inheritance, `rabbit` is an instance of the parent class as well:
+    Trong trường hợp thừa kế, `rabbit` cũng là một thể hiện của lớp cha:
 
     ```js
     class Animal {}
@@ -86,17 +86,17 @@ The algorithm of `obj instanceof Class` works roughly as follows:
     // rabbit.__proto__.__proto__ === Animal.prototype (match!)
     ```
 
-Here's the illustration of what `rabbit instanceof Animal` compares with `Animal.prototype`:
+Dưới đây là minh họa về những gì `rabbit instanceof Animal` so sánh với `Animal.prototype`:
 
 ![](instanceof.png)
 
-By the way, there's also a method [objA.isPrototypeOf(objB)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object/isPrototypeOf), that returns `true` if `objA` is somewhere in the chain of prototypes for `objB`. So the test of `obj instanceof Class` can be rephrased as `Class.prototype.isPrototypeOf(obj)`.
+Nhân tiện, cũng có một phương thức [objA.isPrototypeOf(objB)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object/isPrototypeOf), trả về `true` nếu `objA` nằm ở đâu đó trong chuỗi các nguyên mẫu (chain of prototypes) của `objB`. Vì vậy, bài kiểm tra `obj instanceof Class` có thể được viết lại thành `Class.prototype.isPrototypeOf(obj)`.
 
-That's funny, but the `Class` constructor itself does not participate in the check! Only the chain of prototypes and `Class.prototype` matters.
+Điều đó thật buồn cười, nhưng bản thân `Class` constructor không tham gia kiểm tra! Chỉ có chuỗi các nguyên mẫu (chain of prototypes) và `Class.prototype`.
 
-That can lead to interesting consequences when `prototype` is changed.
+Điều đó có thể dẫn đến những hậu quả thú vị khi `prototype` bị thay đổi.
 
-Like here:
+Giống như ở đây:
 
 ```js
 function Rabbit() {}
@@ -109,11 +109,11 @@ Rabbit.prototype = {};
 alert( rabbit instanceof Rabbit ); // false
 ```
 
-That's one of the reasons to avoid changing `prototype`. Just to keep safe.
+Đó là một trong những lý do để tránh thay đổi `prototype`. Chỉ để giữ an toàn.
 
 ## Bonus: Object toString for the type
 
-We already know that plain objects are converted to string as `[object Object]`:
+Chúng ta đã biết rằng các đối tượng đơn giản được chuyển đổi thành chuỗi dưới dạng `[object Object]`:
 
 ```js
 let obj = {};
@@ -122,11 +122,11 @@ alert(obj); // [object Object]
 alert(obj.toString()); // the same
 ```
 
-That's their implementation of `toString`. But there's a hidden feature that makes `toString` actually much more powerful than that. We can use it as an extended `typeof` and an alternative for `instanceof`.
+Đó là việc chúng thực hiện `toString`. Nhưng có một tính năng ẩn làm cho `toString` thực sự mạnh hơn thế nhiều. Chúng ta có thể sử dụng nó như một extended `typeof` và một thay thế cho `instanceof`.
 
-Sounds strange? Indeed. Let's demystify.
+Nghe lạ nhỉ? Đúng vậy. Hãy làm sáng tỏ.
 
-By [specification](https://tc39.github.io/ecma262/#sec-object.prototype.tostring), the built-in `toString` can be extracted from the object and executed in the context of any other value. And its result depends on that value.
+Theo [đặc tả](https://tc39.github.io/ecma262/#sec-object.prototype.tostring), the built-in `toString` có thể được trích xuất từ đối tượng và được thực thi trong ngữ cảnh của bất kỳ giá trị nào khác. Và kết quả của nó phụ thuộc vào giá trị đó.
 
 - For a number, it will be `[object Number]`
 - For a boolean, it will be `[object Boolean]`
@@ -135,7 +135,7 @@ By [specification](https://tc39.github.io/ecma262/#sec-object.prototype.tostring
 - For arrays: `[object Array]`
 - ...etc (customizable).
 
-Let's demonstrate:
+Hãy chứng minh:
 
 ```js
 // copy toString method into a variable for convenience
@@ -147,11 +147,11 @@ let arr = [];
 alert( objectToString.call(arr) ); // [object Array]
 ```
 
-Here we used [call](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function/call) as described in the chapter **call-apply-decorators** to execute the function `objectToString` in the context `this=arr`.
+Ở đây, chúng ta đã sử dụng [call](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function/call) như được mô tả trong chương **call-apply-decorators** để thực thi hàm `objectToString` trong ngữ cảnh `this=arr`.
 
-Internally, the `toString` algorithm examines `this` and returns the corresponding result. More examples:
+Trong nội bộ, thuật toán `toString` kiểm tra `this` và trả về kết quả tương ứng. Ví dụ khác:
 
-```js run
+```js
 let s = Object.prototype.toString;
 
 alert( s.call(123) ); // [object Number]
@@ -161,9 +161,9 @@ alert( s.call(alert) ); // [object Function]
 
 ### Symbol.toStringTag
 
-The behavior of Object `toString` can be customized using a special object property `Symbol.toStringTag`.
+Hành vi của Object `toString` có thể được tùy chỉnh bằng cách sử dụng một thuộc tính đối tượng đặc biệt `Symbol.toStringTag`.
 
-For instance:
+Ví dụ:
 
 ```js
 let user = {
@@ -173,7 +173,7 @@ let user = {
 alert( {}.toString.call(user) ); // [object User]
 ```
 
-For most environment-specific objects, there is such a property. Here are few browser specific examples:
+Đối với hầu hết các đối tượng môi trường cụ thể (environment-specific objects), có một thuộc tính như vậy. Dưới đây là một vài ví dụ cụ thể về trình duyệt:
 
 ```js
 // toStringTag for the envinronment-specific object and class:
@@ -184,22 +184,22 @@ alert( {}.toString.call(window) ); // [object Window]
 alert( {}.toString.call(new XMLHttpRequest()) ); // [object XMLHttpRequest]
 ```
 
-As you can see, the result is exactly `Symbol.toStringTag` (if exists), wrapped into `[object ...]`.
+Như bạn có thể thấy, kết quả chính xác là `Symbol.toStringTag` (nếu tồn tại), được gói vào `[object ...]`.
 
-At the end we have "typeof on steroids" that not only works for primitive data types, but also for built-in objects and even can be customized.
+Cuối cùng, chúng ta có "typeof on steroid" không chỉ hoạt động cho các loại dữ liệu nguyên thủy, mà còn cho các built-in objects và thậm chí có thể được tùy chỉnh.
 
-It can be used instead of `instanceof` for built-in objects when we want to get the type as a string rather than just to check.
+Nó có thể được sử dụng thay vì `instanceof` cho các built-in objects khi chúng ta muốn lấy kiểu dưới dạng chuỗi thay vì chỉ để kiểm tra.
 
-## Summary
+## Tóm lược
 
-Let's recap the type-checking methods that we know:
+Chúng ta hãy tóm tắt lại các type-checking methods mà chúng ta biết:
 
 |               | works for                                                       |  returns      |
 |---------------|-----------------------------------------------------------------|---------------|
-| `typeof`      | primitives                                                      |  string       |
+| `typeof`      | primitives                                                      | string        |
 | `{}.toString` | primitives, built-in objects, objects with `Symbol.toStringTag` | string        |
-| `instanceof`  | objects                                                         |  true/false   |
+| `instanceof`  | objects                                                         | true/false    |
 
-As we can see, `{}.toString` is technically a "more advanced" `typeof`.
+Như chúng ta có thể thấy, `{}.toString` về mặt kỹ thuật là một `typeof` "tiên tiến hơn".
 
-And `instanceof` operator really shines when we are working with a class hierarchy and want to check for the class taking into account inheritance.
+Và toán tử `instanceof` thực sự tỏa sáng khi chúng ta đang làm việc với hệ thống phân cấp class và muốn kiểm tra class có tính kế thừa.
