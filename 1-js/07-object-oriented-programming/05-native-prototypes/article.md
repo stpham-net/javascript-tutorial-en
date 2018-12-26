@@ -8,7 +8,7 @@ We'll see how it is for plain objects first, and then for more complex ones.
 
 Let's say we output an empty object:
 
-```js run
+```js
 let obj = {};
 alert( obj ); // "[object Object]" ?
 ```
@@ -29,7 +29,7 @@ Afterwards when `obj.toString()` is called -- the method is taken from `Object.p
 
 We can check it like this:
 
-```js run
+```js
 let obj = {};
 
 alert(obj.__proto__ === Object.prototype); // true
@@ -38,7 +38,7 @@ alert(obj.__proto__ === Object.prototype); // true
 
 Please note that there is no additional `[[Prototype]]` in the chain above `Object.prototype`:
 
-```js run
+```js
 alert(Object.prototype.__proto__); // null
 ```
 
@@ -56,7 +56,7 @@ Here's the overall picture (for 3 built-ins to fit):
 
 Let's check the prototypes manually:
 
-```js run
+```js
 let arr = [1, 2, 3];
 
 // it inherits from Array.prototype?
@@ -71,16 +71,14 @@ alert( arr.__proto__.__proto__.__proto__ ); // null
 
 Some methods in prototypes may overlap, for instance, `Array.prototype` has its own `toString` that lists comma-delimited elements:
 
-```js run
+```js
 let arr = [1, 2, 3]
 alert(arr); // 1,2,3 <-- the result of Array.prototype.toString
 ```
 
 As we've seen before, `Object.prototype` has `toString` as well, but `Array.prototype` is closer in the chain, so the array variant is used.
 
-
 ![](native-prototypes-array-tostring.png)
-
 
 In-browser tools like Chrome developer console also show inheritance (may need to use `console.dir` for built-in objects):
 
@@ -88,7 +86,7 @@ In-browser tools like Chrome developer console also show inheritance (may need t
 
 Other built-in objects also work the same way. Even functions. They are objects of a built-in `Function` constructor, and their methods: `call/apply` and others are taken from `Function.prototype`. Functions have their own `toString` too.
 
-```js run
+```js
 function f() {}
 
 alert(f.__proto__ == Function.prototype); // true
@@ -103,15 +101,23 @@ As we remember, they are not objects. But if we try to access their properties, 
 
 These objects are created invisibly to us and most engines optimize them out, but the specification describes it exactly this way. Methods of these objects also reside in prototypes, available as `String.prototype`, `Number.prototype` and `Boolean.prototype`.
 
-```warn header="Values `null` and `undefined` have no object wrappers"
-Special values `null` and `undefined` stand apart. They have no object wrappers, so methods and properties are not available for them. And there are no corresponding prototypes too.
-```
+<br>
 
-## Changing native prototypes [#native-prototype-change]
+> ---
+
+**📌 Values `null` and `undefined` have no object wrappers**
+
+Special values `null` and `undefined` stand apart. They have no object wrappers, so methods and properties are not available for them. And there are no corresponding prototypes too.
+
+> ---
+
+<br>
+
+## Changing native prototypes
 
 Native prototypes can be modified. For instance, if we add a method to `String.prototype`,  it becomes available to all strings:
 
-```js run
+```js
 String.prototype.show = function() {
   alert(this);
 };
@@ -127,7 +133,7 @@ In modern programming, there is only one case when modifying native prototypes i
 
 For instance:
 
-```js run
+```js
 if (!String.prototype.repeat) { // if there's no such method
   // add it to the prototype
 
@@ -146,14 +152,12 @@ alert( "La".repeat(3) ); // LaLaLa
 
 ## Borrowing from prototypes
 
-In the chapter <info:call-apply-decorators#method-borrowing> we talked about method borrowing:
+In the chapter **call-apply-decorators#method-borrowing** we talked about method borrowing:
 
-```js run
+```js
 function showArgs() {
-*!*
   // borrow join from array and call in the context of arguments
   alert( [].join.call(arguments, " - ") );
-*/!*
 }
 
 showArgs("John", "Pete", "Alice"); // John - Pete - Alice
@@ -163,9 +167,7 @@ Because `join` resides in `Array.prototype`, we can call it from there directly 
 
 ```js
 function showArgs() {
-*!*
   alert( Array.prototype.join.call(arguments, " - ") );
-*/!*
 }
 ```
 
