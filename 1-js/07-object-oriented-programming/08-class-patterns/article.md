@@ -1,9 +1,7 @@
 
 # Class patterns
 
-```quote author="Wikipedia"
-In object-oriented programming, a *class* is an extensible program-code-template for creating objects, providing initial values for state (member variables) and implementations of behavior (member functions or methods).
-```
+> In object-oriented programming, a *class* is an extensible program-code-template for creating objects, providing initial values for state (member variables) and implementations of behavior (member functions or methods). - Wikipedia
 
 There's a special syntax construct and a keyword `class` in JavaScript. But before studying it, we should consider that the term "class" comes from the theory of object-oriented programming. The definition is cited above, and it's language-independent.
 
@@ -11,12 +9,11 @@ In JavaScript there are several well-known programming patterns to make classes 
 
 The `class` construct will be described in the next chapter, but in JavaScript it's a "syntax sugar" and an extension of one of the patterns that we'll study here.
 
-
 ## Functional class pattern
 
 The constructor function below can be considered a "class" according to the definition:
 
-```js run
+```js
 function User(name) {
   this.sayHi = function() {
     alert(name);
@@ -39,14 +36,12 @@ In the functional class pattern, local variables and nested functions inside `Us
 
 So we can easily add internal functions and variables, like `calcAge()` here:
 
-```js run
+```js
 function User(name, birthday) {
-*!*
   // only visible from other methods inside User
   function calcAge() {
     return new Date().getFullYear() - birthday.getFullYear();
   }
-*/!*
 
   this.sayHi = function() {
     alert(`${name}, age:${calcAge()}`);
@@ -69,7 +64,7 @@ We can create a class without using `new` at all.
 
 Like this:
 
-```js run
+```js
 function User(name, birthday) {
   // only visible from other methods inside User
   function calcAge() {
@@ -83,9 +78,7 @@ function User(name, birthday) {
   };
 }
 
-*!*
 let user = User("John", new Date(2000, 0, 1));
-*/!*
 user.sayHi(); // John, age:17
 ```
 
@@ -99,17 +92,13 @@ Soon you'll see why.
 
 Here's the same class rewritten using prototypes:
 
-```js run
+```js
 function User(name, birthday) {
-*!*
   this._name = name;
   this._birthday = birthday;
-*/!*
 }
 
-*!*
 User.prototype._calcAge = function() {
-*/!*
   return new Date().getFullYear() - this._birthday.getFullYear();
 };
 
@@ -191,7 +180,7 @@ Like this:
 
 The code to implement that:
 
-```js run
+```js
 // Same Animal as before
 function Animal(name) {
   this.name = name;
@@ -211,15 +200,11 @@ Rabbit.prototype.jump = function() {
   alert(`${this.name} jumps!`);
 };
 
-*!*
 // setup the inheritance chain
 Rabbit.prototype.__proto__ = Animal.prototype; // (*)
-*/!*
 
 let rabbit = new Rabbit("White Rabbit");
-*!*
 rabbit.eat(); // rabbits can eat too
-*/!*
 rabbit.jump();
 ```
 
