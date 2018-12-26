@@ -70,7 +70,7 @@ new User().sayHi(); // Hello
 
 Ở đây `class User` kế thừa từ kết quả của `f("Hello")`.
 
-Điều đó có thể hữu ích cho các mẫu lập trình nâng cao khi chúng ta sử dụng các hàm để tạo các classes phụ thuộc thuộc vào nhiều điều kiện và có thể kế thừa từ chúng.
+Điều đó có thể hữu ích cho các mẫu lập trình nâng cao khi chúng ta sử dụng các hàm để tạo các classes phụ thuộc vào nhiều điều kiện và có thể kế thừa từ chúng.
 
 > ---
 
@@ -365,7 +365,7 @@ Vấn đề không thể được giải quyết bằng cách sử dụng `this`
 
 Để cung cấp giải pháp, JavaScript thêm một thuộc tính nội bộ đặc biệt cho các hàm: `[[HomeObject]]`.
 
-** Khi một hàm được chỉ định là một phương thức class hoặc phương thức đối tượng, thuộc tính `[[HomeObject]]` của nó trở thành đối tượng đó.**
+**Khi một hàm được chỉ định là một phương thức class hoặc phương thức đối tượng, thuộc tính `[[HomeObject]]` của nó trở thành đối tượng đó.**
 
 Điều này thực sự vi phạm ý tưởng về các "unbound" functions, bởi vì các phương thức ghi nhớ các đối tượng của chúng. Và `[[HomeObject]]` không thể thay đổi, vì vậy ràng buộc này là mãi mãi. Vì vậy, đó là một thay đổi rất quan trọng trong ngôn ngữ.
 
@@ -467,7 +467,7 @@ rabbits[0].run(); // Black Rabbit runs with speed 5.
 
 Bây giờ chúng ta có thể gọi `Rabbit.compare` giả sử rằng `Animal.compare` được kế thừa sẽ được gọi.
 
-Làm thế nào nó hoạt động? Một lần nữa, sử dụng nguyên mẫu (prototypes). Như bạn có thể đã đoán, phần mở rộng cũng cung cấp cho `Rabbit` các tham chiếu `[[Prototype]]` cho `Animal`.
+Làm thế nào nó hoạt động? Một lần nữa, sử dụng nguyên mẫu (prototypes). Như bạn có thể đã đoán, extends cũng cung cấp cho `Rabbit` các tham chiếu `[[Prototype]]` cho `Animal`.
 
 ![](animal-rabbit-static.png)
 
