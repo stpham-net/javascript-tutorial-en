@@ -178,7 +178,7 @@ try {
 
 Lớp mới `PropertyRequiredError` rất dễ sử dụng: chúng ta chỉ cần truyền tên thuộc tính: `new PropertyRequiredError(property)`. The human-readable `message` được tạo bởi the constructor.
 
-Xin lưu ý rằng `this.name` trong `PropertyRequiredError` constructor` một lần nữa được gán thủ công. Điều đó có thể trở thành một chút tẻ nhạt -- để gán `this.name = <class name>` khi tạo từng custom error. Nhưng có một lối thoát. Chúng ta có thể tạo lớp "basic error" của riêng mình để loại bỏ gánh nặng này khỏi vai bằng cách sử dụng `this.constructor.name` cho `this.name` trong the constructor. Và sau đó kế thừa từ nó.
+Xin lưu ý rằng `this.name` trong `PropertyRequiredError` constructor một lần nữa được gán thủ công. Điều đó có thể trở thành một chút tẻ nhạt -- để gán `this.name = <class name>` khi tạo từng custom error. Nhưng có một lối thoát. Chúng ta có thể tạo lớp "basic error" của riêng mình để loại bỏ gánh nặng này khỏi vai bằng cách sử dụng `this.constructor.name` cho `this.name` trong the constructor. Và sau đó kế thừa từ nó.
 
 Hãy gọi nó là `MyError`.
 
