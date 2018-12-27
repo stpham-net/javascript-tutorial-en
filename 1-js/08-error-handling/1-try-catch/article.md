@@ -1,6 +1,6 @@
 # Error handling, "try..catch"
 
-Cho dù chúng ta có giỏi lập trình đến đâu, đôi khi các tập lệnh của chúng ta cũng có lỗi. Chúng có thể xảy ra do lỗi của chúng ta, đầu vào của người dùng không mong muốn, phản hồi của máy chủ bị lỗi và vì hàng ngàn lý do khác.
+Cho dù chúng ta có giỏi lập trình đến đâu, đôi khi các tập lệnh của chúng ta cũng vẫn có lỗi. Chúng có thể xảy ra do lỗi của chúng ta, đầu vào của người dùng không mong muốn, phản hồi của máy chủ bị lỗi và vì hàng ngàn lý do khác.
 
 Thông thường, một tập lệnh "chết" (dừng ngay lập tức) trong trường hợp có lỗi, in nó ra console.
 
@@ -201,7 +201,7 @@ alert( user.age );  // 30
 
 Bạn có thể tìm thấy thông tin chi tiết hơn về JSON trong chương **json**.
 
-** Nếu `json` không đúng định dạng, `JSON.parse` sẽ phát sinh lỗi, vì vậy tập lệnh "chết".**
+**Nếu `json` không đúng định dạng, `JSON.parse` sẽ phát sinh lỗi, vì vậy tập lệnh "chết".**
 
 Chúng ta có nên hài lòng với điều đó? Tất nhiên là không rồi!
 
@@ -589,7 +589,7 @@ Chúng ta hãy tưởng tượng rằng chúng ta đã có một lỗi nghiêm t
 
 Có cách nào để phản ứng về những sự cố như vậy không? Chúng ta có thể muốn log lại lỗi, hiển thị một cái gì đó cho người dùng (thông thường họ không thấy thông báo lỗi), v.v.
 
-Không có gì trong đặc tả, nhưng environments thường cung cấp nó, bởi vì nó thực sự hữu ích. Chẳng hạn, [Node.JS có [process.on('uncaughtException')](https://nodejs.org/api/process.html#process_event_uncaughtexception) cho điều đó. Và trong trình duyệt, chúng ta có thể gán một hàm cho thuộc tính [window.onerror](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror) đặc biệt. Nó sẽ chạy trong trường hợp lỗi Không bị bắt.
+Không có gì trong đặc tả, nhưng environments thường cung cấp nó, bởi vì nó thực sự hữu ích. Chẳng hạn, Node.JS có [process.on('uncaughtException')](https://nodejs.org/api/process.html#process_event_uncaughtexception) cho điều đó. Và trong trình duyệt, chúng ta có thể gán một hàm cho thuộc tính [window.onerror](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror) đặc biệt. Nó sẽ chạy trong trường hợp lỗi chưa bị bắt.
 
 Cú pháp:
 
@@ -667,8 +667,8 @@ Các error objects có các thuộc tính sau:
 - `name` -- the string có tên lỗi (error constructor name).
 - `stack` (non-standard) -- ngăn xếp tại thời điểm tạo lỗi.
 
-Chúng ta cũng có thể tự tạo ra các lỗi của mình bằng cách sử dụng toán tử `throw`. Về mặt kỹ thuật, đối số của `throw` có thể là bất cứ điều gì, nhưng thông thường, đó là một đối tượng lỗi thừa hưởng từ built-in `Error` class. Thêm về extending errors trong chương tiếp theo.
+Chúng ta cũng có thể tự tạo ra các lỗi của mình bằng cách sử dụng toán tử `throw`. Về mặt kỹ thuật, đối số của `throw` có thể là bất cứ điều gì, nhưng thông thường, đó là một đối tượng lỗi thừa hưởng từ built-in `Error` class. Còn thêm về extending errors trong chương tiếp theo.
 
-Rethrowing là một mô hình xử lý lỗi cơ bản: một khối `catch` thường mong đợi và biết cách xử lý loại lỗi cụ thể, vì vậy nó nên điều chỉnh lại các lỗi mà nó không biết.
+Rethrowing là một mô hình xử lý lỗi cơ bản: một khối `catch` thường mong đợi và biết cách xử lý loại lỗi cụ thể, vì vậy nó nên rethrow lại các lỗi mà nó không biết.
 
 Ngay cả khi chúng ta không có `try..catch`, hầu hết các environments đều cho phép thiết lập một "global" error handler để bắt lỗi "rơi ra (fall out)". Trong trình duyệt đó là `window.onerror`.
