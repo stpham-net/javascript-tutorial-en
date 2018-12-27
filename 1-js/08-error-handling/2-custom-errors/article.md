@@ -1,32 +1,32 @@
 # Custom errors, extending Error
 
-When we develop something, we often need our own error classes to reflect specific things that may go wrong in our tasks. For errors in network operations we may need `HttpError`, for database operations `DbError`, for searching operations `NotFoundError` and so on.
+Khi chúng ta phát triển một cái gì đó, chúng ta thường cần các error classes của riêng mình để phản ánh những điều cụ thể có thể sai trong các nhiệm vụ của chúng ta. Đối với các lỗi trong hoạt động mạng (network operations), chúng ta có thể cần `HttpError`, đối với các hoạt động cơ sở dữ liệu (database operations) `DbError`, cho các hoạt động tìm kiếm `NotFoundError`, và tương tự v.v.
 
-Our errors should support basic error properties like `message`, `name` and, preferably, `stack`. But they also may have other properties of their own, e.g. `HttpError` objects may have `statusCode` property with a value like `404` or `403` or `500`.
+Các lỗi của chúng ta sẽ hỗ trợ các thuộc tính lỗi cơ bản như `message`, `name` và, tốt nhất là, `stack`. Nhưng chúng cũng có thể có các thuộc tính khác của riêng chúng, ví dụ: các `HttpError` objects có thể có thuộc tính `statusCode` với giá trị như `404` hoặc `403` hoặc `500`.
 
-JavaScript allows to use `throw` with any argument, so technically our custom error classes don't need to inherit from `Error`. But if we inherit, then it becomes possible to use `obj instanceof Error` to identify error objects. So it's better to inherit from it.
+JavaScript cho phép sử dụng `throw` với bất kỳ đối số nào, vì vậy về mặt kỹ thuật, các custom error classes của chúng ta không cần phải kế thừa từ `Error`. Nhưng nếu chúng ta kế thừa, thì có thể sử dụng `obj instanceof Error` để xác định các error objects. Vì vậy, tốt hơn là thừa kế từ nó.
 
-As we build our application, our own errors naturally form a hierarchy, for instance `HttpTimeoutError` may inherit from `HttpError`, and so on.
+Khi chúng ta xây dựng ứng dụng của mình, các lỗi của chúng ta tự nhiên tạo thành một hệ thống phân cấp, ví dụ `HttpTimeoutError` có thể kế thừa từ `HttpError`, và tương tự v.v.
 
 ## Extending Error
 
-As an example, let's consider a function `readUser(json)` that should read JSON with user data.
+Ví dụ, hãy xem xét một hàm `readUser(json)` nên đọc JSON với user data.
 
-Here's an example of how a valid `json` may look:
+Đây là một ví dụ về cách một `json` hợp lệ có thể trông như thế nào:
 
 ```js
 let json = `{ "name": "John", "age": 30 }`;
 ```
 
-Internally, we'll use `JSON.parse`. If it receives malformed `json`, then it throws `SyntaxError`.
+Trong nội bộ, chúng ta sẽ sử dụng `JSON.parse`. Nếu nó nhận được định dạng sai `json`, thì nó sẽ throws `SyntaxError`.
 
-But even if `json` is syntactically correct, that doesn't mean that it's a valid user, right? It may miss the necessary data. For instance, if may not have `name` and `age` properties that are essential for our users.
+Nhưng ngay cả khi `json` đúng về mặt cú pháp, điều đó không có nghĩa đó là người dùng hợp lệ, phải không? Nó có thể bỏ lỡ các dữ liệu cần thiết. Chẳng hạn, nếu có thể không có thuộc tính `name` và `age` cần thiết cho người dùng của chúng ta.
 
-Our function `readUser(json)` will not only read JSON, but check ("validate") the data. If there are no required fields, or the format is wrong, then that's an error. And that's not a `SyntaxError`, because the data is syntactically correct, but another kind of error. We'll call it `ValidationError` and create a class for it. An error of that kind should also carry the information about the offending field.
+Hàm `readUser(json)` của chúng ta sẽ không chỉ đọc JSON mà còn kiểm tra ("validate") dữ liệu. Nếu không có required fields, hoặc định dạng sai, thì đó là lỗi. Và đó không phải là một `SyntaxError`, vì dữ liệu đúng về mặt cú pháp, nhưng là một loại lỗi khác. Chúng ta sẽ gọi nó là `ValidationError` và tạo một class cho nó. Một lỗi thuộc loại đó cũng sẽ mang thông tin về trường vi phạm.
 
-Our `ValidationError` class should inherit from the built-in `Error` class.
+Lớp `ValidationError` của chúng ta sẽ kế thừa từ built-in `Error` class.
 
-That class is built-in, but we should have its approximate code before our eyes, to understand what we're extending.
+Lớp đó được tích hợp sẵn, nhưng chúng ta nên có mã gần đúng của nó trước mắt, để hiểu những gì chúng ta đang mở rộng.
 
 So here you are:
 
@@ -41,7 +41,7 @@ class Error {
 }
 ```
 
-Now let's go on and inherit `ValidationError` from it:
+Bây giờ chúng ta hãy tiếp tục và kế thừa `ValidationError` từ nó:
 
 ```js
 class ValidationError extends Error {
@@ -64,12 +64,12 @@ try {
 }
 ```
 
-Please take a look at the constructor:
+Xin hãy xem the constructor:
 
-1. In the line `(1)` we call the parent constructor. JavaScript requires us to call `super` in the child constructor, so that's obligatory. The parent constructor sets the `message` property.
-2. The parent constructor also sets the `name` property to `"Error"`, so in the line `(2)` we reset it to the right value.
+1. Trong dòng `(1)`, chúng ta gọi parent constructor. JavaScript yêu cầu chúng ta gọi `super` trong child constructor, vì vậy điều đó là bắt buộc. The parent constructor đặt thuộc tính `message`.
+2. The parent constructor cũng đặt thuộc tính `name` thành `"Error"`, vì vậy trong dòng `(2)`, chúng ta đặt lại nó về đúng giá trị.
 
-Let's try to use it in `readUser(json)`:
+Hãy thử sử dụng nó trong `readUser(json)`:
 
 ```js
 class ValidationError extends Error {
@@ -108,11 +108,11 @@ try {
 }
 ```
 
-The `try..catch` block in the code above handles both our `ValidationError` and the built-in `SyntaxError` from `JSON.parse`.
+Khối `try..catch` trong đoạn mã trên xử lý cả `ValidationError` và built-in `SyntaxError` từ `JSON.parse`.
 
-Please take a look at how we use `instanceof` to check for the specific error type in the line `(*)`.
+Vui lòng xem cách chúng ta sử dụng `instanceof` để kiểm tra loại lỗi cụ thể trong dòng `(*)`.
 
-We could also look at `err.name`, like this:
+Chúng ta cũng có thể xem ở `err.name`, như thế này:
 
 ```js
 // ...
@@ -121,13 +121,13 @@ We could also look at `err.name`, like this:
 // ...
 ```  
 
-The `instanceof` version is much better, because in the future we are going to extend `ValidationError`, make subtypes of it, like `PropertyRequiredError`. And `instanceof` check will continue to work for new inheriting classes. So that's future-proof.
+Phiên bản `instanceof` tốt hơn nhiều, vì trong tương lai chúng ta sẽ mở rộng `ValidationError`, tạo các kiểu con của nó, như `PropertyRequiredError`. Và kiểm tra `instanceof` sẽ tiếp tục hoạt động cho các lớp kế thừa mới. Vì vậy, đó là bằng chứng trong tương lai (future-proof).
 
-Also it's important that if `catch` meets an unknown error, then it rethrows it in the line `(**)`. The `catch`  only knows how to handle validation and syntax errors, other kinds (due to a typo in the code or such) should fall through.
+Ngoài ra, một điều quan trọng là nếu `catch` gặp một unknown error, thì nó sẽ rethrows nó trong dòng `(**)`. The `catch` chỉ biết cách xử lý lỗi validation và lỗi syntax, các loại khác (do lỗi chính tả trong mã hoặc như vậy) sẽ rơi qua (fall through).
 
 ## Further inheritance
 
-The `ValidationError` class is very generic. Many things may go wrong. The property may be absent or it may be in a wrong format (like a string value for `age`). Let's make a more concrete class `PropertyRequiredError`, exactly for absent properties. It will carry additional information about the property that's missing.
+Lớp `ValidationError` rất chung chung. Nhiều thứ có thể đi sai. Thuộc tính có thể vắng mặt hoặc nó có thể ở định dạng sai (như giá trị chuỗi cho `age`). Chúng ta hãy tạo một lớp cụ thể hơn `PropertyRequiredError`, chính xác cho các thuộc tính vắng mặt. Nó sẽ mang thêm thông tin về thuộc tính bị thiếu.
 
 ```js
 class ValidationError extends Error {
@@ -176,13 +176,13 @@ try {
 }
 ```
 
-The new class `PropertyRequiredError` is easy to use: we only need to pass the property name: `new PropertyRequiredError(property)`. The human-readable `message` is generated by the constructor.
+Lớp mới `PropertyRequiredError` rất dễ sử dụng: chúng ta chỉ cần truyền tên thuộc tính: `new PropertyRequiredError(property)`. The human-readable `message` được tạo bởi the constructor.
 
-Please note that `this.name` in `PropertyRequiredError` constructor is again assigned manually. That may become a bit tedius -- to assign `this.name = <class name>` when creating each custom error. But there's a way out. We can make our own "basic error" class that removes this burden from our shoulders by using `this.constructor.name` for `this.name` in the constructor. And then inherit from it.
+Xin lưu ý rằng `this.name` trong `PropertyRequiredError` constructor` một lần nữa được gán thủ công. Điều đó có thể trở thành một chút tẻ nhạt -- để gán `this.name = <class name>` khi tạo từng custom error. Nhưng có một lối thoát. Chúng ta có thể tạo lớp "basic error" của riêng mình để loại bỏ gánh nặng này khỏi vai bằng cách sử dụng `this.constructor.name` cho `this.name` trong the constructor. Và sau đó kế thừa từ nó.
 
-Let's call it `MyError`.
+Hãy gọi nó là `MyError`.
 
-Here's the code with `MyError` and other custom error classes, simplified:
+Đây là mã với `MyError` và các custom error classes khác, được đơn giản hóa:
 
 ```js
 class MyError extends Error {
@@ -205,19 +205,19 @@ class PropertyRequiredError extends ValidationError {
 alert( new PropertyRequiredError("field").name ); // PropertyRequiredError
 ```
 
-Now custom errors are much shorter, especially `ValidationError`, as we got rid of the `"this.name = ..."` line in the constructor.
+Bây giờ các custom errors ngắn hơn nhiều, đặc biệt là `ValidationError`, vì chúng ta đã loại bỏ dòng `"this.name = ..."` trong constructor.
 
 ## Wrapping exceptions
 
-The purpose of the function `readUser` in the code above is "to read the user data", right? There may occur different kinds of errors in the process. Right now we have `SyntaxError` and `ValidationError`, but in the future `readUser` function may grow: the new code will probably generate other kinds of errors.
+Mục đích của hàm `readUser` trong đoạn mã trên là "để đọc dữ liệu người dùng", phải không? Có thể xảy ra các loại lỗi khác nhau trong process. Ngay bây giờ chúng ta có `SyntaxError` và `ValidationError`, nhưng trong tương lai hàm `readUser` có thể phát triển: mã mới có thể sẽ tạo ra các loại lỗi khác.
 
-The code which calls `readUser` should handle these errors. Right now it uses multiple `if` in the `catch` block to check for different error types and rethrow the unknown ones. But if `readUser` function generates several kinds of errors -- then we should ask ourselves: do we really want to check for all error types one-by-one in every code that calls `readUser`?
+Mã gọi `readUser` sẽ xử lý các lỗi này. Ngay bây giờ, nó sử dụng nhiều `if` trong khối `catch` để kiểm tra các loại lỗi khác nhau và rethrow các lỗi chưa biết. Nhưng nếu hàm `readUser` tạo ra một số loại lỗi nữa -- thì chúng ta nên tự hỏi: chúng ta có thực sự muốn kiểm tra từng loại lỗi một trong mỗi mã gọi `readUser` không?
 
-Often the answer is "No": the outer code wants to be "one level above all that". It wants to have some kind of "data reading error". Why exactly it happened -- is often irrelevant (the error message describes it). Or, even better if there is a way to get error details, but only if we need to.
+Thường thì câu trả lời là "Không": mã bên ngoài (the outer code) muốn là "một cấp trên tất cả (one level above all that)". Nó muốn có một số loại "lỗi đọc dữ liệu". Tại sao chính xác nó đã xảy ra -- thường không liên quan (thông báo lỗi mô tả nó). Hoặc, thậm chí tốt hơn nếu có một cách để có được chi tiết lỗi, nhưng chỉ khi chúng ta cần.
 
-So let's make a new class `ReadError` to represent such errors. If an error occurs inside `readUser`, we'll catch it there and generate `ReadError`. We'll also keep the reference to the original error in its `cause` property. Then the outer code will only have to check for `ReadError`.
+Vì vậy, hãy tạo một lớp mới `ReadError` để thể hiện các lỗi đó. Nếu xảy ra lỗi bên trong `readUser`, chúng ta sẽ bắt lỗi ở đó và tạo `ReadError`. Chúng ta cũng sẽ giữ tham chiếu đến original error trong thuộc tính `cause` của nó. Sau đó, outer code sẽ chỉ phải kiểm tra `ReadError`.
 
-Here's the code that defines `ReadError` and demonstrates its use in `readUser` and `try..catch`:
+Đây là mã định nghĩa `ReadError` và thể hiện việc sử dụng nó trong `readUser` và `try..catch`:
 
 ```js
 class ReadError extends Error {
@@ -279,14 +279,14 @@ try {
 }
 ```
 
-In the code above, `readUser` works exactly as described -- catches syntax and validation errors and throws `ReadError` errors instead (unknown errors are rethrown as usual).
+Trong đoạn mã trên, `readUser` hoạt động chính xác như được mô tả -- catches các syntax and validation errors và throws `ReadError` errors (unknown errors được rethrown như thường lệ).
 
-So the outer code checks `instanceof ReadError` and that's it. No need to list possible all error types.
+Vì vậy, mã bên ngoài kiểm tra `instanceof ReadError` và đó là nó. Không cần phải liệt kê tất cả các loại lỗi.
 
-The approach is called "wrapping exceptions", because we take "low level exceptions" and "wrap" them into `ReadError` that is more abstract and more convenient to use for the calling code. It is widely used in object-oriented programming.
+Cách tiếp cận này được gọi là "wrapping exceptions", bởi vì chúng ta lấy "ngoại lệ cấp thấp (low level exceptions)" và "bọc (wrap)" chúng thành `ReadError`, nó trừu tượng hơn và thuận tiện hơn để sử dụng cho mã gọi. Nó được sử dụng rộng rãi trong lập trình hướng đối tượng.
 
-## Summary
+## Tóm lược
 
-- We can inherit from `Error` and other built-in error classes normally, just need to take care of `name` property and don't forget to call `super`.
-- Most of the time, we should use `instanceof` to check for particular errors. It also works with inheritance. But sometimes we have an error object coming from the 3rd-party library and there's no easy way to get the class. Then `name` property can be used for such checks.
-- Wrapping exceptions is a widespread technique when a function handles low-level exceptions and makes a higher-level object to report about the errors. Low-level exceptions sometimes become properties of that object like `err.cause` in the examples above, but that's not strictly required.
+- Chúng ta có thể kế thừa từ `Error` và các built-in error classes khác một cách bình thường, chỉ cần chăm sóc thuộc tính `name` và đừng quên gọi `super`.
+- Hầu hết thời gian, chúng ta nên sử dụng `instanceof` để kiểm tra các lỗi cụ thể. Nó cũng hoạt động với sự kế thừa. Nhưng đôi khi chúng ta có một error object đến từ thư viện của bên thứ 3 và không có cách nào dễ dàng để có được class. Sau đó, thuộc tính `name` có thể được sử dụng cho các kiểm tra như vậy.
+- Bao bọc các ngoại lệ (Wrapping exceptions) là một kỹ thuật phổ biến khi một hàm xử lý các ngoại lệ cấp thấp (low-level exceptions) và tạo một đối tượng cấp cao hơn ( higher-level object) để báo cáo về các lỗi. Các ngoại lệ cấp thấp (Low-level exceptions) đôi khi trở thành các thuộc tính của đối tượng đó như `err.cause` trong các ví dụ ở trên, nhưng điều đó không bắt buộc.
