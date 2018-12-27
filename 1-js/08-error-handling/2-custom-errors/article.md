@@ -213,7 +213,7 @@ Mục đích của hàm `readUser` trong đoạn mã trên là "để đọc d�
 
 Mã gọi `readUser` sẽ xử lý các lỗi này. Ngay bây giờ, nó sử dụng nhiều `if` trong khối `catch` để kiểm tra các loại lỗi khác nhau và rethrow các lỗi chưa biết. Nhưng nếu hàm `readUser` tạo ra một số loại lỗi nữa -- thì chúng ta nên tự hỏi: chúng ta có thực sự muốn kiểm tra từng loại lỗi một trong mỗi mã gọi `readUser` không?
 
-Thường thì câu trả lời là "Không": mã bên ngoài (the outer code) muốn là "một cấp trên tất cả (one level above all that)". Nó muốn có một số loại "lỗi đọc dữ liệu". Tại sao chính xác nó đã xảy ra -- thường không liên quan (thông báo lỗi mô tả nó). Hoặc, thậm chí tốt hơn nếu có một cách để có được chi tiết lỗi, nhưng chỉ khi chúng ta cần.
+Thường thì câu trả lời là "Không": mã bên ngoài (the outer code) muốn là "một cấp trên tất cả (one level above all that)". Nó muốn có một số loại "lỗi đọc dữ liệu (data reading error)". Tại sao chính xác nó đã xảy ra -- thường không liên quan (thông báo lỗi mô tả nó). Hoặc, thậm chí tốt hơn nếu có một cách để có được chi tiết lỗi, nhưng chỉ khi chúng ta cần.
 
 Vì vậy, hãy tạo một lớp mới `ReadError` để thể hiện các lỗi đó. Nếu xảy ra lỗi bên trong `readUser`, chúng ta sẽ bắt lỗi ở đó và tạo `ReadError`. Chúng ta cũng sẽ giữ tham chiếu đến original error trong thuộc tính `cause` của nó. Sau đó, outer code sẽ chỉ phải kiểm tra `ReadError`.
 
